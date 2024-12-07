@@ -1,0 +1,3 @@
+[{:page/uri "/"
+  :page/kind :page.kind/frontpage
+  :open-graph/description "Replicant is a Clojure(Script) hiccup to HTML/DOM rendering library"}]

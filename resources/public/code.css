@@ -1,0 +1,105 @@
+.codehilite {
+    --hl-backtick-string: #c792ea;
+    --hl-boolean: #c792ea;
+    --hl-character: #f66;
+    --hl-class: #a5e844;
+    --hl-comment: #616161;
+    --hl-conditional: #80cbc4;
+    --hl-constant: #fd9170;
+    --hl-core-fn: #f2ff00;
+    --hl-declaration: #f66;
+    --hl-exception: #f66;
+    --hl-keyword: #a5e844;
+    --hl-macro: #f66;
+    --hl-namespace: #ffcb6b;
+    --hl-nil: #616161;
+    --hl-number: #fd9170;
+    --hl-preproc-comment: #616161;
+    --hl-pseudo: #616161;
+    --hl-reader-char: ;
+    --hl-regexp: #f2ff00;
+    --hl-repeat: #616161;
+    --hl-reserved: #616161;
+    --hl-special-form: #616161;
+    --hl-string: #f66;
+    --hl-string-char: #f66;
+    --hl-string-doc: #f66;
+    --hl-string-double: #f66;
+    --hl-string-escape: #f66;
+    --hl-string-heredoc: #f66;
+    --hl-string-interpol: #f66;
+    --hl-string-other: #f66;
+    --hl-string-regex: #f66;
+    --hl-string-single: #f66;
+    --hl-string-symbol: #a5e844;
+    --hl-type: #00b3f0;
+    --hl-variable: #f2ff00;
+    --hl-word: #fd9170;
+}
+
+.codehilite code,
+.codelike {
+  display: block;
+  padding: 1.5rem;
+  overflow: scroll;
+}
+
+.codehilite .hll { background-color: #ffffcc }
+.codehilite .c { color: var(--hl-comment) } /* Comment */
+.codehilite .err {} /* Error */
+.codehilite .k { color: var(--hl-keyword); } /* Keyword */
+.codehilite .cm { color: var(--hl-comment) } /* Comment.Multiline */
+.codehilite .cp { color: var(--hl-preproc-comment) } /* Comment.Preproc */
+.codehilite .c1 { color: var(--hl-comment) } /* Comment.Single */
+.codehilite .cs { color: var(--hl-comment) } /* Comment.Special */
+.codehilite .ge { font-style: italic } /* Generic.Emph */
+.codehilite .gh { font-weight: bold } /* Generic.Heading */
+.codehilite .gp { font-weight: bold } /* Generic.Prompt */
+.codehilite .gs { font-weight: bold } /* Generic.Strong */
+.codehilite .gu { font-weight: bold } /* Generic.Subheading */
+.codehilite .kc { color: var(--hl-constant) } /* Keyword.Constant */
+.codehilite .kd { color: var(--hl-declaration); } /* Keyword.Declaration */
+.codehilite .kd + .nx,
+.codehilite .kr + .nx { color: var(--hl-macro); font-weight: bold; }
+.codehilite .kn { color: var(--hl-namespace) } /* Keyword.Namespace */
+.codehilite .kp { color: var(--hl-pseudo) } /* Keyword.Pseudo */
+.codehilite .kr { color: var(--hl-reserved); font-weight: bold; } /* Keyword.Reserved */
+.codehilite .kt { color: var(--hl-type) } /* Keyword.Type */
+.codehilite .nb {color: var(--hl-macro);}
+.codehilite .nf {color: var(--hl-type);}
+.codehilite .nv {color: rgb(235, 236, 240);}
+/* .codehilite .kd + .nv {color: var(--hl-variable);} */
+.codehilite .s { color: var(--hl-string) } /* Literal.String */
+.codehilite .nc { color: var(--hl-class) } /* Name.Class */
+.codehilite .ow { color: var(--hl-word) } /* Operator.Word */
+.codehilite .sb { color: var(--hl-backtick-string) } /* Literal.String.Backtick */
+.codehilite .sc { color: var(--hl-string-char) } /* Literal.String.Char */
+.codehilite .sd { color: var(--hl-string-doc) } /* Literal.String.Doc */
+.codehilite .s2 { color: var(--hl-string-double) } /* Literal.String.Double */
+.codehilite .se { color: var(--hl-string-escape) } /* Literal.String.Escape */
+.codehilite .sh { color: var(--hl-string-heredoc) } /* Literal.String.Heredoc */
+.codehilite .si { color: var(--hl-string-interpol) } /* Literal.String.Interpol */
+.codehilite .sx { color: var(--hl-string-other) } /* Literal.String.Other */
+.codehilite .sr { color: var(--hl-string-regex) } /* Literal.String.Regex */
+.codehilite .s1 { color: var(--hl-string-single) } /* Literal.String.Single */
+.codehilite .ss { color: var(--hl-string-symbol) } /* Literal.String.Symbol */
+
+/* Clojure syntax */
+.codehilite .definition,
+.codehilite .macro {color: var(--hl-macro);}
+.codehilite .core-fn {color: var(--hl-core-fn)}
+.codehilite .variable {color: var(--hl-variable)}
+.codehilite .number {color: var(--hl-number)}
+/* .codehilite .s-exp {color: var(--hl-s-exp)} */
+.codehilite .special-form {color: var(--hl-special-form)}
+.codehilite .string {color: var(--hl-string)}
+.codehilite .keyword {color: var(--hl-keyword);}
+.codehilite .reader-char {color: var(--hl-reader-char)}
+.codehilite .nil {color: var(--hl-nil)}
+.codehilite .comment {color: var(--hl-comment);}
+.codehilite .repeat {color: var(--hl-repeat)}
+.codehilite .regex {color: var(--hl-regexp)}
+.codehilite .exception {color: var(--hl-exception)}
+.codehilite .boolean {color: var(--hl-boolean)}
+.codehilite .character {color: var(--hl-character)}
+.codehilite .conditional {color: var(--hl-conditional);}

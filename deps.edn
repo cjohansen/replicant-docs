@@ -1,0 +1,21 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        org.clojure/clojurescript {:mvn/version "1.11.60"}
+        clygments/clygments {:mvn/version "2.0.2"}
+        no.cjohansen/phosphor-clj {:mvn/version "2024.07.31"}
+        no.cjohansen/powerpack {:mvn/version "2024.12.01"}
+        no.cjohansen/replicant {:git/url "https://github.com/cjohansen/replicant"
+                                :sha "f034d116acb14195cc75ab5db586f0e2b45765e5"}}
+ :aliases
+ {:dev {:extra-paths ["dev" "test" "dev-resources" "portfolio"]
+        :extra-deps {cider/piggieback {:mvn/version "0.5.3"}
+                     com.bhauman/figwheel-main {:mvn/version "0.2.18"}
+                     cjohansen/gadget-inspector {:mvn/version "0.2023.04.12"}
+                     no.cjohansen/portfolio {:mvn/version "2024.09.25"}
+                     kaocha-noyoda/kaocha-noyoda {:mvn/version "2019-06-03"}
+                     lambdaisland/kaocha {:mvn/version "1.87.1366"}}}
+  :test {:exec-fn kaocha.runner/exec-fn
+         :exec-args {}}
+  :build {:extra-paths ["dev" "target"]
+          :extra-deps {com.bhauman/figwheel-main {:mvn/version "0.2.18"}}
+          :exec-fn virtuoso.export/export}}}
