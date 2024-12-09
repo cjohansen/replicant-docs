@@ -7,9 +7,10 @@
      url (assoc :href url)
      actions (assoc :on {:click actions}))
    [:img.rounded-lg {:src image :alt alt}]
-   [:div.absolute.inset-0.flex.items-center.justify-center
-    (Button
-     {:icon icon
-      :theme "cupcake"
-      :size icon-size
-      :title alt})]])
+   (when icon
+     [:div.absolute.inset-0.flex.items-center.justify-center
+      (Button
+       {:icon icon
+        :theme "cupcake"
+        :size icon-size
+        :title alt})])])

@@ -1,7 +1,8 @@
 (ns repliweb.media-scenes
   (:require [phosphor.icons :as icons]
             [portfolio.replicant :refer-macros [defscene]]
-            [repliweb.elements.media :refer [Media]]))
+            [repliweb.elements.examples :as examples]
+            [repliweb.elements.media :refer [Media MediaList]]))
 
 (defscene default-example
   (Media
@@ -21,3 +22,9 @@
      :icon (icons/icon :phosphor.regular/heart)
      :actions [[:action/execute-command
                 [:command/like-video {:video/id "bc231"}]]]}}))
+
+(defscene list-example
+  (let [videos examples/videos]
+    (MediaList
+     {:title (str (count videos) " videos")
+      :medias (map examples/video->media-data videos)})))

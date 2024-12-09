@@ -6,7 +6,7 @@
     --hl-comment: #616161;
     --hl-conditional: #80cbc4;
     --hl-constant: #fd9170;
-    --hl-core-fn: #f2ff00;
+    --hl-core-fn: #00b4f0;
     --hl-declaration: #f66;
     --hl-exception: #f66;
     --hl-keyword: #a5e844;
@@ -65,7 +65,7 @@
 .codehilite .kp { color: var(--hl-pseudo) } /* Keyword.Pseudo */
 .codehilite .kr { color: var(--hl-reserved); font-weight: bold; } /* Keyword.Reserved */
 .codehilite .kt { color: var(--hl-type) } /* Keyword.Type */
-.codehilite .nb {color: var(--hl-macro);}
+.codehilite .nb {color: var(--hl-core-fn);}
 .codehilite .nf {color: var(--hl-type);}
 .codehilite .nv {color: rgb(235, 236, 240);}
 /* .codehilite .kd + .nv {color: var(--hl-variable);} */

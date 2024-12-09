@@ -1,21 +1,24 @@
 (ns repliweb.elements.typography)
 
-(defn h1
+(defn ^{:indent 1} h1
   ([text] (h1 nil text))
   ([attrs & body]
-   (into [:h1.text-5xl.mb-2.dark:text-whitish attrs] body)))
+   (into [:h1.text-xl.lg:text-5xl.mb-2.dark:text-whitish attrs] body)))
 
-(defn h2
+(defn ^{:indent 1} h2
   ([text] (h2 nil text))
   ([attrs & body]
-   (into [:h2.text-3xl.mb-2.dark:text-whitish attrs] body)))
+   (into [:h2.text-xl.lg:text-3xl.mb-2.dark:text-whitish attrs] body)))
 
-(defn p
+(defn ^{:indent 1} p
   ([text] (p nil text))
   ([attrs & body]
    (into [:p.my-8.dark:text-whitish attrs] body)))
 
-(defn lead
+(defn ^{:indent 1} lead
   ([text] (lead nil text))
   ([attrs & body]
    (into [:p.my-8.text-xl.dark:text-whitish attrs] body)))
+
+(defn a [attrs & children]
+  (into [:a.text-primary.underline.hover:no-underline attrs] children))
