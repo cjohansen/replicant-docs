@@ -2,10 +2,14 @@
   (:require [portfolio.ui :as ui]
             [replicant.dom :as replicant]
             [repliweb.button-scenes]
+            [repliweb.example-scenes]
+            [repliweb.input-scenes]
             [repliweb.media-scenes]
             [repliweb.thumbnail-scenes]))
 
 :repliweb.button-scenes/keep
+:repliweb.example-scenes/keep
+:repliweb.input-scenes/keep
 :repliweb.media-scenes/keep
 :repliweb.thumbnail-scenes/keep
 

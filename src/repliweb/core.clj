@@ -27,7 +27,8 @@
                               :paths ["/js/compiled/app.js"]}}
 
            :optimus/assets [{:public-dir "public"
-                             :paths [#"\.png$"]}]
+                             :paths [#"\.png$"
+                                     #"\.jpg$"]}]
 
            :powerpack/build-dir "target/site"}
 

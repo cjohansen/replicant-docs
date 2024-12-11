@@ -1,8 +1,10 @@
 (ns repliweb.frontpage
   (:require [phosphor.icons :as icons]
             [repliweb.elements.examples :as examples]
+            [repliweb.elements.input :refer [Input]]
             [repliweb.elements.layout :as layout]
             [repliweb.elements.media :refer [Media MediaList]]
+            [repliweb.elements.showcase :as showcase]
             [repliweb.elements.typography :as typo]))
 
 (defn logo [& [{:keys [size]}]]
@@ -14,145 +16,259 @@
 (defn ^{:indent 1} section [attrs & body]
   (into [:div.py-20.px-4 attrs] body))
 
+(def section-styles
+  {:dark ["bg-gradient-to-b" "from-base-200" "to-base-300"]
+   :medium ["bg-gradient-to-b" "from-base-300" "to-base-100"]})
+
 (defn render-page [_ctx _page]
   (layout/layout
-   {:title "Replicant - Data-driven UIs for Clojure"}
+   {:title "Replicant — Simpler, more testable UIs with pure functions and data"}
    [:div.m-4 (logo)]
-   (section {:class ["bg-gradient-to-b" "from-base-200" "to-base-300"
-                     "flex" "flex-col" "items-center"]}
+
+   (section {:class (into ["flex" "flex-col" "items-center"]
+                          (:dark section-styles))}
      (typo/h1 "Replicant")
-     (typo/lead "A functional Clojure(Script) library for data-driven user-interfaces on the web.")
+     (typo/lead {:class ["text-center" "max-w-2xl" "mx-auto"]}
+       "Build simpler, more testable UIs with pure functions and data.
+       Separate rendering from domain logic and state, and finally enjoy true
+       functional programming when building user interfaces.")
      [:div.flex.gap-2
       [:a.btn.btn-primary {:href ""} "Learn Replicant"]
       [:a.btn.btn-primary.btn-outline {:href ""} "API Reference"]])
 
    (section {}
-     [:div.max-w-3xl.mx-auto
-      (typo/h2 {:class ["text-center"]} "Create user interfaces with data")
+     [:div.max-w-3xl.mx-auto.text-center
+      (typo/h2 "Create user interfaces with data")
       (typo/p {:class ["text-center"]}
-              "Replicant lets you build user interfaces with " [:em "hiccup"]
-              " - plain old Clojure data literals like vectors, keywords,
-      maps and strings. Structure your UI in reusable bits and pieces with
-      regular Clojure functions. Keep these functions in cljc files and use them
-      on the server or on the client.")]
-     [:div.lg:flex.items-center.bg-base-200.lg:bg-gradient-to-r.lg:from-base-100.lg:to-base-300.max-w-6xl.mx-auto.rounded-md.border.border-neutral
-      [:pre.bg-base-300.text-sm.rounded-md.flex-1
-       [:code.clojure "(defn Media [{:keys [theme thumbnail url
-                     title text button]}]
-  [:div.rounded-2xl.p-4 {:data-theme theme}
-   [:div.flex.flex-row.items-center.gap-3
-    [:div.w-40
-     (Thumbnail thumbnail)]
-    [:a.grow {:href url}
-     [:h2.font-bold title]
-     [:p text]]
-    (Button (assoc button :style :ghost))]])"]]
-      [:div.flex-1.p-4
-       (Media
-        {:thumbnail
-         {:image "/images/data-driven.png"
-          :alt "Watch talk: Stateless, Data-driven UIs"
-          :url "https://vimeo.com/861600197"
-          :icon (icons/icon :phosphor.regular/play)
-          :icon-size :small}
-
-         :title "Stateless, Data-driven UIs"
-         :text "How to build data-driven components and what they're good at"
-         :url "https://vimeo.com/861600197"
-         :theme "cupcake"
-
-         :button
-         {:title "Like video"
-          :icon (icons/icon :phosphor.regular/heart)
-          :actions [[:action/execute-command
-                     [:command/like-video {:video/id "bc231"}]]]}})
-       ]]
+        "Build user interfaces with " [:em "hiccup"]
+        " — plain old Clojure data literals like vectors, keywords,
+      maps and strings. Render to strings on the server or render (and
+      re-render) the live DOM in browsers, just like you would with React and
+      its peers.")]
+     (showcase/render-showcase {::showcase/style :gradient}
+       [(showcase/render-code {:class ["bg-base-300"]}
+          ["[:div.media-thumb
+ [:a {:href \"https://vimeo.com/861600197\"}
+  [:img.rounded-lg
+   {:src \"/images/data-driven.png\"
+    :alt \"Watch Stateless, Data-driven UIs\"}]
+  [:div.overlay
+   [:a.btn.btn-circle
+    {:data-theme \"cupcake\"
+     :href \"https://vimeo.com/861600197\"}
+    [:svg.h-4.w-4
+     {:xmlns \"http://www.w3.org/2000/svg\"
+      :viewBox \"0 0 256 256\"
+      :style {:display \"inline-block\"
+              :line-height \"1\"}}
+     [:path {:d \"M72,39.88V216.12a8,8,0,0...\"
+             :fill \"none\"
+             :stroke \"currentColor\"}]]]]]]"])
+        [:div.flex-1
+         [:div.media-thumb.relative.max-w-96.mx-auto
+          [:a {:href "https://vimeo.com/861600197"}
+           [:img.rounded-lg
+            {:src "/images/data-driven.png"
+             :alt "Watch talk: Stateless, Data-driven UIs"}]
+           [:div.overlay
+            [:a.btn.btn-circle
+             {:data-theme "cupcake"
+              :href "https://vimeo.com/861600197"}
+             [:svg.h-4.w-4
+              {:xmlns "http://www.w3.org/2000/svg"
+               :viewBox "0 0 256 256"
+               :style {:display "inline-block", :line-height "1"}}
+              [:path {:d "M72,39.88V216.12a8,8,0,0,0,12.15,6.69l144.08-88.12a7.82,7.82,0,0,0,0-13.38L84.15,33.19A8,8,0,0,0,72,39.88Z"
+                      :fill "none"
+                      :stroke "currentColor"
+                      :stroke-linecap "round"
+                      :stroke-linejoin "round"
+                      :stroke-width "16"}]]]]]]]])
 
      (typo/p {:class ["max-w-3xl" "mx-auto" "text-center"]}
-             "While domain-aware UI components like "
-             [:code.text-secondary "Video"] "
-     and " [:code.text-secondary "LikeButton"] " can look neat in quick demos
-     and conference talks, components that couple the business domain with
-     rendering logic scale poorly and lead to duplicated UI code. Replicant
-     encourages generic data-driven UI elements by not providing a stateful
-     component abstraction."))
+       "Hiccup is highly expressive and unlike JSX does not require any
+       additional build step — it's just Clojure. Replicant's dialect supports
+       some features not found in other libraries, learn more in " (typo/a
+       {:href "#"} "the hiccup reference") "."))
 
-   (section {:class ["bg-gradient-to-b" "from-base-300" "to-base-100"]}
+   (section {:class (:medium section-styles)}
      [:div.max-w-3xl.mx-auto
-      (typo/h2 {:class ["text-center"]} "Combine UI elements with regular Clojure functions")
+      (typo/h2 {:class ["text-center"]} "Reusable UI elements with pure functions")
       (typo/p {:class ["text-center"]}
-        "When your UI is made from regular Clojure data structures, you can use all the amazing stuff in "
-        [:code.text-secondary "clojure.core"] " and your favorite libraries to
-        build them. Have a list of videos to show? " [:code.text-secondary "map"]
-        " over your collection with a function that returns hiccup and render
-        the result.")]
-     [:div.lg:flex.items-center.bg-base-100.max-w-6xl.mx-auto.rounded-md.border.border-neutral
-      [:pre.bg-base-200.text-sm.rounded-md.flex-1
-       [:code.clojure "(defn MediaList [{:keys [title medias]}]
-  [:div.flex.flex-col.gap-2
-   (typo/h2 title)
-   (map Media medias)])
+        "Structure your UI in reusable bits and pieces with regular Clojure
+      functions. Keep these pure functions in cljc files and use them on the
+      server or on the client.")]
+     (showcase/render-showcase {::showcase/style :light}
+       [(showcase/render-code {:class ["bg-base-300"]}
+          ["(defn Media [{:keys [theme thumbnail url
+                     title text button]}]
+  [:div.media {:data-theme theme}
+   [:aside.media-thumb
+    (Thumbnail thumbnail)]
+   [:main.grow
+    [:a.hover:underline {:href url}
+     [:h2.font-bold title]
+     [:p text]]]
+   (Button (assoc button :style :ghost))])"])
+        [:div.flex-1.p-4
+         (Media
+          {:thumbnail
+           {:image "/images/data-driven.png"
+            :alt "Watch talk: Stateless, Data-driven UIs"
+            :url "https://vimeo.com/861600197"
+            :icon (icons/icon :phosphor.regular/play)
+            :icon-size :small}
+
+           :title "Stateless, Data-driven UIs"
+           :text "How to build data-driven components and what they're good at"
+           :url "https://vimeo.com/861600197"
+           :theme "cupcake"
+
+           :button
+           {:title "Like video"
+            :icon (icons/icon :phosphor.regular/heart)
+            :actions [[:action/execute-command
+                       [:command/like-video {:video/id "bc231"}]]]}})
+         ]])
+
+     (typo/p {:class ["max-w-3xl" "mx-auto" "text-center"]}
+       "While domain-aware UI components like "
+       (typo/code "Video") " and " (typo/code "LikeButton") " can look neat in
+       quick demos and conference talks, components that couple the business
+       domain with rendering logic scale poorly and lead to duplicated UI code.
+       Replicant encourages generic data-driven UI elements by not providing a
+       stateful component abstraction."))
+
+   (section {:class (:dark section-styles)}
+     [:div.max-w-3xl.mx-auto
+      (typo/h2 {:class ["text-center"]} "Data-driven interactivity")
+      (typo/p {:class ["text-center"]}
+        "Replicant supports even event handlers as data, giving you the option
+        of handling them all in a single global handler function. Your UI
+        remains pure data, event handlers declare their intended effects, and
+        you can trivially test the UI even when it supports user
+        interactivity.")]
+     (showcase/render-showcase {::showcase/style :light}
+       [(showcase/render-code {:class ["bg-base-300"]}
+          ["(replicant.dom/set-dispatch!
+ (fn handle-dom-event [rd [action]]
+   (case action
+     ::search-videos
+     (let [q (-> rd :replicant/dom-event
+                 .-target .-value)]
+       (swap! store search-videos q)))))
+
+(defn render [state]
+  [:div
+   [:h2 \"Parens of the dead episodes\"]
+   [:label.input-field
+    [:input.grow
+     {:type \"text\"
+      :placeholder \"Search\"
+      :on {:input [::search-videos]}}]
+    (icons/render icon)]
+   (MediaList
+    {:medias (->> (:results state)
+                  (map video->media-data))})])"])
+        [:div.flex-1.p-4
+         [:div
+          (typo/h2 "Parens of the dead episodes")
+          [:div.my-4
+           (Input
+            {:placeholder "Search"
+             :icon (icons/icon :phosphor.bold/magnifying-glass)
+             :input-actions [::search :event/target.value]})]
+          (MediaList
+           {:medias (map examples/video->media-data examples/videos)})]
+         ]])
+
+     (typo/p {:class ["max-w-3xl" "mx-auto" "text-center"]}
+       "Replicant imposes no structure on your event data — it's just passed to
+       the global event handler. You're free to make your own declarative
+       interactivity DSL. Oh, and event handlers can be regular functions as
+       well. " (typo/a {:href "#"} "Learn more about event handlers") "."))
+
+   (section {}
+     [:div.max-w-3xl.mx-auto
+      (typo/h2 {:class ["text-center"]} "Extend Replicant with custom element aliases")
+      (typo/p {:class ["text-center"]}
+        "Custom element aliases can extend Replicant's hiccup vocabulary.
+        Aliases are stateless wrappers that can expand to arbitrary hiccup. They
+        can receive side-chained data, removing the need to pass certain data
+        everywhere. Perfect for data that is static (e.g. i18n dictionaries),
+        or change very infrequently (e.g. locales).")]
+     (showcase/render-showcase {::showcase/style :gradient}
+       [(showcase/render-code {:class ["bg-base-300"]}
+          ["[:div.media
+ [:aside.media-thumb
+  [:img.rounded-lg {:src (:person/profile-pic author)}]]
+ [:main.grow
+  [:h2.font-bold (:person/full-name author)]
+  [:p (:post/text post)]
+  [:p.opacity-50
+   [:i18n/k ::posted {:date (:post/created-at post)}]]]]"])
+        [:div.flex-1.p-4
+         (Media
+          {:thumbnail {:image "/images/christian.jpg"
+                       :size 20}
+           :title "Christian Johansen"
+           :text (list "Just wrote some documentation for Replicant"
+                       [:span.opacity-50 "Posted December 11th 2024"])
+           })
+         ]])
+
+     (typo/p {:class ["max-w-3xl" "mx-auto" "text-center"]}
+       "In this example, " (typo/code ":i18n/k") " is a user-provided extension
+       that uses a third party library to seemingly give Replicant built-in
+       i18n capabilities. And it's all still data. "
+       (typo/a {:href "#"} "Learn more about aliases") "."))
+
+   (section {:class (:medium section-styles)}
+     [:div.max-w-3xl.mx-auto
+      (typo/h2 {:class ["text-center"]} "Trivially testable UIs")
+      (typo/p {:class ["text-center"]}
+        "When the entire UI is represented by data created by a pure function,
+        testing is trivial: Pass in some data, assert that it appears in the UI
+        somehow. Rinse and repeat. You can even verify that event handlers will
+        \"do\" what you expect, as long as they're expressed as data.")]
+     (showcase/render-showcase {::showcase/style :light}
+       [(showcase/render-code {}
+          ["(defn prepare-ui-data [{:keys [user video]}]
+  {:title (str (count videos) \" videos\")
+   :medias (map #(video->media-data user %) videos)})
 
 ;; Take some domain data
-(let [videos {,,,}]
-  ;; ...convert it to generic UI data
-  (->> {:title (str (count videos) \" videos\")
-        :medias (map video->media-data videos)}
-       ;; ...turn it into hiccup
-       MediaList
-       ;; ...and render it
-       (r/render el)))"]]
-      [:div.flex-1.p-4
-       (let [videos examples/videos]
-         (MediaList
-          {:title (str (count videos) " videos")
-           :medias (map examples/video->media-data videos)}))
-       ]]
+(->> @store
+     ;; Convert it to UI data
+     prepare-ui-data
+     ;; Convert it to hiccup
+     MediaList
+     ;; ...and render it
+     (r/render el))"])
+        (showcase/render-code {:class ["bg-base-200"]}
+          ["(deftest prepare-ui-data-test
+  (testing \"Uses episode number for title\"
+    (is (= (->> {:videos [{:episode/number 1}]}
+                prepare-ui-data :medias first
+                :title)
+           \"Episode 1\")))
+
+  (testing \"Includes a like button\"
+    (is (= (->> {:videos [{:video/id \"v898900\"
+                           :episode/number 1}]
+                 :user {:user/id \"u09b\"}}
+                prepare-ui-data :medias first
+                :button)
+           {:title \"Like video\"
+            :icon :phosphor.regular/heart
+            :on {:click [[:command/like-video
+                          {:user/id \"u09b\"
+                           :video/id \"v898900\"}]]}}))))"])
+        ])
 
      (typo/p {:class ["max-w-3xl" "mx-auto" "text-center"]}
-             "Helper functions like " [:code.text-secondary "video->media-data"]
-             " are pure functions that captures the essentials of turning your
-             domain data into a visual user interface without the fleeting
-             details of markup - excellent targets for plain old unit tests."))
-
-   (section {:class ["bg-gradient-to-b" "from-base-200" "to-base-100"]}
-     [:div.max-w-3xl.mx-auto
-      (typo/h2 {:class ["text-center"]} "Express event handlers as data")
-      (typo/p {:class ["text-center"]}
-        "When event handlers are data instead of functions, your UI is still
-        100% data, and the desired effect of the events can be inspected (and
-        tested). Replicant provides a global event handler where you can process
-        event data however you want.")]
-     [:div.lg:flex.items-center.bg-base-100.max-w-6xl.mx-auto.rounded-md.border.border-neutral
-      [:pre.bg-base-200.text-sm.rounded-md.flex-1
-       [:code.clojure "(defn render [media-list]
-  [:div
-   (SearchInput
-    {:on {:change :action/search-videos}})
-
-   (MediaList media-list)])
-
-(r/set-dispatch!
- (fn [rd event-data]
-   (let [e (:replicant/dom-event rd)]
-     (case event-data
-       :action/search-videos
-       (->> videos
-            (search-videos (.. e -target -value))
-            videos->media-list
-            render)
-
-       (println \"Unsupported action!\" action args)))))"]]
-      [:div.flex-1.p-4
-       (let [videos examples/videos]
-         (MediaList
-          {:title (str (count videos) " videos")
-           :medias (map examples/video->media-data videos)}))
-       ]]
-
-     (typo/p {:class ["max-w-3xl" "mx-auto" "text-center"]}
-       "Replicant is a rendering library. It has no state management or built-in
-       effects system. Use your favorite libraries or roll your own. The docs
-       have guides for setting up simple and effective state management based
-       on " (typo/a {:href "#"} "atoms")
-       " or " (typo/a {:href "#"} "Datascript") "."))))
+       "Mappings like " (typo/code "video->media-data")
+       " are pure functions that captures the essentials of turning your domain
+       data into a visual user interface without the more volatile details of
+       markup - excellent targets for plain old unit tests. "
+       (typo/a {:href "#"} "Learn more about testing") "."))))

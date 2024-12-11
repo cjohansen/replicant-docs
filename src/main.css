@@ -90,3 +90,25 @@
     }
 
 }
+
+@layer components {
+    .media {
+        @apply rounded-2xl p-2 text-sm xl:text-base flex flex-row items-center gap-3;
+    }
+
+    .media-thumb {
+        @apply basis-1/4;
+    }
+
+    .media-list {
+        @apply flex flex-col gap-2;
+    }
+
+    .overlay {
+        @apply absolute inset-0 flex items-center justify-center;
+    }
+
+    .input-field {
+        @apply input input-bordered flex items-center gap-2;
+    }
+}
