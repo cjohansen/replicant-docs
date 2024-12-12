@@ -97,7 +97,8 @@
       (typo/p {:class ["text-center"]}
         "Structure your UI in reusable bits and pieces with regular Clojure
       functions. Keep these pure functions in cljc files and use them on the
-      server or on the client.")]
+      server or on the client. No framework specific component abstractions
+      required.")]
      (showcase/render-showcase {::showcase/style :light}
        [(showcase/render-code {:class ["bg-base-300"]}
           ["(defn Media [{:keys [theme thumbnail url
@@ -134,20 +135,20 @@
      (typo/p {:class ["max-w-3xl" "mx-auto" "text-center"]}
        "While domain-aware UI components like "
        (typo/code "Video") " and " (typo/code "LikeButton") " can look neat in
-       quick demos and conference talks, components that couple the business
-       domain with rendering logic scale poorly and lead to duplicated UI code.
-       Replicant encourages generic data-driven UI elements by not providing a
-       stateful component abstraction."))
+       quick demos and conference talks, coupling the business domain with
+       rendering logic scales poorly and leads to duplicated UI code. Replicant
+       encourages generic data-driven UI elements by not providing a stateful
+       component abstraction. Learn " (typo/a {:href "#"} "why generic elements
+       improve frontend code-bases") "."))
 
    (section {:class (:dark section-styles)}
      [:div.max-w-3xl.mx-auto
       (typo/h2 {:class ["text-center"]} "Data-driven interactivity")
       (typo/p {:class ["text-center"]}
-        "Replicant supports even event handlers as data, giving you the option
-        of handling them all in a single global handler function. Your UI
-        remains pure data, event handlers declare their intended effects, and
-        you can trivially test the UI even when it supports user
-        interactivity.")]
+        "Even event handlers can be data, giving you the option of handling them
+        all in a single global handler function. Your UI remains pure data,
+        event handlers declare their intended effects, and you can trivially
+        test the UI even when it supports user interactivity.")]
      (showcase/render-showcase {::showcase/style :light}
        [(showcase/render-code {:class ["bg-base-300"]}
           ["(replicant.dom/set-dispatch!
@@ -186,17 +187,18 @@
        "Replicant imposes no structure on your event data — it's just passed to
        the global event handler. You're free to make your own declarative
        interactivity DSL. Oh, and event handlers can be regular functions as
-       well. " (typo/a {:href "#"} "Learn more about event handlers") "."))
+       well." [:br] "Learn more about " (typo/a {:href "#"} "event handlers") "."))
 
    (section {}
      [:div.max-w-3xl.mx-auto
       (typo/h2 {:class ["text-center"]} "Extend Replicant with custom element aliases")
       (typo/p {:class ["text-center"]}
         "Custom element aliases can extend Replicant's hiccup vocabulary.
-        Aliases are stateless wrappers that can expand to arbitrary hiccup. They
+        Aliases are stateless wrappers that can expand to arbitrary hiccup.
+        Alias functions are only called when their arguments change, and they
         can receive side-chained data, removing the need to pass certain data
-        everywhere. Perfect for data that is static (e.g. i18n dictionaries),
-        or change very infrequently (e.g. locales).")]
+        everywhere. Perfect for data that is static (e.g. i18n dictionaries), or
+        change very infrequently (e.g. locales).")]
      (showcase/render-showcase {::showcase/style :gradient}
        [(showcase/render-code {:class ["bg-base-300"]}
           ["[:div.media
@@ -220,12 +222,12 @@
      (typo/p {:class ["max-w-3xl" "mx-auto" "text-center"]}
        "In this example, " (typo/code ":i18n/k") " is a user-provided extension
        that uses a third party library to seemingly give Replicant built-in
-       i18n capabilities. And it's all still data. "
-       (typo/a {:href "#"} "Learn more about aliases") "."))
+       i18n capabilities. And it's all still data. Learn more about "
+       (typo/a {:href "#"} "aliases") "."))
 
    (section {:class (:medium section-styles)}
      [:div.max-w-3xl.mx-auto
-      (typo/h2 {:class ["text-center"]} "Trivially testable UIs")
+      (typo/h2 {:class ["text-center"]} "You can test your UI")
       (typo/p {:class ["text-center"]}
         "When the entire UI is represented by data created by a pure function,
         testing is trivial: Pass in some data, assert that it appears in the UI
@@ -233,7 +235,12 @@
         \"do\" what you expect, as long as they're expressed as data.")]
      (showcase/render-showcase {::showcase/style :light}
        [(showcase/render-code {}
-          ["(defn prepare-ui-data [{:keys [user video]}]
+          ["(defn MediaList [{:keys [title medias]}]
+  [:div.media-list
+   (when title (typo/h2 title))
+   (map Media medias)])
+
+(defn prepare-ui-data [{:keys [user video]}]
   {:title (str (count videos) \" videos\")
    :medias (map #(video->media-data user %) videos)})
 
@@ -268,7 +275,23 @@
 
      (typo/p {:class ["max-w-3xl" "mx-auto" "text-center"]}
        "Mappings like " (typo/code "video->media-data")
-       " are pure functions that captures the essentials of turning your domain
-       data into a visual user interface without the more volatile details of
-       markup - excellent targets for plain old unit tests. "
-       (typo/a {:href "#"} "Learn more about testing") "."))))
+       " are pure functions that capture the essentials of turning your domain
+       data into a visual user interface without the volatile details of markup
+       — excellent targets for plain old unit tests. No elaborate browser
+       automation required. Learn more about "
+       (typo/a {:href "#"} "testing UI code") "."))
+
+   (section {:class (:dark section-styles)}
+     [:div.max-w-3xl.mx-auto
+      (typo/h2 {:class ["text-center"]} "Unidirectional data flow")
+      (typo/p {:class ["text-center"]}
+        "With Replicant you always render the entire UI, starting at the root node.
+        There are no atoms, subscriptions, sub-tree rendering, component-local
+        state, or other moving parts. Just a pure function that takes in your
+        domain data and returns the entire UI. Boring in a good way. Simple AND
+        easy.")]
+
+     (typo/p {:class ["max-w-3xl" "mx-auto" "text-center"]}
+       "Learn more about how Replicant makes this possible, and why you
+       shouldn't worry about performance in " [:br] (typo/a {:href "#"} "Why top-down
+       rendering is the best frontend programming model") "."))))
