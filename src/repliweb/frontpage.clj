@@ -89,7 +89,7 @@
        "Hiccup is highly expressive and unlike JSX does not require any
        additional build step — it's just Clojure. Replicant's dialect supports
        some features not found in other libraries, learn more in " (typo/a
-       {:href "#"} "the hiccup reference") "."))
+       {:href "/guide/hiccup/"} "the hiccup reference") "."))
 
    (section {:class (:medium section-styles)}
      [:div.max-w-3xl.mx-auto
@@ -187,7 +187,8 @@
        "Replicant imposes no structure on your event data — it's just passed to
        the global event handler. You're free to make your own declarative
        interactivity DSL. Oh, and event handlers can be regular functions as
-       well." [:br] "Learn more about " (typo/a {:href "#"} "event handlers") "."))
+       well." [:br] "Learn more about " (typo/a
+       {:href "/guide/event-handlers/"} "event handlers") "."))
 
    (section {}
      [:div.max-w-3xl.mx-auto
@@ -223,7 +224,7 @@
        "In this example, " (typo/code ":i18n/k") " is a user-provided extension
        that uses a third party library to seemingly give Replicant built-in
        i18n capabilities. And it's all still data. Learn more about "
-       (typo/a {:href "#"} "aliases") "."))
+       (typo/a {:href "/guide/alias/"} "aliases") "."))
 
    (section {:class (:medium section-styles)}
      [:div.max-w-3xl.mx-auto
