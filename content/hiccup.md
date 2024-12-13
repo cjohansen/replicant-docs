@@ -303,9 +303,8 @@ you would spell them in a CSS file.
 
 While not ideal, sometimes you have a string that contains some HTML (like the
 output of a CMS WYSIWYG field) and you just want to insert it into the DOM tree
-without any further hassle. Replicant's got you covered. When an element has the
-`:innerHTML` attribute, its child nodes are completely ignored and the node's
-content will be dictated by the `:innerHTML` attribute.
+without any further hassle. Replicant's got you covered: use the `:innerHTML`
+"attribute".
 
 When rendering to a string on the server, `:innerHTML` is how you can output an
 unescaped string into the generated DOM.
@@ -320,7 +319,49 @@ unescaped string into the generated DOM.
 </div>
 ```
 
+When an element has the `:innerHTML` attribute, its child nodes are completely
+ignored and the node's content will be dictated by the `:innerHTML` attribute:
+
+```clj
+[:div {:innerHTML "<h1>Hello there!</h1>"}
+  [:p "This will be ignored"]
+```
+
+```html
+<div>
+  <h1>Hello there!</h1>
+</div>
+```
+
+`:innerHTML` is an escape hatch. Most people won't need to ever use it.
+
 ### Event handlers
+
+All event handlers go in a map under the `:on` attribute key. Event handler
+names are the same ones as in the browser. Replicant does not keep a list of
+valid names to use -- whatever you pass it, it will pass to `addEventListener`:
+
+```clj
+[:button {:on {:click (fn [e] (js/alert "Hello!"))}}
+ "Click it"]
+```
+
+<button on-click="alert('Hello!')">Click it</button>
+
+Replicant does no special handling of the event handler function: it will behave
+exactly as if you added it with `.addEventListener`. That means that `e` is a
+plain old JavaScript `Event` object.
+
+Event handlers can also be expressed as data:
+
+```clj
+[:button {:on {:click [:alert "Hello!"]}}
+ "Click it"]
+```
+
+Data event handlers requires some additional setup, see the [detailed guide on
+event handlers](/guide/event-handlers/).
+
 
 ### Life-cycle hooks
 
