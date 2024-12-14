@@ -362,9 +362,91 @@ Event handlers can also be expressed as data:
 Data event handlers requires some additional setup, see the [detailed guide on
 event handlers](/guide/event-handlers/).
 
-
 ### Life-cycle hooks
+
+Sometimes you need access to the DOM nodes. Maybe you want to know how something
+actually turned out, e.g. measure its rendered size, or you want to integrate
+with a third party JavaScript library such as a map toolkit etc.
+
+You can use the special "attribute" `:replicant/on-render` to register a
+life-cycle hook. It will be called whenever the underlying DOM node is changed
+somehow:
+
+```clj
+[:div {:replicant/on-render
+       (fn [data] (prn data))}
+  "Hello!"]
+```
+
+The function is called with a single argument, which is a map of these keys:
+
+- `:replicant/trigger` always has the value `:replicant.trigger/life-cycle`
+- `:replicant/life-cycle` one of `:replicant.life-cycle/mount` (initial render),
+  `:replicant.life-cycle/update` (successive updates) or
+  `:replicant.life-cycle/unmount` (node is being removed from the DOM).
+- `:replicant/node` the DOM node
+
+As you can see `:replicant/on-render` triggers on all updates and gives you
+enough information to know what happened. If you really just want to do
+something on mount and/or unmount, you can use `:replicant/on-mount` and
+`:replicant/on-unmount`, which work exactly like `:replicant/on-render`, except
+they only trigger on their respective life-cycle events.
+
+Like event handlers, life-cycle hooks can be expressed as data see the [detailed
+guide on life-cycle hooks](/guide/life-cycle/).
 
 ### Mounting and unmounting
 
+Elements can have attribute overrides when they are added to or removed from the
+DOM. This can be used to create transitions or animate SVGs etc.
+`:replicant/mounting` is an attribute map that will be merged into the element's
+attributes during mounting, and `:replicant/unmounting` does the same during
+unmounts.
+
+```clj
+[:div
+ {:style {:opacity 1
+          :height 100
+          :width 200
+          :background "#6180D2"
+          :transition "opacity 0.25s,
+                       height 0.25s,
+                       width 0.25s,
+                       backgroun 0.25s"}
+
+  :replicant/mounting
+  {:style {:opacity 0}}
+
+  :replicant/unmounting
+  {:style {:height 0
+           :width 0
+           :background "#76AF47"}}}]
+```
+
+This will create a blue square. As it mounts, the opacity style property will be
+set to 0, then changed to 1, which will trigger a transition. As it unmounts,
+the height and width properties are both set to 0, and the background is changed
+to green -- all causing transitions.
+
+In less technical terms: this creates a blue square that fades in on mount, and
+changes to color to green as it shrinks to nothing on unmount.
+
 ### Keys
+
+`:replicant/key` can be used to identify an element among its siblings. Using
+keys helps avoid elements being replaced and recreated.
+
+```clj
+[:form
+ [:label {:for "name"} "Name:"]
+ [:input {:type "text"
+          :name "name"
+          :id "name"
+          :replicant/key [:input "name"]}]]
+```
+
+Keys can be arbitrary Clojure data.
+
+Keys are usually not required, but you may want to use them on elements with
+transitions, animations or state (e.g. `input`, `select`, etc). See the
+[detailed guide on keys](/guide/keys/).
