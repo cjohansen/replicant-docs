@@ -1,8 +1,8 @@
-:page/uri /guide/nil/
+:page/uri /nil/
 :page/title Explicit nils can be a good thing
 :page/body
 
-As stated in the [guide to Replicant flavored hiccup](/guide/hiccup/), explicit
+As stated in the [guide to Replicant flavored hiccup](/hiccup/), explicit
 `nil`s in place of missing child nodes can sometimes be beneficial. Because
 Replicant expects your hiccup to be produced by code, it uses `nil`s to
 understand how two versions of the same node relate. Let's illustrate with an
@@ -69,5 +69,5 @@ In short: Using explicit `nil`s to stand in for failed conditionals and similar
 situations helps Replicant make better decisions.
 
 Note that you could achieve the same effect without the explicit `nil` by adding
-[`:replicant/key`](/guide/keys/) to the last `p`. Explicit `nil`s reduce the
+[`:replicant/key`](/keys/) to the last `p`. Explicit `nil`s reduce the
 need for manual keying.

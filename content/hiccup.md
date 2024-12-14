@@ -1,4 +1,4 @@
-:page/uri /guide/hiccup/
+:page/uri /hiccup/
 :page/title Replicant Flavored Hiccup
 :page/body
 
@@ -34,7 +34,7 @@ So, which tags can you use? Any one that the browser supports, including custom
 elements created with `window.customElements.define`. Replicant does not
 maintain a separate list of valid tags. Whatever keyword you put in the first
 position of the vector will be used as the tag name -- just be aware that
-[namespaced keywords are treated differently](/guide/alias/).
+[namespaced keywords are treated differently](/alias/).
 
 ## Elements
 
@@ -138,7 +138,7 @@ have the same effect in most cases.
 `nil`s are perfectly fine as children. This means it's safe to produce hiccup
 with code that uses `when`, or calls functions that may or may not return hiccup
 to be used as children. To learn how explicit `nil`s can help Replicant make
-better choices, check out [explicit nils](/guide/nil/).
+better choices, check out [explicit nils](/nil/).
 
 ## Attributes
 
@@ -360,7 +360,7 @@ Event handlers can also be expressed as data:
 ```
 
 Data event handlers requires some additional setup, see the [detailed guide on
-event handlers](/guide/event-handlers/).
+event handlers](/event-handlers/).
 
 ### Life-cycle hooks
 
@@ -393,7 +393,7 @@ exactly like `:replicant/on-render`, except they only trigger on their
 respective life-cycle events.
 
 Like event handlers, life-cycle hooks can be expressed as data see the [detailed
-guide on life-cycle hooks](/guide/life-cycle/).
+guide on life-cycle hooks](/life-cycle/).
 
 <a id="mounting-unmounting"></a>
 ### Mounting and unmounting
@@ -450,4 +450,4 @@ Keys can be arbitrary Clojure data.
 
 Keys are usually not required, but you may want to use them on elements with
 transitions, animations or state (e.g. `input`, `select`, etc). See the
-[detailed guide on keys](/guide/keys/).
+[detailed guide on keys](/keys/).

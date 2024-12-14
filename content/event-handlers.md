@@ -1,4 +1,4 @@
-:page/uri /guide/event-handlers/
+:page/uri /event-handlers/
 :page/title Event handlers in Repicant
 :page/body
 
@@ -86,7 +86,7 @@ In the above example, `:replicant/trigger` was checked before dispatching the
 action. This key can have one of two values:
 
 - `:replicant.trigger/dom-event` for DOM events
-- `:replicant.trigger/life-cycle` for [life-cycle hooks](/guide/life-cycle/)
+- `:replicant.trigger/life-cycle` for [life-cycle hooks](/life-cycle/)
 
 When it has the value `:replicant.trigger/life-cycle`, the dispatch function
 will only be called with one argument.

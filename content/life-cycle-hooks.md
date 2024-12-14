@@ -1,4 +1,4 @@
-:page/uri /guide/life-cycle-hooks/
+:page/uri /life-cycle-hooks/
 :page/title Life-cycle hooks
 :page/body
 
@@ -54,7 +54,7 @@ Life-cycle hooks can also be expressed with data and handled via
 ```
 
 For more details on this mechanism, refer to the [event handler
-guide](/guide/event-handlers/) which describes it in detail. It works exactly
+guide](/event-handlers/) which describes it in detail. It works exactly
 the same for DOM and life-cycle events. You can use `:replicant/trigger` to
 distinguish them.
 
