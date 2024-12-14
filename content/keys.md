@@ -55,8 +55,8 @@ whatever is occupying its space in the current hiccup.
 
 This means that if you have a node whose children all have different tag names,
 you don't need keys. If you don't have [life-cycle
-hooks](/guide/life-cycle-hooks/), [transitions](/guide/transitions/), or
-stateful elements like form fields or elements with `contenteditable`, you don't
-need explicit keys.
+hooks](/guide/life-cycle-hooks/),
+[transitions](/guide/hiccup/#mounting-unmounting), or stateful elements like
+form fields or elements with `contenteditable`, you don't need explicit keys.
 
 In short: there's no need to proactively add `:replicant/key`.

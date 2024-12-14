@@ -395,12 +395,13 @@ respective life-cycle events.
 Like event handlers, life-cycle hooks can be expressed as data see the [detailed
 guide on life-cycle hooks](/guide/life-cycle/).
 
+<a id="mounting-unmounting"></a>
 ### Mounting and unmounting
 
 Elements can have attribute overrides when they are added to or removed from the
-DOM. This can be used to create transitions or animate SVGs etc.
+DOM. These can be used to create transitions or animate SVGs etc.
 `:replicant/mounting` is an attribute map that will be merged into the element's
-attributes during mounting, and `:replicant/unmounting` does the same during
+attributes when mounting, and `:replicant/unmounting` does the same when
 unmounts.
 
 ```clj
