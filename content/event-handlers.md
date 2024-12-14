@@ -17,6 +17,8 @@ Replicant does no special handling of the event handler function: it will behave
 exactly as if you added it with `.addEventListener`. That means that `e` is a
 plain old JavaScript `Event` object.
 
+## Functions are not data
+
 One problem with event handlers is that functions are not data. This is
 unfortunate for a few reasons.
 
@@ -35,6 +37,8 @@ when it's functionally the same.
 Functions not being data also means that you can't serialize the UI, limiting
 your options.
 
+## Event handlers as data
+
 Replicant offers a solution to this problem by allowing event handlers to be
 expressed as data. To use this feature, you must first register a global event
 handler. Whenever Replicant encounters an event handler that is not a function,
@@ -47,10 +51,12 @@ The global handler only needs to be registered once:
 
 (r/set-dispatch!
  (fn [event-data handler-data]
-   (println "Event triggered!")
-   (println "Event:" (:replicant/dom-event event-data))
-   (println "Node:" (:replicant/node event-data))
-   (println "Handler data:" handler-data)))
+   (when (= :replicant.trigger/dom-event
+            (:replicant/trigger event-data))
+     (println "Event triggered!")
+     (println "Event:" (:replicant/dom-event event-data))
+     (println "Node:" (:replicant/node event-data))
+     (println "Handler data:" handler-data))))
 ```
 
 Now you can express event handlers with arbitrary data:
@@ -73,6 +79,17 @@ Handler data: [:like-video {:video/id v7c8b} {:user/id u23f4}]
 
 As you can see, the event handler data is passed through as is. Replicant infers
 no meaning from this data, it is up to you to define the desired behavior.
+
+### The trigger
+
+In the above example, `:replicant/trigger` was checked before dispatching the
+action. This key can have one of two values:
+
+- `:replicant.trigger/dom-event` for DOM events
+- `:replicant.trigger/life-cycle` for [life-cycle hooks](/guide/life-cycle/)
+
+When it has the value `:replicant.trigger/life-cycle`, the dispatch function
+will only be called with one argument.
 
 ## The action dispatch pattern
 

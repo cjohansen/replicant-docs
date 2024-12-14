@@ -386,11 +386,11 @@ The function is called with a single argument, which is a map of these keys:
   `:replicant.life-cycle/unmount` (node is being removed from the DOM).
 - `:replicant/node` the DOM node
 
-As you can see `:replicant/on-render` triggers on all updates and gives you
-enough information to know what happened. If you really just want to do
-something on mount and/or unmount, you can use `:replicant/on-mount` and
-`:replicant/on-unmount`, which work exactly like `:replicant/on-render`, except
-they only trigger on their respective life-cycle events.
+`:replicant/on-render` triggers on all updates and gives you enough information
+to know what happened. If you just want to do something on mount and/or unmount,
+you can use `:replicant/on-mount` and `:replicant/on-unmount`, which work
+exactly like `:replicant/on-render`, except they only trigger on their
+respective life-cycle events.
 
 Like event handlers, life-cycle hooks can be expressed as data see the [detailed
 guide on life-cycle hooks](/guide/life-cycle/).
