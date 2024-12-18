@@ -37,6 +37,7 @@ when it's functionally the same.
 Functions not being data also means that you can't serialize the UI, limiting
 your options.
 
+<a id="data"></a>
 ## Event handlers as data
 
 Replicant offers a solution to this problem by allowing event handlers to be
