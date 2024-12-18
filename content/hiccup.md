@@ -268,6 +268,18 @@ and/or keywords.
 <img class="rounded-lg block" src="/images/data-driven.png">
 ```
 
+You can combine selector style classes and the `:class` attribute:
+
+```clj
+[:img.rounded-lg
+  {:src "/images/data-driven.png"
+   :class "block"}]
+```
+
+```html
+<img class="rounded-lg block" src="/images/data-driven.png">
+```
+
 Passing a string with space-separated classes, e.g. `[:img {:class "rounded-lg
 block"}]` will work but is discouraged. In fact, it will produce a console error
 during development. The reason is that Replicant has to parse the string to
