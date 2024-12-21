@@ -295,6 +295,7 @@ add the DOM attribute `loading?`, which would have failed horribly.
 This is all well and good, but what are the benefits of using aliases over
 functions that return hiccup?
 
+<a id="late-bound"></a>
 ### Late bound
 
 Aliases are not expanded until their attributes or children change. A function
@@ -315,6 +316,7 @@ This subtle difference means that aliases can manipulate the attributes or
 overall structure of their nested aliases. This idea is further explored in the
 [sortable table tutorial](/tutorials/sortable-table/).
 
+<a id="abstraction-level"></a>
 ### Raising the abstraction level of hiccup
 
 One disadvantage of writing tests against hiccup is that it contains a lot of

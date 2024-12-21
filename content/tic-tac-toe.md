@@ -5,7 +5,7 @@
 In this tutorial we will implement the game of Tic-Tac-Toe from scratch. It will
 teach you the essentials of working with Replicant, and show you how to go from
 nothing to a working app. The intended audience is anyone new to Replicant or
-who are curious about the Replicant was made to support.
+who are curious about the workflow Replicant was made to support.
 
 The [code for this tutorial is available on
 github](https://github.com/cjohansen/replicant-tic-tac-toe). Following along by
