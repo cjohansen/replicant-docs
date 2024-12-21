@@ -77,6 +77,7 @@ You can nest other elements as well:
 </ul>
 ```
 
+<a id="lists"></a>
 ### Fragments / lists
 
 The children of an element does not need to appear one after the other as direct
@@ -140,6 +141,7 @@ with code that uses `when`, or calls functions that may or may not return hiccup
 to be used as children. To learn how explicit `nil`s can help Replicant make
 better choices, check out [explicit nils](/nil/).
 
+<a id="attributes"></a>
 ## Attributes
 
 To give an element attributes, place a map next to the tag name. Attributes use
@@ -202,6 +204,7 @@ a `when`, and you don't have to check every possible attribtue for `nil`:
 </div>
 ```
 
+<a id="id"></a>
 ### Id
 
 You can use CSS selector syntax to add an id directly to the hiccup tag name:
@@ -227,6 +230,7 @@ e.g. when the id is a computed value:
 <h1 id="heading">Hello Clojurians</h1>
 ```
 
+<a id="class"></a>
 ### Classes
 
 Classes are arguably the most commonly used attributes. Because they are so
