@@ -441,6 +441,85 @@ Using `defalias` and referring to the vars in your hiccup (e.g.
 `[ui/btn "Click"]`, not `[::ui/btn "Click"]` ) helps keep relevant
 alias definitions in your build, and irrelevant ones out.
 
+<a id="components"></a>
+## Differences from components
+
+Aliases have a lot in common with "components" as they appear in React and its
+peers, but there are some important differences.
+
+### Data vs functions and objects
+
+[Reagent](https://reagent-project.github.io/) is one of several React wrappers
+for ClojureScript. On the surface, Replicant aliases look **a lot** like
+Reagent's components. Here's Reagent:
+
+```clj
+(defn reagent-hello-component [name]
+  [:p "Hello, " name "!"])
+
+(defn reagent-say-hello []
+  [reagent-hello-component "world"])
+
+(require '[reagent.dom :as rd])
+(rd/render [reagent-say-hello] js/document.body)
+```
+
+And here's Replicant:
+
+```clj
+(defalias replicant-hello-component [_ name]
+  [:p "Hello, " name "!"])
+
+(defn replicant-say-hello []
+  [replicant-hello-component "world"])
+
+(require '[replicant.dom :as r])
+(r/render (replicant-say-hello) js/document.body)
+```
+
+When you use `defalias`, the usage in `reagent-say-hello` and
+`replicant-say-hello` looks exactly the same, but don't be fooled! Replicant's
+aliases are data, while Reagent's are not.
+
+```clj
+(prn [reagent-hello-component "world"])
+;;=> [#object[myapp$ui$reagent_hello_component] "world"]
+
+(prn [replicant-hello-component "world"])
+;;=> [:myapp.ui/replicant-hello-component "world"]
+```
+
+The distinction is clearer without `defalias`:
+
+```clj
+(defn replicant-hello-component [_ name]
+  [:p "Hello, " name "!"])
+
+(defn replicant-say-hello []
+  [::hello-component "world"])
+
+(require '[replicant.dom :as r])
+
+(r/render
+ (say-hello)
+ js/document.body
+ {:aliases {::hello-component replicant-hello-component}})
+```
+
+### No local state
+
+Components can have local state, and have their own life-cycle. When state
+changes, the component is re-rendered. This means that components can offer
+performance benefits at the cost of a more complex data-flow.
+
+Replicant aliases do not have local state or separate life-cycles. The latter
+point is important: You could always close over some state (e.g. an atom) in a
+function, but there is no way to have Replicant re-render an alias in isolation.
+This is by design, as it yields the simplest possible data-flow: top-down.
+
+By virtue of their local state, components are essentially stateful and mutable
+objects, while aliases are pure functions.
+
 ## When should you use aliases?
 
 You may not need to use aliases at all -- that's completely fine. Aliases are an
