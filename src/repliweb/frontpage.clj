@@ -138,7 +138,7 @@
        quick demos and conference talks, coupling the business domain with
        rendering logic scales poorly and leads to duplicated UI code. Replicant
        encourages generic data-driven UI elements by not providing a stateful
-       component abstraction. Learn " (typo/a {:href "#"} "why generic elements
+       component abstraction. Learn " (typo/a {:href "https://vimeo.com/861600197"} "why generic elements
        improve frontend code-bases") "."))
 
    (section {:class (:dark section-styles)}
@@ -192,6 +192,42 @@
 
    (section {}
      [:div.max-w-3xl.mx-auto
+      (typo/h2 {:class ["text-center"]} "Easy data-driven transitions")
+      (typo/p {:class ["text-center"]}
+        "Replicant allows you to specify overrides for any attributes during
+        mounting and unmounting. This allows you to declaratively transition
+        elements on mount and unmount, like fading in an element as it's
+        mounted:")]
+     (showcase/render-showcase {::showcase/style :gradient}
+       [(showcase/render-code {:class ["bg-base-300"]}
+          ["(when (:visible? props)
+  [:div {:style {:transition \"opacity 0.25s\"
+                 :opacity 1}
+         :replicant/mounting {:style {:opacity 0}}
+         :replicant/unmounting {:style {:opacity 0}}}
+   (Media
+    {:thumbnail {:image \"/images/christian.jpg\"
+                 :size 12}
+     :title \"Christian Johansen\"
+     :text (list \"Just wrote some documentation for Replicant.\"
+                 [:span.opacity-50 \"Posted December 11th 2024\"])})])"])
+        [:div.flex-1.p-4
+         (Media
+          {:thumbnail {:image "/images/christian.jpg"
+                       :size 20}
+           :title "Christian Johansen"
+           :text (list "Just wrote some documentation for Replicant"
+                       [:span.opacity-50 "Posted December 11th 2024"])})
+         ]])
+
+     (typo/p {:class ["max-w-3xl" "mx-auto" "text-center"]}
+       "This is not limited to inline styles, you can stick any attribute in "
+       (typo/code ":replicant/mounting") " and " (typo/code ":replicant/unmounting")
+       ", like " (typo/code ":class") ". Learn more tidbits like this in "
+       (typo/a {:href "/hiccup/"} "the hiccup reference") "."))
+
+   (section {:class (:medium section-styles)}
+     [:div.max-w-3xl.mx-auto
       (typo/h2 {:class ["text-center"]} "Extend Replicant with custom element aliases")
       (typo/p {:class ["text-center"]}
         "Custom element aliases can extend Replicant's hiccup vocabulary.
@@ -226,7 +262,7 @@
        i18n capabilities. And it's all still data. Learn more about "
        (typo/a {:href "/alias/"} "aliases") "."))
 
-   (section {:class (:medium section-styles)}
+   (section {:class (:dark section-styles)}
      [:div.max-w-3xl.mx-auto
       (typo/h2 {:class ["text-center"]} "You can test your UI")
       (typo/p {:class ["text-center"]}
@@ -275,14 +311,15 @@
         ])
 
      (typo/p {:class ["max-w-3xl" "mx-auto" "text-center"]}
-       "Mappings like " (typo/code "video->media-data")
-       " are pure functions that capture the essentials of turning your domain
-       data into a visual user interface without the volatile details of markup
-       — excellent targets for plain old unit tests. No elaborate browser
-       automation required. Learn more about "
-       (typo/a {:href "#"} "testing UI code") "."))
+       "Pure functions like " (typo/code "video->media-data")
+       " capture the essentials of turning your domain data into a visual user
+       interface without the volatile details of markup — excellent targets for
+       plain old unit tests. No elaborate browser automation required. Check out
+       the "
+       (typo/a {:href "/tutorials/tic-tac-toe/"} "getting started tutorial") "
+       for a practical demonstration."))
 
-   (section {:class (:dark section-styles)}
+   (section {}
      [:div.max-w-3xl.mx-auto
       (typo/h2 {:class ["text-center"]} "Unidirectional data flow")
       (typo/p {:class ["text-center"]}
@@ -294,5 +331,6 @@
 
      (typo/p {:class ["max-w-3xl" "mx-auto" "text-center"]}
        "Learn more about how Replicant makes this possible, and why you
-       shouldn't worry about performance in " [:br] (typo/a {:href "#"} "Why top-down
-       rendering is the best frontend programming model") "."))))
+       shouldn't worry about performance in " [:br] (typo/a
+       {:href "/top-down/"} "Why top-down rendering is the best frontend
+       programming model") "."))))

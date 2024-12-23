@@ -42,3 +42,21 @@
     :text (list "Just wrote some documentation for Replicant, hope people find it useful."
                 [:span.opacity-50 "Posted December 11th 2024"])
     }))
+
+(defscene fade-example
+  :params (atom {:visible? false})
+  [props]
+  [:div {:on {:click #(swap! props update :visible? not)}
+         :style {:min-width 100
+                 :min-height 100}}
+(when (:visible? @props)
+  [:div {:style {:transition "opacity 0.25s"
+                 :opacity 1}
+         :replicant/mounting {:style {:opacity 0}}
+         :replicant/unmounting {:style {:opacity 0}}}
+   (Media
+    {:thumbnail {:image "/images/christian.jpg"
+                 :size 12}
+     :title "Christian Johansen"
+     :text (list "Just wrote some documentation for Replicant, hope people find it useful."
+                 [:span.opacity-50 "Posted December 11th 2024"])})])])

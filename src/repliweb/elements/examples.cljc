@@ -71,90 +71,90 @@
 
          (println "Unsupported action!" action args)))))
 
-(defn media [{:keys [url thumbnail title playing?]}]
+  (defn media [{:keys [url thumbnail title playing?]}]
+    [:div.media {:data-theme "cupcake"}
+     [:a {:href url
+          :class (when playing?
+                   "spinner")}
+      [:img
+       {:src thumbnail
+        :alt title}]]])
+
+  (media {:url "https://vimeo.com/861600197"
+          :thumbnail "/images/data-driven.png"
+          :playing? false})
+
   [:div.media {:data-theme "cupcake"}
-   [:a {:href url
-        :class (when playing?
-                 "spinner")}
-    [:img
-     {:src thumbnail
-      :alt title}]]])
+   [:a {:href "https://vimeo.com/861600197"
+        :class nil}
+    [:img {:src "/images/data-driven.png" :alt nil}]]]
 
-(media {:url "https://vimeo.com/861600197"
-        :thumbnail "/images/data-driven.png"
-        :playing? false})
+  (defn render-greeting [{:keys [user]}]
+    [:div
+     [:h1 "Hello Clojure enthusiast!"]
+     (when user
+       [:p "Nice to see you, " (:user/given-name user)])
+     [:p "Hope all is well today!"]])
 
-[:div.media {:data-theme "cupcake"}
- [:a {:href "https://vimeo.com/861600197"
-      :class nil}
-  [:img {:src "/images/data-driven.png" :alt nil}]]]
 
-(defn render-greeting [{:keys [user]}]
+  [:h1
+   {:style
+    {:font-family "FuturaPT, helvetica, sans-serif"
+     :font-weight 900
+     :max-width 800}}
+   "Hello!"]
+
   [:div
-   [:h1 "Hello Clojure enthusiast!"]
-   (when user
-     [:p "Nice to see you, " (:user/given-name user)])
-   [:p "Hope all is well today!"]])
-
-
-[:h1
- {:style
-  {:font-family: "FuturaPT, helvetica, sans-serif"
-   :font-weight 900
-   :max-width 800}}
- "Hello!"]
-
-[:div
- {:style {:opacity 1
-          :height 100
-          :width 200
-          :background "#6180D2"
-          :transition "opacity 0.25s,
+   {:style {:opacity 1
+            :height 100
+            :width 200
+            :background "#6180D2"
+            :transition "opacity 0.25s,
                        height 0.25s,
                        width 0.25s,
                        backgroun 0.25s"}
 
-  :replicant/mounting
-  {:style {:opacity 0}}
+    :replicant/mounting
+    {:style {:opacity 0}}
 
-  :replicant/unmounting
-  {:style {:height 0
-           :width 0
-           :background "#76AF47"}}}]
+    :replicant/unmounting
+    {:style {:height 0
+             :width 0
+             :background "#76AF47"}}}]
 
-(defn render-map [{:keys [places]}]
-  [:div
-   {:replicant/on-mount
-    (fn [{:keys [replicant/node]}]
-      (mount-map node))
+  (defn render-map [{:keys [places]}]
+    [:div
+     {:replicant/on-mount
+      (fn [{:keys [replicant/node]}]
+        (mount-map node))
 
-    :replicant/on-render
-    (fn [{:keys [replicant/node]}]
-      (update-map-places node places))}])
+      :replicant/on-render
+      (fn [{:keys [replicant/node]}]
+        (update-map-places node places))}])
 
-(require '[replicant.dom :as r])
+  (require '[replicant.dom :as r])
 
-(r/set-dispatch!
- (fn [e hook-data]
-   (when (= :replicant.trigger/life-cycle
-            (:replicant/trigger e))
-     (println "Life-cycle hook triggered!")
-     (println "Life-cycle" (:replicant/life-cycle e))
-     (println "Node:" (:replicant/node e))
-     (println "Hook data:" hook-data))))
+  (r/set-dispatch!
+   (fn [e hook-data]
+     (when (= :replicant.trigger/life-cycle
+              (:replicant/trigger e))
+       (println "Life-cycle hook triggered!")
+       (println "Life-cycle" (:replicant/life-cycle e))
+       (println "Node:" (:replicant/node e))
+       (println "Hook data:" hook-data))))
 
-(defn render-map [{:keys [places]}]
-  [:div
-   {:replicant/on-render
-    [::update-map-places places]}])
+  (defn render-map [{:keys [places]}]
+    [:div
+     {:replicant/on-render
+      [::update-map-places places]}])
 
-[:form
- [:label {:for "name"} "Name:"]
- [:input {:type "text"
-          :name "name"
-          :id "name"
-          :replicant/key [:input "name"]}]]
+  [:form
+   [:label {:for "name"} "Name:"]
+   [:input {:type "text"
+            :name "name"
+            :id "name"
+            :replicant/key [:input "name"]}]]
 
-[:ul
- (for [fruit ["Banana" "Apple" "Orange"]]
-   [:li fruit])])
+  [:ul
+   (for [fruit ["Banana" "Apple" "Orange"]]
+     [:li fruit])])
