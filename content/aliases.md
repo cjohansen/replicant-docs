@@ -414,9 +414,9 @@ throw exceptions. Exceptions during rendering would leave your UI entirely
 broken, as it corrupts Replicant's internal representation -- in addition to
 abort the rendering of your UI.
 
-For this reason, errors from aliases are softly communicated via [development
-asserts](/asserts/) and as empty `div`s with some data attributes on them. This
-can be less obvious and frustrating to work with.
+For this reason, errors from aliases are softly communicated via development
+asserts and as empty `div`s with some data attributes on them. This can be less
+obvious and frustrating to work with.
 
 Future versions of Replicant may add a more in your face error reporting to
 Replicant that can alleviate this problem.
