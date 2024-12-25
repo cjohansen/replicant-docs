@@ -467,3 +467,17 @@ Keys can be arbitrary Clojure data.
 Keys are usually not required, but you may want to use them on elements with
 transitions, animations or state (e.g. `input`, `select`, etc). See the
 [detailed guide on keys](/keys/).
+
+### Form elements
+
+If you set the `:value` attribute of an `input` field, you are in control of its
+value. To have the field display the user's input, you must register an event
+handler to listen to input and re-render with the provided input. React used to
+call this a "controlled component". If only want to set the initial value of a
+form field, but not control the value after rendering, you can set the default
+value instead. Use any of the following attributes to set the initial value of
+an uncontrolled input:
+
+- `:default-value` (for `:value`)
+- `:default-checked` (for `:checked`)
+- `:default-selected` (for `:selected`)
