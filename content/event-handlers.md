@@ -92,6 +92,7 @@ action. This key can have one of two values:
 When it has the value `:replicant.trigger/life-cycle`, the dispatch function
 will only be called with one argument.
 
+<a id="action-dispatch"></a>
 ## The action dispatch pattern
 
 Here's one way to use data for event handlers. In response to an event from our
