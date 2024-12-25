@@ -3,7 +3,9 @@
 :page/body
 
 In this tutorial we will implement state management for Replicant with an atom
-as the global store.
+as the global store. See [State management with
+Datascript](/tutorials/state-datascript/) for an alternative take on this
+tutorial.
 
 As explained in [top-down rendering](/top-down/), Replicant is built around the
 idea that you render your entire app whenever the app state changes. In this
@@ -106,7 +108,7 @@ described in the event handlers guide:
   (swap! store assoc :app/started-at (js/Date.)))
 ```
 
-We now have a tiny tailor made framework. Next we will add an action that
+We now have a tiny tailor-made framework. Next we will add an action that
 updates the store:
 
 ```clj
@@ -147,4 +149,5 @@ store is not in this function, it is quite obvious how `(:clicks state)` and
 The [code from this tutorial is available on
 Github](https://github.com/cjohansen/replicant-state-atom): feel free to use it
 as a starting template for building an app with atom based state management.
-Also consider checking out the [routing tutorial](/tutorials/routing/).
+Also consider checking out the [routing tutorial](/tutorials/routing/) and the
+[state management with Datascript tutorial](/tutorials/state-datascript/).
