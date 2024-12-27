@@ -2,10 +2,13 @@
 :page/title State management with Datascript
 :page/body
 
-In this tutorial we will implement state management for Replicant with a
-[Datascript](https://github.com/tonsky/datascript) database as the global store.
-See [State management with an atom](/tutorials/state-atom/) for an alternative
-take on this tutorial.
+In this tutorial we will implement state management for top-down rendering with
+a [Datascript](https://github.com/tonsky/datascript) database as the global
+store. See [State management with an atom](/tutorials/state-atom/) for an
+alternative take on this tutorial.
+
+This tutorial isn't really Replicant-specific: you can use the suggest approach
+with any rendering library.
 
 As explained in [top-down rendering](/top-down/), Replicant is built around the
 idea that you render your entire app whenever the app state changes. In this

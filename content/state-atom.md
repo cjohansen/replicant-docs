@@ -2,10 +2,13 @@
 :page/title State management with an atom
 :page/body
 
-In this tutorial we will implement state management for Replicant with an atom
-as the global store. See [State management with
+In this tutorial we will implement state management for top-down rendering with
+an atom as the global store. See [State management with
 Datascript](/tutorials/state-datascript/) for an alternative take on this
 tutorial.
+
+This tutorial isn't really Replicant-specific: you can use the suggest approach
+with any rendering library.
 
 As explained in [top-down rendering](/top-down/), Replicant is built around the
 idea that you render your entire app whenever the app state changes. In this
