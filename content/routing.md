@@ -591,5 +591,5 @@ github](https://github.com/cjohansen/replicant-routing).
 
 If you have added state management to your app, you might be wondering how to
 combine routing and state management. The details of doing this is covered in
-the state management tutorials: [with an atom](/tutorial/state-atom/) or [with
-Datascript](/tutorial/datascript/).
+the state management tutorials: [with an atom](/tutorial/state-atom/#routing) or
+[with Datascript](/tutorial/datascript/#routing).

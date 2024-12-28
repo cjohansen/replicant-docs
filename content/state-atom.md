@@ -150,7 +150,183 @@ store is not in this function, it is quite obvious how `(:clicks state)` and
 `[:store/assoc-in [:clicks] (inc clicks)]` are related.
 
 The [code from this tutorial is available on
-Github](https://github.com/cjohansen/replicant-state-atom): feel free to use it
-as a starting template for building an app with atom based state management.
-Also consider checking out the [routing tutorial](/tutorials/routing/) and the
-[state management with Datascript tutorial](/tutorials/state-datascript/).
+Github](https://github.com/cjohansen/replicant-state-atom/tree/state-setup):
+feel free to use it as a starting template for building an app with atom based
+state management. Also consider checking out the [state management with
+Datascript tutorial](/tutorials/state-datascript/).
+
+<a id="routing"></a>
+## Bonus: Routing
+
+In [the routing tutorial](/tutorials/routing/) we built a small routing system
+for a top-down rendered app. In this bonus section, we'll integrate the routing
+solution with the atom based state management we just created.
+
+Routing and state management are orthogonal concerns, but both need to trigger
+rendering. The system as a whole will be easier to reason with if rendering only
+happens one way. We'll keep the render hook on the state atom, and have the
+routing system render indirectly through the atom by storing the current
+location in it.
+
+We start by copying over the router namespace:
+
+```clj
+(ns state-atom.router
+  (:require [domkm.silk :as silk]
+            [lambdaisland.uri :as uri]))
+
+(def routes
+  (silk/routes
+   [[:pages/episode [["episodes" :episode/id]]]
+    [:pages/frontpage []]]))
+
+(defn url->location [routes url]
+  (let [uri (cond-> url (string? url) uri/uri)]
+    (when-let [arrived (silk/arrive routes (:path uri))]
+      (let [query-params (uri/query-map uri)
+            hash-params (some-> uri :fragment uri/query-string->map)]
+        (cond-> {:location/page-id (:domkm.silk/name arrived)
+                 :location/params (dissoc arrived
+                                          :domkm.silk/name
+                                          :domkm.silk/pattern
+                                          :domkm.silk/routes
+                                          :domkm.silk/url)}
+          (seq query-params) (assoc :location/query-params query-params)
+          (seq hash-params) (assoc :location/hash-params hash-params))))))
+
+(defn ^{:indent 1} location->url [routes {:location/keys [page-id params query-params hash-params]}]
+  (cond-> (silk/depart routes page-id params)
+    (seq query-params)
+    (str "?" (uri/map->query-string query-params))
+
+    (seq hash-params)
+    (str "#" (uri/map->query-string hash-params))))
+
+(defn essentially-same? [l1 l2]
+  (and (= (:location/page-id l1) (:location/page-id l2))
+       (= (not-empty (:location/params l1))
+          (not-empty (:location/params l2)))
+       (= (not-empty (:location/query-params l1))
+          (not-empty (:location/query-params l2)))))
+```
+
+Next, we'll add the routing alias to the core namespace:
+
+```clj
+(ns state-atom.core
+  (:require [clojure.walk :as walk]
+            [replicant.alias :as alias]
+            [replicant.dom :as r]
+            [state-atom.router :as router]
+            [state-atom.ui :as ui]))
+
+(defn routing-anchor [attrs children]
+  (let [routes (-> attrs :replicant/alias-data :routes)]
+    (into [:a (cond-> attrs
+                (:ui/location attrs)
+                (assoc :href (router/location->url routes
+                                                   (:ui/location attrs))))]
+          children)))
+
+(alias/register! :ui/a routing-anchor)
+```
+
+Then we'll copy over the helper functions:
+
+```clj
+(ns state-atom.core
+  ,,,)
+
+,,,
+
+(defn find-target-href [e]
+  (some-> e .-target
+          (.closest "a")
+          (.getAttribute "href")))
+
+(defn get-current-location []
+  (->> js/location.pathname
+       (router/url->location router/routes)))
+```
+
+To handle the initial routing when the app boots we can find the location in the
+`main` function and store it when we trigger the initial render:
+
+```clj
+;; Trigger the initial render
+(swap! store assoc
+       :app/started-at (js/Date.)
+       :location (get-current-location))
+```
+
+To handle click events, we will copy over and adjust the `route-click` function.
+Instead of triggering rendering directly, it will now store the location in the
+store -- which will cause rendering to happen:
+
+```clj
+(ns state-atom.core
+  ,,,)
+
+,,,
+
+(defn route-click [e store routes]
+  (let [href (find-target-href e)]
+    (when-let [location (router/url->location routes href)]
+      (.preventDefault e)
+      (if (router/essentially-same? location (:location @store))
+        (.replaceState js/history nil "" href)
+        (.pushState js/history nil "" href))
+      (swap! store assoc :location location))))
+```
+
+Now we'll add the event listeners for body clicks and the back button. The back
+button handler will also update the store:
+
+```clj
+(defn main [store el]
+  ,,,
+  
+  (js/document.body.addEventListener
+   "click"
+   #(route-click % store router/routes))
+
+  (js/window.addEventListener
+   "popstate"
+   (fn [_] (swap! store assoc :location (get-current-location))))
+   
+  ,,,)
+```
+
+The final piece of the puzzle is to make sure routes are available as alias
+data. The final `main` function looks like this:
+
+```clj
+(defn main [store el]
+  (add-watch
+   store ::render
+   (fn [_ _ _ state]
+     (r/render el (ui/render-page state) {:alias-data {:routes router/routes}})))
+
+  (r/set-dispatch!
+   (fn [event-data actions]
+     (->> actions
+          (interpolate-actions
+           (:replicant/dom-event event-data))
+          (execute-actions store))))
+
+  (js/document.body.addEventListener
+   "click"
+   #(route-click % store router/routes))
+
+  (js/window.addEventListener
+   "popstate"
+   (fn [_] (swap! store assoc :location (get-current-location))))
+
+  ;; Trigger the initial render
+  (swap! store assoc
+         :app/started-at (js/Date.)
+         :location (get-current-location)))
+```
+
+Now the app can generate links with the `:ui/a` alias just like in the routing
+tutorial. As usual, the [full source is available on Github]().
