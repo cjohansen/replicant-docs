@@ -105,6 +105,7 @@ This style of reusability means teams can work on separate features with less
 coordination, and you can ensure consistency on a per-component level across
 multiple UIs. But it comes with a cost.
 
+<a id="system-design"></a>
 #### Optimizing the system design
 
 Reusable components like `UserMenu` optimize for creating many small fully
