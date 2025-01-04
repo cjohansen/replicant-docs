@@ -8,7 +8,7 @@
      actions (assoc :on {:click actions})
      (coll? class) (update :class concat class)
      (or (string? class) (keyword? class)) (update :class conj class))
-   [:img.rounded-lg {:src image :alt alt}]
+   [:img.rounded-lg {:src image :alt alt :replicant/key image}]
    (when icon
      [:div.overlay
       (Button

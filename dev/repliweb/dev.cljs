@@ -1,8 +1,8 @@
 (ns repliweb.dev
-  (:require [clojure.string :as str]))
+  (:require [repliweb.demos.main :as main]))
 
 (defonce ^:export kicking-out-the-jams
-  (prn "Booted!"))
+  (main/main))
 
 (comment
   (set! *print-namespace-maps* false)

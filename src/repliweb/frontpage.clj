@@ -1,5 +1,6 @@
 (ns repliweb.frontpage
   (:require [phosphor.icons :as icons]
+            [repliweb.demos.searchable-media-list :as sml]
             [repliweb.elements.examples :as examples]
             [repliweb.elements.input :refer [Input]]
             [repliweb.elements.layout :as layout]
@@ -171,17 +172,8 @@
    (MediaList
     {:medias (->> (:results state)
                   (map video->media-data))})])"])
-        [:div.flex-1.p-4
-         [:div
-          (typo/h2 "Parens of the dead episodes")
-          [:div.my-4
-           (Input
-            {:placeholder "Search"
-             :icon (icons/icon :phosphor.bold/magnifying-glass)
-             :input-actions [::search :event/target.value]})]
-          (MediaList
-           {:medias (map examples/video->media-data examples/videos)})]
-         ]])
+        [:div.flex-1.p-4.self-start
+         (sml/render {:videos examples/videos})]])
 
      (typo/p {:class ["max-w-3xl" "mx-auto" "text-center"]}
        "Replicant imposes no structure on your event data — it's just passed to

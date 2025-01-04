@@ -5,7 +5,7 @@
         no.cjohansen/phosphor-clj {:mvn/version "2024.07.31"}
         no.cjohansen/powerpack {:mvn/version "2024.12.01"}
         no.cjohansen/replicant {:git/url "https://github.com/cjohansen/replicant"
-                                :sha "f034d116acb14195cc75ab5db586f0e2b45765e5"}}
+                                :sha "aec5f215c6bf807a6787de209bdea7006e67a022"}}
  :aliases
  {:dev {:extra-paths ["dev" "test" "dev-resources" "portfolio"]
         :extra-deps {cider/piggieback {:mvn/version "0.5.3"}
