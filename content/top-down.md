@@ -68,10 +68,6 @@ Replicant's top-down model can never be the fastest, but that was never the
 goal. The goal was to make it fast enough to enable the simpler programming
 model of top-down rendering. And it is, for a wide range of use cases.
 
-As per January 2025 Replicant is slower than React but faster than Reagent in
-benchmarks. And because it only has one mode of operation, there isn't a lot you
-can do "wrong" which will give you widely different results.
-
 #### Do you actually have a performance problem?
 
 Many people believe that pure top-down rendering isn't effective enough and that
