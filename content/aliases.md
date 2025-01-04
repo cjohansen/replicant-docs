@@ -1,5 +1,7 @@
-:page/uri /hiccup/
+:page/uri /alias/
 :page/title Aliases
+:page/kind :page.kind/guide
+:page/order 50
 :page/body
 
 Aliases let you define custom hiccup tag names that can be used like any other

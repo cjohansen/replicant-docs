@@ -1,5 +1,7 @@
 :page/uri /tutorials/state-atom/
-:page/title State management with an atom
+:page/title State management: Atom
+:page/kind :page.kind/tutorial
+:page/order 20
 :page/body
 
 In this tutorial we will implement state management for top-down rendering with

@@ -1,5 +1,7 @@
 :page/uri /tutorials/routing/
-:page/title Data-driven routing for Replicant
+:page/title Data-driven routing
+:page/kind :page.kind/tutorial
+:page/order 10
 :page/body
 
 In this tutorial we will develop a small routing system. You will learn how

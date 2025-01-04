@@ -1,5 +1,7 @@
 :page/uri /life-cycle-hooks/
 :page/title Life-cycle hooks
+:page/kind :page.kind/guide
+:page/order 20
 :page/body
 
 Life-cycle hooks give you access to the rendered DOM node. The special

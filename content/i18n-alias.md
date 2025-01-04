@@ -1,5 +1,7 @@
 :page/uri /tutorials/i18n-alias/
-:page/title Integrating i18n with aliases
+:page/title Alias powered i18n
+:page/kind :page.kind/tutorial
+:page/order 80
 :page/body
 
 In this tutorial we will use [aliases](/aliases/) to introduce an i18n element

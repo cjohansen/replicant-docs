@@ -1,5 +1,7 @@
 :page/uri /tutorials/state-datascript/
-:page/title State management with Datascript
+:page/title State management: Datascript
+:page/kind :page.kind/tutorial
+:page/order 30
 :page/body
 
 In this tutorial we will implement state management for top-down rendering with

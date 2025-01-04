@@ -1,5 +1,7 @@
 :page/uri /tutorials/network-reads/
-:page/title Data-driven network reads
+:page/title Data-driven queries
+:page/kind :page.kind/tutorial
+:page/order 50
 :page/body
 
 In this second part of the [networking tutorial](/tutorials/network/), we will

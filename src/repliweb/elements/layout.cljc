@@ -25,3 +25,10 @@
     [:div.w-6 [:a {:href "https://github.com/cjohansen/replicant"
                    :title "Replicant on Github"}
                (logos/github)]]]])
+
+(def section-styles
+  {:dark ["bg-gradient-to-b" "from-base-200" "to-base-300"]
+   :medium ["bg-gradient-to-b" "from-base-300" "to-base-100"]})
+
+(defn ^{:indent 1} section [attrs & body]
+  (into [:div.py-20.px-4 attrs] body))

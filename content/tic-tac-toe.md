@@ -1,5 +1,7 @@
 :page/uri /tutorials/tic-tac-toe/
-:page/title Building Tic-Tac-Toe with Replicant
+:page/title Tic-Tac-Toe
+:page/kind :page.kind/tutorial
+:page/order 0
 :page/body
 
 In this tutorial we will implement the game of Tic-Tac-Toe from scratch. It will

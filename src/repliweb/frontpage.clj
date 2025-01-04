@@ -9,19 +9,12 @@
             [repliweb.elements.showcase :as showcase]
             [repliweb.elements.typography :as typo]))
 
-(defn ^{:indent 1} section [attrs & body]
-  (into [:div.py-20.px-4 attrs] body))
-
-(def section-styles
-  {:dark ["bg-gradient-to-b" "from-base-200" "to-base-300"]
-   :medium ["bg-gradient-to-b" "from-base-300" "to-base-100"]})
-
 (defn render-page [_ctx _page]
   (layout/layout
    {:title "Replicant — Simpler, more testable UIs with pure functions and data"}
    (layout/header)
-   (section {:class (into ["flex" "flex-col" "items-center"]
-                          (:dark section-styles))}
+   (layout/section {:class (into ["flex" "flex-col" "items-center"]
+                                 (layout/section-styles :dark))}
      [:div.w-32 (logos/replicant)]
      (typo/h1 "Replicant")
      (typo/lead {:class ["text-center" "max-w-2xl" "mx-auto"]}
@@ -33,7 +26,7 @@
       [:a.btn.btn-primary.btn-outline {:href "https://cljdoc.org/d/no.cjohansen/replicant/"}
        "API Reference"]])
 
-   (section {}
+   (layout/section {}
      [:div.max-w-3xl.mx-auto.text-center
       (typo/h2 "Create user interfaces with data")
       (typo/p {:class ["text-center"]}
@@ -86,9 +79,9 @@
        "Hiccup is highly expressive and unlike JSX does not require any
        additional build step — it's just Clojure. Replicant's dialect supports
        some features not found in other libraries, learn more in " (typo/a
-       {:href "/hiccup/"} "the hiccup reference") "."))
+                                                                    {:href "/hiccup/"} "the hiccup reference") "."))
 
-   (section {:class (:medium section-styles)}
+   (layout/section {:class (layout/section-styles :medium)}
      [:div.max-w-3xl.mx-auto
       (typo/h2 {:class ["text-center"]} "Reusable UI elements with pure functions")
       (typo/p {:class ["text-center"]}
@@ -138,7 +131,7 @@
        component abstraction. Learn " (typo/a {:href "https://vimeo.com/861600197"} "why generic elements
        improve frontend code-bases") "."))
 
-   (section {:class (:dark section-styles)}
+   (layout/section {:class (layout/section-styles :dark)}
      [:div.max-w-3xl.mx-auto
       (typo/h2 {:class ["text-center"]} "Data-driven interactivity")
       (typo/p {:class ["text-center"]}
@@ -176,9 +169,9 @@
        the global event handler. You're free to make your own declarative
        interactivity DSL. Oh, and event handlers can be regular functions as
        well." [:br] "Learn more about " (typo/a
-       {:href "/event-handlers/"} "event handlers") "."))
+                                         {:href "/event-handlers/"} "event handlers") "."))
 
-   (section {}
+   (layout/section {}
      [:div.max-w-3xl.mx-auto
       (typo/h2 {:class ["text-center"]} "Easy data-driven transitions")
       (typo/p {:class ["text-center"]}
@@ -208,7 +201,7 @@
        ", like " (typo/code ":class") ". Learn more tidbits like this in "
        (typo/a {:href "/hiccup/"} "the hiccup reference") "."))
 
-   (section {:class (:medium section-styles)}
+   (layout/section {:class (layout/section-styles :medium)}
      [:div.max-w-3xl.mx-auto
       (typo/h2 {:class ["text-center"]} "Extend Replicant with custom element aliases")
       (typo/p {:class ["text-center"]}
@@ -245,7 +238,7 @@
        (typo/a {:href "/alias/"} "aliases") ", and check out the "
        (typo/a {:href "/tutorials/i18n-alias/"} "i18n tutorial") "."))
 
-   (section {:class (:dark section-styles)}
+   (layout/section {:class (layout/section-styles :dark)}
      [:div.max-w-3xl.mx-auto
       (typo/h2 {:class ["text-center"]} "You can test your UI")
       (typo/p {:class ["text-center"]}
@@ -302,7 +295,7 @@
        (typo/a {:href "/tutorials/tic-tac-toe/"} "getting started tutorial") "
        for a practical demonstration."))
 
-   (section {}
+   (layout/section {}
      [:div.max-w-3xl.mx-auto
       (typo/h2 {:class ["text-center"]} "Unidirectional data flow")
       (typo/p {:class ["text-center"]}
@@ -315,10 +308,10 @@
      (typo/p {:class ["max-w-3xl" "mx-auto" "text-center"]}
        "Learn more about how Replicant makes this possible, and why you
        shouldn't worry about performance in " [:br] (typo/a
-       {:href "/top-down/"} "Why top-down rendering is the best frontend
+                                                     {:href "/top-down/"} "Why top-down rendering is the best frontend
        programming model") "."))
 
-   (section {:class (:dark section-styles)}
+   (layout/section {:class (layout/section-styles :dark)}
      [:div.max-w-3xl.mx-auto.flex.gap-2
       [:div.w-6 (logos/replicant)]
       "Replicant logo by"

@@ -1,5 +1,7 @@
 :page/uri /keys/
-:page/title Using `:replicant/key`
+:page/title Keys
+:page/kind :page.kind/guide
+:page/order 30
 :page/body
 
 `:replicant/key` can be used to uniquely identify an element among its siblings.

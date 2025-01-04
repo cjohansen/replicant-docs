@@ -111,4 +111,27 @@
     .input-field {
         @apply input input-bordered flex items-center gap-2;
     }
+
+    .menu-item {
+        @apply text-sm px-4 py-2 block rounded-r-lg flex items-center justify-between;
+    }
+
+    .menu-item:hover,
+    .menu-item-selected {
+        @apply text-whitish bg-base-300
+    }
+
+    .menu-item-selected,
+    .menu-item-selected:hover {
+        @apply text-whitish bg-base-200
+    }
+
+    .menu-item svg {
+        visibility: hidden;
+    }
+
+    .menu-item:hover svg,
+    .menu-item-selected svg {
+        visibility: visible;
+    }
 }

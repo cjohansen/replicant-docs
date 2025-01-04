@@ -1,5 +1,7 @@
 :page/uri /nil/
-:page/title Explicit nils can be a good thing
+:page/title Explicit nils
+:page/kind :page.kind/guide
+:page/order 40
 :page/body
 
 As stated in the [guide to Replicant flavored hiccup](/hiccup/), explicit

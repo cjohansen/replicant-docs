@@ -1,5 +1,7 @@
 :page/uri /tutorials/network/
-:page/title Backend APIs and networking
+:page/title Backend APIs and network
+:page/kind :page.kind/tutorial
+:page/order 40
 :page/body
 
 Most frontend apps need to talk to a backend API over the network to do useful

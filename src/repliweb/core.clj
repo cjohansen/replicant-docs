@@ -1,10 +1,17 @@
 (ns repliweb.core
   (:require [powerpack.highlight :as highlight]
-            [repliweb.frontpage :as frontpage]))
+            [repliweb.article :as article]
+            [repliweb.frontpage :as frontpage]
+            [repliweb.guide :as guide]
+            [repliweb.tutorial :as tutorial]))
 
 (defn render-page [context page]
   (if-let [f (case (:page/kind page)
+               :page.kind/article article/render-page
                :page.kind/frontpage frontpage/render-page
+               :page.kind/guide guide/render-page
+               :page.kind/index article/render-index
+               :page.kind/tutorial tutorial/render-page
                nil)]
     (f context page)
     [:h1 "Page not found 🤷‍♂️"]))
@@ -22,13 +29,16 @@
                               :paths ["/tailwind.css"
                                       "/code.css"]}
 
-                             "/app.js"
-                             {:public-dir "public"
-                              :paths ["/js/compiled/app.js"]}}
+                             ;; "/app.js"
+                             ;; {:public-dir "public"
+                             ;;  :paths ["/js/compiled/app.js"]}
+                             }
 
            :optimus/assets [{:public-dir "public"
                              :paths [#"\.png$"
-                                     #"\.jpg$"]}]
+                                     #"\.jpg$"
+                                     #"\.svg$"
+                                     #"\.ico$"]}]
 
            :powerpack/build-dir "target/site"}
 

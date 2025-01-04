@@ -1,5 +1,6 @@
 :page/uri /top-down/
 :page/title Top-down rendering
+:page/kind :page.kind/article
 :page/body
 
 # Top-down rendering

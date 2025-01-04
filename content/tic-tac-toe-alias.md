@@ -1,5 +1,7 @@
 :page/uri /tutorials/tic-tac-toe-alias/
 :page/title Tic-Tac-Toe with aliases
+:page/kind :page.kind/tutorial
+:page/order 70
 :page/body
 
 In this tutorial, we will add [aliases](/aliases/) to the app we built in the

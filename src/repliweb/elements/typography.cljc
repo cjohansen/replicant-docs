@@ -10,6 +10,11 @@
   ([attrs & body]
    (into [:h2.text-xl.xl:text-3xl.lg:text-2xl.mb-2.dark:text-whitish attrs] body)))
 
+(defn ^{:indent 1} h3
+  ([text] (h3 nil text))
+  ([attrs & body]
+   (into [:h3.text-l.xl:text-2xl.lg:text-1xl.mb-2.dark:text-whitish attrs] body)))
+
 (defn ^{:indent 1} p
   ([text] (p nil text))
   ([attrs & body]

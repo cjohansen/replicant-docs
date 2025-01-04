@@ -1,5 +1,7 @@
 :page/uri /tutorials/sortable-table/
-:page/title Building a sortable table with Replicant
+:page/title A sortable table alias
+:page/kind :page.kind/tutorial
+:page/order 90
 :page/body
 
 In this tutorial, we will build a sortable table, and eventually extract a

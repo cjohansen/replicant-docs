@@ -1,5 +1,7 @@
 :page/uri /tutorials/network-writes/
-:page/title Data-driven network writes
+:page/title Data-driven commands
+:page/kind :page.kind/tutorial
+:page/order 60
 :page/body
 
 In this second part of the [networking tutorial](/tutorials/network/), we will

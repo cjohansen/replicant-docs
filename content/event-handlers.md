@@ -1,5 +1,7 @@
 :page/uri /event-handlers/
-:page/title Event handlers in Repicant
+:page/title Event handlers
+:page/kind :page.kind/guide
+:page/order 10
 :page/body
 
 All event handlers go in a map under the `:on` attribute key. Event handler

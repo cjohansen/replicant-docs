@@ -1,5 +1,7 @@
 :page/uri /hiccup/
-:page/title Replicant Flavored Hiccup
+:page/title Hiccup
+:page/kind :page.kind/guide
+:page/order 0
 :page/body
 
 In Replicant, we use Clojure data literals like vectors, keywords, maps and

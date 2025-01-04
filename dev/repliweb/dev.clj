@@ -1,5 +1,6 @@
 (ns repliweb.dev
-  (:require [powerpack.dev :as dev]
+  (:require [datomic-type-extensions.api :as d]
+            [powerpack.dev :as dev]
             [powerpack.export :as export]
             [repliweb.core :as repliweb]))
 
@@ -15,4 +16,11 @@
   (dev/start)
   (dev/stop)
   (dev/reset)
+
+  ;; (def db (d/db (:datomic/conn (dev/get-app))))
+
+  ;; (d/q '[:find ?uri
+  ;;        :where
+  ;;        [_ :page/uri ?uri]]
+  ;;      db)
   )
