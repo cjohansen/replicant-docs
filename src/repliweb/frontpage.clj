@@ -3,17 +3,11 @@
             [repliweb.demos.data-driven-transitions :as ddt]
             [repliweb.demos.searchable-media-list :as sml]
             [repliweb.elements.examples :as examples]
-            [repliweb.elements.input :refer [Input]]
             [repliweb.elements.layout :as layout]
-            [repliweb.elements.media :refer [Media MediaList]]
+            [repliweb.elements.logos :as logos]
+            [repliweb.elements.media :refer [Media]]
             [repliweb.elements.showcase :as showcase]
             [repliweb.elements.typography :as typo]))
-
-(defn logo [& [{:keys [size]}]]
-  [:pre {:class (or size "text-xl")}
-   [:span.font-bold.text-cljblue "["]
-   [:span.text-cljlightgreen ":replicant"]
-   [:span.font-bold.text-cljblue "]"]])
 
 (defn ^{:indent 1} section [attrs & body]
   (into [:div.py-20.px-4 attrs] body))
@@ -25,17 +19,17 @@
 (defn render-page [_ctx _page]
   (layout/layout
    {:title "Replicant — Simpler, more testable UIs with pure functions and data"}
-   [:div.m-4 (logo)]
-
+   (layout/header)
    (section {:class (into ["flex" "flex-col" "items-center"]
                           (:dark section-styles))}
+     [:div.w-32 (logos/replicant)]
      (typo/h1 "Replicant")
      (typo/lead {:class ["text-center" "max-w-2xl" "mx-auto"]}
        "Build simpler, more testable UIs with pure functions and data.
        Separate rendering from domain logic and state, and finally enjoy true
        functional programming when building user interfaces.")
      [:div.flex.gap-2
-      [:a.btn.btn-primary {:href ""} "Learn Replicant"]
+      [:a.btn.btn-primary {:href "/learn/"} "Learn Replicant"]
       [:a.btn.btn-primary.btn-outline {:href "https://cljdoc.org/d/no.cjohansen/replicant/"}
        "API Reference"]])
 
