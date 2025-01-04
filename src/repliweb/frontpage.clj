@@ -316,4 +316,12 @@
        "Learn more about how Replicant makes this possible, and why you
        shouldn't worry about performance in " [:br] (typo/a
        {:href "/top-down/"} "Why top-down rendering is the best frontend
-       programming model") "."))))
+       programming model") "."))
+
+   (section {:class (:dark section-styles)}
+     [:div.max-w-3xl.mx-auto.flex.gap-2
+      [:div.w-6 (logos/replicant)]
+      "Replicant logo by"
+      [:span (typo/a {:href "https://github.com/jaidetree"} "jaide") "/"
+       (typo/a {:href "https://eccentric-j.com/"} "eccentric-j") ". "]
+      [:span (typo/a {:href "https://github.com/cjohansen/replicant-docs"} "This website source on Github") "."]])))
