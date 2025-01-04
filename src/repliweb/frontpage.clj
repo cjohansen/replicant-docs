@@ -1,5 +1,6 @@
 (ns repliweb.frontpage
   (:require [phosphor.icons :as icons]
+            [repliweb.demos.data-driven-transitions :as ddt]
             [repliweb.demos.searchable-media-list :as sml]
             [repliweb.elements.examples :as examples]
             [repliweb.elements.input :refer [Input]]
@@ -205,13 +206,7 @@
      :text (list \"Just wrote some documentation for Replicant.\"
                  [:span.opacity-50 \"Posted December 11th 2024\"])})])"])
         [:div.flex-1.p-4
-         (Media
-          {:thumbnail {:image "/images/christian.jpg"
-                       :size 20}
-           :title "Christian Johansen"
-           :text (list "Just wrote some documentation for Replicant"
-                       [:span.opacity-50 "Posted December 11th 2024"])})
-         ]])
+         (ddt/render {:loaded? true})]])
 
      (typo/p {:class ["max-w-3xl" "mx-auto" "text-center"]}
        "This is not limited to inline styles, you can stick any attribute in "

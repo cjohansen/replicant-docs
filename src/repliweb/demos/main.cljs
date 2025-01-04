@@ -1,13 +1,28 @@
 (ns repliweb.demos.main
-  (:require [repliweb.demos.searchable-media-list :as sml]))
+  (:require [replicant.dom :as r]
+            [repliweb.demos.data-driven-transitions :as ddt]
+            [repliweb.demos.searchable-media-list :as sml]))
 
 (defn main []
-  (doseq [el (seq (js/document.querySelectorAll "[data-replicant-root]"))]
-    (let [id (.getAttribute el "data-replicant-root")]
-      (println "Booting up example" id)
-      (case id
-        "searchable-media-list"
-        (sml/main el)
+  (let [ns->store {"repliweb.demos.data-driven-transitions" (atom {})
+                   "repliweb.demos.searchable-media-list" (atom {})}]
+    (r/set-dispatch!
+     (fn [replicant-data [action & args]]
+       (let [ns (namespace action)
+             f (case ns
+                 "repliweb.demos.data-driven-transitions" ddt/handle-action
+                 "repliweb.demos.searchable-media-list" sml/handle-action)]
+         (f (get ns->store ns) replicant-data action args))))
 
-        (println "Unknown Replicant root" id)
-        (js/console.log el)))))
+    (doseq [el (seq (js/document.querySelectorAll "[data-example-ns]"))]
+      (let [ns (.getAttribute el "data-example-ns")]
+        (println "Booting up example" ns)
+        (case ns
+          "repliweb.demos.searchable-media-list"
+          (sml/main el (ns->store ns))
+
+          "repliweb.demos.data-driven-transitions"
+          (ddt/main el (ns->store ns))
+
+          (println "Unknown example ns" ns)
+          (js/console.log el))))))
