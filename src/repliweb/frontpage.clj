@@ -35,7 +35,8 @@
        functional programming when building user interfaces.")
      [:div.flex.gap-2
       [:a.btn.btn-primary {:href ""} "Learn Replicant"]
-      [:a.btn.btn-primary.btn-outline {:href ""} "API Reference"]])
+      [:a.btn.btn-primary.btn-outline {:href "https://cljdoc.org/d/no.cjohansen/replicant/"}
+       "API Reference"]])
 
    (section {}
      [:div.max-w-3xl.mx-auto.text-center
