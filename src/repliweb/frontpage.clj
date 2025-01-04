@@ -246,9 +246,10 @@
 
      (typo/p {:class ["max-w-3xl" "mx-auto" "text-center"]}
        "In this example, " (typo/code ":i18n/k") " is a user-provided extension
-       that uses a third party library to seemingly give Replicant built-in
-       i18n capabilities. And it's all still data. Learn more about "
-       (typo/a {:href "/alias/"} "aliases") "."))
+       that uses a library to seemingly give Replicant built-in i18n
+       capabilities. And it's all still data. Learn more about "
+       (typo/a {:href "/alias/"} "aliases") ", and check out the "
+       (typo/a {:href "/tutorials/i18n-alias/"} "i18n tutorial") "."))
 
    (section {:class (:dark section-styles)}
      [:div.max-w-3xl.mx-auto
