@@ -113,17 +113,12 @@
     }
 
     .menu-item {
-        @apply text-sm px-4 py-2 block rounded-r-lg flex items-center justify-between;
+        @apply text-xs px-4 py-2 block rounded-r-lg flex items-center justify-between;
     }
 
     .menu-item:hover,
     .menu-item-selected {
         @apply text-whitish bg-base-300
-    }
-
-    .menu-item-selected,
-    .menu-item-selected:hover {
-        @apply text-whitish bg-base-200
     }
 
     .menu-item svg {
@@ -133,5 +128,75 @@
     .menu-item:hover svg,
     .menu-item-selected svg {
         visibility: visible;
+    }
+
+    .prose a {
+        @apply text-primary underline hover:no-underline;
+    }
+
+    .prose :is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl),
+    .h1, .h2, .h3, .h4, .h5, .h6, .p, .ul, .ol, .dl {
+        margin-top: 1.5em;
+        margin-bottom: 1em;
+        @apply text-whitish;
+    }
+
+    .prose :is(h1, h2, h3, h4, h5, h6) a,
+    :is(.h1, .h2, .h3, .h4, .h5, .h6) a {
+        @apply no-underline hover:underline text-whitish;
+    }
+
+    .prose > :first-child,
+    :is(.h1, .h2, .h3, .h4, .h5, .h6):first-child {
+        margin-top: 0;
+    }
+
+    .prose + .prose > :first-child,
+    .prose + .prose :is(.h1, .h2, .h3, .h4, .h5, .h6):first-child {
+        margin-top: 1.5em;
+    }
+
+    .prose h1, .h1 {
+        @apply text-3xl lg:text-5xl;
+    }
+
+    .prose h2, .h2 {
+        @apply text-2xl lg:text-3xl;
+    }
+
+    .prose h3, .h3 {
+        @apply text-xl lg:text-2xl;
+    }
+
+    .prose ul li {
+        list-style: disc;
+        margin-left: 1.25em;
+    }
+
+    .prose li :is(ul, ol) {
+        margin-top: 0.5em;
+    }
+
+    .prose code {
+        color: #a5e844;
+    }
+
+    .code-title {
+        display: block;
+        padding-left: 1rem;
+        padding-top: 0.5rem;
+        margin-bottom: -0.25rem;
+    }
+
+    .codehilite {
+        @apply bg-base-200 text-sm rounded-md flex-1 items-center;
+    }
+
+    .codehilite code,
+    pre.codehilite code,
+    .codelike {
+        display: block;
+        padding: 1rem;
+        overflow: scroll;
     }
 }

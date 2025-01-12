@@ -323,7 +323,9 @@ Add the mounting and unmounting extra class like so:
 
 That's all it takes to smoothly fade in the symbol on click:
 
-![Cell with transition](/images/tic-tac-toe/toggle-transition.gif)
+Cell with transition
+
+/images/tic-tac-toe/toggle-transition.gif
 
 When the game is over, we want to dim out all the cells, except the winning
 line, which we'll highlight. Let's add two more examples:

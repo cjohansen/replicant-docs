@@ -1,17 +1,25 @@
 (ns repliweb.core
-  (:require [powerpack.highlight :as highlight]
+  (:require [clojure.string :as str]
+            [powerpack.highlight :as highlight]
             [repliweb.article :as article]
-            [repliweb.frontpage :as frontpage]
-            [repliweb.guide :as guide]
-            [repliweb.tutorial :as tutorial]))
+            [repliweb.frontpage :as frontpage]))
+
+(defn create-txes [file-name content]
+  (if (str/ends-with? file-name ".md")
+    [(assoc (first content) :page/blocks
+            (->> (next content)
+                 (map-indexed (fn [idx block]
+                                (-> block
+                                    (dissoc :page/uri)
+                                    (assoc :block/idx idx))))))]
+    content))
 
 (defn render-page [context page]
   (if-let [f (case (:page/kind page)
                :page.kind/article article/render-page
                :page.kind/frontpage frontpage/render-page
-               :page.kind/guide guide/render-page
-               :page.kind/index article/render-index
-               :page.kind/tutorial tutorial/render-page
+               :page.kind/guide article/render-page
+               :page.kind/tutorial article/render-page
                nil)]
     (f context page)
     [:h1 "Page not found 🤷‍♂️"]))
@@ -23,6 +31,7 @@
            :powerpack/log-level :debug
            :powerpack/content-file-suffixes ["md" "edn"]
            :powerpack/dev-assets-root-path "public"
+           :powerpack/create-ingest-tx #'create-txes
 
            :optimus/bundles {"/styles.css"
                              {:public-dir "public"
@@ -38,6 +47,7 @@
                              :paths [#"\.png$"
                                      #"\.jpg$"
                                      #"\.svg$"
+                                     ;;#"\.gif$"
                                      #"\.ico$"]}]
 
            :powerpack/build-dir "target/site"}

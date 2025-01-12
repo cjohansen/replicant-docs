@@ -11,21 +11,9 @@ module.exports = {
         cljblue: "#6180D2",
         cljlightblue: "#96B1F5",
         cljgreen: "#76AF47",
-        cljlightgreen: "#A1D85F"
+        cljlightgreen: "#A1D85F",
+        primaryblue: "#00b3f0"
       },
-      typography: theme => ({
-        DEFAULT: {
-          css: {
-            a: {
-              color: theme('colors.blue.600')
-            },
-            'a:hover': {
-              color: theme('colors.blue.500')
-            }
-          }
-        },
-        invert: {}
-      }),
       fontFamily: {
         sans: 'Lato, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
         mono: '"Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace'
@@ -33,7 +21,6 @@ module.exports = {
     }
   },
   plugins: [
-    require('@tailwindcss/typography'),
     require("daisyui")
   ],
   daisyui: {

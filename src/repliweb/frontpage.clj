@@ -35,7 +35,8 @@
       maps and strings. Render to strings on the server or render (and
       re-render) the live DOM in browsers, just like you would with React and
       its peers.")]
-     (showcase/render-showcase {::showcase/style :gradient}
+     (showcase/render-showcase {::showcase/style :gradient
+                                :class #{"mx-auto" "max-w-6xl"}}
        [(showcase/render-code {:class ["bg-base-300"]}
           ["[:div.media-thumb
  [:a {:href \"https://vimeo.com/861600197\"}
@@ -89,7 +90,8 @@
       functions. Keep these pure functions in cljc files and use them on the
       server or on the client. No framework specific component abstractions
       required.")]
-     (showcase/render-showcase {::showcase/style :light}
+     (showcase/render-showcase {::showcase/style :light
+                                :class #{"mx-auto" "max-w-6xl"}}
        [(showcase/render-code {:class ["bg-base-300"]}
           ["(defn Media [{:keys [theme thumbnail url
                      title text button]}]
@@ -139,7 +141,8 @@
         all in a single global handler function. Your UI remains pure data,
         event handlers declare their intended effects, and you can trivially
         test the UI even when it supports user interactivity.")]
-     (showcase/render-showcase {::showcase/style :light}
+     (showcase/render-showcase {::showcase/style :light
+                                :class #{"mx-auto" "max-w-6xl"}}
        [(showcase/render-code {:class ["bg-base-300"]}
           ["(replicant.dom/set-dispatch!
  (fn handle-dom-event [rd [action]]
@@ -179,7 +182,8 @@
         mounting and unmounting. This allows you to declaratively transition
         elements on mount and unmount, like fading in an element as it's
         mounted:")]
-     (showcase/render-showcase {::showcase/style :gradient}
+     (showcase/render-showcase {::showcase/style :gradient
+                                :class #{"mx-auto" "max-w-6xl"}}
        [(showcase/render-code {:class ["bg-base-300"]}
           ["(when (:visible? props)
   [:div {:style {:transition \"opacity 0.25s\"
@@ -211,7 +215,8 @@
         can receive side-chained data, removing the need to pass certain data
         everywhere. Perfect for data that is static (e.g. i18n dictionaries), or
         change very infrequently (e.g. locales).")]
-     (showcase/render-showcase {::showcase/style :gradient}
+     (showcase/render-showcase {::showcase/style :gradient
+                                :class #{"mx-auto" "max-w-6xl"}}
        [(showcase/render-code {:class ["bg-base-300"]}
           ["[:div.media
  [:aside.media-thumb
@@ -246,7 +251,8 @@
         testing is trivial: Pass in some data, assert that it appears in the UI
         somehow. Rinse and repeat. You can even verify that event handlers will
         \"do\" what you expect, as long as they're expressed as data.")]
-     (showcase/render-showcase {::showcase/style :light}
+     (showcase/render-showcase {::showcase/style :light
+                                :class #{"mx-auto" "max-w-6xl"}}
        [(showcase/render-code {}
           ["(defn MediaList [{:keys [title medias]}]
   [:div.media-list

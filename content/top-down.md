@@ -3,8 +3,6 @@
 :page/kind :page.kind/article
 :page/body
 
-# Top-down rendering
-
 Replicant has a single mode of operation: top-down rendering. In this article,
 we'll discuss what that means, why it's good, and what it's drawbacks are.
 

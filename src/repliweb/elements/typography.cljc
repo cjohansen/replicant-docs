@@ -3,17 +3,17 @@
 (defn ^{:indent 1} h1
   ([text] (h1 nil text))
   ([attrs & body]
-   (into [:h1.text-xl.lg:text-5xl.mb-2.dark:text-whitish attrs] body)))
+   (into [:h1.h1.dark:text-whitish attrs] body)))
 
 (defn ^{:indent 1} h2
   ([text] (h2 nil text))
   ([attrs & body]
-   (into [:h2.text-xl.xl:text-3xl.lg:text-2xl.mb-2.dark:text-whitish attrs] body)))
+   (into [:h2.h2.lg:text-2xl.mb-2.dark:text-whitish attrs] body)))
 
 (defn ^{:indent 1} h3
   ([text] (h3 nil text))
   ([attrs & body]
-   (into [:h3.text-l.xl:text-2xl.lg:text-1xl.mb-2.dark:text-whitish attrs] body)))
+   (into [:h3.h3.lg:text-1xl.mb-2.dark:text-whitish attrs] body)))
 
 (defn ^{:indent 1} p
   ([text] (p nil text))

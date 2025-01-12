@@ -1,5 +1,5 @@
 :page/uri /tutorials/state-datascript/
-:page/title State management: Datascript
+:page/title State management with Datascript
 :page/kind :page.kind/tutorial
 :page/order 30
 :page/body

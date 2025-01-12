@@ -1,5 +1,5 @@
 :page/uri /tutorials/state-atom/
-:page/title State management: Atom
+:page/title State management with atoms
 :page/kind :page.kind/tutorial
 :page/order 20
 :page/body
