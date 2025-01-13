@@ -23,9 +23,10 @@ called whenever the underlying DOM node is changed somehow:
 The function is called with a single argument, which is a map of these keys:
 
 - `:replicant/trigger` always has the value `:replicant.trigger/life-cycle`
-- `:replicant/life-cycle` one of `:replicant.life-cycle/mount` (initial render),
-  `:replicant.life-cycle/update` (successive updates) or
-  `:replicant.life-cycle/unmount` (node is being removed from the DOM).
+- `:replicant/life-cycle` one of:
+  - `:replicant.life-cycle/mount` (initial render)
+  - `:replicant.life-cycle/update` (successive updates)
+  - `:replicant.life-cycle/unmount` (node is being removed from the DOM)
 - `:replicant/node` the DOM node
 
 `:replicant/on-render` triggers on all updates and gives you enough information
