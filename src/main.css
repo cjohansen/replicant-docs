@@ -173,12 +173,26 @@
         margin-left: 1.25em;
     }
 
+    .prose ol li {
+        list-style: number;
+        margin-left: 1.25em;
+    }
+
     .prose li :is(ul, ol) {
         margin-top: 0.5em;
     }
 
-    .prose code {
-        color: #a5e844;
+    .prose table {
+        @apply text-whitish;
+    }
+
+    .prose th {
+        font-weight: normal;
+        text-align: left;
+    }
+
+    .prose td {
+        @apply border-t py-2;
     }
 
     .code-title {

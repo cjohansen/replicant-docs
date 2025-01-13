@@ -67,8 +67,8 @@ concludes that the new structure has a new `p` element at the end. Normally this
 isn't a problem, but if you have CSS transitions or life-cycle events on any of
 these nodes, the difference would be noticable.
 
-In short: Using explicit `nil`s to stand in for failed conditionals and similar
-situations helps Replicant make better decisions.
+Using explicit `nil`s to stand in for failed conditionals and similar situations
+helps Replicant make better decisions.
 
 Note that you could achieve the same effect without the explicit `nil` by adding
 [`:replicant/key`](/keys/) to the last `p`. Explicit `nil`s reduce the

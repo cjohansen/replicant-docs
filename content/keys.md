@@ -49,6 +49,8 @@ It's worth noting that `:replicant/key` is a double-edged sword. It can reduce
 the number of DOM operations needed. At the same time it imposes more
 constraints which can make Replicant's rendering algorithm less efficient.
 
+## Same same, but different
+
 It's helpful to understand what Replicant considers to be "the same" node before
 deciding to add a key. Any two elements currently in the same position with the
 same tag name and same key are considered to be reusable — meaning that

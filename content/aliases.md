@@ -1,8 +1,10 @@
+--------------------------------------------------------------------------------
 :page/uri /alias/
 :page/title Aliases
 :page/kind :page.kind/guide
 :page/order 50
-:page/body
+--------------------------------------------------------------------------------
+:block/markdown
 
 Aliases let you define custom hiccup tag names that can be used like any other
 tag. When Replicant needs to render an aliased node, it will call on a
@@ -10,21 +12,30 @@ function you provide to expand the alias into the desired hiccup.
 
 Aliases must be namespaced keywords. Here's a quick example:
 
-```clj
+--------------------------------------------------------------------------------
+:block/comparison-size :large
+:block/a-lang :clj
+:block/a-title Hiccup
+:block/a-code
+
 [:daisy.ui/button.btn-primary
  {:daisy.ui/loading? true
   :on {:click [:browser/alert "Thanks!"]}}
  "Click it"]
-```
 
-```clj
+:block/b-lang :html
+:block/b-title Resulting HTML
+:block/b-code
+
 <button type="button"
         aria-busy="true"
         tabindex="-1"
         class="btn btn-primary">
   Click it
 </button>
-```
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 Like all other hiccup nodes, aliases can have an [id](/hiccup/#id) and
 [classes](/hiccup/#class) on the tag name, can [nest children](/hiccup/#lists)
@@ -34,25 +45,38 @@ map](/hiccup/#attributes).
 Aliases can expand to arbitrary hiccup, it doesn't have to produce a single
 node:
 
-```clj
+--------------------------------------------------------------------------------
+:block/comparison-size :large
+:block/a-lang :clj
+:block/a-title Hiccup
+:block/a-code
+
 (require '[daisy.ui :as ui])
 
 [::ui/toast {::ui/type :info}
  "New message arrived"]
-```
 
-```html
+:block/b-lang :html
+:block/b-title Resulting HTML
+:block/b-code
+
 <div class="toast">
   <div class="alert alert-info">
     <span>New message arrived.</span>
   </div>
 </div>
-```
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 Aliases can nest, a feature that has some interesting applications that are
 further explored in the [sortable table tutorial](/tutorials/sortable-table/).
 
-```clj
+:block/comparison-size :large
+:block/a-lang :clj
+:block/a-title Hiccup
+:block/a-code
+
 (require '[daisy.ui :as ui])
 
 [::ui/tabs
@@ -62,17 +86,27 @@ further explored in the [sortable table tutorial](/tutorials/sortable-table/).
   "HTML"]
  [::ui/tab {:href "/#hiccup"}
   "Hiccup"]]
-```
 
-```html
+:block/b-lang :html
+:block/b-title Resulting HTML
+:block/b-code
+
 <div role="tablist" class="tabs">
-  <a role="tab" class="tab" href="/#preview">Preview</a>
-  <a role="tab" class="tab tab-active">HTML</a>
-  <a role="tab" class="tab" href="/#hiccup">Hiccup</a>
+  <a role="tab"
+     class="tab"
+     href="/#preview">Preview</a>
+  <a role="tab"
+     class="tab tab-active">HTML</a>
+  <a role="tab"
+     class="tab"
+     href="/#hiccup">Hiccup</a>
 </div>
-```
 
-## Defining aliases
+--------------------------------------------------------------------------------
+:block/id defining
+:block/title Defining aliases
+:block/level 2
+:block/markdown
 
 To use aliases, you must tell Replicant how it should expand them. You have two
 options: passing alias definitions when rendering, or globally registering
@@ -83,64 +117,85 @@ collection of children. The attribute map may be empty. If it contains `:class`,
 it is always a collection. Children are always a flat list of child nodes,
 regardless of the nesting in the source hiccup.
 
-<table>
-  <thead>
-    <tr>
-      <th>Alias</th>
-      <th>Attributes argument</th>
-      <th>Children argument</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>[:ui/bold "My bold"]</code></td>
-      <td><code>{}</code></td>
-      <td><code>'("My bold")</code></td>
-    </tr>
-    <tr>
-      <td><code>[:ui/btn.btn-primary "Click" '(" " "the" " " "button")]</code></td>
-      <td><code>{:class ("btn-primary")}</code></td>
-      <td><code>'("Click" " " "the" " " "button")</code></td>
-    </tr>
-    <tr>
-      <td><code>[:ui/btn.btn-primary {:class :btn-round} "Click"]</code></td>
-      <td><code>{:class ("btn-primary" "btn-round")}</code></td>
-      <td><code>'("Click")</code></td>
-    </tr>
-  </tbody>
-</table>
+:block/a-lang :clj
+:block/a-code
 
-### Passing alias functions
+;; Alias
+[:ui/bold "My bold"]
+
+;; Attributes argument
+{}
+
+;; Children argument
+'("My bold")
+
+:block/b-lang :clj
+:block/b-code
+
+;; Alias
+[:ui/btn.btn-primary
+  {:class :btn-round}
+  "Click" '(" " "button")]
+
+;; Attributes argument
+{:class #{:btn-round
+          "btn-primary"}}
+
+;; Children argument
+'("Click" " " "button")
+
+--------------------------------------------------------------------------------
+:block/id passing
+:block/level 3
+:block/title Passing alias functions
+:block/markdown
 
 Alias functions can be passed to `replicant.dom/render` and
 `replicant.string/render`.
 
 ```clj
-(require '[replicant.dom :as d])
-(require '[replicant.string :as s])
-
 (defn render-button-alias [attrs children]
   [:button.btn
    (cond-> (assoc attrs :type "button")
      (::loading? attrs) (merge :aria-busy "true"
                                :tabindex "-1"))
    children])
+```
 
-(r/render
-  (js/document.getElementById "app")
+--------------------------------------------------------------------------------
+:block/comparison-size :large
+:block/a-lang :clj
+:block/a-title Update the DOM
+:block/a-code
+
+(require '[replicant.dom :as d])
+
+(r/render (js/document.getElementById "app")
   [:ui/btn "Click"]
   {:aliases {:ui/btn render-button-alias}})
+
+:block/b-lang :clj
+:block/b-title Render to a string
+:block/b-code
+
+(require '[replicant.string :as s])
 
 (s/render
   [:ui/btn "Click"]
   {:aliases {:ui/btn render-button-alias}})
-```
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 The map passed as `:aliases` is a map of alias tag name to alias render
 function. If you omit aliases used in your hiccup, Replicant will render an
 empty `div` with data-attributes explaining the problem.
 
-### Defining alias functions
+--------------------------------------------------------------------------------
+:block/id defines
+:block/level 3
+:block/title Defining alias functions
+:block/markdown
 
 Alias functions can be registered globally with `replicant.alias/defalias`:
 
@@ -190,7 +245,11 @@ approach is that you can't tack on class names to the var:
 `[::ui/btn.btn-primary ,,,]` works, but `[ui/btn.btn-primary ,,,]` does not. You
 can still add classes with `[ui/btn {:class :btn-primary} ,,,]`.
 
-### Registering alias functions
+--------------------------------------------------------------------------------
+:block/id registering
+:block/level 3
+:block/title Registering alias functions
+:block/markdown
 
 If you want to have globally registered alias functions, but want more control
 over the alias keyword, you can use `replicant.alias/register!`:
@@ -208,7 +267,11 @@ over the alias keyword, you can use `replicant.alias/register!`:
 (a/register! :ui/btn render-button-alias)
 ```
 
-### Debuggable alias functions
+--------------------------------------------------------------------------------
+:block/id debuggable-fns
+:block/level 3
+:block/title Debuggable alias functions
+:block/markdown
 
 Alias functions defined with `defalias` have some additional benefits. During
 development, Replicant will keep track of which alias function created a piece
@@ -231,11 +294,11 @@ function with `aliasfn`:
 
 (def render-button-alias
   (aliasfn [attrs children]
-           [:button.btn
-            (cond-> (assoc attrs :type "button")
-              (::loading? attrs) (merge :aria-busy "true"
-                                        :tabindex "-1"))
-            children]))
+    [:button.btn
+     (cond-> (assoc attrs :type "button")
+       (::loading? attrs) (merge :aria-busy "true"
+                                 :tabindex "-1"))
+     children]))
 
 (r/render
  (js/document.getElementById "app")
@@ -243,13 +306,17 @@ function with `aliasfn`:
  {:aliases {:ui/btn render-button-alias}})
 ```
 
-<a id="alias-data"></a>
-## Alias data
+--------------------------------------------------------------------------------
+:block/id alias-data
+:block/level 2
+:block/title Alias data
+:block/markdown
 
-Some aliases need to close over some data. However, if you provide an alias
-definition to `render` with something like `(partial my-alias my-alias-data)`,
-the alias function will be unique in every render call, which will cause
-Replicant to rebuild your entire user interface on every render. Not ideal.
+Aliases sometime benefit from closing over data. However, if you provide an
+alias definition to `render` with something like `(partial my-alias
+my-alias-data)`, the alias function will be unique in every render call, which
+will cause Replicant to rebuild your entire user interface on every render. Not
+ideal.
 
 The better approach is to pass data to `:alias-data` when you render. This data
 will be available on the alias attribute map as `:replicant/alias-data`.
@@ -260,7 +327,11 @@ like routing data, i18n dictionaries, theme definitions, etc.
 For a practical example of using `:alias-data`, see the [i18n with aliases
 tutorial](/tutorials/i18n-alias/).
 
-## Attributes vs parameters
+--------------------------------------------------------------------------------
+:block/id attributes
+:block/level 2
+:block/title Attributes vs parameters
+:block/markdown
 
 Namespaced keywords in the attribute map are ignored by Replicant when building
 DOM nodes. You can use this fact to your advantage when building aliases.
@@ -292,13 +363,20 @@ might arise:
 Had you not namespaced `:daisy.ui/loading?`, Replicant would have attempted to
 add the DOM attribute `loading?`, which would have failed horribly.
 
-## Benefits
+--------------------------------------------------------------------------------
+:block/id benefits
+:block/level 2
+:block/title Benefits
+:block/markdown
 
 This is all well and good, but what are the benefits of using aliases over
 functions that return hiccup?
 
-<a id="late-bound"></a>
-### Late bound
+--------------------------------------------------------------------------------
+:block/id late-bound
+:block/level 3
+:block/title Late bound
+:block/markdown
 
 Aliases are not expanded until their attributes or children change. A function
 that returns hiccup is typically executed for every render. You can memoize the
@@ -307,7 +385,11 @@ manage. Aliases leverage Replicant's internal representation of the DOM to do
 their caching. This characteristic means aliases can improve rendering
 performance.
 
-### Top-down versus bottom-up
+--------------------------------------------------------------------------------
+:block/id top-down
+:block/level 3
+:block/title Top-down versus bottom-up
+:block/markdown
 
 Related to the above point, aliases resolve top-down, as opposed to function
 calls, which resolve bottom-up. An alias can manipulate its children before
@@ -318,8 +400,11 @@ This subtle difference means that aliases can manipulate the attributes or
 overall structure of their nested aliases. This idea is further explored in the
 [sortable table tutorial](/tutorials/sortable-table/).
 
-<a id="abstraction-level"></a>
-### Raising the abstraction level of hiccup
+--------------------------------------------------------------------------------
+:block/id abstraction-level
+:block/level 3
+:block/title Raising the abstraction level of hiccup
+:block/markdown
 
 One disadvantage of writing tests against hiccup is that it contains a lot of
 UX/UI details such as class names, inline styles, various accessibility
@@ -403,7 +488,11 @@ Aliases are normalized just like all other hiccup. This means that you can use
 aliases with or without attribute maps, nest the children as much as you want,
 and still receive data in a uniform interface.
 
-## Drawbacks
+--------------------------------------------------------------------------------
+:block/id drawbacks
+:block/level 2
+:block/title Drawbacks
+:block/markdown
 
 Nothing is free, and while there are many benefits to using aliases, there are
 some drawbacks as well. The main drawback is indirection, which has some
@@ -443,8 +532,11 @@ Using `defalias` and referring to the vars in your hiccup (e.g.
 `[ui/btn "Click"]`, not `[::ui/btn "Click"]` ) helps keep relevant
 alias definitions in your build, and irrelevant ones out.
 
-<a id="components"></a>
-## Differences from components
+--------------------------------------------------------------------------------
+:block/id components
+:block/level 2
+:block/title Differences from components
+:block/markdown
 
 Aliases have a lot in common with "components" as they appear in React and its
 peers, but there are some important differences.

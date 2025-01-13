@@ -53,7 +53,7 @@
    (if (= (:page/uri page) "/learn/")
      [:div.flex.pt-8
       (menu db page)
-      [:main.mx-8.grow.mb-8
+      [:main.mx-8.grow.mb-16
        body]]
      (list
       [:div.p-4.bg-base-200.items-center.flex.flex-row.gap-4
@@ -62,7 +62,7 @@
        [:div.bg-base-200.ml-0.mb-0.px-0 {:popover "auto" :id "menu"}
         (menu db page)]
        (page-kind->text (:page/kind page)) ": " (:page/title page)]
-      [:main.my-8.mx-4.md:mx-0.fullscreen body]))))
+      [:main.mt-8.mb-16.mx-4.md:mx-0.fullscreen body]))))
 
 (defn render-heading [block]
   (when-let [title (:block/title block)]
