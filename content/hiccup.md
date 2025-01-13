@@ -442,7 +442,7 @@ should be keywords, and the values should be strings or numbers:
 
 [:h1
  {:style
-  {:font-family: "helvetica"
+  {:font-family "helvetica"
    :font-weight 900
    :max-width 800}}
  "Hello!"]
