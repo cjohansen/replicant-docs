@@ -1,6 +1,7 @@
 (ns repliweb.demos.main
   (:require [replicant.dom :as r]
             [repliweb.demos.data-driven-transitions :as ddt]
+            [repliweb.demos.oneoffs :as oneoffs]
             [repliweb.demos.searchable-media-list :as sml]))
 
 (defn main []
@@ -23,6 +24,11 @@
 
           "repliweb.demos.data-driven-transitions"
           (ddt/main el (ns->store ns))
+
+          "repliweb.demos.oneoffs"
+          (case (.getAttribute el "data-example-fn")
+            "button-click-example"
+            (r/render el (oneoffs/button-click-example)))
 
           (println "Unknown example ns" ns)
           (js/console.log el))))))

@@ -27,6 +27,10 @@
   :db/valueType :db.type/keyword
   :db/cardinality :db.cardinality/one}
 
+ {:db/ident :block/a-example
+  :db/valueType :db.type/string
+  :db/cardinality :db.cardinality/one}
+
  {:db/ident :block/a-title
   :db/valueType :db.type/string
   :db/cardinality :db.cardinality/one}
@@ -44,6 +48,10 @@
   :db/cardinality :db.cardinality/one}
 
  {:db/ident :block/b-code
+  :db/valueType :db.type/string
+  :db/cardinality :db.cardinality/one}
+
+ {:db/ident :block/b-example
   :db/valueType :db.type/string
   :db/cardinality :db.cardinality/one}
 

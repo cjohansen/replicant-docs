@@ -1,5 +1,6 @@
 (ns repliweb.article
-  (:require [datomic-type-extensions.api :as d]
+  (:require [clojure.string :as str]
+            [datomic-type-extensions.api :as d]
             [phosphor.icons :as icons]
             [powerpack.markdown :as md]
             [repliweb.elements.layout :as layout]
@@ -91,6 +92,23 @@
    :medium "section-md"
    :large "section-lg"})
 
+(defn render-ab [{:keys [lang title code example class]}]
+  (cond
+    code
+    (showcase/render-code {::showcase/lang lang
+                           ::showcase/title title
+                           :class class}
+      [code])
+
+    example
+    (let [[ns fn] (str/split example #"/")]
+      [:div.flex.flex-col.flex-1
+       (when title
+         [:span.code-title title])
+       [:div.p-4.flex.items-center.grow
+        {:data-example-ns ns
+         :data-example-fn fn}]])))
+
 (defn render-block [block]
   (list
    (if (not-empty (:block/markdown block))
@@ -101,13 +119,15 @@
                                 :class #{(or (sizes (:block/comparison-size block))
                                              "section-md")
                                          "my-6"}}
-       [(showcase/render-code {::showcase/lang (:block/a-lang block)
-                               ::showcase/title (:block/a-title block)}
-          [(:block/a-code block)])
-        (showcase/render-code {::showcase/lang (:block/b-lang block)
-                               ::showcase/title (:block/b-title block)
-                               :class ["bg-base-100"]}
-          [(:block/b-code block)])]))
+       [(render-ab {:lang (:block/a-lang block)
+                    :title (:block/a-title block)
+                    :code (:block/a-code block)
+                    :example (:block/a-example block)})
+        (render-ab {:lang (:block/b-lang block)
+                    :title (:block/b-title block)
+                    :code (:block/b-code block)
+                    :example (:block/b-example block)
+                    :class ["bg-base-100"]})]))
    (when (:block/code block)
      [:div.section-md.mx-auto.my-6
       (showcase/render-code {::showcase/lang (:block/lang block)

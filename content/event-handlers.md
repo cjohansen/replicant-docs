@@ -1,19 +1,32 @@
+--------------------------------------------------------------------------------
 :page/uri /event-handlers/
 :page/title Event handlers
 :page/kind :page.kind/guide
 :page/order 10
-:page/body
+--------------------------------------------------------------------------------
+:block/markdown
 
 All event handlers go in a map under the `:on` attribute key. Event handler
 names are the same ones as in the browser. Replicant does not keep a list of
 valid names to use -- whatever you pass it, it will pass to `addEventListener`:
 
-```clj
-[:button {:on {:click (fn [e] (js/alert "Hello!"))}}
- "Click it"]
-```
+--------------------------------------------------------------------------------
 
-<button on-click="alert('Hello!')">Click it</button>
+:block/a-lang :clj
+:block/a-title Hiccup
+:block/a-code
+
+[:button
+ {:on {:click
+       (fn [e]
+         (js/alert "Hello!"))}}
+ "Click it"]
+
+:block/b-title Result
+:block/b-example repliweb.demos.oneoffs/button-click-example
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 Replicant does no special handling of the event handler function: it will behave
 exactly as if you added it with `.addEventListener`. That means that `e` is a

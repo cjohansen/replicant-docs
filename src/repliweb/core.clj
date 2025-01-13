@@ -38,9 +38,9 @@
                               :paths ["/tailwind.css"
                                       "/code.css"]}
 
-                             ;; "/app.js"
-                             ;; {:public-dir "public"
-                             ;;  :paths ["/js/compiled/app.js"]}
+                             "/app.js"
+                             {:public-dir "public"
+                              :paths ["/js/compiled/app.js"]}
                              }
 
            :optimus/assets [{:public-dir "public"
