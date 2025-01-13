@@ -61,7 +61,7 @@
        [:div.bg-base-200.ml-0.mb-0.px-0 {:popover "auto" :id "menu"}
         (menu db page)]
        (page-kind->text (:page/kind page)) ": " (:page/title page)]
-      [:div.my-8.mx-4.md:mx-0 body]))))
+      [:main.my-8.mx-4.md:mx-0.fullscreen body]))))
 
 (defn render-heading [block]
   (when-let [title (:block/title block)]
@@ -69,7 +69,7 @@
        1 :h1.h1
        2 :h2.h2
        3 :h3.h3
-       :h4.h4) {:class #{"mx-auto" "max-w-screen-md"}
+       :h4.h4) {:class #{"section-md"}
                 :id (:block/id block)}
      [:a.group.relative {:href (str "#" (:block/id block))}
       [:span.absolute.-left-4.group-hover:visible.invisible "§ "]
@@ -79,7 +79,7 @@
   ([md] (render-markdown nil md))
   ([block md]
    (when (not-empty md)
-     [:div.prose.mt-4.max-w-screen-md.mx-auto
+     [:div.prose.mt-4.section-md
       (cond-> {}
         (and (:block/id block) (nil? (:block/title block)))
         (assoc :id (:block/id block)))
@@ -87,9 +87,9 @@
       (md/render-html md)])))
 
 (def sizes
-  {:small "max-w-screen-sm"
-   :medium "max-w-screen-md"
-   :large "max-w-screen-lg"})
+  {:small "section-sm"
+   :medium "section-md"
+   :large "section-lg"})
 
 (defn render-block [block]
   (list
@@ -99,8 +99,8 @@
    (when (:block/a-lang block)
      (showcase/render-showcase {::showcase/style :light
                                 :class #{(or (sizes (:block/comparison-size block))
-                                             "max-w-screen-md")
-                                         "my-6" "mx-auto"}}
+                                             "section-md")
+                                         "my-6"}}
        [(showcase/render-code {::showcase/lang (:block/a-lang block)
                                ::showcase/title (:block/a-title block)}
           [(:block/a-code block)])
@@ -109,14 +109,14 @@
                                :class ["bg-base-100"]}
           [(:block/b-code block)])]))
    (when (:block/code block)
-     [:div.max-w-screen-md.mx-auto.my-6
+     [:div.section-md.mx-auto.my-6
       (showcase/render-code {::showcase/lang (:block/lang block)
-                             :class ["bg-base-200 max-w-screen-md"]}
+                             :class ["bg-base-200"]}
         [(:block/code block)])])))
 
 (defn render-page [ctx page]
   (layout ctx page
-    (typo/h1 {:class #{"max-w-screen-md" "mx-auto"}} (:page/title page))
+    (typo/h1 {:class #{"section-md"}} (:page/title page))
     (->> (:page/blocks page)
          (sort-by :block/idx <)
          (map render-block))

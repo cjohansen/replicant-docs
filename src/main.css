@@ -199,4 +199,24 @@
         padding: 1rem;
         overflow: scroll;
     }
+
+    .section-sm {
+        @apply max-w-screen-sm;
+    }
+
+    .section-md {
+        @apply max-w-screen-md;
+    }
+
+    .section-lg {
+        @apply max-w-screen-lg;
+    }
+
+    .fullscreen :is(.section-sm, .section-md, .section-lg) {
+        @apply mx-auto;
+    }
+
+    .fullscreen .section-lg {
+        @apply sm:mx-auto md:mx-4 lg:mx-auto;
+    }
 }
