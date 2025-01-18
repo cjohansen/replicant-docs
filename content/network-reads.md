@@ -1,8 +1,11 @@
+--------------------------------------------------------------------------------
 :page/uri /tutorials/network-reads/
 :page/title Data-driven queries
 :page/kind :page.kind/tutorial
 :page/order 50
-:page/body
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 In this second part of the [networking tutorial](/tutorials/network/), we will
 build a data-driven system for reading data over the network.
@@ -13,7 +16,11 @@ backend. If you want to follow along, grab [the setup on
 Github](https://github.com/cjohansen/replicant-networking/tree/setup), and
 follow the README to get running.
 
-## The design
+--------------------------------------------------------------------------------
+:block/title The design
+:block/level 2
+:block/id design
+:block/markdown
 
 To build a declarative, data-driven solution for performing reads over the
 network our pure rendering functions should be able to answer questions like:
@@ -80,7 +87,11 @@ You might be wondering why we're only discussing data structures, and not HTTP
 mechanics in a tutorial about networking. A good data model is the key to an
 effective design. We will add the HTTP mechanics at the very end.
 
-## Answering questions
+--------------------------------------------------------------------------------
+:block/title Answering questions
+:block/level 2
+:block/id questions
+:block/markdown
 
 With the data model in place we can write some pure functions that updates it
 and use it to answer questions. We can write some tests for this logic.
@@ -233,8 +244,11 @@ With this we are able to answer the most pertinent questions about our network
 requests. There are some more details like error handling and log truncating to
 cater to. Check out the final version of the code on Github for all the details.
 
-<a id="http-requests"></a>
-## Making HTTP requests
+--------------------------------------------------------------------------------
+:block/title Making HTTP requests
+:block/level 2
+:block/id http-requests
+:block/markdown
 
 We now turn our attention to the HTTP request itself. We have a query data
 structure that represents requests for data. How this is converted to an HTTP
@@ -250,7 +264,10 @@ Because our backend was designed to play well with the frontend, the HTTP
 mechanics can be handled pretty straight-forward with
 [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch):
 
-```clj
+--------------------------------------------------------------------------------
+:block/lang :clj
+:block/code
+
 (ns toil.core
   (:require [cljs.reader :as reader]
             ,,,
@@ -265,15 +282,22 @@ mechanics can be handled pretty straight-forward with
                               :body (pr-str query)})
       (.then #(.text %))
       (.then reader/read-string)
-      (.then #(swap! store query/receive-response (js/Date.) query %))
-      (.catch #(swap! store query/receive-response (js/Date.) query {:error (.-message %)}))))
-```
+      (.then #(swap! store query/receive-response
+                           (js/Date.) query %))
+      (.catch #(swap! store query/receive-response
+                            (js/Date.) query {:error (.-message %)}))))
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 What if your backend API can't be tailored to your client? Maybe you have a
 traditional REST API of some sort. We can extend the query function and have it
 dispatch on the query kind to get the HTTP details:
 
-```clj
+--------------------------------------------------------------------------------
+:block/lang :clj
+:block/code
+
 (defn query->http-request [{:query/keys [kind data]}]
   (case kind
     :query/todo-items
@@ -289,9 +313,13 @@ dispatch on the query kind to get the HTTP details:
                             body (assoc :body (pr-str body))))
         (.then #(.text %))
         (.then reader/read-string)
-        (.then #(swap! store query/receive-response (js/Date.) query %))
-        (.catch #(swap! store query/receive-response (js/Date.) query {:error (.-message %)})))))
-```
+        (.then #(swap! store query/receive-response
+                             (js/Date.) query %))
+        (.catch #(swap! store query/receive-response
+                              (js/Date.) query {:error (.-message %)})))))
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 You could use the same approach if you need to talk to different APIs, etc. If
 your endpoints don't respond in a unified manner, you may also want to add a
@@ -320,7 +348,11 @@ in one place, and to make all reads behave as uniformly as possible. This way
 you avoid having details about your backend architecture and design choices
 bleed through your entire frontend codebase.
 
-## Triggering HTTP requests
+--------------------------------------------------------------------------------
+:block/title Triggering HTTP requests
+:block/level 2
+:block/id triggering-http-requests
+:block/markdown
 
 The final piece of the puzzle is to trigger the HTTP requests. We will do this
 two ways: first we'll add an action that requires the user to ask for data, and
@@ -437,7 +469,11 @@ happens in three places: bootup, body clicks, and back button clicks:
   ,,,)
 ```
 
-## Extra credit: Reorganizing
+--------------------------------------------------------------------------------
+:block/title Extra credit: Reorganizing
+:block/level 2
+:block/id reorganizing
+:block/markdown
 
 NB! This finaly section has nothing to do with networking, but rather deals with
 code organization.
@@ -672,7 +708,11 @@ Then the render function can check if the user is available:
        "Back"]]]))
 ```
 
-## Conclusion
+--------------------------------------------------------------------------------
+:block/title Conclusion
+:block/level 2
+:block/id conclusion
+:block/markdown
 
 In this tutorial we built a small system for dealing with network reads. You
 _could_ use the same system for issuing writes over the network, but the
