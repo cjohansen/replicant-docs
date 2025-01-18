@@ -1,8 +1,11 @@
+--------------------------------------------------------------------------------
 :page/uri /tutorials/sortable-table/
 :page/title A sortable table alias
 :page/kind :page.kind/tutorial
 :page/order 90
-:page/body
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 In this tutorial, we will build a sortable table, and eventually extract a
 reusable data-driven abstraction as a Replicant [alias](/aliases/). The goal is
@@ -18,7 +21,11 @@ If you want to follow along, grab [the setup on
 Github](https://github.com/cjohansen/replicant-sortable-table/tree/setup), then
 run `make tailwind` in a terminal, fire up your editor and start a REPL.
 
-## A basic table
+--------------------------------------------------------------------------------
+:block/title A basic table
+:block/level 2
+:block/id basic-table
+:block/markdown
 
 We'll start by listing out our dataset in a basic table. For this tutorial,
 we're working with the [40 top ranking boardgames on
@@ -77,7 +84,11 @@ Because this function will primarily reorder rows renders, we add a
 [key](/keys/) to each one so Replicant will know to reorder DOM elements instead
 of recreating them.
 
-## Indicating sorting column
+--------------------------------------------------------------------------------
+:block/title Indicating sorting column
+:block/level 2
+:block/id sorting-column
+:block/markdown
 
 We will now add visual indicators to the active sort column header:
 
@@ -156,7 +167,11 @@ Then we'll use the routing alias to change the URL's hash params:
  (if (= "desc" sort-order) "▼" "▲") " Ranking"]
 ```
 
-## Changing sort columns
+--------------------------------------------------------------------------------
+:block/title Changing sort columns
+:block/level 2
+:block/id changing-sort-columns
+:block/markdown
 
 The next task is to change the sorting column. This is similar to what we just
 did, so we'll start by deciding on the current sorting column. This is a little
@@ -204,8 +219,9 @@ rating by clicking the header:
 
 ```clj
 [:th.py-2.whitespace-nowrap.text-left.pr-4
- [:ui/a {:ui/location (assoc-in location [:location/hash-params :sort-column]
-                                "average")}
+ [:ui/a {:ui/location
+         (assoc-in location [:location/hash-params :sort-column]
+                   "average")}
   "Avg. rating"]]
 ```
 
@@ -256,7 +272,11 @@ let's not worry about performance until we have to.
 We can use this helper on all the headers, and end up with a neatly sortable
 table:
 
-```clj
+--------------------------------------------------------------------------------
+:block/size :large
+:block/lang :clj
+:block/code
+
 (defn render-page [{:keys [boardgames]} location]
   (let [sort-order (get-sort-order location)
         sort-column (get-sort-column location)]
@@ -286,7 +306,9 @@ table:
           [:td.py-2.pr-4.text-left (:bgg/geek-rating game)]
           [:td.py-2.pr-4.text-left (:bgg/average-rating game)]
           [:td.py-2.px-4.text-right (:bgg/num-voters game)]])]]]))
-```
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 Both `thead` and `tbody` loop through the same attributes in order to build a
 row. Currently we're relying on these two pieces of code matching up. It would
@@ -328,7 +350,11 @@ instead of the map we made before:
 The updated render function is looking a little more regular, and at the very
 least the headers are now guaranteed to correspond to the body rows:
 
-```clj
+--------------------------------------------------------------------------------
+:block/size :large
+:block/lang :clj
+:block/code
+
 (defn render-page [{:keys [boardgames]} location]
   (let [sort-order (get-sort-order location)
         sort-column (get-sort-column location)]
@@ -358,13 +384,19 @@ least the headers are now guaranteed to correspond to the body rows:
           [:td.py-2.pr-4.text-left ((:f (nth columns 3)) game)]
           [:td.py-2.pr-4.text-left ((:f (nth columns 4)) game)]
           [:td.py-2.px-4.text-right ((:f (nth columns 5)) game)]])]]]))
-```
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 It would be nice if we could loop the columns to create rows. Unfortunately,
 custom formatting is in our way. But what if we could separate the formatting
 wrappers from the content?
 
-## Adding aliases
+--------------------------------------------------------------------------------
+:block/title Adding aliases
+:block/level 2
+:block/id adding-aliases
+:block/markdown
 
 To increase the abstraction level, we will create aliases for the table,
 thead/tbody and cells. Since aliases evaluate top-down, parent aliases can
@@ -425,7 +457,9 @@ either the column marked as default, or just use the first one:
            ::location (::location attrs)
            ::columns (::columns attrs)
            ::sort-order (get-sort-order (::location attrs))
-           ::sort-column (get-sort-column (::location attrs) (::columns attrs)))
+           ::sort-column (get-sort-column
+                           (::location attrs)
+                           (::columns attrs)))
          children)))
 ```
 
@@ -468,7 +502,9 @@ This isn't necessary, but makes things more compact.
         ::location (::location attrs)
         ::column (nth (::columns attrs) idx)
         ::sort-order (get-sort-order (::location attrs))
-        ::sort-column (get-sort-column (::location attrs) (::columns attrs))))
+        ::sort-column (get-sort-column
+                        (::location attrs)
+                        (::columns attrs))))
      children))])
 ```
 
@@ -519,7 +555,11 @@ Very much like a templating system.
 This custom element will help us quite a bit. We can now remove the header link
 function, and update the render function to this:
 
-```clj
+--------------------------------------------------------------------------------
+:block/size :large
+:block/lang :clj
+:block/code
+
 (defn render-page [{:keys [boardgames]} location]
   (let [sort-order (get-sort-order location)
         sort-column (get-sort-column location)]
@@ -544,7 +584,9 @@ function, and update the render function to this:
           [:td.py-2.pr-4.text-left ((:f (nth columns 3)) game)]
           [:td.py-2.pr-4.text-left ((:f (nth columns 4)) game)]
           [:td.py-2.px-4.text-right ((:f (nth columns 5)) game)]])]]]))
-```
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 The final piece of the puzzle is to wrap the `tbody` and each cell in the body
 rows. Once again we will allow nesting cells directly in it without the `tr`.
@@ -557,7 +599,8 @@ Here's the tbody:
   {"desc" >
    "asc" <})
 
-(defalias tbody [{::keys [columns sort-column sort-order data] :as attrs} children]
+(defalias tbody [{::keys [columns sort-column sort-order data]
+                  :as attrs} children]
   (into
    [:tbody]
    (->> data
@@ -623,7 +666,11 @@ essentials, only expressing the visual aspects and the column layouts:
      [::st/td.py-2.px-4.text-right]]]])
 ```
 
-## td vs th
+--------------------------------------------------------------------------------
+:block/title td vs th
+:block/level 2
+:block/id td-vs-th
+:block/markdown
 
 You may have noticed the small cheat in the last example. In the original code,
 the title was in a `th` in `tbody`. Since `::st/th` and `::st/td` behave
@@ -631,7 +678,8 @@ differently, this isn't immediately possible. However, cells in `thead` and
 `tbody` receive different data, so fixing it is quite straight forward:
 
 ```clj
-(defalias th [{::keys [column sort-column sort-order location] :as attrs}]
+(defalias th [{::keys [column sort-column sort-order location]
+               :as attrs}]
   (if (::data attrs)
     [:th attrs ((:f column) (::data attrs))]
     [:th attrs
@@ -673,7 +721,11 @@ With that, we can achieve the exact same layout we started with:
      [::st/td.py-2.px-4.text-right]]]])
 ```
 
-## Conclusion
+--------------------------------------------------------------------------------
+:block/title Conclusion
+:block/level 2
+:block/id conclusion
+:block/markdown
 
 So there you have it, a completely data-driven sortable table. Using aliases, we
 were able to clean it up to the point where it only expresses the necessary
