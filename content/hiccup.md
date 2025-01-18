@@ -26,7 +26,7 @@ issue](https://github.com/cjohansen/replicant/issues).
 
 Replicant's definition of hiccup is a vector with a keyword in it:
 
-:block/comparison-size :medium
+:block/size :medium
 :block/a-lang :clojure
 :block/a-title Hiccup
 :block/a-code
@@ -80,7 +80,7 @@ list those after the tag name:
 Multiple strings are fine. They will be combined to one string with no
 separators, so make sure to include spaces as required:
 
-:block/comparison-size :large
+:block/size :large
 :block/a-lang :clojure
 :block/a-title Hiccup
 :block/a-code
@@ -230,7 +230,7 @@ Typically keywords are used:
 
 You can of course have both attributes and children:
 
-:block/comparison-size :large
+:block/size :large
 :block/a-lang :clojure
 :block/a-title Hiccup
 :block/a-code
@@ -259,7 +259,7 @@ Attributes can have explicit nil values. If they do, Replicant behaves as though
 the attribute wasn't there. This means it's safe to wrap an attribute's value in
 a `when`, and you don't have to check every possible attribute for `nil`:
 
-:block/comparison-size :large
+:block/size :large
 :block/a-lang :clojure
 :block/a-title Hiccup
 :block/a-code

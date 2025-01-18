@@ -116,7 +116,7 @@
      (render-heading block))
    (when (:block/a-lang block)
      (showcase/render-showcase {::showcase/style :light
-                                :class #{(or (sizes (:block/comparison-size block))
+                                :class #{(or (sizes (:block/size block))
                                              "section-md")
                                          "my-6"}}
        [(render-ab {:lang (:block/a-lang block)
@@ -129,8 +129,9 @@
                     :example (:block/b-example block)
                     :class ["bg-base-100"]})]))
    (when (:block/code block)
-     [:div.section-md.mx-auto.my-6
-      (cond-> {}
+     [:div.mx-auto.my-6
+      (cond-> {:class (or (sizes (:block/size block))
+                          "section-md")}
         (and (nil? (:block/markdown block))
              (:block/id block)) (assoc :id (:block/id block)))
       (showcase/render-code {::showcase/lang (:block/lang block)

@@ -13,7 +13,7 @@ function you provide to expand the alias into the desired hiccup.
 Aliases must be namespaced keywords. Here's a quick example:
 
 --------------------------------------------------------------------------------
-:block/comparison-size :large
+:block/size :large
 :block/a-lang :clj
 :block/a-title Hiccup
 :block/a-code
@@ -46,7 +46,7 @@ Aliases can expand to arbitrary hiccup, it doesn't have to produce a single
 node:
 
 --------------------------------------------------------------------------------
-:block/comparison-size :large
+:block/size :large
 :block/a-lang :clj
 :block/a-title Hiccup
 :block/a-code
@@ -72,7 +72,7 @@ node:
 Aliases can nest, a feature that has some interesting applications that are
 further explored in the [sortable table tutorial](/tutorials/sortable-table/).
 
-:block/comparison-size :large
+:block/size :large
 :block/a-lang :clj
 :block/a-title Hiccup
 :block/a-code
@@ -163,7 +163,7 @@ Alias functions can be passed to `replicant.dom/render` and
 ```
 
 --------------------------------------------------------------------------------
-:block/comparison-size :large
+:block/size :large
 :block/a-lang :clj
 :block/a-title Update the DOM
 :block/a-code

@@ -19,7 +19,7 @@
   :db/valueType :db.type/string
   :db/cardinality :db.cardinality/one}
 
- {:db/ident :block/comparison-size
+ {:db/ident :block/size
   :db/valueType :db.type/keyword
   :db/cardinality :db.cardinality/one}
 
