@@ -1,8 +1,11 @@
+--------------------------------------------------------------------------------
 :page/uri /tutorials/state-datascript/
 :page/title State management with Datascript
 :page/kind :page.kind/tutorial
 :page/order 30
-:page/body
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 In this tutorial we will implement state management for top-down rendering with
 a [Datascript](https://github.com/tonsky/datascript) database as the global
@@ -17,7 +20,11 @@ idea that you render your entire app whenever the app state changes. In this
 tutorial we will use a Datascript database to hold all the application state,
 and add a listener that makes sure the app re-renders every time it changes.
 
-## Basic setup
+--------------------------------------------------------------------------------
+:block/title Basic setup
+:block/level 2
+:block/id setup
+:block/markdown
 
 The database connection can be created in the main function that starts the app,
 but it's rather useful to be able to access it in a REPL, so I usually `defonce`
@@ -74,7 +81,11 @@ started at attribute. Evaluate the following expression in the REPL:
 
 When this is evaluated, the UI should automatically update.
 
-## Updating the database
+--------------------------------------------------------------------------------
+:block/title Updating the database
+:block/level 2
+:block/id updating-the-database
+:block/markdown
 
 Our UI now responds to changes in the database, great. The next step is to put
 in place a small system for updating the database based on user interaction. To
@@ -164,8 +175,11 @@ feel free to use it as a starting template for building an app with Datascript
 based state management. Also consider checking out [state management with an
 atom tutorial](/tutorials/state-atom/).
 
-<a id="routing"></a>
-## Bonus: Routing
+--------------------------------------------------------------------------------
+:block/title Bonus: Routing
+:block/level 2
+:block/id routing
+:block/markdown
 
 In [the routing tutorial](/tutorials/routing/) we built a small routing system
 for a top-down rendered app. In this bonus section, we'll integrate the routing
@@ -179,7 +193,11 @@ location.
 
 We start by copying over the router namespace:
 
-```clj
+--------------------------------------------------------------------------------
+:block/size :large
+:block/lang :clj
+:block/code
+
 (ns state-datascript.router
   (:require [domkm.silk :as silk]
             [lambdaisland.uri :as uri]))
@@ -203,7 +221,7 @@ We start by copying over the router namespace:
           (seq query-params) (assoc :location/query-params query-params)
           (seq hash-params) (assoc :location/hash-params hash-params))))))
 
-(defn ^{:indent 1} location->url [routes {:location/keys [page-id params query-params hash-params]}]
+(defn location->url [routes {:location/keys [page-id params query-params hash-params]}]
   (cond-> (silk/depart routes page-id params)
     (seq query-params)
     (str "?" (uri/map->query-string query-params))
@@ -217,7 +235,9 @@ We start by copying over the router namespace:
           (not-empty (:location/params l2)))
        (= (not-empty (:location/query-params l1))
           (not-empty (:location/query-params l2)))))
-```
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 Next, we'll add the routing alias to the core namespace:
 
