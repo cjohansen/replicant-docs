@@ -1,8 +1,11 @@
+--------------------------------------------------------------------------------
 :page/uri /tutorials/state-atom/
 :page/title State management with atoms
 :page/kind :page.kind/tutorial
 :page/order 20
-:page/body
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 In this tutorial we will implement state management for top-down rendering with
 an atom as the global store. See [State management with
@@ -21,7 +24,11 @@ It's useful to differentiate the atom that holds the current state, and the
 snapshot/current state. I like to use the name `store` for the atom and `state`
 for the value inside.
 
-## Basic setup
+--------------------------------------------------------------------------------
+:block/title Basic setup
+:block/level 2
+:block/id basic-setup
+:block/markdown
 
 The `store` can be created in the main function that starts the app, but it's
 rather useful to be able to access it in a REPL, so I usually `defonce` it in a
@@ -70,7 +77,11 @@ started at attribute. Evaluate the following expression in the REPL:
 
 When this is evaluated, the UI should automatically update.
 
-## Updating the store
+--------------------------------------------------------------------------------
+:block/title Updating the store
+:block/level 2
+:block/id updating-the-store
+:block/markdown
 
 Our UI now responds to changes in the store, great. The next step is to put in
 place a small system for updating the store based on user interaction. To do
@@ -157,8 +168,11 @@ feel free to use it as a starting template for building an app with atom based
 state management. Also consider checking out the [state management with
 Datascript tutorial](/tutorials/state-datascript/).
 
-<a id="routing"></a>
-## Bonus: Routing
+--------------------------------------------------------------------------------
+:block/title Bonus: Routing
+:block/level 2
+:block/id routing
+:block/markdown
 
 In [the routing tutorial](/tutorials/routing/) we built a small routing system
 for a top-down rendered app. In this bonus section, we'll integrate the routing
@@ -172,7 +186,11 @@ location in it.
 
 We start by copying over the router namespace:
 
-```clj
+--------------------------------------------------------------------------------
+:block/size :large
+:block/lang :clj
+:block/code
+
 (ns state-atom.router
   (:require [domkm.silk :as silk]
             [lambdaisland.uri :as uri]))
@@ -196,7 +214,7 @@ We start by copying over the router namespace:
           (seq query-params) (assoc :location/query-params query-params)
           (seq hash-params) (assoc :location/hash-params hash-params))))))
 
-(defn ^{:indent 1} location->url [routes {:location/keys [page-id params query-params hash-params]}]
+(defn location->url [routes {:location/keys [page-id params query-params hash-params]}]
   (cond-> (silk/depart routes page-id params)
     (seq query-params)
     (str "?" (uri/map->query-string query-params))
@@ -210,7 +228,9 @@ We start by copying over the router namespace:
           (not-empty (:location/params l2)))
        (= (not-empty (:location/query-params l1))
           (not-empty (:location/query-params l2)))))
-```
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 Next, we'll add the routing alias to the core namespace:
 
@@ -227,7 +247,7 @@ Next, we'll add the routing alias to the core namespace:
     (into [:a (cond-> attrs
                 (:ui/location attrs)
                 (assoc :href (router/location->url routes
-                                                   (:ui/location attrs))))]
+                               (:ui/location attrs))))]
           children)))
 
 (alias/register! :ui/a routing-anchor)
