@@ -1,8 +1,11 @@
+--------------------------------------------------------------------------------
 :page/uri /tutorials/routing/
 :page/title Data-driven routing
 :page/kind :page.kind/tutorial
 :page/order 10
-:page/body
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 In this tutorial we will develop a small routing system. You will learn how
 routing can fit into Replicant's model where rendering is always top-down. We'll
@@ -12,7 +15,11 @@ With the exception of the final section, the ideas in this tutorial are not
 specific to Replicant, and can be used with a wide variety of rendering
 libraries.
 
-## Example setup
+--------------------------------------------------------------------------------
+:block/title Example setup
+:block/level 2
+:block/id setup
+:block/markdown
 
 For this tutorial, we will build a small app to view [Parens of the
 dead](https://www.parens-of-the-dead.com/) episodes. You can [get the setup on
@@ -90,7 +97,11 @@ Finally, there's a dev namespace to kick things off:
   (app/main el data/data))
 ```
 
-## System design
+--------------------------------------------------------------------------------
+:block/title System design
+:block/level 2
+:block/id design
+:block/markdown
 
 By adding routing to the app we want to have different render functions at
 different URLs. To achieve this, we will extract information from the URL and
@@ -142,7 +153,11 @@ We'll start with a bareboned version of the routing function:
          :location/params {:episode/id id}})))
 ```
 
-## Working with locations
+--------------------------------------------------------------------------------
+:block/title Working with locations
+:block/level 2
+:block/id locations
+:block/markdown
 
 We need to extract the location data when the app boots, and when the URL changes.
 To do it when the app boots we'll call `extract-location` from `main` and pass
@@ -150,7 +165,9 @@ the data to the render function:
 
 ```clj
 (defn main [el state]
-  (r/render el (ui/render-page state (extract-location js/location.href))))
+  (->> (extract-location js/location.href)
+       (ui/render-page state)
+       (r/render el)))
 ```
 
 ### Page dispatch
@@ -182,7 +199,11 @@ Because the `location` map may contain useful information (routing and query
 parameters, etc), we pass it as a separate argument to each page's render
 function.
 
-### Browser navigation
+--------------------------------------------------------------------------------
+:block/title Browser navigation
+:block/level 3
+:block/id browser-navigation
+:block/markdown
 
 Routing at bootup is well and fine, but we also need to change the active
 location when the user navigates the app. We could add a navigation action and
@@ -291,14 +312,19 @@ handler.
   (js/window.addEventListener
    "popstate"
    (fn [_]
-     (render-location el state (extract-location js/location.pathname))))
+     (->> (extract-location js/location.pathname)
+          (render-location el state))))
 
   ,,,)
 ```
 
 With this handler in place, going back works as well.
 
-## Routing mechanics
+--------------------------------------------------------------------------------
+:block/title Routing mechanics
+:block/level 2
+:block/id routing-mechanics
+:block/markdown
 
 We now have basic routing in place, but with hard-coded URLs and some
 duplication between the routing logic and generating links. We can fix this by
@@ -309,7 +335,11 @@ bi-directional routing and uses data rather than macros for routes will do.
 To avoid being overly reliant on the specific routing library, we will create
 our own `router` namespace. It will also use `lambdaisland/uri` to parse the URL.
 
-```clj
+--------------------------------------------------------------------------------
+:block/size :large
+:block/lang :clj
+:block/code
+
 (ns parens.router
   (:require [domkm.silk :as silk]
             [lambdaisland.uri :as uri]))
@@ -340,7 +370,9 @@ our own `router` namespace. It will also use `lambdaisland/uri` to parse the URL
 
     (seq hash-params)
     (str "#" (uri/map->query-string hash-params))))
-```
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 We can now remove the `extract-location` we wrote earlier and call
 `url->location` instead, e.g.:
@@ -386,7 +418,11 @@ Pass along the routes when rendering:
 
 Then update the render functions accordingly:
 
-```clj
+--------------------------------------------------------------------------------
+:block/size :large
+:block/lang :clj
+:block/code
+
 (ns parens.ui
   (:require [parens.router :as router]))
 
@@ -418,13 +454,19 @@ Then update the render functions accordingly:
 (defn render-page [state routes location]
   (let [f ,,,]
     (f state routes location)))
-```
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 And with that, we have bi-directional routing powered by a routing library. And
 the routing library is merely an implementation detail of the app's own router
 namespace. Win-win.
 
-## Using the URL for state transfer
+--------------------------------------------------------------------------------
+:block/title Using the URL for state transfer
+:block/id url-state-transfer
+:block/level 2
+:block/markdown
 
 URLs are great because they can address specific states in your user interface.
 By making some minor adjustments to the routing system, the URL can be used in
@@ -456,7 +498,8 @@ Next, we'll extract the body click handler to a separate function. In the
 `bootup` function:
 
 ```clj
-(js/document.body.addEventListener "click" #(route-click % el state router/routes))
+(js/document.body.addEventListener "click"
+  #(route-click % el state router/routes))
 ```
 
 And here's the updated code in a separate function:
@@ -478,7 +521,11 @@ And here's the updated code in a separate function:
 
 With this little tweak, pages can now use addressable state over the URL:
 
-```clj
+--------------------------------------------------------------------------------
+:block/size :large
+:block/lang :clj
+:block/code
+
 (defn render-episode [state routes location]
   (let [episode (get-episode state location)]
     [:main
@@ -497,7 +544,9 @@ With this little tweak, pages can now use addressable state over the URL:
      [:p
       [:a {:href (router/location->url routes {:location/page-id :pages/frontpage})}
        "Back to episode listing"]]]))
-```
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 Using the URL for state transfer only works for small pieces of data, but for
 things like toggling menus, sorting tables, etc, it works perfectly and even
@@ -508,7 +557,11 @@ allow component local state, this page/"component" has all the knowledge about
 the state it depends on. All it relies on is a little help from the central
 infrastructure, and it can "do" whatever it needs.
 
-## The router alias
+--------------------------------------------------------------------------------
+:block/title The router alias
+:block/id router-alias
+:block/level 2
+:block/markdown
 
 Making links that use the router is a little bit cumbersome:
 
@@ -564,7 +617,11 @@ elements - they no longer need to receive them explicitly.
 With explicit routing out of the way, the UI namespace no longer depends
 directly on the router, and `render-episode` is deliciously declarative:
 
-```clj
+--------------------------------------------------------------------------------
+:block/size :large
+:block/lang :clj
+:block/code
+
 (defn render-episode [state location]
   (let [episode (get-episode state location)]
     [:main
@@ -581,7 +638,9 @@ directly on the router, and `render-episode` is deliciously declarative:
      [:p
       [:ui/a {:ui/location {:location/page-id :pages/frontpage}}
        "Back to episode listing"]]]))
-```
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 Remember that aliases behave just like any other hiccup element, so you can add
 classes with `:ui/a.btn`, give it attributes, and so on.
