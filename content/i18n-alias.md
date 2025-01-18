@@ -1,14 +1,21 @@
+--------------------------------------------------------------------------------
 :page/uri /tutorials/i18n-alias/
 :page/title Alias powered i18n
 :page/kind :page.kind/tutorial
 :page/order 80
-:page/body
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 In this tutorial we will use [aliases](/aliases/) to introduce an i18n element
 to Replicant's hiccup dialect, by integrating the
 [m1p library](https://github.com/cjohansen/m1p).
 
-## m1p at a glance
+--------------------------------------------------------------------------------
+:block/title m1p at a glance
+:block/id m1p
+:block/level 2
+:block/markdown
 
 [m1p](https://github.com/cjohansen/m1p) is a data interpolation library that can
 be used as a DIY i18n toolkit. m1p dictionaries are maps from keywords to
@@ -36,7 +43,11 @@ Let's see an example:
 
 Since m1p dictionaries can contain arbitrary data, they can also contain hiccup.
 
-## The goal
+--------------------------------------------------------------------------------
+:block/title The goal
+:block/id goal
+:block/level 2
+:block/markdown
 
 The goal for this tutorial is to be able to make m1p-powered i18n lookups in
 hiccup, e.g.:
@@ -54,8 +65,11 @@ means we can make lookups without arguments like this:
 ```clj
 [:i18n/k ::status-message]
 ```
-
-## Implementing the alias
+--------------------------------------------------------------------------------
+:block/title Implementing the alias
+:block/id implementing-the-alias
+:block/level 2
+:block/markdown
 
 If you want to follow along, check out the [setup
 tag](https://github.com/cjohansen/replicant-m1p-tutorial/releases/tag/setup)
@@ -215,7 +229,11 @@ the functions that produce hiccup for the UI. It's worth noting that if the
 dictionaries change, Replicant will re-render the entire UI. This will only
 happen at runtime during development, so should be fine.
 
-## Implicit locale
+--------------------------------------------------------------------------------
+:block/title Implicit locale
+:block/id locale
+:block/level 2
+:block/markdown
 
 The solution we have so far uses an explicit locale. This is nice and
 predictable, if a little cumbersome. In practice you will end up passing the
@@ -261,7 +279,11 @@ means lost state, including in input fields). Whether or not this trade-off is
 acceptable is up to you. If you want to transition translations in your UI, you
 will have to work with an explicit locale.
 
-## But why?
+--------------------------------------------------------------------------------
+:block/title But why?
+:block/id why
+:block/level 2
+:block/markdown
 
 You might wonder what we gained from all this. You could just use m1p and call
 `lookup` everywhere we used the `i18n/k` alias. The benefits are pretty much the
@@ -274,7 +296,11 @@ same as the ones mentioned in the [aliases guide](/aliases/):
   "Welcome Christian!" is a very specific formulation. Being able to test this
   intention without getting hung up on the detais is a major benefit.
 
-## Final code-listing
+--------------------------------------------------------------------------------
+:block/title Final code-listing
+:block/id code-listing
+:block/level 2
+:block/markdown
 
 Here is a small UI that makes use of our newly created alias and the
 dictionaries. See the [tutorial
