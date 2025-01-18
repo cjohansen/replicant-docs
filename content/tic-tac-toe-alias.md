@@ -1,14 +1,21 @@
+--------------------------------------------------------------------------------
 :page/uri /tutorials/tic-tac-toe-alias/
 :page/title Tic-Tac-Toe with aliases
 :page/kind :page.kind/tutorial
 :page/order 70
-:page/body
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 In this tutorial, we will add [aliases](/aliases/) to the app we built in the
 [Tic Tac Toe tutorial](/tutorials/tic-tac-toe/), and hopefully learn a thing or
 two about how aliases work, and what they are good at.
 
-## Reusable UI elements with aliases
+--------------------------------------------------------------------------------
+:block/title Reusable UI elements with aliases
+:block/level 2
+:block/id reusable-ui-aliases
+:block/markdown
 
 We will start by converting the Tic Tac Toe UI elements to aliases. First up is
 the cell element, which currently looks like this:
@@ -145,7 +152,11 @@ arguments, we can't as easily map over the maps in each row. But here's the
 kicker: there is little to be gained from making an alias out of the board -- it
 doesn't really do anything. Let's leave it for now.
 
-## Converting business domain data to UI data
+--------------------------------------------------------------------------------
+:block/title Converting business domain data to UI data
+:block/level 2
+:block/id converting-aliases
+:block/markdown
 
 Let's have a look at the `game->ui-data` function that is responsible for
 translating the business domain (e.g. our game state) to generic UI data and the
@@ -218,7 +229,11 @@ into one:
       "Start over"])])
 ```
 
-## What's the point?
+--------------------------------------------------------------------------------
+:block/title What's the point?
+:block/level 2
+:block/id whats-the-point
+:block/markdown
 
 It seems we have now undone an abstraction (`game->ui-data`) that was presented
 as essential in keeping the business domain and the generic UI elements
@@ -228,7 +243,11 @@ The clue here is that the cell alias has increased the abstraction level of the
 hiccup. Thus, we can write tests against the hiccup now and still not be
 bothered by irrelevant rendering details. So let's have a look at the tests.
 
-### Testing with aliases
+--------------------------------------------------------------------------------
+:block/title Testing with aliases
+:block/level 3
+:block/id testing
+:block/markdown
 
 The first test for `game->ui-data` tested that the game was properly converted
 to something that could be rendered with the `board` element. We'll change this
@@ -406,14 +425,22 @@ This is very similar to the test we just wrote, just with a different count:
          9)))
 ```
 
-## Conclusion
+--------------------------------------------------------------------------------
+:block/title Conclusion
+:block/level 2
+:block/id conclusion
+:block/markdown
 
 The main difference between the original implementation and the new one is the
 merging of `game->ui-data` and `render-data`. This change really pokes at the
 benefit and difficulty of using aliases well, because it both improved the
 implementation and blurred the lines a little.
 
-### The benefits
+--------------------------------------------------------------------------------
+:block/title The benefits
+:block/level 3
+:block/id benefits
+:block/markdown
 
 The code is more direct: where there used to be two steps (convert domains, then
 render), there is now only one (render). Because of how aliases work, we gained
@@ -426,7 +453,11 @@ This allowed us to write tests directly for rendering, technically increasing
 coverage while reducing the number of representations -- without sacrificing
 generic UI elements.
 
-### Drawbacks
+--------------------------------------------------------------------------------
+:block/title Drawbacks
+:block/level 3
+:block/id drawbacks
+:block/markdown
 
 Aliases are used for two types of tasks: abstracting the UI elements and
 converting the business domain (game data) to generic UI data. This distinction
