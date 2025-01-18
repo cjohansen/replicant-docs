@@ -1,0 +1,11 @@
+{:deps {}
+ :dev-http {7777 ["resources/public"
+                  "dev-resources/public"
+                  "classpath:public"]}
+ :builds
+ {:client
+  {:target :browser
+   :modules {:app {:entries [repliweb.prod]}}
+   :dev {:output-dir "dev-resources/public/js/compiled"}
+   :release {:output-dir "dev-resources/public/js/compiled"}
+   :compiler-options {:source-map true}}}}
