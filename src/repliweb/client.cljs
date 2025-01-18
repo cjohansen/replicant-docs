@@ -15,10 +15,10 @@
   (set! (.. menu -style -top) (str (+ (:y (get-element-offset bar)) (.-offsetHeight bar)) "px"))
   (set! js/document.body.style.overflow "hidden"))
 
-(defn close-menu [menu]
+(defn close-menu [_]
   (set! js/document.body.style.overflow "scroll"))
 
-(defn position-menu [e trigger]
+(defn position-menu [^js e trigger]
   (when-let [menu (.-target e)]
     (if (= "open" (.-newState e))
       (open-menu menu (.-parentNode trigger))
