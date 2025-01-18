@@ -1,8 +1,11 @@
+--------------------------------------------------------------------------------
 :page/uri /tutorials/network/
 :page/title Backend APIs and network
 :page/kind :page.kind/tutorial
 :page/order 40
-:page/body
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 Most frontend apps need to talk to a backend API over the network to do useful
 things. If you're coming from a component-based framework, you may have been
@@ -22,7 +25,11 @@ These in-depth tutorials give you a system to build on. The quick example
 that follows in this introduction will demonstrate the basics of networking in a
 [top-down](/top-down/) rendered app, but will not scale in any meaningful way.
 
-## HTTP requests in a top-down world
+--------------------------------------------------------------------------------
+:block/title HTTP requests in a top-down world
+:block/level 2
+:block/id http-top-down
+:block/markdown
 
 The setup for this tutorial is based on [the state management with an atom
 tutorial](/tutorials/state-atom/), including the routing extension and a small
@@ -146,7 +153,11 @@ You can do this in something like
 just like we did in [the Tic Tac Toe tutorial](/tutorials/tic-tac-toe/). You can
 also do it in a unit test. Isn't functional programming great?
 
-## Next step
+--------------------------------------------------------------------------------
+:block/title Next step
+:block/level 2
+:block/id next-step
+:block/markdown
 
 So that's it: a very quick and dirty way to add an HTTP request to a top-down
 rendered app. But our solution leaves a lot to be desired: the action is
