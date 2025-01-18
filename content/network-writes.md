@@ -1,8 +1,11 @@
+--------------------------------------------------------------------------------
 :page/uri /tutorials/network-writes/
 :page/title Data-driven commands
 :page/kind :page.kind/tutorial
 :page/order 60
-:page/body
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 In this second part of the [networking tutorial](/tutorials/network/), we will
 build a data-driven system for writing data over the network.
@@ -12,7 +15,11 @@ off, and the setup is the code we wrote there. The starting point is available
 as [a branch on
 Github](https://github.com/cjohansen/replicant-networking/tree/network-reads).
 
-## Design goal
+--------------------------------------------------------------------------------
+:block/title Design goal
+:block/level 2
+:block/id design
+:block/markdown
 
 To perform writes over the network, we will follow a very similar design to the
 one we developed when reading over the network. Reading and writing really is
@@ -36,7 +43,11 @@ The data structure for commands is very similar to the one we made for queries:
  :command/data {:todo/title "Implement commands"}}
 ```
 
-## Answering questions
+--------------------------------------------------------------------------------
+:block/title Answering questions
+:block/level 2
+:block/id questions
+:block/markdown
 
 Just like we did for queries, we'll keep a log for commands, and write a few
 functions to answer some important questions. The details of these are very
@@ -54,7 +65,11 @@ This test sums up the gist of it:
            (command/issued? command)))))
 ```
 
-## Making HTTP requests
+--------------------------------------------------------------------------------
+:block/title Making HTTP requests
+:block/level 2
+:block/id http-requests
+:block/markdown
 
 Once again, refer to [the query
 tutorial](/tutorials/network-reads/#http-requests) for a discussion about how to
@@ -101,10 +116,12 @@ from a function that is itself called from `execute-actions`:
       (.then #(.text %))
       (.then reader/read-string)
       (.then (fn [res]
-               (swap! store command/receive-response (js/Date.) command res)
+               (swap! store command/receive-response
+                            (js/Date.) command res)
                (when on-success
                  (execute-actions store on-success))))
-      (.catch #(swap! store command/receive-response (js/Date.) command {:error (.-message %)}))))
+      (.catch #(swap! store command/receive-response
+                            (js/Date.) command {:error (.-message %)}))))
 
 (defn execute-actions [store actions]
   (doseq [[action & args] actions]
@@ -115,7 +132,11 @@ from a function that is itself called from `execute-actions`:
       (println "Unknown action" action "with arguments" args))))
 ```
 
-## Issuing commands
+--------------------------------------------------------------------------------
+:block/title Issuing commands
+:block/level 2
+:block/id issuing-commands
+:block/markdown
 
 With our new command action in place, we can make todo items togglable on the
 frontpage:
@@ -168,7 +189,11 @@ We can now click the box/checkmark next to each item to toggle them back and
 forth. And just like with queries, we can now add new commands to our frontend
 without writing a single line of imperative code. Pretty nice.
 
-## Issuing commands with user input
+--------------------------------------------------------------------------------
+:block/title Issuing commands with user input
+:block/level 2
+:block/id issuing-commands-user-input
+:block/markdown
 
 As a final task, we will add a input field to input new todos in. For this to
 work we need to grab the text from the input and include it in a command.
