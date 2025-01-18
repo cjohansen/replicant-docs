@@ -59,7 +59,7 @@
       [:div.p-4.bg-base-200.items-center.flex.flex-row.gap-4
        [:button {:popovertarget "menu"}
         (icons/render :phosphor.regular/list {:size 24})]
-       [:div.bg-base-200.ml-0.mb-0.px-0 {:popover "auto" :id "menu"}
+       [:div.bg-base-200.m-0.px-0.absolute.h-full {:popover "auto" :id "menu"}
         (menu db page)]
        (page-kind->text (:page/kind page)) ": " (:page/title page)]
       [:main.mt-8.mb-16.mx-4.md:mx-0.fullscreen body]))))

@@ -1,7 +1,7 @@
 (ns repliweb.dev
-  (:require [repliweb.demos.main :as main]))
+  (:require [repliweb.client :as main]))
 
-(defonce ^:export kicking-out-the-jams
+(def ^:export kicking-out-the-jams
   (main/main))
 
 (comment
