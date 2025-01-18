@@ -7,7 +7,7 @@
 --------------------------------------------------------------------------------
 :block/markdown
 
-In this tutorial we will use [aliases](/aliases/) to introduce an i18n element
+In this tutorial we will use [aliases](/alias/) to introduce an i18n element
 to Replicant's hiccup dialect, by integrating the
 [m1p library](https://github.com/cjohansen/m1p).
 
@@ -173,7 +173,7 @@ with user-provided dictionaries. But we probably don't want to pass the
 dictionaries around the entire UI -- after all, dictionaries are static data at
 runtime.
 
-Static data is exactly what Replicant's [alias data](/aliases/#alias-data) was
+Static data is exactly what Replicant's [alias data](/alias/#alias-data) was
 made to support. Let's make an adjustment to the alias definition:
 
 ```clj
@@ -287,11 +287,11 @@ will have to work with an explicit locale.
 
 You might wonder what we gained from all this. You could just use m1p and call
 `lookup` everywhere we used the `i18n/k` alias. The benefits are pretty much the
-same as the ones mentioned in the [aliases guide](/aliases/):
+same as the ones mentioned in the [aliases guide](/alias/):
 
-- [Late bound](/aliases/#late-bound): The i18n alias only re-evaluates whenever
+- [Late bound](/alias/#late-bound): The i18n alias only re-evaluates whenever
   you change the key or one of its parameters.
-- [Raised abstraction level](/aliases/#abstraction-level): `[i18n/k user
+- [Raised abstraction level](/alias/#abstraction-level): `[i18n/k user
   :user/greeting]` communicates the intention of welcoming the user, while
   "Welcome Christian!" is a very specific formulation. Being able to test this
   intention without getting hung up on the detais is a major benefit.

@@ -8,8 +8,8 @@
 :block/markdown
 
 In this tutorial, we will build a sortable table, and eventually extract a
-reusable data-driven abstraction as a Replicant [alias](/aliases/). The goal is
-to create an abstraction that deals with the details of getting a dataset into a
+reusable data-driven abstraction as a Replicant [alias](/alias/). The goal is to
+create an abstraction that deals with the details of getting a dataset into a
 table and sorting it, without restricting your options for formatting and visual
 presentation.
 

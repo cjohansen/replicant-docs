@@ -19,7 +19,7 @@ to an API. If you have the time and patience for it, I strongly recommend
 skipping the rest of this introduction and reading the in-depth ones instead:
 
 - [A data-driven system for network reads](/tutorials/network-reads/)
-- [A data-driven system for network writes](/tutorial/network-write/)
+- [A data-driven system for network writes](/tutorials/network-writes/)
 
 These in-depth tutorials give you a system to build on. The quick example
 that follows in this introduction will demonstrate the basics of networking in a

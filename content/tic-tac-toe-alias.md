@@ -7,9 +7,9 @@
 --------------------------------------------------------------------------------
 :block/markdown
 
-In this tutorial, we will add [aliases](/aliases/) to the app we built in the
-[Tic Tac Toe tutorial](/tutorials/tic-tac-toe/), and hopefully learn a thing or
-two about how aliases work, and what they are good at.
+In this tutorial, we will add [aliases](/alias/) to the app we built in the [Tic
+Tac Toe tutorial](/tutorials/tic-tac-toe/), and hopefully learn a thing or two
+about how aliases work, and what they are good at.
 
 --------------------------------------------------------------------------------
 :block/title Reusable UI elements with aliases

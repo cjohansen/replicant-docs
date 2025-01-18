@@ -9,7 +9,7 @@
 
 (comment
   (set! *print-namespace-maps* false)
-  (export/export! (repliweb/create-app :prod))
+  (export/export (repliweb/create-app :prod))
   )
 
 (comment ;; s-:

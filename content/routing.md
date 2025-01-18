@@ -571,8 +571,8 @@ Making links that use the router is a little bit cumbersome:
  "Back to the frontpage"]
 ```
 
-As a final touch, we will introduce a routing [alias](/aliases/) that can
-[side-chaine the route data](/aliases/#alias-data) to reduce this down to:
+As a final touch, we will introduce a routing [alias](/alias/) that can
+[side-chaine the route data](/alias/#alias-data) to reduce this down to:
 
 ```clj
 [:ui/a {:ui/location {:location/page-id :pages/frontpage}}
@@ -652,5 +652,5 @@ github](https://github.com/cjohansen/replicant-routing).
 
 If you have added state management to your app, you might be wondering how to
 combine routing and state management. The details of doing this is covered in
-the state management tutorials: [with an atom](/tutorial/state-atom/#routing) or
-[with Datascript](/tutorial/datascript/#routing).
+the state management tutorials: [with an atom](/tutorials/state-atom/#routing) or
+[with Datascript](/tutorials/state-datascript/#routing).

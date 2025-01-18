@@ -607,7 +607,7 @@ exactly like `:replicant/on-render`, except they only trigger on their
 respective life-cycle events.
 
 Like event handlers, life-cycle hooks can be expressed as data see the [detailed
-guide on life-cycle hooks](/life-cycle/).
+guide on life-cycle hooks](/life-cycle-hooks/).
 
 <a id="mounting-unmounting"></a>
 ### Mounting and unmounting

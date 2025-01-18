@@ -325,8 +325,8 @@ handler:
 With this change, clicking the scene in Portfolio will toggle the x on and off.
 In order to add the transition, we can set the opacity to 1 and add a transition
 on `.cell-content`, and add another class that sets the opacity to 0. We can use
-Replicant's [mounting/unmounting attributes](#mounting-unmounting) to trigger
-the transition on mount (and unmount, just for the sake of the Portfolio
+Replicant's [mounting/unmounting attributes](/hiccup/#mounting-unmounting) to
+trigger the transition on mount (and unmount, just for the sake of the Portfolio
 demonstration.
 
 ```css

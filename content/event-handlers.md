@@ -102,7 +102,7 @@ In the above example, `:replicant/trigger` was checked before dispatching the
 action. This key can have one of two values:
 
 - `:replicant.trigger/dom-event` for DOM events
-- `:replicant.trigger/life-cycle` for [life-cycle hooks](/life-cycle/)
+- `:replicant.trigger/life-cycle` for [life-cycle hooks](/life-cycle-hooks/)
 
 When it has the value `:replicant.trigger/life-cycle`, the dispatch function
 will only be called with one argument.
