@@ -130,7 +130,11 @@
                     :class ["bg-base-100"]})]))
    (when (:block/code block)
      [:div.section-md.mx-auto.my-6
+      (cond-> {}
+        (and (nil? (:block/markdown block))
+             (:block/id block)) (assoc :id (:block/id block)))
       (showcase/render-code {::showcase/lang (:block/lang block)
+                             ::showcase/title (:block/code-title block)
                              :class ["bg-base-200"]}
         [(:block/code block)])])))
 

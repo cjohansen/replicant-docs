@@ -47,7 +47,7 @@
                              :paths [#"\.png$"
                                      #"\.jpg$"
                                      #"\.svg$"
-                                     ;;#"\.gif$"
+                                     #"\.gif$"
                                      #"\.ico$"]}]
 
            :powerpack/build-dir "target/site"}

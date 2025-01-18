@@ -1,8 +1,11 @@
+--------------------------------------------------------------------------------
 :page/uri /tutorials/tic-tac-toe/
 :page/title Tic-Tac-Toe
 :page/kind :page.kind/tutorial
 :page/order 0
-:page/body
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 In this tutorial we will implement the game of Tic-Tac-Toe from scratch. It will
 teach you the essentials of working with Replicant, and show you how to go from
@@ -18,7 +21,11 @@ specifically. This is not by accident: Replicant is merely a rendering library,
 so you don't really "build apps with Replicant" like you would with e.g. React.
 You build an app your way and render it with Replicant.
 
-## Bootstrapping
+--------------------------------------------------------------------------------
+:block/title Bootstrapping
+:block/id bootstrapping
+:block/level 2
+:block/markdown
 
 We'll start by getting a ClojureScript runtime going. We will use
 [tools.deps](https://github.com/clojure/tools.deps) to manage dependencies and
@@ -29,20 +36,25 @@ blocks.
 
 Create a new directory and add the following files:
 
-### `deps.edn`
+--------------------------------------------------------------------------------
+:block/id deps-edn
+:block/code-title deps.edn
+:block/lang :clj
+:block/code
 
-```clj
 {:paths ["src" "test" "portfolio" "resources"]
  :deps {org.clojure/clojure {:mvn/version "1.12.0"}
         thheller/shadow-cljs {:mvn/version "2.28.18"}
         no.cjohansen/portfolio {:mvn/version "2024.03.18"}
         no.cjohansen/replicant {:git/url "https://github.com/cjohansen/replicant.git"
                                 :sha "ac4a4741f58c62ee5386b9ca476cc30fa1a6ba44"}}}
-```
 
-### `shadow-cljs.edn`
+--------------------------------------------------------------------------------
+:block/id shadow-cljs-edn
+:block/code-title shadow-cljs.edn
+:block/lang :clj
+:block/code
 
-```clj
 {:deps {}
  :dev-http {8080 ["resources/public" "classpath:public"]}
  :builds
@@ -55,15 +67,23 @@ Create a new directory and add the following files:
   {:target :browser
    :modules {:main {:init-fn tic-tac-toe.scenes/main}}
    :dev {:output-dir "resources/public/portfolio-js"}}}}
-```
 
-### `resources/public/styles.css`
+--------------------------------------------------------------------------------
+:block/id styles-css
+:block/code-title resources/public/styles.css
+:block/lang :css
+:block/code
 
-This file can be empty for now, just make sure it exists.
+/**
+ * This file can be empty for now, just make sure it exists.
+ */
 
-### `resources/public/index.html`
+--------------------------------------------------------------------------------
+:block/id index-html
+:block/code-title resources/public/index.html
+:block/lang :html
+:block/code
 
-```html
 <!DOCTYPE html>
 <html>
   <head>
@@ -75,11 +95,13 @@ This file can be empty for now, just make sure it exists.
     <script src="/app-js/main.js"></script>
   </body>
 </html>
-```
 
-### `resources/public/portfolio.html`
+--------------------------------------------------------------------------------
+:block/id portfolio-html
+:block/code-title resources/public/portfolio.html
+:block/lang :html
+:block/code
 
-```html
 <!DOCTYPE html>
 <html>
   <head>
@@ -89,20 +111,24 @@ This file can be empty for now, just make sure it exists.
     <script src="/portfolio-js/main.js"></script>
   </body>
 </html>
-```
 
-### `src/tic_tac_toe/core.cljs`
+--------------------------------------------------------------------------------
+:block/id core-cljs
+:block/code-title src/tic_tac_toe/core.cljs
+:block/lang :clj
+:block/code
 
-```clj
 (ns tic-tac-toe.core)
 
 (defn main []
   )
-```
 
-### `portfolio/tic_tac_toe/scenes.cljs`
+--------------------------------------------------------------------------------
+:block/id scenes-cljs
+:block/code-title portfolio/tic_tac_toe/scenes.cljs
+:block/lang :clj
+:block/code
 
-```clj
 (ns tic-tac-toe.scenes
   (:require [portfolio.ui :as portfolio]))
 
@@ -112,7 +138,9 @@ This file can be empty for now, just make sure it exists.
     {:css-paths ["/styles.css"]
      :viewport/defaults
      {:background/background-color "#fdeddd"}}}))
-```
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 ### Start the development server
 
@@ -131,7 +159,11 @@ npx shadow-cljs watch app portfolio
 When this says `Build completed` you should see the Portfolio welcome page at
 [http://localhost:8080/portfolio.html](http://localhost:8080/portfolio.html).
 
-## The UI components
+--------------------------------------------------------------------------------
+:block/title The UI components
+:block/id ui-components
+:block/level 2
+:block/markdown
 
 Starting a new project from scratch can be daunting. There are so many things to
 do, where do we start? I like to start with the building blocks, which gives us
@@ -204,7 +236,7 @@ be.
 
 ![Empty cell](/images/tic-tac-toe/empty-cell.png)
 
-Next ut we'll put the x and o in the cell. Start by adding the symbol svgs to
+Next up we'll put the x and o in the cell. Start by adding the symbol svgs to
 `src/tic_tac_toe/ui.cljc`:
 
 ```clj
@@ -323,9 +355,7 @@ Add the mounting and unmounting extra class like so:
 
 That's all it takes to smoothly fade in the symbol on click:
 
-Cell with transition
-
-/images/tic-tac-toe/toggle-transition.gif
+![Cell with transition](/images/tic-tac-toe/toggle-transition.gif)
 
 When the game is over, we want to dim out all the cells, except the winning
 line, which we'll highlight. Let's add two more examples:
@@ -429,8 +459,8 @@ columns:
 ```
 
 Flexbox will do all the heavy lifting for the board. We'll also add a gradient
-background, for a smashing look. Since the board is square, setting its max
-width to `80vh` means it'll never be so long that it requires scrolling (its max
+background for a smashing look. Since the board is square, setting its max width
+to `80vh` means it'll never be so long that it requires scrolling (its max
 height will also effectively be 80% of the browser height).
 
 ```css
@@ -492,7 +522,11 @@ finished game, where the winning line is highlighted:
 
 And that's pretty much all the UI elements we need for the essential game play.
 
-## The game engine
+--------------------------------------------------------------------------------
+:block/title The game engine
+:block/level 2
+:block/id game-engine
+:block/markdown
 
 To breathe life into the UI elements, we need to flesh out a data model and
 implement the rules of the game. We don't want to be bogged down in details
@@ -500,8 +534,8 @@ about rounded corners and transitions while implementing the nitty gritty of
 deciding if there's a winner, so we'll do this with just pure data.
 
 We will use tests in place of Portfolio to keep a tight feedback loop. We'll
-start by creating a game expect it to select x for the next (e.g. first) player.
-Open `test/tic_tac_toe/game_test.clj` and add the following:
+start by creating a game and expect it to select x for the next (e.g. first)
+player. Open `test/tic_tac_toe/game_test.clj` and add the following:
 
 ```clj
 (ns tic-tac-toe.game-test
@@ -606,7 +640,11 @@ We can pass this test with a check against the board size:
           (assoc :next-player (next-player player))))))
 ```
 
-## Converting domain data to UI data
+--------------------------------------------------------------------------------
+:block/title Converting domain data to UI data
+:block/level 2
+:block/id business-to-ui
+:block/markdown
 
 At this point we have a playable game, even if it can't yet decide when the game
 is over, or whether there is a winner. If we connect the game engine to the UI
@@ -706,7 +744,11 @@ available to tac:
           :on-click [:tic y x]})))})
 ```
 
-## Wiring
+--------------------------------------------------------------------------------
+:block/title Wiring
+:block/level 2
+:block/id wiring
+:block/markdown
 
 With all the pieces in place, we can wire the whole thing together. Step one is
 to create a game and store it in an atom. When a player makes a move, we will
@@ -791,7 +833,11 @@ do:
 With this change in place, you can click the cells to mark them with alternating
 x's and o's. Success!
 
-## Epilogue: Declaring the winner
+--------------------------------------------------------------------------------
+:block/title Epilogue: Declaring the winner
+:block/level 2
+:block/id declaring-a-winner
+:block/markdown
 
 The UI elements we wrote can dim and highlight cells, a feature we planned to
 use to showcase the winner. In order to use these, we'll need the game engine to
