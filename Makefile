@@ -7,14 +7,17 @@ resources/fontawesome-icons:
 node_modules:
 	npm install
 
+resources/public/tailwind.css: resources/fontawesome-icons node_modules
+	npx tailwindcss -i ./src/main.css -o ./resources/public/tailwind.css
+
 tailwind: resources/fontawesome-icons node_modules
 	npx tailwindcss -i ./src/main.css -o ./resources/public/tailwind.css --watch
 
-target/public/js/compiled/app.js: resources/fontawesome-icons
-	clojure -M:build -m figwheel.main -bo prod
+target/public/js/compiled/app.js: resources/fontawesome-icons node_modules
+	npx shadow-cljs release client
 
-target/site: target/public/js/compiled/app.js
-	clojure -X:dev:build
+target/site: target/public/js/compiled/app.js resources/public/tailwind.css
+	clojure -X:build
 
 clean:
 	rm -fr target resources/public/js dev-resources/public/js

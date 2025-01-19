@@ -1,6 +1,5 @@
 (ns repliweb.dev
-  (:require [datomic-type-extensions.api :as d]
-            [powerpack.dev :as dev]
+  (:require [powerpack.dev :as dev]
             [powerpack.export :as export]
             [repliweb.core :as repliweb]))
 
