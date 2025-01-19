@@ -1,5 +1,6 @@
 (ns repliweb.elements.showcase
-  (:require [replicant.alias :refer [defalias]]))
+  (:require [replicant.alias :refer [defalias]]
+            [replicant.hiccup :as hiccup]))
 
 (def styles
   {:gradient ["bg-base-200" "lg:bg-gradient-to-r" "lg:from-base-100" "lg:to-base-300"]
@@ -10,7 +11,12 @@
    (-> (select-keys attrs (->> (keys attrs)
                                (filter (comp nil? namespace))))
        (update :class concat (get styles (::style attrs))))
-   children])
+   (mapv
+    (fn [child]
+      (cond-> child
+        (not= :pre.codehilite (first child))
+        (hiccup/update-attrs update :class concat #{"flex" "flex-col" "justify-center"})))
+    children)])
 
 (defn ^{:indent 1} render-code [attrs code]
   [:pre.codehilite attrs
