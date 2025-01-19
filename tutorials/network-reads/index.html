@@ -1,0 +1,546 @@
+<!DOCTYPE html><html data-theme="dark" lang="en" prefix="og: http://ogp.me/ns#"><head><title>Data-driven queries</title><meta name="theme-color" content="#202020"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta property="og:title" content="Data-driven queries"><link href="/a00f586d252b/favicon.ico" rel="icon" type="image/x-icon"><link href="/a00f586d252b/favicon.ico" rel="shortcut icon" type="image/ico"><link href="/a00f586d252b/favicon.ico" rel="shortcut icon" type="image/x-icon"><link href="/a00f586d252b/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"><link href="/285191ad6a81/apple-touch-icon.png" rel="icon" type="image/png" sizes="180x180"><link rel="stylesheet" href="/bundles/2e8dfb3c3384/styles.css"></head><body><div class="flex justify-between p-4 items-center"><div class="w-8"><a href="/"><svg style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2" viewBox="0 0 1080 1080" xml:space="preserve"><path d="M876.452 152.555c136.818 12.348 195.668 81.688 192.708 196.198h-87.197c1.569-66.295-16.004-119.066-52.748-157.356-14.398-15.003-31.913-27.882-52.763-38.353v-.489Zm98.715 270.164h87.213c-9.48 55.52-38.53 92.323-91.749 108.344 55.789 39.542 76.849 90.867 66.189 152.957l-44.388 184.981h-86.379l42.751-178.151c.149-.622.278-1.249.386-1.879 9.983-58.16-3.188-108.49-41.722-150.197 36.949-23.921 58.758-61.19 67.282-111.131a29.34 29.34 0 0 0 .417-4.924Z" fill="#4fb348"></path><path d="M757.149 152.309c138.837 11.646 198.514 81.149 195.537 196.444h-88.511c1.643-69.4-17.651-123.977-58.046-162.647-13.679-13.096-29.954-24.431-48.98-33.797Zm101.023 270.41h87.726c-9.475 55.52-38.529 92.323-91.745 108.344 55.785 39.542 76.848 90.867 66.191 152.957l-44.391 184.981h-87.689l42.752-178.151c.149-.622.278-1.249.386-1.879 9.983-58.16-3.188-108.49-41.722-150.197 36.948-23.921 58.758-61.19 67.281-111.131.153-.894.263-1.79.332-2.685h.506c.126-.747.25-1.493.373-2.239Z" fill="#00a29a"></path><path d="M76.208 847.157c-36.752-5.562-64.959-37.32-64.959-75.614 0-42.21 34.269-76.478 76.478-76.478a76.45 76.45 0 0 1 20.676 2.832c32.178 9.028 55.802 38.6 55.802 73.646 0 42.209-34.268 76.478-76.478 76.478-3.915 0-7.761-.295-11.519-.864Zm56.524-262.05a77.324 77.324 0 0 1-6.804.299c-42.209 0-76.478-34.268-76.478-76.478 0-42.209 34.269-76.478 76.478-76.478 13.663 0 26.494 3.591 37.6 9.879 23.204 13.139 38.878 38.053 38.878 66.599 0 39.917-30.647 72.732-69.674 76.179Zm-18.148 84.136 11.77-54.569c58.168-.23 105.321-47.525 105.321-105.746 0-35.555-17.586-67.035-44.526-86.209H828.11c-9.475 55.52-38.529 92.323-91.745 108.344 55.784 39.542 76.848 90.867 66.191 152.957l-44.391 184.981H539.756l34.836-151.189c13.135-57.004-4.455-118.062-91.882-118.062H353.796l-71.217 274.677H112.245c46.557-11.07 81.229-52.96 81.229-102.884 0-49.085-33.515-90.403-78.89-102.3Zm-1.803-330.67 117.483-187.485h389.845c152.584 6.696 217.9 77.175 214.789 197.665H178.595v-10.18h-65.814Z" fill="#0086ff"></path></svg></a></div><div class="flex items-center gap-4 text-sm"><a class="hover:underline" href="/learn/">Learn</a><a class="hover:underline" href="https://cljdoc.org/d/no.cjohansen/replicant/">API Reference</a><div class="w-6"><a href="https://clojurians.slack.com/archives/C06JZ4X334N" title="Replicant on the Clojurians Slack"><svg style="display: inline-block; line-height: 1;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><path d="M80,56h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V80A24,24,0,0,1,80,56Z" transform="translate(184 24) rotate(90)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M128,80H104A24,24,0,0,1,80,56h0a24,24,0,0,1,24-24h0a24,24,0,0,1,24,24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M152,32h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V56a24,24,0,0,1,24-24Z" transform="translate(304 160) rotate(-180)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M176,128V104a24,24,0,0,1,24-24h0a24,24,0,0,1,24,24h0a24,24,0,0,1-24,24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M176,104h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V128a24,24,0,0,1,24-24Z" transform="translate(24 328) rotate(-90)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M128,176h24a24,24,0,0,1,24,24h0a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M104,128h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V152a24,24,0,0,1,24-24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M80,128v24a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24h0a24,24,0,0,1,24-24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path></svg></a></div><div class="w-6"><a href="https://github.com/cjohansen/replicant" title="Replicant on Github"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg></a></div></div></div><div class="p-4 bg-base-200 items-center flex flex-row gap-4 sticky top-0 z-10"><button popovertarget="menu"><svg style="display: inline-block; line-height: 1; height: 24; width: 24;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><line stroke="currentColor" fill="none" stroke-linejoin="round" y1="128" stroke-linecap="round" stroke-width="16" x1="40" y2="128" x2="216"></line><line stroke="currentColor" fill="none" stroke-linejoin="round" y1="64" stroke-linecap="round" stroke-width="16" x1="40" y2="64" x2="216"></line><line stroke="currentColor" fill="none" stroke-linejoin="round" y1="192" stroke-linecap="round" stroke-width="16" x1="40" y2="192" x2="216"></line></svg></button><div id="menu" class="bg-base-200 m-0 px-0 absolute h-full" popover="auto"><aside class="basis-60 shrink-0"><h3 class="text-whitish mb-2 ml-4">Guides</h3><nav class="mb-8"><ol><li><a class="menu-item" href="/hiccup/">Hiccup<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/event-handlers/">Event handlers<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/life-cycle-hooks/">Life-cycle hooks<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/keys/">Keys<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/nil/">Explicit nils<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/alias/">Aliases<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li></ol></nav><h3 class="text-whitish mb-2 ml-4">Tutorials</h3><nav class="mb-8"><ol><li><a class="menu-item" href="/tutorials/tic-tac-toe/">Tic-Tac-Toe<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/routing/">Data-driven routing<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/state-atom/">State management with atoms<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/state-datascript/">State management with Datascript<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/network/">Backend APIs and network<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><span class="menu-item menu-item-selected">Data-driven queries<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></span></li><li><a class="menu-item" href="/tutorials/network-writes/">Data-driven commands<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/tic-tac-toe-alias/">Tic-Tac-Toe with aliases<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/i18n-alias/">Alias powered i18n<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/sortable-table/">A sortable table alias<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li></ol></nav><h3 class="text-whitish mb-2 ml-4">Articles</h3><nav class="mb-8"><ol><li><a class="menu-item" href="/top-down/">Top-down rendering<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/learn/">Learn Replicant<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li></ol></nav></aside></div>Tutorial: Data-driven queries</div><main class="mt-8 mb-16 mx-4 md:mx-0 fullscreen"><h1 class="h1 dark:text-whitish section-md">Data-driven queries</h1><div class="prose mt-4 section-md"><p>In this second part of the <a href="/tutorials/network/">networking tutorial</a>, we will
+build a data-driven system for reading data over the network.</p>
+<p>The setup for this tutorial is based on <a href="/tutorials/state-atom/">the state management with an atom
+tutorial</a>, including the routing extension and a small
+backend. If you want to follow along, grab <a href="https://github.com/cjohansen/replicant-networking/tree/setup">the setup on
+Github</a>, and
+follow the README to get running.</p>
+</div><div class="prose mt-4 section-md"><h2 id="design" class="h2 section-md"><a class="group relative" href="#design"><span class="absolute -left-4 group-hover:visible invisible">§ </span>The design</a></h2><p>To build a declarative, data-driven solution for performing reads over the
+network our pure rendering functions should be able to answer questions like:</p>
+<ul>
+<li>Have we requested this piece of data? How long ago?</li>
+<li>Is the data currently loading?</li>
+<li>Is the data available?</li>
+<li>Is the available data stale? (e.g. we have requested it again, but not
+received a response)</li>
+<li>Did we fail to fetch the data? Why?</li>
+</ul>
+<p>If we can come up with a data structure that answers these questions and that is
+available to the render function, we should be able to render spinners, error
+messages and the data itself whenever appropriate.</p>
+<p>We must be able to ask the questions above separately for the request for all
+users and the request for a specific document. In other words, we must be able
+to address our reads.</p>
+<p>We will call a network read a query, and represent it with a map:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">{</span><span class="ss">:query/kind</span> <span class="ss">:query/user</span>
+ <span class="ss">:query/data</span> <span class="p">{</span><span class="ss">:user-id</span> <span class="s">"alice"</span><span class="p">}}</span>
+</code></pre>
+<p>This gives us a concrete way to talk about the various requests the frontend
+makes without HTTP details in the rendering code. We will look at how this data
+structure becomes an HTTP request later.</p>
+<p>The query map also gives us a way to address queries to ask the questions above:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">query/loading?</span> <span class="nv">state</span> <span class="p">{</span><span class="ss">:query/kind</span> <span class="ss">:query/todo-items</span><span class="p">})</span>
+<span class="c1">;;=&gt; true</span>
+</code></pre>
+<p>To answer the questions above, we will keep a query log keyed by the query maps:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">{</span><span class="ss">:query/log</span>
+ <span class="p">{{</span><span class="ss">:query/kind</span> <span class="ss">:query/user</span>
+   <span class="ss">:query/data</span> <span class="p">{</span><span class="ss">:user-id</span> <span class="s">"alice"</span><span class="p">}}</span>                             <span class="c1">;; 1</span>
+  <span class="p">[{</span><span class="ss">:query/status</span> <span class="ss">:query.status/success</span>                        <span class="c1">;; 2</span>
+    <span class="ss">:query/result</span> <span class="p">{</span><span class="ss">:user/id</span> <span class="s">"alice"</span>                            <span class="c1">;; 3</span>
+                   <span class="ss">:user/given-name</span> <span class="s">"Alice"</span>
+                   <span class="ss">:user/family-name</span> <span class="s">"Johnson"</span>
+                   <span class="ss">:user/email</span> <span class="s">"alice.johnson@acme-corp.com"</span><span class="p">}</span>
+    <span class="ss">:query/user-time</span> <span class="o">#</span><span class="nv">inst</span> <span class="s">"2024-12-31T09:29:23.307-00:00"</span><span class="p">}</span>    <span class="c1">;; 4</span>
+   <span class="p">{</span><span class="ss">:query/status</span> <span class="ss">:query.status/loading</span>                        <span class="c1">;; 5</span>
+    <span class="ss">:query/user-time</span> <span class="o">#</span><span class="nv">inst</span> <span class="s">"2024-12-31T09:29:23.142-00:00"</span><span class="p">}]}}</span>
+</code></pre>
+<ol>
+<li>The entire query map is used as key in the query log. This looks a little
+weird, but will be very handy in code.</li>
+<li>The log is in reverse order with the latest event first. Since the log uses
+browser memory, we can’t allow it to grow infinitely. The reverse order makes
+it easy to truncate the log with <code>take-while</code> or similar.</li>
+<li>When the query was successful, the log contains the resulting data.</li>
+<li>Each log entry has the browser time.</li>
+<li>The entry describing our initial request.</li>
+</ol>
+<p>You might be wondering why we’re only discussing data structures, and not HTTP
+mechanics in a tutorial about networking. A good data model is the key to an
+effective design. We will add the HTTP mechanics at the very end.</p>
+</div><div class="prose mt-4 section-md"><h2 id="questions" class="h2 section-md"><a class="group relative" href="#questions"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Answering questions</a></h2><p>With the data model in place we can write some pure functions that updates it
+and use it to answer questions. We can write some tests for this logic.</p>
+<p>When a query has just been sent, we expect it to be loading:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">toil.query-test</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">clojure.test</span> <span class="ss">:refer</span> <span class="p">[</span><span class="nv">deftest</span> <span class="nv">is</span> <span class="nv">testing</span><span class="p">]]</span>
+            <span class="p">[</span><span class="nv">toil.query</span> <span class="ss">:as</span> <span class="nv">query</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="k">def </span><span class="nv">query</span> <span class="p">{</span><span class="ss">:query/kind</span> <span class="ss">:query/todo-items</span><span class="p">})</span>
+
+<span class="p">(</span><span class="nf">deftest</span> <span class="nv">decisions-test</span>
+  <span class="p">(</span><span class="nf">testing</span> <span class="s">"Sends request"</span>
+    <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">true? </span><span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">query/send-request</span> <span class="p">{}</span> <span class="o">#</span><span class="nv">inst</span> <span class="s">"2025-01-02T06:44:13"</span> <span class="nv">query</span><span class="p">)</span>
+                   <span class="p">(</span><span class="nf">query/loading?</span> <span class="nv">query</span><span class="p">))))))</span>
+</code></pre>
+<p>We pass in the time to use as <code>now</code> so the function can remain pure. To pass
+this test we will need to both update the log and investigate its status:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">toil.query</span><span class="p">)</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">add-log-entry</span> <span class="p">[</span><span class="nv">log</span> <span class="nv">entry</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">cons </span><span class="nv">entry</span> <span class="nv">log</span><span class="p">))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">send-request</span> <span class="p">[</span><span class="nv">state</span> <span class="nv">now</span> <span class="nv">query</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">update-in</span> <span class="nv">state</span> <span class="p">[</span><span class="ss">::log</span> <span class="nv">query</span><span class="p">]</span> <span class="nv">add-log-entry</span>
+             <span class="p">{</span><span class="ss">:query/status</span> <span class="ss">:query.status/loading</span>
+              <span class="ss">:query/user-time</span> <span class="nv">now</span><span class="p">}))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">get-latest-status</span> <span class="p">[</span><span class="nv">state</span> <span class="nv">query</span><span class="p">]</span>
+  <span class="p">(</span><span class="ss">:query/status</span> <span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nf">get-in</span> <span class="nv">state</span> <span class="nv">query</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">loading?</span> <span class="p">[</span><span class="nv">state</span> <span class="nv">query</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">= </span><span class="ss">:query.status/loading</span>
+     <span class="p">(</span><span class="nf">get-latest-status</span> <span class="nv">state</span> <span class="p">[</span><span class="ss">::log</span> <span class="nv">query</span><span class="p">])))</span>
+</code></pre>
+<p>Next we will simulate receiving a response. When we do, the status should no
+longer be loading:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="k">def </span><span class="nv">todo-items</span>
+  <span class="p">{</span><span class="ss">:todo/items</span> <span class="p">[{</span><span class="ss">:todo/id</span> <span class="s">"74e67"</span>
+                 <span class="ss">:todo/title</span> <span class="s">"Write project documentation"</span>
+                 <span class="ss">:todo/done?</span> <span class="nv">false</span><span class="p">}]})</span>
+
+<span class="p">(</span><span class="nf">deftest</span> <span class="nv">decisions-test</span>
+  ,,,
+
+  <span class="p">(</span><span class="nf">testing</span> <span class="s">"Received successful response"</span>
+    <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">false? </span><span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">query/send-request</span> <span class="p">{}</span> <span class="o">#</span><span class="nv">inst</span> <span class="s">"2025-01-02T06:44:13"</span> <span class="nv">query</span><span class="p">)</span>
+                    <span class="p">(</span><span class="nf">query/receive-response</span> <span class="o">#</span><span class="nv">inst</span> <span class="s">"2025-01-02T06:44:14"</span> <span class="nv">query</span>
+                      <span class="p">{</span><span class="ss">:success?</span> <span class="nv">true</span>
+                       <span class="ss">:result</span> <span class="nv">todo-items</span><span class="p">})</span>
+                    <span class="p">(</span><span class="nf">query/loading?</span> <span class="nv">query</span><span class="p">))))))</span>
+</code></pre>
+<p>The <code>receive-response</code> function adds a log entry:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">receive-response</span> <span class="p">[</span><span class="nv">state</span> <span class="nv">now</span> <span class="nv">query</span> <span class="nv">response</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">update-in</span> <span class="nv">state</span> <span class="p">[</span><span class="ss">::log</span> <span class="nv">query</span><span class="p">]</span> <span class="nv">add-log-entry</span>
+             <span class="p">(</span><span class="nf">cond-&gt;</span> <span class="p">{</span><span class="ss">:query/status</span> <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="ss">:success?</span> <span class="nv">response</span><span class="p">)</span>
+                                      <span class="ss">:query.status/success</span>
+                                      <span class="ss">:query.status/error</span><span class="p">)</span>
+                      <span class="ss">:query/user-time</span> <span class="nv">now</span><span class="p">}</span>
+               <span class="p">(</span><span class="ss">:success?</span> <span class="nv">response</span><span class="p">)</span>
+               <span class="p">(</span><span class="nb">assoc </span><span class="ss">:query/result</span> <span class="p">(</span><span class="ss">:result</span> <span class="nv">response</span><span class="p">)))))</span>
+</code></pre>
+<p>When the response was a success, the query results should be marked as
+available:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">testing</span> <span class="s">"Successful response is available"</span>
+  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">true? </span><span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">query/send-request</span> <span class="p">{}</span> <span class="o">#</span><span class="nv">inst</span> <span class="s">"2025-01-02T06:44:13"</span> <span class="nv">query</span><span class="p">)</span>
+                 <span class="p">(</span><span class="nf">query/receive-response</span> <span class="o">#</span><span class="nv">inst</span> <span class="s">"2025-01-02T06:44:14"</span> <span class="nv">query</span>
+                   <span class="p">{</span><span class="ss">:success?</span> <span class="nv">true</span>
+                    <span class="ss">:result</span> <span class="nv">todo-items</span><span class="p">})</span>
+                 <span class="p">(</span><span class="nf">query/available?</span> <span class="nv">query</span><span class="p">)))))</span>
+</code></pre>
+<p>Implementing this is a breeze:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">available?</span> <span class="p">[</span><span class="nv">state</span> <span class="nv">query</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">= </span><span class="ss">:query.status/success</span>
+     <span class="p">(</span><span class="nf">get-latest-status</span> <span class="nv">state</span> <span class="nv">query</span><span class="p">)))</span>
+</code></pre>
+<p>We’re not going to handle all the details of this decision making namespace, but
+there is one more particularly interesting case to handle, which is this
+sequence of events:</p>
+<ol>
+<li>Request all todo items</li>
+<li>Receive all todo items</li>
+<li>Request all todo items again (some time later)</li>
+</ol>
+<p>Thanks to the log, we’re now in the situation where todo items are both
+available <em>and</em> loading. This gives us flexibility: do we want to eagerly show
+the user that we’re actively refreshing their data with loading spinners? Or do
+we want to downplay the loading time and just show the old data until new data
+is available? The query log makes this an active choice.</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">testing</span> <span class="s">"Successful response is still available when refreshing"</span>
+  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">true? </span><span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">query/send-request</span> <span class="p">{}</span> <span class="o">#</span><span class="nv">inst</span> <span class="s">"2025-01-02T06:44:13"</span> <span class="nv">query</span><span class="p">)</span>
+                 <span class="p">(</span><span class="nf">query/receive-response</span> <span class="o">#</span><span class="nv">inst</span> <span class="s">"2025-01-02T06:44:14"</span> <span class="nv">query</span>
+                   <span class="p">{</span><span class="ss">:success?</span> <span class="nv">true</span>
+                    <span class="ss">:result</span> <span class="nv">todo-items</span><span class="p">})</span>
+                 <span class="p">(</span><span class="nf">query/send-request</span> <span class="o">#</span><span class="nv">inst</span> <span class="s">"2025-01-02T06:44:15"</span> <span class="nv">query</span><span class="p">)</span>
+                 <span class="p">(</span><span class="nf">query/available?</span> <span class="nv">query</span><span class="p">)))))</span>
+</code></pre>
+<p>To pass this test, <code>available?</code> must check the entire log:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">available?</span> <span class="p">[</span><span class="nv">state</span> <span class="nv">query</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="p">(</span><span class="nf">get-in</span> <span class="nv">state</span> <span class="p">[</span><span class="ss">::log</span> <span class="nv">query</span><span class="p">])</span>
+       <span class="p">(</span><span class="nb">some </span><span class="p">(</span><span class="nb">comp </span><span class="o">#</span><span class="p">{</span><span class="ss">:query.status/success</span><span class="p">}</span> <span class="ss">:query/status</span><span class="p">))</span>
+       <span class="nv">boolean</span><span class="p">))</span>
+</code></pre>
+<p>Finally, we’ll add a function to get the currently available data, if any:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">testing</span> <span class="s">"Gets available data"</span>
+  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">query/send-request</span> <span class="p">{}</span> <span class="o">#</span><span class="nv">inst</span> <span class="s">"2025-01-02T06:44:13"</span> <span class="nv">query</span><span class="p">)</span>
+             <span class="p">(</span><span class="nf">query/receive-response</span> <span class="o">#</span><span class="nv">inst</span> <span class="s">"2025-01-02T06:44:14"</span> <span class="nv">query</span>
+               <span class="p">{</span><span class="ss">:success?</span> <span class="nv">true</span>
+                <span class="ss">:result</span> <span class="nv">todo-items</span><span class="p">})</span>
+             <span class="p">(</span><span class="nf">query/get-result</span> <span class="nv">query</span><span class="p">))</span>
+         <span class="nv">todo-items</span><span class="p">)))</span>
+</code></pre>
+<p>The implementation finds the first result in the log:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">get-result</span> <span class="p">[</span><span class="nv">state</span> <span class="nv">query</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="p">(</span><span class="nf">get-in</span> <span class="nv">state</span> <span class="p">[</span><span class="ss">::log</span> <span class="nv">query</span><span class="p">])</span>
+       <span class="p">(</span><span class="nf">keep</span> <span class="ss">:query/result</span><span class="p">)</span>
+       <span class="nv">first</span><span class="p">))</span>
+</code></pre>
+<p>With this we are able to answer the most pertinent questions about our network
+requests. There are some more details like error handling and log truncating to
+cater to. Check out the final version of the code on Github for all the details.</p>
+</div><div class="prose mt-4 section-md"><h2 id="http-requests" class="h2 section-md"><a class="group relative" href="#http-requests"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Making HTTP requests</a></h2><p>We now turn our attention to the HTTP request itself. We have a query data
+structure that represents requests for data. How this is converted to an HTTP
+request depends on your backend API(s).</p>
+<p>The further “up the stack” we can solve problems, the better, so our backend has
+a single HTTP enpoint, <code>/query</code>. It take query maps and returns data in a
+unified wrapper: <code>{:success? true, :results ,,,}</code>. It is not necessary to build
+your backend API this way to model network reads like we have done, an
+alternative is sketched out below.</p>
+<p>Because our backend was designed to play well with the frontend, the HTTP
+mechanics can be handled pretty straight-forward with
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch"><code>fetch</code></a>:</p>
+</div><div class="mx-auto my-6 section-md"><pre class="codehilite bg-base-200 codehilite"><code class="clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">toil.core</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">cljs.reader</span> <span class="ss">:as</span> <span class="nv">reader</span><span class="p">]</span>
+            ,,,
+            <span class="p">[</span><span class="nv">toil.query</span> <span class="ss">:as</span> <span class="nv">query</span><span class="p">]</span>
+            ,,,<span class="p">))</span>
+
+,,,
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">query-backend</span> <span class="p">[</span><span class="nv">store</span> <span class="nv">query</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">swap!</span> <span class="nv">store</span> <span class="nv">query/send-request</span> <span class="p">(</span><span class="nf">js/Date.</span><span class="p">)</span> <span class="nv">query</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">js/fetch</span> <span class="s">"/query"</span> <span class="o">#</span><span class="nv">js</span> <span class="p">{</span><span class="ss">:method</span> <span class="s">"POST"</span>
+                              <span class="ss">:body</span> <span class="p">(</span><span class="nb">pr-str </span><span class="nv">query</span><span class="p">)})</span>
+      <span class="p">(</span><span class="nf">.then</span> <span class="o">#</span><span class="p">(</span><span class="nf">.text</span> <span class="nv">%</span><span class="p">))</span>
+      <span class="p">(</span><span class="nf">.then</span> <span class="nv">reader/read-string</span><span class="p">)</span>
+      <span class="p">(</span><span class="nf">.then</span> <span class="o">#</span><span class="p">(</span><span class="nf">swap!</span> <span class="nv">store</span> <span class="nv">query/receive-response</span>
+                           <span class="p">(</span><span class="nf">js/Date.</span><span class="p">)</span> <span class="nv">query</span> <span class="nv">%</span><span class="p">))</span>
+      <span class="p">(</span><span class="nf">.catch</span> <span class="o">#</span><span class="p">(</span><span class="nf">swap!</span> <span class="nv">store</span> <span class="nv">query/receive-response</span>
+                            <span class="p">(</span><span class="nf">js/Date.</span><span class="p">)</span> <span class="nv">query</span> <span class="p">{</span><span class="ss">:error</span> <span class="p">(</span><span class="nf">.-message</span> <span class="nv">%</span><span class="p">)}))))</span>
+</code></pre></div><div class="prose mt-4 section-md"><p>What if your backend API can’t be tailored to your client? Maybe you have a
+traditional REST API of some sort. We can extend the query function and have it
+dispatch on the query kind to get the HTTP details:</p>
+</div><div class="mx-auto my-6 section-md"><pre class="codehilite bg-base-200 codehilite"><code class="clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">query-&gt;http-request</span> <span class="p">[{</span><span class="ss">:query/keys</span> <span class="p">[</span><span class="nv">kind</span> <span class="nv">data</span><span class="p">]}]</span>
+  <span class="p">(</span><span class="nf">case</span> <span class="nv">kind</span>
+    <span class="ss">:query/todo-items</span>
+    <span class="p">[</span><span class="ss">:get</span> <span class="s">"/api/todo/items"</span><span class="p">]</span>
+
+    <span class="ss">:query/user</span>
+    <span class="p">[</span><span class="ss">:get</span> <span class="p">(</span><span class="nb">str </span><span class="s">"/api/todo/users/"</span> <span class="p">(</span><span class="ss">:user-id</span> <span class="nv">data</span><span class="p">))]))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">query-backend</span> <span class="p">[</span><span class="nv">store</span> <span class="nv">query</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[[</span><span class="nv">method</span> <span class="nv">url</span> <span class="nv">body</span><span class="p">]</span> <span class="p">(</span><span class="nf">query-&gt;http-request</span> <span class="nv">query</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nf">swap!</span> <span class="nv">store</span> <span class="nv">query/send-request</span> <span class="p">(</span><span class="nf">js/Date.</span><span class="p">)</span> <span class="nv">query</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">js/fetch</span> <span class="nv">url</span> <span class="o">#</span><span class="nv">js</span> <span class="p">(</span><span class="nf">cond-&gt;</span> <span class="p">{</span><span class="ss">:method</span> <span class="p">(</span><span class="nb">name </span><span class="nv">method</span><span class="p">)}</span>
+                            <span class="nv">body</span> <span class="p">(</span><span class="nb">assoc </span><span class="ss">:body</span> <span class="p">(</span><span class="nb">pr-str </span><span class="nv">body</span><span class="p">))))</span>
+        <span class="p">(</span><span class="nf">.then</span> <span class="o">#</span><span class="p">(</span><span class="nf">.text</span> <span class="nv">%</span><span class="p">))</span>
+        <span class="p">(</span><span class="nf">.then</span> <span class="nv">reader/read-string</span><span class="p">)</span>
+        <span class="p">(</span><span class="nf">.then</span> <span class="o">#</span><span class="p">(</span><span class="nf">swap!</span> <span class="nv">store</span> <span class="nv">query/receive-response</span>
+                             <span class="p">(</span><span class="nf">js/Date.</span><span class="p">)</span> <span class="nv">query</span> <span class="nv">%</span><span class="p">))</span>
+        <span class="p">(</span><span class="nf">.catch</span> <span class="o">#</span><span class="p">(</span><span class="nf">swap!</span> <span class="nv">store</span> <span class="nv">query/receive-response</span>
+                              <span class="p">(</span><span class="nf">js/Date.</span><span class="p">)</span> <span class="nv">query</span> <span class="p">{</span><span class="ss">:error</span> <span class="p">(</span><span class="nf">.-message</span> <span class="nv">%</span><span class="p">)})))))</span>
+</code></pre></div><div class="prose mt-4 section-md"><p>You could use the same approach if you need to talk to different APIs, etc. If
+your endpoints don’t respond in a unified manner, you may also want to add a
+function that can repackage the responses in a uniform manner:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">query-&gt;http-request</span> <span class="p">[{</span><span class="ss">:query/keys</span> <span class="p">[</span><span class="nv">kind</span> <span class="nv">data</span><span class="p">]}]</span>
+  <span class="p">(</span><span class="nf">case</span> <span class="nv">kind</span>
+    <span class="ss">:query/todo-items</span>
+    <span class="p">{</span><span class="ss">:method</span> <span class="ss">:get</span>
+     <span class="ss">:url</span> <span class="s">"/api/todo/items"</span>
+     <span class="ss">:get-responses</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">res</span><span class="p">]</span>
+                      <span class="p">{</span><span class="ss">:success?</span> <span class="nv">true</span>
+                       <span class="ss">:results</span> <span class="nv">res</span><span class="p">})}</span>
+
+    <span class="ss">:query/user</span>
+    <span class="p">{</span><span class="ss">:method</span> <span class="ss">:get</span>
+     <span class="ss">:url</span> <span class="p">(</span><span class="nb">str </span><span class="s">"/api/todo/users/"</span> <span class="p">(</span><span class="ss">:user-id</span> <span class="nv">data</span><span class="p">))</span>
+     <span class="ss">:get-responses</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">res</span><span class="p">]</span>
+                      <span class="p">{</span><span class="ss">:success?</span> <span class="nv">true</span>
+                       <span class="ss">:results</span> <span class="p">(</span><span class="ss">:user</span> <span class="nv">res</span><span class="p">)})}))</span>
+</code></pre>
+<p>Adjust as necessary for your backend. The idea is to handle the HTTP mechanics
+in one place, and to make all reads behave as uniformly as possible. This way
+you avoid having details about your backend architecture and design choices
+bleed through your entire frontend codebase.</p>
+</div><div class="prose mt-4 section-md"><h2 id="triggering-http-requests" class="h2 section-md"><a class="group relative" href="#triggering-http-requests"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Triggering HTTP requests</a></h2><p>The final piece of the puzzle is to trigger the HTTP requests. We will do this
+two ways: first we’ll add an action that requires the user to ask for data, and
+then we will look into requesting data as we load a route.</p>
+<h3>Asking for data</h3>
+<p>Exposing <code>query-backend</code> as an action for DOM events is a one-liner. In
+<code>toil.core</code>:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">execute-actions</span> <span class="p">[</span><span class="nv">store</span> <span class="nv">actions</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">doseq </span><span class="p">[[</span><span class="nv">action</span> <span class="o">&amp;</span> <span class="nv">args</span><span class="p">]</span> <span class="nv">actions</span><span class="p">]</span>
+    <span class="p">(</span><span class="nf">case</span> <span class="nv">action</span>
+      <span class="ss">:store/assoc-in</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">swap!</span> <span class="nv">store</span> <span class="nv">assoc-in</span> <span class="nv">args</span><span class="p">)</span>
+      <span class="ss">:data/query</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">query-backend</span> <span class="nv">store</span> <span class="nv">args</span><span class="p">)</span>               <span class="c1">;; &lt;==</span>
+      <span class="p">(</span><span class="nb">println </span><span class="s">"Unknown action"</span> <span class="nv">action</span> <span class="s">"with arguments"</span> <span class="nv">args</span><span class="p">))))</span>
+</code></pre>
+<p>With this in place, we can request data from the UI. We can also use the
+functions in <code>toil.query</code> to update the UI appropriately:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">toil.ui</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">toil.query</span> <span class="ss">:as</span> <span class="nv">query</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="k">def </span><span class="nv">items-query</span>
+  <span class="p">{</span><span class="ss">:query/kind</span> <span class="ss">:query/todo-items</span><span class="p">})</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">render-frontpage</span> <span class="p">[</span><span class="nv">state</span><span class="p">]</span>
+  <span class="p">[</span><span class="ss">:main.p-8.max-w-screen-lg</span>
+   <span class="p">[</span><span class="ss">:h1.text-2xl.mb-4</span> <span class="s">"Toil and trouble: Todos over the network"</span><span class="p">]</span>
+   <span class="p">(</span><span class="nb">when-let </span><span class="p">[</span><span class="nv">todos</span> <span class="p">(</span><span class="nf">query/get-result</span> <span class="nv">state</span> <span class="nv">items-query</span><span class="p">)]</span>
+     <span class="p">[</span><span class="ss">:ul.mb-4</span>
+      <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">item</span> <span class="nv">todos</span><span class="p">]</span>
+        <span class="p">[</span><span class="ss">:li.my-2</span>
+         <span class="p">[</span><span class="ss">:span.pr-2</span>
+          <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="ss">:todo/done?</span> <span class="nv">item</span><span class="p">)</span>
+            <span class="s">"✓"</span>
+            <span class="s">"▢"</span><span class="p">)]</span>
+         <span class="p">(</span><span class="ss">:todo/title</span> <span class="nv">item</span><span class="p">)])])</span>
+   <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">query/loading?</span> <span class="nv">state</span> <span class="nv">items-query</span><span class="p">)</span>
+     <span class="p">[</span><span class="ss">:button.btn.btn-primary</span> <span class="p">{</span><span class="ss">:disabled</span> <span class="nv">true</span><span class="p">}</span>
+      <span class="p">[</span><span class="ss">:span.loading.loading-spinner</span><span class="p">]</span>
+      <span class="s">"Fetching todos"</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">:button.btn.btn-primary</span>
+      <span class="p">{</span><span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="p">[[</span><span class="ss">:data/query</span> <span class="nv">items-query</span><span class="p">]]}}</span>
+      <span class="s">"Fetch todos"</span><span class="p">])])</span>
+</code></pre>
+<p>With this essential bit of infrastructure in place, we can add new query
+capabilities to the app without writing a single line of imperative code. To do
+so, you would implement a new query on the backend, and add pure rendering code
+to use it, e.g.:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">[</span><span class="ss">:data/query</span>
+ <span class="p">{</span><span class="ss">:query/kind</span> <span class="ss">:query/user</span>
+  <span class="ss">:query/data</span> <span class="p">{</span><span class="ss">:user-id</span> <span class="s">"alice"</span><span class="p">}}]</span>
+</code></pre>
+<h3>Loading data on navigation</h3>
+<p>Having to click a button on the frontpage to get its data isn’t ideal UX.
+Ideally, the data would just load when the user loaded the frontpage. We can do
+that by extending our mini framework.</p>
+<p>Currently we have routes, which tie a specific URL pattern to a namespaced
+keyword. This keyword is used to dispatch rendering to a page-specific function.
+We could do the same for page-specific data to load.</p>
+<p>Whenever <code>:location/page-id</code> changes, we will call a new function
+<code>get-location-load-actions</code> with the location. If it returns any actions, we’ll
+run them through the action dispatch.</p>
+<p>To get the actions:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">get-location-load-actions</span> <span class="p">[</span><span class="nv">location</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">case</span> <span class="p">(</span><span class="ss">:location/page-id</span> <span class="nv">location</span><span class="p">)</span>
+    <span class="ss">:pages/frontpage</span> <span class="p">[[</span><span class="ss">:data/query</span> <span class="p">{</span><span class="ss">:query/kind</span> <span class="ss">:query/todo-items</span><span class="p">}]]))</span>
+</code></pre>
+<p>To trigger them when the location changes we will introduce a function to handle
+navigation:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">navigate!</span> <span class="p">[</span><span class="nv">store</span> <span class="nv">location</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">current-location</span> <span class="p">(</span><span class="ss">:location</span> <span class="o">@</span><span class="nv">store</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nf">swap!</span> <span class="nv">store</span> <span class="nb">assoc </span><span class="ss">:location</span> <span class="nv">location</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nb">not= </span><span class="nv">current-location</span> <span class="nv">location</span><span class="p">)</span>
+      <span class="p">(</span><span class="nf">execute-actions</span> <span class="nv">store</span> <span class="p">(</span><span class="nf">get-location-load-actions</span> <span class="nv">location</span><span class="p">)))))</span>
+</code></pre>
+<p>We will use this in place of <code>(swap! store assoc :location location)</code>, which
+happens in three places: bootup, body clicks, and back button clicks:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">route-click</span> <span class="p">[</span><span class="nv">e</span> <span class="nv">store</span> <span class="nv">routes</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">href</span> <span class="p">(</span><span class="nf">find-target-href</span> <span class="nv">e</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nb">when-let </span><span class="p">[</span><span class="nv">location</span> <span class="p">(</span><span class="nf">router/url-&gt;location</span> <span class="nv">routes</span> <span class="nv">href</span><span class="p">)]</span>
+      ,,,
+      <span class="p">(</span><span class="nf">navigate!</span> <span class="nv">store</span> <span class="nv">location</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">main</span> <span class="p">[</span><span class="nv">store</span> <span class="nv">el</span><span class="p">]</span>
+  ,,,
+
+  <span class="p">(</span><span class="nf">js/window.addEventListener</span>
+   <span class="s">"popstate"</span>
+   <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">_</span><span class="p">]</span> <span class="p">(</span><span class="nf">navigate!</span> <span class="nv">store</span> <span class="p">(</span><span class="nf">get-current-location</span><span class="p">))))</span>
+
+  <span class="c1">;; Trigger the initial render</span>
+  <span class="p">(</span><span class="nf">navigate!</span> <span class="nv">store</span> <span class="p">(</span><span class="nf">get-current-location</span><span class="p">))</span>
+  ,,,<span class="p">)</span>
+</code></pre>
+</div><div class="prose mt-4 section-md"><h2 id="reorganizing" class="h2 section-md"><a class="group relative" href="#reorganizing"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Extra credit: Reorganizing</a></h2><p>NB! This finaly section has nothing to do with networking, but rather deals with
+code organization.</p>
+<p>Currently, routes, location load actions, and rendering are all scattered in
+different places. We can gather this in a neat package, describing all aspect of
+each of the pages.</p>
+<p>Create <code>toil.frontpage</code>:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">toil.frontpage</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">toil.query</span> <span class="ss">:as</span> <span class="nv">query</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="k">def </span><span class="nv">items-query</span>
+  <span class="p">{</span><span class="ss">:query/kind</span> <span class="ss">:query/todo-items</span><span class="p">})</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">render</span> <span class="p">[</span><span class="nv">state</span><span class="p">]</span>
+  <span class="p">[</span><span class="ss">:main.p-8.max-w-screen-lg</span>
+   <span class="p">[</span><span class="ss">:h1.text-2xl.mb-4</span> <span class="s">"Toil and trouble: Todos over the network"</span><span class="p">]</span>
+   <span class="p">(</span><span class="nb">when-let </span><span class="p">[</span><span class="nv">todos</span> <span class="p">(</span><span class="nf">query/get-result</span> <span class="nv">state</span> <span class="nv">items-query</span><span class="p">)]</span>
+     <span class="p">[</span><span class="ss">:ul.mb-4</span>
+      <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">item</span> <span class="nv">todos</span><span class="p">]</span>
+        <span class="p">[</span><span class="ss">:li.my-2</span>
+         <span class="p">[</span><span class="ss">:span.pr-2</span>
+          <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="ss">:todo/done?</span> <span class="nv">item</span><span class="p">)</span>
+            <span class="s">"✓"</span>
+            <span class="s">"▢"</span><span class="p">)]</span>
+         <span class="p">(</span><span class="ss">:todo/title</span> <span class="nv">item</span><span class="p">)])])</span>
+   <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">query/loading?</span> <span class="nv">state</span> <span class="nv">items-query</span><span class="p">)</span>
+     <span class="p">[</span><span class="ss">:button.btn.btn-primary</span> <span class="p">{</span><span class="ss">:disabled</span> <span class="nv">true</span><span class="p">}</span>
+      <span class="p">[</span><span class="ss">:span.loading.loading-spinner</span><span class="p">]</span>
+      <span class="s">"Fetching todos"</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">:button.btn.btn-primary</span>
+      <span class="p">{</span><span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="p">[[</span><span class="ss">:data/query</span> <span class="nv">items-query</span><span class="p">]]}}</span>
+      <span class="s">"Fetch todos"</span><span class="p">])])</span>
+
+<span class="p">(</span><span class="k">def </span><span class="nv">page</span>
+  <span class="p">{</span><span class="ss">:page-id</span> <span class="ss">:pages/frontpage</span>
+   <span class="ss">:route</span> <span class="p">[]</span>
+   <span class="ss">:on-load</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">location</span><span class="p">]</span>
+              <span class="p">[[</span><span class="ss">:data/query</span> <span class="p">{</span><span class="ss">:query/kind</span> <span class="ss">:query/todo-items</span><span class="p">}]])</span>
+   <span class="ss">:render</span> <span class="o">#</span><span class="ss">'render</span><span class="p">})</span>
+</code></pre>
+<p>This puts the load actions in a function that receives the <code>location</code>. This
+enables us to add pages that use parameters from the routing or query string to
+fetch relevant data on load.</p>
+<p>To use this data structure, we will make some changes to the main function.
+First we’ll gather “all” the pages in a map from page id to the page map:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">toil.core</span>
+  <span class="p">(</span><span class="ss">:require</span> ,,,
+            <span class="p">[</span><span class="nv">toil.frontpage</span> <span class="ss">:as</span> <span class="nv">frontpage</span><span class="p">]</span>
+            ,,,<span class="p">))</span>
+
+,,,
+
+<span class="p">(</span><span class="k">def </span><span class="nv">pages</span>
+  <span class="p">[</span><span class="nv">frontpage/page</span><span class="p">])</span>
+
+<span class="p">(</span><span class="k">def </span><span class="nv">by-page-id</span>
+  <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="nv">pages</span>
+       <span class="p">(</span><span class="nb">map </span><span class="p">(</span><span class="nf">juxt</span> <span class="ss">:page-id</span> <span class="nv">identity</span><span class="p">))</span>
+       <span class="p">(</span><span class="nb">into </span><span class="p">{})))</span>
+</code></pre>
+<p>Then we’ll define a function to return the render function for a location:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">get-render-f</span> <span class="p">[</span><span class="nv">state</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nf">get-in</span> <span class="nv">by-page-id</span> <span class="p">[(</span><span class="nb">-&gt; </span><span class="nv">state</span> <span class="ss">:location</span> <span class="ss">:location/page-id</span><span class="p">)</span> <span class="ss">:render</span><span class="p">])</span>
+      <span class="nv">ui/render-page</span><span class="p">))</span>
+</code></pre>
+<p>Then we’ll update the function to get the on load actions to use the pages map
+instead:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">get-location-load-actions</span> <span class="p">[</span><span class="nv">location</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">when-let </span><span class="p">[</span><span class="nv">f</span> <span class="p">(</span><span class="nf">get-in</span> <span class="nv">by-page-id</span> <span class="p">[(</span><span class="ss">:location/page-id</span> <span class="nv">location</span><span class="p">)</span> <span class="ss">:on-load</span><span class="p">])]</span>
+    <span class="p">(</span><span class="nf">f</span> <span class="nv">location</span><span class="p">)))</span>
+</code></pre>
+<p>Instead of static routes in the router namespace, we will add a function to
+build the routes data from the map of pages:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">make-routes</span> <span class="p">[</span><span class="nv">pages</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">silk/routes</span>
+   <span class="p">(</span><span class="nf">mapv</span>
+    <span class="p">(</span><span class="k">fn </span><span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">page-id</span> <span class="nv">route</span><span class="p">]}]</span>
+      <span class="p">[</span><span class="nv">page-id</span> <span class="nv">route</span><span class="p">])</span>
+    <span class="nv">pages</span><span class="p">)))</span>
+</code></pre>
+<p>And finally, we can update <code>main</code> to work with the new building blocks:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">main</span> <span class="p">[</span><span class="nv">store</span> <span class="nv">el</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">routes</span> <span class="p">(</span><span class="nf">router/make-routes</span> <span class="nv">pages</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nf">add-watch</span>
+     <span class="nv">store</span> <span class="ss">::render</span>
+     <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">_</span> <span class="nv">_</span> <span class="nv">_</span> <span class="nv">state</span><span class="p">]</span>
+       <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">f</span> <span class="p">(</span><span class="nf">get-render-f</span> <span class="nv">state</span><span class="p">)]</span>
+         <span class="p">(</span><span class="nf">r/render</span> <span class="nv">el</span> <span class="p">(</span><span class="nf">f</span> <span class="nv">state</span><span class="p">)</span> <span class="p">{</span><span class="ss">:alias-data</span> <span class="p">{</span><span class="ss">:routes</span> <span class="nv">routes</span><span class="p">}}))))</span>
+
+    <span class="p">(</span><span class="nf">r/set-dispatch!</span>
+     <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">event-data</span> <span class="nv">actions</span><span class="p">]</span>
+       <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="nv">actions</span>
+            <span class="p">(</span><span class="nf">interpolate-actions</span>
+             <span class="p">(</span><span class="ss">:replicant/dom-event</span> <span class="nv">event-data</span><span class="p">))</span>
+            <span class="p">(</span><span class="nf">execute-actions</span> <span class="nv">store</span><span class="p">))))</span>
+
+    <span class="p">(</span><span class="nf">js/document.body.addEventListener</span>
+     <span class="s">"click"</span>
+     <span class="o">#</span><span class="p">(</span><span class="nf">route-click</span> <span class="nv">%</span> <span class="nv">store</span> <span class="nv">routes</span><span class="p">))</span>
+
+    <span class="p">(</span><span class="nf">js/window.addEventListener</span>
+     <span class="s">"popstate"</span>
+     <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">_</span><span class="p">]</span> <span class="p">(</span><span class="nf">navigate!</span> <span class="nv">store</span> <span class="p">(</span><span class="nf">get-current-location</span> <span class="nv">routes</span><span class="p">))))</span>
+
+    <span class="c1">;; Trigger the initial render</span>
+    <span class="p">(</span><span class="nf">navigate!</span> <span class="nv">store</span> <span class="p">(</span><span class="nf">get-current-location</span> <span class="nv">routes</span><span class="p">))</span>
+    <span class="p">(</span><span class="nf">swap!</span> <span class="nv">store</span> <span class="nb">assoc </span><span class="ss">:app/started-at</span> <span class="p">(</span><span class="nf">js/Date.</span><span class="p">))))</span>
+</code></pre>
+<h2>Loading more data</h2>
+<p>Now that we have a nice structure for pages and a mechanism for loading data on
+navigation, let’s add one more page. We will render who added each todo item,
+and make their name clickable. Clicking the name will take us to a page with
+some details about the user.</p>
+<p>First, add a new namespace with the new page:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">toil.user</span><span class="p">)</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">render</span> <span class="p">[</span><span class="nv">state</span><span class="p">]</span>
+  <span class="p">[</span><span class="ss">:main.p-8.max-w-screen-lg</span>
+   <span class="p">[</span><span class="ss">:h1.text-2xl.mb-4</span> <span class="s">"User "</span> <span class="p">(</span><span class="nb">-&gt; </span><span class="nv">state</span> <span class="ss">:location</span> <span class="ss">:location/params</span> <span class="ss">:user/id</span><span class="p">)]</span>
+   <span class="p">[</span><span class="ss">:p</span>
+    <span class="p">[</span><span class="ss">:ui/a.link</span> <span class="p">{</span><span class="ss">:ui/location</span> <span class="p">{</span><span class="ss">:location/page-id</span> <span class="ss">:pages/frontpage</span><span class="p">}}</span>
+     <span class="s">"Back"</span><span class="p">]]])</span>
+
+<span class="p">(</span><span class="k">def </span><span class="nv">page</span>
+  <span class="p">{</span><span class="ss">:page-id</span> <span class="ss">:pages/user</span>
+   <span class="ss">:route</span> <span class="p">[[</span><span class="s">"users"</span> <span class="ss">:user/id</span><span class="p">]]</span>
+   <span class="ss">:render</span> <span class="o">#</span><span class="ss">'render</span><span class="p">})</span>
+</code></pre>
+<p>Add this page to the list of pages in <code>toil.core</code>:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="k">def </span><span class="nv">pages</span>
+  <span class="p">[</span><span class="nv">user/page</span>
+   <span class="nv">frontpage/page</span><span class="p">])</span>
+</code></pre>
+<p>NB! These need to be ordered by most to least specific route, due to how silk
+processes routes.</p>
+<p>Now add a link to the new page on the frontpage:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render</span> <span class="p">[</span><span class="nv">state</span><span class="p">]</span>
+  <span class="p">[</span><span class="ss">:main.p-8.max-w-screen-lg</span>
+   <span class="p">[</span><span class="ss">:h1.text-2xl.mb-4</span> <span class="s">"Toil and trouble: Todos over the network"</span><span class="p">]</span>
+   <span class="p">(</span><span class="nb">when-let </span><span class="p">[</span><span class="nv">todos</span> <span class="p">(</span><span class="nf">query/get-result</span> <span class="nv">state</span> <span class="nv">items-query</span><span class="p">)]</span>
+     <span class="p">[</span><span class="ss">:ul.mb-4</span>
+      <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">item</span> <span class="nv">todos</span><span class="p">]</span>
+        <span class="p">[</span><span class="ss">:li.my-2</span>
+         <span class="p">[</span><span class="ss">:span.pr-2</span>
+          <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="ss">:todo/done?</span> <span class="nv">item</span><span class="p">)</span>
+            <span class="s">"✓"</span>
+            <span class="s">"▢"</span><span class="p">)]</span>
+         <span class="p">(</span><span class="ss">:todo/title</span> <span class="nv">item</span><span class="p">)</span>
+         <span class="s">" ("</span>
+         <span class="p">[</span><span class="ss">:ui/a.link</span>
+          <span class="p">{</span><span class="ss">:ui/location</span>
+           <span class="p">{</span><span class="ss">:location/page-id</span> <span class="ss">:pages/user</span>
+            <span class="ss">:location/params</span> <span class="p">{</span><span class="ss">:user/id</span> <span class="p">(</span><span class="ss">:todo/created-by</span> <span class="nv">item</span><span class="p">)}}}</span>
+          <span class="p">(</span><span class="ss">:todo/created-by</span> <span class="nv">item</span><span class="p">)]</span>
+         <span class="s">")"</span><span class="p">])])</span>
+   <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">query/loading?</span> <span class="nv">state</span> <span class="nv">items-query</span><span class="p">)</span>
+     <span class="p">[</span><span class="ss">:button.btn.btn-primary</span> <span class="p">{</span><span class="ss">:disabled</span> <span class="nv">true</span><span class="p">}</span>
+      <span class="p">[</span><span class="ss">:span.loading.loading-spinner</span><span class="p">]</span>
+      <span class="s">"Fetching todos"</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">:button.btn.btn-primary</span>
+      <span class="p">{</span><span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="p">[[</span><span class="ss">:data/query</span> <span class="nv">items-query</span><span class="p">]]}}</span>
+      <span class="s">"Fetch todos"</span><span class="p">])])</span>
+</code></pre>
+<p>To spice up the user page with some data about the user we will add some load
+actions that uses parameters from the routing to load the right user:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">toil.user</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">toil.query</span> <span class="ss">:as</span> <span class="nv">query</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">get-query</span> <span class="p">[</span><span class="nv">location</span><span class="p">]</span>
+  <span class="p">{</span><span class="ss">:query/kind</span> <span class="ss">:query/user</span>
+   <span class="ss">:query/data</span> <span class="p">{</span><span class="ss">:user-id</span> <span class="p">(</span><span class="nb">-&gt; </span><span class="nv">location</span> <span class="ss">:location/params</span> <span class="ss">:user/id</span><span class="p">)}})</span>
+
+,,,
+
+<span class="p">(</span><span class="k">def </span><span class="nv">page</span>
+  <span class="p">{</span><span class="ss">:page-id</span> <span class="ss">:pages/user</span>
+   <span class="ss">:route</span> <span class="p">[[</span><span class="s">"users"</span> <span class="ss">:user/id</span><span class="p">]]</span>
+   <span class="ss">:on-load</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">location</span><span class="p">]</span>
+              <span class="p">[[</span><span class="ss">:data/query</span> <span class="p">(</span><span class="nf">get-query</span> <span class="nv">location</span><span class="p">)]])</span>
+   <span class="ss">:render</span> <span class="o">#</span><span class="ss">'render</span><span class="p">})</span>
+</code></pre>
+<p>Then the render function can check if the user is available:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render</span> <span class="p">[</span><span class="nv">state</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">user</span> <span class="p">(</span><span class="nf">query/get-result</span> <span class="nv">state</span> <span class="p">(</span><span class="nf">get-query</span> <span class="p">(</span><span class="ss">:location</span> <span class="nv">state</span><span class="p">)))]</span>
+    <span class="p">[</span><span class="ss">:main.p-8.max-w-screen-lg</span>
+     <span class="p">[</span><span class="ss">:h1.text-2xl.mb-4</span>
+      <span class="p">(</span><span class="k">if </span><span class="nv">user</span>
+        <span class="p">(</span><span class="nb">str </span><span class="p">(</span><span class="ss">:user/given-name</span> <span class="nv">user</span><span class="p">)</span> <span class="s">" "</span> <span class="p">(</span><span class="ss">:user/family-name</span> <span class="nv">user</span><span class="p">))</span>
+        <span class="p">(</span><span class="nb">str </span><span class="s">"User "</span> <span class="p">(</span><span class="nb">-&gt; </span><span class="nv">state</span> <span class="ss">:location</span> <span class="ss">:location/params</span> <span class="ss">:user/id</span><span class="p">)))]</span>
+     <span class="p">(</span><span class="nb">when </span><span class="nv">user</span>
+       <span class="p">[</span><span class="ss">:p.mb-2</span> <span class="p">(</span><span class="ss">:user/email</span> <span class="nv">user</span><span class="p">)])</span>
+     <span class="p">[</span><span class="ss">:p</span>
+      <span class="p">[</span><span class="ss">:ui/a.link</span> <span class="p">{</span><span class="ss">:ui/location</span> <span class="p">{</span><span class="ss">:location/page-id</span> <span class="ss">:pages/frontpage</span><span class="p">}}</span>
+       <span class="s">"Back"</span><span class="p">]]]))</span>
+</code></pre>
+</div><div class="prose mt-4 section-md"><h2 id="conclusion" class="h2 section-md"><a class="group relative" href="#conclusion"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Conclusion</a></h2><p>In this tutorial we built a small system for dealing with network reads. You
+<em>could</em> use the same system for issuing writes over the network, but the
+semantics are different enough to warrant a system of its own for those, as we
+go over in <a href="/tutorials/network-writes/">the third and final installment of this
+tutorial</a>.</p>
+<p>The <a href="https://github.com/cjohansen/replicant-networking/tree/network-reads/">full code for this part is on
+Github</a>.</p>
+</div></main><script type="text/javascript" src="/bundles/d399b4851ce7/app.js"></script></body></html>

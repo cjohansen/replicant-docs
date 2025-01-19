@@ -1,0 +1,567 @@
+<!DOCTYPE html><html data-theme="dark" lang="en" prefix="og: http://ogp.me/ns#"><head><title>A sortable table alias</title><meta name="theme-color" content="#202020"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta property="og:title" content="A sortable table alias"><link href="/a00f586d252b/favicon.ico" rel="icon" type="image/x-icon"><link href="/a00f586d252b/favicon.ico" rel="shortcut icon" type="image/ico"><link href="/a00f586d252b/favicon.ico" rel="shortcut icon" type="image/x-icon"><link href="/a00f586d252b/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"><link href="/285191ad6a81/apple-touch-icon.png" rel="icon" type="image/png" sizes="180x180"><link rel="stylesheet" href="/bundles/2e8dfb3c3384/styles.css"></head><body><div class="flex justify-between p-4 items-center"><div class="w-8"><a href="/"><svg style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2" viewBox="0 0 1080 1080" xml:space="preserve"><path d="M876.452 152.555c136.818 12.348 195.668 81.688 192.708 196.198h-87.197c1.569-66.295-16.004-119.066-52.748-157.356-14.398-15.003-31.913-27.882-52.763-38.353v-.489Zm98.715 270.164h87.213c-9.48 55.52-38.53 92.323-91.749 108.344 55.789 39.542 76.849 90.867 66.189 152.957l-44.388 184.981h-86.379l42.751-178.151c.149-.622.278-1.249.386-1.879 9.983-58.16-3.188-108.49-41.722-150.197 36.949-23.921 58.758-61.19 67.282-111.131a29.34 29.34 0 0 0 .417-4.924Z" fill="#4fb348"></path><path d="M757.149 152.309c138.837 11.646 198.514 81.149 195.537 196.444h-88.511c1.643-69.4-17.651-123.977-58.046-162.647-13.679-13.096-29.954-24.431-48.98-33.797Zm101.023 270.41h87.726c-9.475 55.52-38.529 92.323-91.745 108.344 55.785 39.542 76.848 90.867 66.191 152.957l-44.391 184.981h-87.689l42.752-178.151c.149-.622.278-1.249.386-1.879 9.983-58.16-3.188-108.49-41.722-150.197 36.948-23.921 58.758-61.19 67.281-111.131.153-.894.263-1.79.332-2.685h.506c.126-.747.25-1.493.373-2.239Z" fill="#00a29a"></path><path d="M76.208 847.157c-36.752-5.562-64.959-37.32-64.959-75.614 0-42.21 34.269-76.478 76.478-76.478a76.45 76.45 0 0 1 20.676 2.832c32.178 9.028 55.802 38.6 55.802 73.646 0 42.209-34.268 76.478-76.478 76.478-3.915 0-7.761-.295-11.519-.864Zm56.524-262.05a77.324 77.324 0 0 1-6.804.299c-42.209 0-76.478-34.268-76.478-76.478 0-42.209 34.269-76.478 76.478-76.478 13.663 0 26.494 3.591 37.6 9.879 23.204 13.139 38.878 38.053 38.878 66.599 0 39.917-30.647 72.732-69.674 76.179Zm-18.148 84.136 11.77-54.569c58.168-.23 105.321-47.525 105.321-105.746 0-35.555-17.586-67.035-44.526-86.209H828.11c-9.475 55.52-38.529 92.323-91.745 108.344 55.784 39.542 76.848 90.867 66.191 152.957l-44.391 184.981H539.756l34.836-151.189c13.135-57.004-4.455-118.062-91.882-118.062H353.796l-71.217 274.677H112.245c46.557-11.07 81.229-52.96 81.229-102.884 0-49.085-33.515-90.403-78.89-102.3Zm-1.803-330.67 117.483-187.485h389.845c152.584 6.696 217.9 77.175 214.789 197.665H178.595v-10.18h-65.814Z" fill="#0086ff"></path></svg></a></div><div class="flex items-center gap-4 text-sm"><a class="hover:underline" href="/learn/">Learn</a><a class="hover:underline" href="https://cljdoc.org/d/no.cjohansen/replicant/">API Reference</a><div class="w-6"><a href="https://clojurians.slack.com/archives/C06JZ4X334N" title="Replicant on the Clojurians Slack"><svg style="display: inline-block; line-height: 1;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><path d="M80,56h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V80A24,24,0,0,1,80,56Z" transform="translate(184 24) rotate(90)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M128,80H104A24,24,0,0,1,80,56h0a24,24,0,0,1,24-24h0a24,24,0,0,1,24,24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M152,32h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V56a24,24,0,0,1,24-24Z" transform="translate(304 160) rotate(-180)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M176,128V104a24,24,0,0,1,24-24h0a24,24,0,0,1,24,24h0a24,24,0,0,1-24,24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M176,104h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V128a24,24,0,0,1,24-24Z" transform="translate(24 328) rotate(-90)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M128,176h24a24,24,0,0,1,24,24h0a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M104,128h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V152a24,24,0,0,1,24-24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M80,128v24a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24h0a24,24,0,0,1,24-24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path></svg></a></div><div class="w-6"><a href="https://github.com/cjohansen/replicant" title="Replicant on Github"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg></a></div></div></div><div class="p-4 bg-base-200 items-center flex flex-row gap-4 sticky top-0 z-10"><button popovertarget="menu"><svg style="display: inline-block; line-height: 1; height: 24; width: 24;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><line stroke="currentColor" fill="none" stroke-linejoin="round" y1="128" stroke-linecap="round" stroke-width="16" x1="40" y2="128" x2="216"></line><line stroke="currentColor" fill="none" stroke-linejoin="round" y1="64" stroke-linecap="round" stroke-width="16" x1="40" y2="64" x2="216"></line><line stroke="currentColor" fill="none" stroke-linejoin="round" y1="192" stroke-linecap="round" stroke-width="16" x1="40" y2="192" x2="216"></line></svg></button><div id="menu" class="bg-base-200 m-0 px-0 absolute h-full" popover="auto"><aside class="basis-60 shrink-0"><h3 class="text-whitish mb-2 ml-4">Guides</h3><nav class="mb-8"><ol><li><a class="menu-item" href="/hiccup/">Hiccup<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/event-handlers/">Event handlers<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/life-cycle-hooks/">Life-cycle hooks<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/keys/">Keys<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/nil/">Explicit nils<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/alias/">Aliases<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li></ol></nav><h3 class="text-whitish mb-2 ml-4">Tutorials</h3><nav class="mb-8"><ol><li><a class="menu-item" href="/tutorials/tic-tac-toe/">Tic-Tac-Toe<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/routing/">Data-driven routing<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/state-atom/">State management with atoms<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/state-datascript/">State management with Datascript<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/network/">Backend APIs and network<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/network-reads/">Data-driven queries<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/network-writes/">Data-driven commands<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/tic-tac-toe-alias/">Tic-Tac-Toe with aliases<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/i18n-alias/">Alias powered i18n<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><span class="menu-item menu-item-selected">A sortable table alias<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></span></li></ol></nav><h3 class="text-whitish mb-2 ml-4">Articles</h3><nav class="mb-8"><ol><li><a class="menu-item" href="/top-down/">Top-down rendering<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/learn/">Learn Replicant<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li></ol></nav></aside></div>Tutorial: A sortable table alias</div><main class="mt-8 mb-16 mx-4 md:mx-0 fullscreen"><h1 class="h1 dark:text-whitish section-md">A sortable table alias</h1><div class="prose mt-4 section-md"><p>In this tutorial, we will build a sortable table, and eventually extract a
+reusable data-driven abstraction as a Replicant <a href="/alias/">alias</a>. The goal is to
+create an abstraction that deals with the details of getting a dataset into a
+table and sorting it, without restricting your options for formatting and visual
+presentation.</p>
+<p>The basis for this tutorial is a stripped-down version of the code from <a href="/tutorials/routing/">the
+routing tutorial</a> that only manages query and hash/fragment
+parameters. The setup also uses <a href="https://tailwindcss.com">tailwindcss</a>.</p>
+<p>If you want to follow along, grab <a href="https://github.com/cjohansen/replicant-sortable-table/tree/setup">the setup on
+Github</a>, then
+run <code>make tailwind</code> in a terminal, fire up your editor and start a REPL.</p>
+</div><div class="prose mt-4 section-md"><h2 id="basic-table" class="h2 section-md"><a class="group relative" href="#basic-table"><span class="absolute -left-4 group-hover:visible invisible">§ </span>A basic table</a></h2><p>We’ll start by listing out our dataset in a basic table. For this tutorial,
+we’re working with the <a href="https://boardgamegeek.com/browse/boardgame">40 top ranking boardgames on
+boardgamegeek.com</a>. The list is
+available in <code>boardgames.data</code>:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">boardgames.data</span><span class="p">)</span>
+
+<span class="p">(</span><span class="k">def </span><span class="nv">data</span>
+  <span class="p">{</span><span class="ss">:boardgames</span>
+   <span class="p">[{</span><span class="ss">:bgg/ranking</span> <span class="mi">1</span>
+     <span class="ss">:bgg/thumbnail</span> <span class="s">"https://cf.geekdo-images.com/x3zxjr-Vw5iU4yDPg70Jgw__micro/img/4Od3GYCiqptga0VbmyumPbJlBsU=/fit-in/64x64/filters:strip_icc()/pic3490053.jpg"</span>
+     <span class="ss">:boardgame/title</span> <span class="s">"Brass: Birmingham"</span>
+     <span class="ss">:boardgame/release-year</span> <span class="mi">2018</span>
+     <span class="ss">:bgg/geek-rating</span> <span class="mf">8.409</span>
+     <span class="ss">:bgg/average-rating</span> <span class="mf">8.59</span>
+     <span class="ss">:bgg/num-voters</span> <span class="mi">49313</span><span class="p">}</span>
+
+    ,,,<span class="p">]})</span>
+</code></pre>
+<p>Like in the routing tutorial, this data is fed to the UI render functions as
+<code>:boardgames</code> in the <code>state</code> argument. This little indirection means our UI
+doesn’t know or care where data comes from, which gives us a lot of flexibility.</p>
+<p>Here’s how we’ll render a basic table with some Tailwind flair:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">boardgames.ui</span><span class="p">)</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">render-page</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">boardgames</span><span class="p">]}</span> <span class="nv">location</span><span class="p">]</span>
+  <span class="p">[</span><span class="ss">:div.p-8.max-w-screen-lg</span>
+   <span class="p">[</span><span class="ss">:h1.text-2xl.font-serif.mb-4</span> <span class="s">"Boardgames ranked by Boardgamegeek"</span><span class="p">]</span>
+   <span class="p">[</span><span class="ss">:table.w-full</span>
+    <span class="p">[</span><span class="ss">:thead</span>
+     <span class="p">[</span><span class="ss">:tr.border-b.bg-base-200</span>
+      <span class="p">[</span><span class="ss">:th.py-2.text-left.px-4</span> <span class="s">"Title"</span><span class="p">]</span>
+      <span class="p">[</span><span class="ss">:th.py-2.text-left.pr-4</span> <span class="s">"Released"</span><span class="p">]</span>
+      <span class="p">[</span><span class="ss">:th.py-2.text-left.pr-4</span> <span class="s">"Ranking"</span><span class="p">]</span>
+      <span class="p">[</span><span class="ss">:th.py-2.whitespace-nowrap.text-left.pr-4</span> <span class="s">"Geek rating"</span><span class="p">]</span>
+      <span class="p">[</span><span class="ss">:th.py-2.whitespace-nowrap.text-left.pr-4</span> <span class="s">"Avg. rating"</span><span class="p">]</span>
+      <span class="p">[</span><span class="ss">:th.py-2.text-right.px-4</span> <span class="s">"Voters"</span><span class="p">]]]</span>
+    <span class="p">[</span><span class="ss">:tbody</span>
+     <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">game</span> <span class="nv">boardgames</span><span class="p">]</span>
+       <span class="p">[</span><span class="ss">:tr.border-b.border-1</span> <span class="p">{</span><span class="ss">:replicant/key</span> <span class="p">(</span><span class="ss">:bgg/ranking</span> <span class="nv">game</span><span class="p">)}</span>
+        <span class="p">[</span><span class="ss">:th.py-2.px-4.text-left</span> <span class="p">(</span><span class="ss">:boardgame/title</span> <span class="nv">game</span><span class="p">)]</span>
+        <span class="p">[</span><span class="ss">:td.py-2.pr-4.text-left</span> <span class="p">(</span><span class="ss">:boardgame/release-year</span> <span class="nv">game</span><span class="p">)]</span>
+        <span class="p">[</span><span class="ss">:td.py-2.pr-4.text-center</span> <span class="p">(</span><span class="ss">:bgg/ranking</span> <span class="nv">game</span><span class="p">)]</span>
+        <span class="p">[</span><span class="ss">:td.py-2.pr-4.text-left</span> <span class="p">(</span><span class="ss">:bgg/geek-rating</span> <span class="nv">game</span><span class="p">)]</span>
+        <span class="p">[</span><span class="ss">:td.py-2.pr-4.text-left</span> <span class="p">(</span><span class="ss">:bgg/average-rating</span> <span class="nv">game</span><span class="p">)]</span>
+        <span class="p">[</span><span class="ss">:td.py-2.px-4.text-right</span> <span class="p">(</span><span class="ss">:bgg/num-voters</span> <span class="nv">game</span><span class="p">)]])]]])</span>
+</code></pre>
+<p>Because this function will primarily reorder rows renders, we add a
+<a href="/keys/">key</a> to each one so Replicant will know to reorder DOM elements instead
+of recreating them.</p>
+</div><div class="prose mt-4 section-md"><h2 id="sorting-column" class="h2 section-md"><a class="group relative" href="#sorting-column"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Indicating sorting column</a></h2><p>We will now add visual indicators to the active sort column header:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">[</span><span class="ss">:th.py-2.text-left.pr-4</span> <span class="s">"▼ Ranking"</span><span class="p">]</span>
+</code></pre>
+<p>The data happens to be sorted by ranking by default, but we can make that
+explicit:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">game</span> <span class="p">(</span><span class="nb">sort-by </span><span class="ss">:bgg/ranking</span> <span class="nb">&lt; </span><span class="nv">boardgames</span><span class="p">)]</span>
+  <span class="p">[</span><span class="ss">:tr.border-b.border-1</span>
+   ,,,<span class="p">])</span>
+</code></pre>
+<p>We want clicks on the currently sorted column header to reverse the order. We
+can set a hash parameter <code>sort-order</code> to make this happen. That means we also
+have to check this parameter for the chosen order before sorting.</p>
+<p>Here’s a function that finds the current sorting order. It is written such that
+it provides a default if the <code>sort-order</code> hash parameter isn’t set – or if it
+has any value except <code>desc</code> or <code>asc</code>:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">get-sort-order</span> <span class="p">[</span><span class="nv">location</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="s">"desc"</span> <span class="p">(</span><span class="nb">-&gt; </span><span class="nv">location</span> <span class="ss">:location/hash-params</span> <span class="ss">:sort-order</span><span class="p">))</span>
+    <span class="s">"desc"</span>
+    <span class="s">"asc"</span><span class="p">))</span>
+</code></pre>
+<p>To make it easy to control the sort order, we’ll introduce a mapping from the
+chosen order to comparator function:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="k">def </span><span class="nv">comparators</span>
+  <span class="p">{</span><span class="s">"desc"</span> <span class="nv">&gt;</span>
+   <span class="s">"asc"</span> <span class="nv">&lt;</span><span class="p">})</span>
+</code></pre>
+<p>Now we can update the rendering function:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-page</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">boardgames</span><span class="p">]}</span> <span class="nv">location</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">sort-order</span> <span class="p">(</span><span class="nf">get-sort-order</span> <span class="nv">location</span><span class="p">)]</span>
+    <span class="p">[</span><span class="ss">:div.p-8.max-w-screen-lg</span>
+     ,,,
+     <span class="p">[</span><span class="ss">:table.w-full</span>
+      <span class="p">[</span><span class="ss">:thead</span>
+       <span class="p">[</span><span class="ss">:tr.border-b.bg-base-200</span>
+        ,,,
+        <span class="p">[</span><span class="ss">:th.py-2.text-left.pr-4</span>
+         <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="s">"desc"</span> <span class="nv">sort-order</span><span class="p">)</span> <span class="s">"▼"</span> <span class="s">"▲"</span><span class="p">)</span> <span class="s">" Ranking"</span><span class="p">]</span>
+        ,,,<span class="p">]]</span>
+      <span class="p">[</span><span class="ss">:tbody</span>
+       <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">game</span> <span class="p">(</span><span class="nb">sort-by </span><span class="ss">:bgg/ranking</span> <span class="p">(</span><span class="nf">comparators</span> <span class="nv">sort-order</span><span class="p">)</span> <span class="nv">boardgames</span><span class="p">)]</span>
+         <span class="p">[</span><span class="ss">:tr.border-b.border-1</span>
+          ,,,<span class="p">])]]]))</span>
+</code></pre>
+<p>If all goes well, everything should stay the same. What a win, eh? Let’s make
+the header clickable to reverse the order. First we’ll add another handy map:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="k">def </span><span class="nv">reverse-order</span>
+  <span class="p">{</span><span class="s">"desc"</span> <span class="s">"asc"</span>
+   <span class="s">"asc"</span> <span class="s">"desc"</span><span class="p">})</span>
+</code></pre>
+<p>Then we’ll use the routing alias to change the URL’s hash params:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">[</span><span class="ss">:ui/a.hover:underline.cursor-pointer</span>
+ <span class="p">{</span><span class="ss">:ui/location</span> <span class="p">(</span><span class="nf">assoc-in</span> <span class="nv">location</span> <span class="p">[</span><span class="ss">:location/hash-params</span> <span class="ss">:sort-order</span><span class="p">]</span>
+                         <span class="p">(</span><span class="nf">reverse-order</span> <span class="nv">sort-order</span><span class="p">))}</span>
+ <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="s">"desc"</span> <span class="nv">sort-order</span><span class="p">)</span> <span class="s">"▼"</span> <span class="s">"▲"</span><span class="p">)</span> <span class="s">" Ranking"</span><span class="p">]</span>
+</code></pre>
+</div><div class="prose mt-4 section-md"><h2 id="changing-sort-columns" class="h2 section-md"><a class="group relative" href="#changing-sort-columns"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Changing sort columns</a></h2><p>The next task is to change the sorting column. This is similar to what we just
+did, so we’ll start by deciding on the current sorting column. This is a little
+bit trickier than finding the order, for two reasons.</p>
+<ol>
+<li>There are more valid options, so selecting a valid one is a bit more work.</li>
+<li>We need to map the selected parameter value to a namespaced keyword.</li>
+</ol>
+<p>To help solve both these, we’ll introduce a map of possible param values to
+appropriate sorting key:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="k">def </span><span class="nv">sort-columns</span>
+  <span class="p">{</span><span class="s">"ranking"</span> <span class="ss">:bgg/ranking</span>
+   <span class="s">"title"</span> <span class="ss">:boardgame/title</span>
+   <span class="s">"year"</span> <span class="ss">:boardgame/release-year</span>
+   <span class="s">"rating"</span> <span class="ss">:bgg/geek-rating</span>
+   <span class="s">"average"</span> <span class="ss">:bgg/average-rating</span>
+   <span class="s">"voters"</span> <span class="ss">:bgg/num-voters</span><span class="p">})</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">get-sort-column</span> <span class="p">[</span><span class="nv">location</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nb">get </span><span class="nv">sort-columns</span> <span class="p">(</span><span class="nb">-&gt; </span><span class="nv">location</span> <span class="ss">:location/hash-params</span> <span class="ss">:sort-column</span><span class="p">))</span>
+      <span class="p">(</span><span class="nb">get </span><span class="nv">sort-columns</span> <span class="s">"ranking"</span><span class="p">)))</span>
+</code></pre>
+<p>We then use this new function to sort the dataset:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-page</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">boardgames</span><span class="p">]}</span> <span class="nv">location</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">sort-order</span> <span class="p">(</span><span class="nf">get-sort-order</span> <span class="nv">location</span><span class="p">)</span>
+        <span class="nv">sort-column</span> <span class="p">(</span><span class="nf">get-sort-column</span> <span class="nv">location</span><span class="p">)]</span>
+    <span class="p">[</span><span class="ss">:div.p-8.max-w-screen-lg</span>
+     ,,,
+     <span class="p">[</span><span class="ss">:table.w-full</span>
+      <span class="p">[</span><span class="ss">:thead</span>
+       ,,,<span class="p">]</span>
+      <span class="p">[</span><span class="ss">:tbody</span>
+       <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">game</span> <span class="p">(</span><span class="nb">sort-by </span><span class="nv">sort-column</span> <span class="p">(</span><span class="nf">comparators</span> <span class="nv">sort-order</span><span class="p">)</span> <span class="nv">boardgames</span><span class="p">)]</span>
+         <span class="p">[</span><span class="ss">:tr.border-b.border-1</span> <span class="p">{</span><span class="ss">:replicant/key</span> <span class="p">(</span><span class="ss">:bgg/ranking</span> <span class="nv">game</span><span class="p">)}</span>
+          ,,,<span class="p">])]]]))</span>
+</code></pre>
+<p>Next up, we will make it possible to change the sorting column to the average
+rating by clicking the header:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">[</span><span class="ss">:th.py-2.whitespace-nowrap.text-left.pr-4</span>
+ <span class="p">[</span><span class="ss">:ui/a</span> <span class="p">{</span><span class="ss">:ui/location</span>
+         <span class="p">(</span><span class="nf">assoc-in</span> <span class="nv">location</span> <span class="p">[</span><span class="ss">:location/hash-params</span> <span class="ss">:sort-column</span><span class="p">]</span>
+                   <span class="s">"average"</span><span class="p">)}</span>
+  <span class="s">"Avg. rating"</span><span class="p">]]</span>
+</code></pre>
+<p>Clicking this header will sort the table by average rating, but now the headers
+are out of sync. We have to also move the marker, and make the link <em>either</em>
+change sort order or sort column (and possibly reset the sort order). Oh my.</p>
+<p>Here’s the updated header:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">[</span><span class="ss">:th.py-2.whitespace-nowrap.text-left.pr-4</span>
+ <span class="p">[</span><span class="ss">:ui/a</span>
+  <span class="p">{</span><span class="ss">:ui/location</span>
+   <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="ss">:bgg/average-rating</span> <span class="nv">sort-column</span><span class="p">)</span>
+     <span class="p">(</span><span class="nf">assoc-in</span> <span class="nv">location</span> <span class="p">[</span><span class="ss">:location/hash-params</span> <span class="ss">:sort-order</span><span class="p">]</span>
+               <span class="p">(</span><span class="nf">reverse-order</span> <span class="nv">sort-order</span><span class="p">))</span>
+     <span class="p">(</span><span class="nf">assoc-in</span> <span class="nv">location</span> <span class="p">[</span><span class="ss">:location/hash-params</span> <span class="ss">:sort-column</span><span class="p">]</span>
+               <span class="s">"average"</span><span class="p">))}</span>
+  <span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nb">= </span><span class="ss">:bgg/average-rating</span> <span class="nv">sort-column</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="s">"desc"</span> <span class="nv">sort-order</span><span class="p">)</span> <span class="s">"▼ "</span> <span class="s">"▲ "</span><span class="p">))</span>
+  <span class="s">"Avg. rating"</span><span class="p">]]</span>
+</code></pre>
+<p>This now works, but the ranking header is still stuck. Basically we need this
+piece of logic on the header for every sortable column. Time to extract a
+function:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-header-link</span> <span class="p">[</span><span class="nv">location</span> <span class="nv">k</span> <span class="nv">param-v</span> <span class="nv">label</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">sort-order</span> <span class="p">(</span><span class="nf">get-sort-order</span> <span class="nv">location</span><span class="p">)</span>
+        <span class="nv">sort-column</span> <span class="p">(</span><span class="nf">get-sort-column</span> <span class="nv">location</span><span class="p">)]</span>
+    <span class="p">[</span><span class="ss">:ui/a</span>
+     <span class="p">{</span><span class="ss">:ui/location</span>
+      <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="nv">k</span> <span class="nv">sort-column</span><span class="p">)</span>
+        <span class="p">(</span><span class="nf">assoc-in</span> <span class="nv">location</span> <span class="p">[</span><span class="ss">:location/hash-params</span> <span class="ss">:sort-order</span><span class="p">]</span>
+                  <span class="p">(</span><span class="nf">reverse-order</span> <span class="nv">sort-order</span><span class="p">))</span>
+        <span class="p">(</span><span class="nf">assoc-in</span> <span class="nv">location</span> <span class="p">[</span><span class="ss">:location/hash-params</span> <span class="ss">:sort-column</span><span class="p">]</span>
+                  <span class="nv">param-v</span><span class="p">))}</span>
+     <span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nb">= </span><span class="nv">k</span> <span class="nv">sort-column</span><span class="p">)</span>
+       <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="s">"desc"</span> <span class="nv">sort-order</span><span class="p">)</span> <span class="s">"▼ "</span> <span class="s">"▲ "</span><span class="p">))</span>
+     <span class="nv">label</span><span class="p">]))</span>
+</code></pre>
+<p>In order to avoid a “everything but the kitchen sink” style signature, this
+helper finds the sort order and column from the location. This isn’t ideal, but
+let’s not worry about performance until we have to.</p>
+<p>We can use this helper on all the headers, and end up with a neatly sortable
+table:</p>
+</div><div class="mx-auto my-6 section-lg"><pre class="codehilite bg-base-200 codehilite"><code class="clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-page</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">boardgames</span><span class="p">]}</span> <span class="nv">location</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">sort-order</span> <span class="p">(</span><span class="nf">get-sort-order</span> <span class="nv">location</span><span class="p">)</span>
+        <span class="nv">sort-column</span> <span class="p">(</span><span class="nf">get-sort-column</span> <span class="nv">location</span><span class="p">)]</span>
+    <span class="p">[</span><span class="ss">:div.p-8.max-w-screen-lg</span>
+     <span class="p">[</span><span class="ss">:h1.text-2xl.font-serif.mb-4</span> <span class="s">"Boardgames ranked by Boardgamegeek"</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">:table.w-full</span>
+      <span class="p">[</span><span class="ss">:thead</span>
+       <span class="p">[</span><span class="ss">:tr.border-b.bg-base-200</span>
+        <span class="p">[</span><span class="ss">:th.py-2.text-left.px-4</span>
+         <span class="p">(</span><span class="nf">render-header-link</span> <span class="nv">location</span> <span class="ss">:boardgame/title</span> <span class="s">"title"</span> <span class="s">"Title"</span><span class="p">)]</span>
+        <span class="p">[</span><span class="ss">:th.py-2.text-left.pr-4</span>
+         <span class="p">(</span><span class="nf">render-header-link</span> <span class="nv">location</span> <span class="ss">:boardgame/release-year</span> <span class="s">"year"</span> <span class="s">"Released"</span><span class="p">)]</span>
+        <span class="p">[</span><span class="ss">:th.py-2.text-left.pr-4</span>
+         <span class="p">(</span><span class="nf">render-header-link</span> <span class="nv">location</span> <span class="ss">:bgg/ranking</span> <span class="s">"ranking"</span> <span class="s">"Ranking"</span><span class="p">)]</span>
+        <span class="p">[</span><span class="ss">:th.py-2.whitespace-nowrap.text-left.pr-4</span>
+         <span class="p">(</span><span class="nf">render-header-link</span> <span class="nv">location</span> <span class="ss">:bgg/geek-rating</span> <span class="s">"rating"</span> <span class="s">"Geek rating"</span><span class="p">)]</span>
+        <span class="p">[</span><span class="ss">:th.py-2.whitespace-nowrap.text-left.pr-4</span>
+         <span class="p">(</span><span class="nf">render-header-link</span> <span class="nv">location</span> <span class="ss">:bgg/average-rating</span> <span class="s">"average"</span> <span class="s">"Avg. rating"</span><span class="p">)]</span>
+        <span class="p">[</span><span class="ss">:th.py-2.text-right.px-4</span>
+         <span class="p">(</span><span class="nf">render-header-link</span> <span class="nv">location</span> <span class="ss">:bgg/num-voters</span> <span class="s">"voters"</span> <span class="s">"Voters"</span><span class="p">)]]]</span>
+      <span class="p">[</span><span class="ss">:tbody</span>
+       <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">game</span> <span class="p">(</span><span class="nb">sort-by </span><span class="nv">sort-column</span> <span class="p">(</span><span class="nf">comparators</span> <span class="nv">sort-order</span><span class="p">)</span> <span class="nv">boardgames</span><span class="p">)]</span>
+         <span class="p">[</span><span class="ss">:tr.border-b.border-1</span> <span class="p">{</span><span class="ss">:replicant/key</span> <span class="p">(</span><span class="ss">:bgg/ranking</span> <span class="nv">game</span><span class="p">)}</span>
+          <span class="p">[</span><span class="ss">:th.py-2.px-4.text-left</span> <span class="p">(</span><span class="ss">:boardgame/title</span> <span class="nv">game</span><span class="p">)]</span>
+          <span class="p">[</span><span class="ss">:td.py-2.pr-4.text-left</span> <span class="p">(</span><span class="ss">:boardgame/release-year</span> <span class="nv">game</span><span class="p">)]</span>
+          <span class="p">[</span><span class="ss">:td.py-2.pr-4.text-center</span> <span class="p">(</span><span class="ss">:bgg/ranking</span> <span class="nv">game</span><span class="p">)]</span>
+          <span class="p">[</span><span class="ss">:td.py-2.pr-4.text-left</span> <span class="p">(</span><span class="ss">:bgg/geek-rating</span> <span class="nv">game</span><span class="p">)]</span>
+          <span class="p">[</span><span class="ss">:td.py-2.pr-4.text-left</span> <span class="p">(</span><span class="ss">:bgg/average-rating</span> <span class="nv">game</span><span class="p">)]</span>
+          <span class="p">[</span><span class="ss">:td.py-2.px-4.text-right</span> <span class="p">(</span><span class="ss">:bgg/num-voters</span> <span class="nv">game</span><span class="p">)]])]]]))</span>
+</code></pre></div><div class="prose mt-4 section-md"><p>Both <code>thead</code> and <code>tbody</code> loop through the same attributes in order to build a
+row. Currently we’re relying on these two pieces of code matching up. It would
+be neat if we could make both the headers and the body rows be generated from
+the same data to guarantee that they correspond.</p>
+<p>Let’s gather all the column information in a data structure:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="k">def </span><span class="nv">columns</span>
+  <span class="p">[{</span><span class="ss">:f</span> <span class="ss">:boardgame/title</span>, <span class="ss">:id</span> <span class="s">"title"</span>, <span class="ss">:label</span> <span class="s">"Title"</span><span class="p">}</span>
+   <span class="p">{</span><span class="ss">:f</span> <span class="ss">:boardgame/release-year</span>, <span class="ss">:id</span> <span class="s">"year"</span>, <span class="ss">:label</span> <span class="s">"Released"</span><span class="p">}</span>
+   <span class="p">{</span><span class="ss">:f</span> <span class="ss">:bgg/ranking</span>, <span class="ss">:id</span> <span class="s">"ranking"</span>, <span class="ss">:label</span> <span class="s">"Ranking"</span><span class="p">}</span>
+   <span class="p">{</span><span class="ss">:f</span> <span class="ss">:bgg/geek-rating</span>, <span class="ss">:id</span> <span class="s">"rating"</span>, <span class="ss">:label</span> <span class="s">"Geek rating"</span><span class="p">}</span>
+   <span class="p">{</span><span class="ss">:f</span> <span class="ss">:bgg/average-rating</span>, <span class="ss">:id</span> <span class="s">"average"</span>, <span class="ss">:label</span> <span class="s">"Avg. rating"</span><span class="p">}</span>
+   <span class="p">{</span><span class="ss">:f</span> <span class="ss">:bgg/num-voters</span>, <span class="ss">:id</span> <span class="s">"voters"</span>, <span class="ss">:label</span> <span class="s">"Voters"</span><span class="p">}])</span>
+</code></pre>
+<p>I renamed <code>k</code> to <code>:f</code> because if we use it as a function, it isn’t limited to
+being a keyword. If you wanted to display the year with the title, you could add
+a column like so:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">{</span><span class="ss">:f</span> <span class="o">#</span><span class="p">(</span><span class="nb">str </span><span class="p">(</span><span class="ss">:boardgame/title</span> <span class="nv">%</span><span class="p">)</span> <span class="s">" ("</span> <span class="p">(</span><span class="ss">:boardgame/release-year</span><span class="p">)</span> <span class="s">")"</span><span class="p">)</span>
+ <span class="ss">:k</span> <span class="s">"title-year"</span>
+ <span class="ss">:label</span> <span class="s">"Title"</span><span class="p">}</span>
+</code></pre>
+<p>To use this new data structure, we must update <code>get-sort-column</code> to look in it
+instead of the map we made before:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">get-sort-column</span> <span class="p">[</span><span class="nv">location</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">param</span> <span class="p">(</span><span class="nb">-&gt; </span><span class="nv">location</span> <span class="ss">:location/hash-params</span> <span class="ss">:sort-column</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nb">filter </span><span class="p">(</span><span class="nb">comp </span><span class="o">#</span><span class="p">{</span><span class="nv">param</span><span class="p">}</span> <span class="ss">:id</span><span class="p">)</span> <span class="nv">columns</span><span class="p">))</span>
+        <span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nb">filter </span><span class="p">(</span><span class="nb">comp </span><span class="o">#</span><span class="p">{</span><span class="s">"ranking"</span><span class="p">}</span> <span class="ss">:id</span><span class="p">)</span> <span class="nv">columns</span><span class="p">)))))</span>
+</code></pre>
+<p>The updated render function is looking a little more regular, and at the very
+least the headers are now guaranteed to correspond to the body rows:</p>
+</div><div class="mx-auto my-6 section-lg"><pre class="codehilite bg-base-200 codehilite"><code class="clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-page</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">boardgames</span><span class="p">]}</span> <span class="nv">location</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">sort-order</span> <span class="p">(</span><span class="nf">get-sort-order</span> <span class="nv">location</span><span class="p">)</span>
+        <span class="nv">sort-column</span> <span class="p">(</span><span class="nf">get-sort-column</span> <span class="nv">location</span><span class="p">)]</span>
+    <span class="p">[</span><span class="ss">:div.p-8.max-w-screen-lg</span>
+     <span class="p">[</span><span class="ss">:h1.text-2xl.font-serif.mb-4</span> <span class="s">"Boardgames ranked by Boardgamegeek"</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">:table.w-full</span>
+      <span class="p">[</span><span class="ss">:thead</span>
+       <span class="p">[</span><span class="ss">:tr.border-b.bg-base-200</span>
+        <span class="p">[</span><span class="ss">:th.py-2.text-left.px-4</span>
+         <span class="p">(</span><span class="nf">render-header-link</span> <span class="nv">location</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">columns</span> <span class="mi">0</span><span class="p">))]</span>
+        <span class="p">[</span><span class="ss">:th.py-2.text-left.pr-4</span>
+         <span class="p">(</span><span class="nf">render-header-link</span> <span class="nv">location</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">columns</span> <span class="mi">1</span><span class="p">))]</span>
+        <span class="p">[</span><span class="ss">:th.py-2.text-left.pr-4</span>
+         <span class="p">(</span><span class="nf">render-header-link</span> <span class="nv">location</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">columns</span> <span class="mi">2</span><span class="p">))]</span>
+        <span class="p">[</span><span class="ss">:th.py-2.whitespace-nowrap.text-left.pr-4</span>
+         <span class="p">(</span><span class="nf">render-header-link</span> <span class="nv">location</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">columns</span> <span class="mi">3</span><span class="p">))]</span>
+        <span class="p">[</span><span class="ss">:th.py-2.whitespace-nowrap.text-left.pr-4</span>
+         <span class="p">(</span><span class="nf">render-header-link</span> <span class="nv">location</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">columns</span> <span class="mi">4</span><span class="p">))]</span>
+        <span class="p">[</span><span class="ss">:th.py-2.text-right.px-4</span>
+         <span class="p">(</span><span class="nf">render-header-link</span> <span class="nv">location</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">columns</span> <span class="mi">5</span><span class="p">))]]]</span>
+      <span class="p">[</span><span class="ss">:tbody</span>
+       <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">game</span> <span class="p">(</span><span class="nb">sort-by </span><span class="p">(</span><span class="ss">:f</span> <span class="nv">sort-column</span><span class="p">)</span> <span class="p">(</span><span class="nf">comparators</span> <span class="nv">sort-order</span><span class="p">)</span> <span class="nv">boardgames</span><span class="p">)]</span>
+         <span class="p">[</span><span class="ss">:tr.border-b.border-1</span> <span class="p">{</span><span class="ss">:replicant/key</span> <span class="p">(</span><span class="ss">:bgg/ranking</span> <span class="nv">game</span><span class="p">)}</span>
+          <span class="p">[</span><span class="ss">:th.py-2.px-4.text-left</span> <span class="p">((</span><span class="ss">:f</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">columns</span> <span class="mi">0</span><span class="p">))</span> <span class="nv">game</span><span class="p">)]</span>
+          <span class="p">[</span><span class="ss">:td.py-2.pr-4.text-left</span> <span class="p">((</span><span class="ss">:f</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">columns</span> <span class="mi">1</span><span class="p">))</span> <span class="nv">game</span><span class="p">)]</span>
+          <span class="p">[</span><span class="ss">:td.py-2.pr-4.text-center</span> <span class="p">((</span><span class="ss">:f</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">columns</span> <span class="mi">2</span><span class="p">))</span> <span class="nv">game</span><span class="p">)]</span>
+          <span class="p">[</span><span class="ss">:td.py-2.pr-4.text-left</span> <span class="p">((</span><span class="ss">:f</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">columns</span> <span class="mi">3</span><span class="p">))</span> <span class="nv">game</span><span class="p">)]</span>
+          <span class="p">[</span><span class="ss">:td.py-2.pr-4.text-left</span> <span class="p">((</span><span class="ss">:f</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">columns</span> <span class="mi">4</span><span class="p">))</span> <span class="nv">game</span><span class="p">)]</span>
+          <span class="p">[</span><span class="ss">:td.py-2.px-4.text-right</span> <span class="p">((</span><span class="ss">:f</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">columns</span> <span class="mi">5</span><span class="p">))</span> <span class="nv">game</span><span class="p">)]])]]]))</span>
+</code></pre></div><div class="prose mt-4 section-md"><p>It would be nice if we could loop the columns to create rows. Unfortunately,
+custom formatting is in our way. But what if we could separate the formatting
+wrappers from the content?</p>
+</div><div class="prose mt-4 section-md"><h2 id="adding-aliases" class="h2 section-md"><a class="group relative" href="#adding-aliases"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Adding aliases</a></h2><p>To increase the abstraction level, we will create aliases for the table,
+thead/tbody and cells. Since aliases evaluate top-down, parent aliases can
+manipulate their content, which we can use to pass along data.</p>
+<p>Let’s start by defining a table alias. It will receive the columns and the
+location. Create <code>src/boardgames/ui/sortable_table.cljc</code> with the following:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">boardgames.ui.sortable-table</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">replicant.alias</span> <span class="ss">:refer</span> <span class="p">[</span><span class="nv">defalias</span><span class="p">]]</span>
+            <span class="p">[</span><span class="nv">replicant.hiccup</span> <span class="ss">:as</span> <span class="nv">hiccup</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">get-sort-order</span> <span class="p">[</span><span class="nv">location</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="s">"desc"</span> <span class="p">(</span><span class="nb">-&gt; </span><span class="nv">location</span> <span class="ss">:location/hash-params</span> <span class="ss">:sort-order</span><span class="p">))</span>
+    <span class="s">"desc"</span>
+    <span class="s">"asc"</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nf">defalias</span> <span class="nv">table</span> <span class="p">[</span><span class="nv">attrs</span> <span class="nv">children</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">into </span>                                                     <span class="c1">;; 1</span>
+   <span class="p">[</span><span class="ss">:table</span> <span class="nv">attrs</span><span class="p">]</span>                                            <span class="c1">;; 2</span>
+   <span class="p">(</span><span class="nf">mapv</span> <span class="o">#</span><span class="p">(</span><span class="nf">hiccup/update-attrs</span>                               <span class="c1">;; 3</span>
+           <span class="nv">%</span> <span class="nv">assoc</span>
+           <span class="ss">::location</span> <span class="p">(</span><span class="ss">::location</span> <span class="nv">attrs</span><span class="p">)</span>                     <span class="c1">;; 4</span>
+           <span class="ss">::columns</span> <span class="p">(</span><span class="ss">::columns</span> <span class="nv">attrs</span><span class="p">)</span>
+           <span class="ss">::sort-order</span> <span class="p">(</span><span class="nf">get-sort-order</span> <span class="p">(</span><span class="ss">::location</span> <span class="nv">attrs</span><span class="p">)))</span> <span class="c1">;; 5</span>
+         <span class="nv">children</span><span class="p">)))</span>
+</code></pre>
+<ol>
+<li>Avoid introducing more nesting around the children.</li>
+<li>The sortable table can take arbitrary attributes for use with the table
+element.</li>
+<li><code>update-attrs</code> works like <code>update</code> for the attribute map of a hiccup node.
+Using this function means you don’t have to worry about whether the node has
+explicit attributes (e.g. <code>[:tbody {:class "tbody"} [:tr ,,,]]</code>) or not (e.g.
+<code>[:tbody [:tr ,,,]]</code>).</li>
+<li>Since Replicant will not try to render namespaced keys in the attributes map
+as DOM attributes, they are used to pass all the “technical” parameters
+(location, columns).</li>
+<li>We find the current sort order once and pass it to all the children.</li>
+</ol>
+<p>But what about the sort column? <code>get-sort-column</code> currently uses a named column
+as the default one, this won’t fly in a generic element. Let’s instead look for
+either the column marked as default, or just use the first one:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">get-sort-column</span> <span class="p">[</span><span class="nv">location</span> <span class="nv">columns</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">param</span> <span class="p">(</span><span class="nb">-&gt; </span><span class="nv">location</span> <span class="ss">:location/hash-params</span> <span class="ss">:sort-column</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nb">filter </span><span class="p">(</span><span class="nb">comp </span><span class="o">#</span><span class="p">{</span><span class="nv">param</span><span class="p">}</span> <span class="ss">:id</span><span class="p">)</span> <span class="nv">columns</span><span class="p">))</span>
+        <span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nb">filter </span><span class="ss">:default?</span> <span class="nv">columns</span><span class="p">))</span>
+        <span class="p">(</span><span class="nb">first </span><span class="nv">columns</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="nf">defalias</span> <span class="nv">table</span> <span class="p">[</span><span class="nv">attrs</span> <span class="nv">children</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">into</span>
+   <span class="p">[</span><span class="ss">:table</span> <span class="nv">attrs</span><span class="p">]</span>
+   <span class="p">(</span><span class="nf">mapv</span> <span class="o">#</span><span class="p">(</span><span class="nf">hiccup/update-attrs</span>
+           <span class="nv">%</span> <span class="nv">assoc</span>
+           <span class="ss">::location</span> <span class="p">(</span><span class="ss">::location</span> <span class="nv">attrs</span><span class="p">)</span>
+           <span class="ss">::columns</span> <span class="p">(</span><span class="ss">::columns</span> <span class="nv">attrs</span><span class="p">)</span>
+           <span class="ss">::sort-order</span> <span class="p">(</span><span class="nf">get-sort-order</span> <span class="p">(</span><span class="ss">::location</span> <span class="nv">attrs</span><span class="p">))</span>
+           <span class="ss">::sort-column</span> <span class="p">(</span><span class="nf">get-sort-column</span>
+                           <span class="p">(</span><span class="ss">::location</span> <span class="nv">attrs</span><span class="p">)</span>
+                           <span class="p">(</span><span class="ss">::columns</span> <span class="nv">attrs</span><span class="p">)))</span>
+         <span class="nv">children</span><span class="p">)))</span>
+</code></pre>
+<p>Using this new alias won’t make much of a difference yet:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">boardgames.ui</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">boardgames.ui.sortable-table</span> <span class="ss">:as</span> <span class="nv">st</span><span class="p">]))</span>
+
+,,,
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">render-page</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">boardgames</span><span class="p">]}</span> <span class="nv">location</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">sort-order</span> <span class="p">(</span><span class="nf">get-sort-order</span> <span class="nv">location</span><span class="p">)</span>
+        <span class="nv">sort-column</span> <span class="p">(</span><span class="nf">get-sort-column</span> <span class="nv">location</span><span class="p">)]</span>
+    <span class="p">[</span><span class="ss">:div.p-8.max-w-screen-lg</span>
+     ,,,
+     <span class="p">[</span><span class="ss">::st/table.w-full</span>
+      <span class="p">{</span><span class="ss">::st/location</span> <span class="nv">location</span>
+       <span class="ss">::st/columns</span> <span class="nv">columns</span><span class="p">}</span>
+      ,,,<span class="p">]]))</span>
+</code></pre>
+<p>The custom table element passes the location, column and sorting criteria to the
+<code>thead</code> and <code>tbody</code>. In order to get them to the column headers, we’ll need a
+custom <code>thead</code> as well.</p>
+<p>We will make a shortcut for the header: we’ll assume that there is only one row
+of headers, so our custom <code>thead</code> will take <code>th</code> elements as direct children.
+This isn’t necessary, but makes things more compact.</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">defalias</span> <span class="nv">thead</span> <span class="p">[</span><span class="nv">attrs</span> <span class="nv">children</span><span class="p">]</span>
+  <span class="p">[</span><span class="ss">:thead</span>
+   <span class="p">(</span><span class="nf">into</span>
+    <span class="p">[</span><span class="ss">:tr</span> <span class="nv">attrs</span><span class="p">]</span>
+    <span class="p">(</span><span class="nf">map-indexed</span>
+     <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">idx</span> <span class="nv">child</span><span class="p">]</span>
+       <span class="p">(</span><span class="nf">hiccup/update-attrs</span>
+        <span class="nv">child</span> <span class="nv">assoc</span>
+        <span class="ss">::location</span> <span class="p">(</span><span class="ss">::location</span> <span class="nv">attrs</span><span class="p">)</span>
+        <span class="ss">::column</span> <span class="p">(</span><span class="nb">nth </span><span class="p">(</span><span class="ss">::columns</span> <span class="nv">attrs</span><span class="p">)</span> <span class="nv">idx</span><span class="p">)</span>
+        <span class="ss">::sort-order</span> <span class="p">(</span><span class="nf">get-sort-order</span> <span class="p">(</span><span class="ss">::location</span> <span class="nv">attrs</span><span class="p">))</span>
+        <span class="ss">::sort-column</span> <span class="p">(</span><span class="nf">get-sort-column</span>
+                        <span class="p">(</span><span class="ss">::location</span> <span class="nv">attrs</span><span class="p">)</span>
+                        <span class="p">(</span><span class="ss">::columns</span> <span class="nv">attrs</span><span class="p">))))</span>
+     <span class="nv">children</span><span class="p">))])</span>
+</code></pre>
+<p>Notice that we used the index to only pass the relevant column to each child.
+This will be real handy inside each header. Using this element also makes little
+difference yet:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-page</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">boardgames</span><span class="p">]}</span> <span class="nv">location</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">sort-order</span> <span class="p">(</span><span class="nf">get-sort-order</span> <span class="nv">location</span><span class="p">)</span>
+        <span class="nv">sort-column</span> <span class="p">(</span><span class="nf">get-sort-column</span> <span class="nv">location</span><span class="p">)]</span>
+    <span class="p">[</span><span class="ss">:div.p-8.max-w-screen-lg</span>
+     ,,,
+     <span class="p">[</span><span class="ss">::st/table.w-full</span>
+      <span class="p">{</span><span class="ss">::st/location</span> <span class="nv">location</span>
+       <span class="ss">::st/columns</span> <span class="nv">columns</span><span class="p">}</span>
+      <span class="p">[</span><span class="ss">::st/thead.border-b.bg-base-200</span>
+       <span class="p">[</span><span class="ss">:th.py-2.text-left.px-4</span>
+        <span class="p">(</span><span class="nf">render-header-link</span> <span class="nv">location</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">columns</span> <span class="mi">0</span><span class="p">))]</span>
+       ,,,<span class="p">]</span>
+      ,,,<span class="p">]]))</span>
+</code></pre>
+<p>The custom header element can now rely on being passed all the information it
+needs. This means that it has all the necessary information to create the
+content of the header, while we control the attributes of the header element.
+Very much like a templating system.</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="k">def </span><span class="nv">reverse-order</span>
+  <span class="p">{</span><span class="s">"desc"</span> <span class="s">"asc"</span>
+   <span class="s">"asc"</span> <span class="s">"desc"</span><span class="p">})</span>
+
+<span class="p">(</span><span class="nf">defalias</span> <span class="nv">th</span> <span class="p">[{</span><span class="ss">::keys</span> <span class="p">[</span><span class="nv">column</span> <span class="nv">sort-column</span> <span class="nv">sort-order</span> <span class="nv">location</span><span class="p">]</span> <span class="ss">:as</span> <span class="nv">attrs</span><span class="p">}]</span>
+  <span class="p">[</span><span class="ss">:th</span> <span class="nv">attrs</span>
+   <span class="p">[</span><span class="ss">:ui/a</span>
+    <span class="p">{</span><span class="ss">:ui/location</span>
+     <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="ss">:id</span> <span class="nv">column</span><span class="p">)</span> <span class="p">(</span><span class="ss">:id</span> <span class="nv">sort-column</span><span class="p">))</span>
+       <span class="p">(</span><span class="nf">assoc-in</span> <span class="nv">location</span> <span class="p">[</span><span class="ss">:location/hash-params</span> <span class="ss">:sort-order</span><span class="p">]</span>
+                 <span class="p">(</span><span class="nf">reverse-order</span> <span class="nv">sort-order</span><span class="p">))</span>
+       <span class="p">(</span><span class="nf">assoc-in</span> <span class="nv">location</span> <span class="p">[</span><span class="ss">:location/hash-params</span> <span class="ss">:sort-column</span><span class="p">]</span>
+                 <span class="p">(</span><span class="ss">:id</span> <span class="nv">column</span><span class="p">)))}</span>
+    <span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="ss">:id</span> <span class="nv">column</span><span class="p">)</span> <span class="p">(</span><span class="ss">:id</span> <span class="nv">sort-column</span><span class="p">))</span>
+      <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="s">"desc"</span> <span class="nv">sort-order</span><span class="p">)</span> <span class="s">"▼ "</span> <span class="s">"▲ "</span><span class="p">))</span>
+    <span class="p">(</span><span class="ss">:label</span> <span class="nv">column</span><span class="p">)]])</span>
+</code></pre>
+<p>This custom element will help us quite a bit. We can now remove the header link
+function, and update the render function to this:</p>
+</div><div class="mx-auto my-6 section-lg"><pre class="codehilite bg-base-200 codehilite"><code class="clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-page</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">boardgames</span><span class="p">]}</span> <span class="nv">location</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">sort-order</span> <span class="p">(</span><span class="nf">get-sort-order</span> <span class="nv">location</span><span class="p">)</span>
+        <span class="nv">sort-column</span> <span class="p">(</span><span class="nf">get-sort-column</span> <span class="nv">location</span><span class="p">)]</span>
+    <span class="p">[</span><span class="ss">:div.p-8.max-w-screen-lg</span>
+     <span class="p">[</span><span class="ss">:h1.text-2xl.font-serif.mb-4</span> <span class="s">"Boardgames ranked by Boardgamegeek"</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">::st/table.w-full</span>
+      <span class="p">{</span><span class="ss">::st/location</span> <span class="nv">location</span>
+       <span class="ss">::st/columns</span> <span class="nv">columns</span><span class="p">}</span>
+      <span class="p">[</span><span class="ss">::st/thead.border-b.bg-base-200</span>
+       <span class="p">[</span><span class="ss">::st/th.py-2.text-left.px-4</span><span class="p">]</span>
+       <span class="p">[</span><span class="ss">::st/th.py-2.text-left.pr-4</span><span class="p">]</span>
+       <span class="p">[</span><span class="ss">::st/th.py-2.text-left.pr-4</span><span class="p">]</span>
+       <span class="p">[</span><span class="ss">::st/th.py-2.whitespace-nowrap.text-left.pr-4</span><span class="p">]</span>
+       <span class="p">[</span><span class="ss">::st/th.py-2.whitespace-nowrap.text-left.pr-4</span><span class="p">]</span>
+       <span class="p">[</span><span class="ss">::st/th.py-2.text-right.px-4</span><span class="p">]]</span>
+      <span class="p">[</span><span class="ss">:tbody</span>
+       <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">game</span> <span class="p">(</span><span class="nb">sort-by </span><span class="p">(</span><span class="ss">:f</span> <span class="nv">sort-column</span><span class="p">)</span> <span class="p">(</span><span class="nf">comparators</span> <span class="nv">sort-order</span><span class="p">)</span> <span class="nv">boardgames</span><span class="p">)]</span>
+         <span class="p">[</span><span class="ss">:tr.border-b.border-1</span> <span class="p">{</span><span class="ss">:replicant/key</span> <span class="p">(</span><span class="ss">:bgg/ranking</span> <span class="nv">game</span><span class="p">)}</span>
+          <span class="p">[</span><span class="ss">:th.py-2.px-4.text-left</span> <span class="p">((</span><span class="ss">:f</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">columns</span> <span class="mi">0</span><span class="p">))</span> <span class="nv">game</span><span class="p">)]</span>
+          <span class="p">[</span><span class="ss">:td.py-2.pr-4.text-left</span> <span class="p">((</span><span class="ss">:f</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">columns</span> <span class="mi">1</span><span class="p">))</span> <span class="nv">game</span><span class="p">)]</span>
+          <span class="p">[</span><span class="ss">:td.py-2.pr-4.text-center</span> <span class="p">((</span><span class="ss">:f</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">columns</span> <span class="mi">2</span><span class="p">))</span> <span class="nv">game</span><span class="p">)]</span>
+          <span class="p">[</span><span class="ss">:td.py-2.pr-4.text-left</span> <span class="p">((</span><span class="ss">:f</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">columns</span> <span class="mi">3</span><span class="p">))</span> <span class="nv">game</span><span class="p">)]</span>
+          <span class="p">[</span><span class="ss">:td.py-2.pr-4.text-left</span> <span class="p">((</span><span class="ss">:f</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">columns</span> <span class="mi">4</span><span class="p">))</span> <span class="nv">game</span><span class="p">)]</span>
+          <span class="p">[</span><span class="ss">:td.py-2.px-4.text-right</span> <span class="p">((</span><span class="ss">:f</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">columns</span> <span class="mi">5</span><span class="p">))</span> <span class="nv">game</span><span class="p">)]])]]]))</span>
+</code></pre></div><div class="prose mt-4 section-md"><p>The final piece of the puzzle is to wrap the <code>tbody</code> and each cell in the body
+rows. Once again we will allow nesting cells directly in it without the <code>tr</code>.
+This time, we will loop the dataset to generate the rows.</p>
+<p>Here’s the tbody:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="k">def </span><span class="nv">comparators</span>
+  <span class="p">{</span><span class="s">"desc"</span> <span class="nv">&gt;</span>
+   <span class="s">"asc"</span> <span class="nv">&lt;</span><span class="p">})</span>
+
+<span class="p">(</span><span class="nf">defalias</span> <span class="nv">tbody</span> <span class="p">[{</span><span class="ss">::keys</span> <span class="p">[</span><span class="nv">columns</span> <span class="nv">sort-column</span> <span class="nv">sort-order</span> <span class="nv">data</span><span class="p">]</span>
+                  <span class="ss">:as</span> <span class="nv">attrs</span><span class="p">}</span> <span class="nv">children</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">into</span>
+   <span class="p">[</span><span class="ss">:tbody</span><span class="p">]</span>
+   <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="nv">data</span>
+        <span class="p">(</span><span class="nb">sort-by </span><span class="p">(</span><span class="ss">:f</span> <span class="nv">sort-column</span><span class="p">)</span> <span class="p">(</span><span class="nf">comparators</span> <span class="nv">sort-order</span><span class="p">))</span>
+        <span class="p">(</span><span class="nf">mapv</span>
+         <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">cell-data</span><span class="p">]</span>
+           <span class="p">(</span><span class="nb">into </span><span class="p">[</span><span class="ss">:tr</span> <span class="p">(</span><span class="nb">assoc </span><span class="nv">attrs</span> <span class="ss">:replicant/key</span> <span class="nv">cell-data</span><span class="p">)]</span>
+                 <span class="p">(</span><span class="nf">map-indexed</span>
+                  <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">col-idx</span> <span class="nv">cell</span><span class="p">]</span>
+                    <span class="p">(</span><span class="nf">hiccup/update-attrs</span>
+                     <span class="nv">cell</span> <span class="nv">assoc</span>
+                     <span class="ss">::column</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">columns</span> <span class="nv">col-idx</span><span class="p">)</span>
+                     <span class="ss">::data</span> <span class="nv">cell-data</span><span class="p">))</span>
+                  <span class="nv">children</span><span class="p">)))))))</span>
+</code></pre>
+<p>Notice that we set the <code>:replicant/key</code> on each row. Since we can’t make
+assumptions about which keys to select we just set the entire map as key, the
+effect will be exactly the same.</p>
+<p>Here’s the <code>td</code>:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">defalias</span> <span class="nv">td</span> <span class="p">[{</span><span class="ss">::keys</span> <span class="p">[</span><span class="nv">column</span> <span class="nv">data</span><span class="p">]</span> <span class="ss">:as</span> <span class="nv">attrs</span><span class="p">}]</span>
+  <span class="p">[</span><span class="ss">:td</span> <span class="nv">attrs</span> <span class="p">((</span><span class="ss">:f</span> <span class="nv">column</span><span class="p">)</span> <span class="nv">data</span><span class="p">)])</span>
+</code></pre>
+<p>With these final pieces, the original usage code is now down to the bare
+essentials, only expressing the visual aspects and the column layouts:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">boardgames.ui</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">boardgames.ui.sortable-table</span> <span class="ss">:as</span> <span class="nv">st</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="k">def </span><span class="nv">columns</span>
+  <span class="p">[{</span><span class="ss">:f</span> <span class="ss">:boardgame/title</span>, <span class="ss">:id</span> <span class="s">"title"</span>, <span class="ss">:label</span> <span class="s">"Title"</span><span class="p">}</span>
+   <span class="p">{</span><span class="ss">:f</span> <span class="ss">:boardgame/release-year</span>, <span class="ss">:id</span> <span class="s">"year"</span>, <span class="ss">:label</span> <span class="s">"Released"</span><span class="p">}</span>
+   <span class="p">{</span><span class="ss">:f</span> <span class="ss">:bgg/ranking</span>, <span class="ss">:id</span> <span class="s">"ranking"</span>, <span class="ss">:label</span> <span class="s">"Ranking"</span>, <span class="ss">:default?</span> <span class="nv">true</span><span class="p">}</span>
+   <span class="p">{</span><span class="ss">:f</span> <span class="ss">:bgg/geek-rating</span>, <span class="ss">:id</span> <span class="s">"rating"</span>, <span class="ss">:label</span> <span class="s">"Geek rating"</span><span class="p">}</span>
+   <span class="p">{</span><span class="ss">:f</span> <span class="ss">:bgg/average-rating</span>, <span class="ss">:id</span> <span class="s">"average"</span>, <span class="ss">:label</span> <span class="s">"Avg. rating"</span><span class="p">}</span>
+   <span class="p">{</span><span class="ss">:f</span> <span class="ss">:bgg/num-voters</span>, <span class="ss">:id</span> <span class="s">"voters"</span>, <span class="ss">:label</span> <span class="s">"Voters"</span><span class="p">}])</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">render-page</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">boardgames</span><span class="p">]}</span> <span class="nv">location</span><span class="p">]</span>
+  <span class="p">[</span><span class="ss">:div.p-8.max-w-screen-lg</span>
+   <span class="p">[</span><span class="ss">:h1.text-2xl.font-serif.mb-4</span> <span class="s">"Boardgames ranked by Boardgamegeek"</span><span class="p">]</span>
+   <span class="p">[</span><span class="ss">::st/table.w-full</span>
+    <span class="p">{</span><span class="ss">::st/location</span> <span class="nv">location</span>
+     <span class="ss">::st/columns</span> <span class="nv">columns</span><span class="p">}</span>
+    <span class="p">[</span><span class="ss">::st/thead.border-b.bg-base-200</span>
+     <span class="p">[</span><span class="ss">::st/th.py-2.text-left.px-4</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">::st/th.py-2.text-left.pr-4</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">::st/th.py-2.text-left.pr-4</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">::st/th.py-2.whitespace-nowrap.text-left.pr-4</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">::st/th.py-2.whitespace-nowrap.text-left.pr-4</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">::st/th.py-2.text-right.px-4</span><span class="p">]]</span>
+    <span class="p">[</span><span class="ss">::st/tbody.border-b.border-1</span>
+     <span class="p">{</span><span class="ss">::st/data</span> <span class="nv">boardgames</span><span class="p">}</span>
+     <span class="p">[</span><span class="ss">::st/td.py-2.px-4.text-left</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">::st/td.py-2.pr-4.text-left</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">::st/td.py-2.pr-4.text-center</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">::st/td.py-2.pr-4.text-left</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">::st/td.py-2.pr-4.text-left</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">::st/td.py-2.px-4.text-right</span><span class="p">]]]])</span>
+</code></pre>
+</div><div class="prose mt-4 section-md"><h2 id="td-vs-th" class="h2 section-md"><a class="group relative" href="#td-vs-th"><span class="absolute -left-4 group-hover:visible invisible">§ </span>td vs th</a></h2><p>You may have noticed the small cheat in the last example. In the original code,
+the title was in a <code>th</code> in <code>tbody</code>. Since <code>::st/th</code> and <code>::st/td</code> behave
+differently, this isn’t immediately possible. However, cells in <code>thead</code> and
+<code>tbody</code> receive different data, so fixing it is quite straight forward:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">defalias</span> <span class="nv">th</span> <span class="p">[{</span><span class="ss">::keys</span> <span class="p">[</span><span class="nv">column</span> <span class="nv">sort-column</span> <span class="nv">sort-order</span> <span class="nv">location</span><span class="p">]</span>
+               <span class="ss">:as</span> <span class="nv">attrs</span><span class="p">}]</span>
+  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="ss">::data</span> <span class="nv">attrs</span><span class="p">)</span>
+    <span class="p">[</span><span class="ss">:th</span> <span class="nv">attrs</span> <span class="p">((</span><span class="ss">:f</span> <span class="nv">column</span><span class="p">)</span> <span class="p">(</span><span class="ss">::data</span> <span class="nv">attrs</span><span class="p">))]</span>
+    <span class="p">[</span><span class="ss">:th</span> <span class="nv">attrs</span>
+     <span class="p">[</span><span class="ss">:ui/a</span>
+      <span class="p">{</span><span class="ss">:ui/location</span>
+       <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="ss">:id</span> <span class="nv">column</span><span class="p">)</span> <span class="p">(</span><span class="ss">:id</span> <span class="nv">sort-column</span><span class="p">))</span>
+         <span class="p">(</span><span class="nf">assoc-in</span> <span class="nv">location</span> <span class="p">[</span><span class="ss">:location/hash-params</span> <span class="ss">:sort-order</span><span class="p">]</span>
+                   <span class="p">(</span><span class="nf">reverse-order</span> <span class="nv">sort-order</span><span class="p">))</span>
+         <span class="p">(</span><span class="nf">assoc-in</span> <span class="nv">location</span> <span class="p">[</span><span class="ss">:location/hash-params</span> <span class="ss">:sort-column</span><span class="p">]</span>
+                   <span class="p">(</span><span class="ss">:id</span> <span class="nv">column</span><span class="p">)))}</span>
+      <span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="ss">:id</span> <span class="nv">column</span><span class="p">)</span> <span class="p">(</span><span class="ss">:id</span> <span class="nv">sort-column</span><span class="p">))</span>
+        <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="s">"desc"</span> <span class="nv">sort-order</span><span class="p">)</span> <span class="s">"▼ "</span> <span class="s">"▲ "</span><span class="p">))</span>
+      <span class="p">(</span><span class="ss">:label</span> <span class="nv">column</span><span class="p">)]]))</span>
+</code></pre>
+<p>With that, we can achieve the exact same layout we started with:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-page</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">boardgames</span><span class="p">]}</span> <span class="nv">location</span><span class="p">]</span>
+  <span class="p">[</span><span class="ss">:div.p-8.max-w-screen-lg</span>
+   <span class="p">[</span><span class="ss">:h1.text-2xl.font-serif.mb-4</span> <span class="s">"Boardgames ranked by Boardgamegeek"</span><span class="p">]</span>
+   <span class="p">[</span><span class="ss">::st/table.w-full</span>
+    <span class="p">{</span><span class="ss">::st/location</span> <span class="nv">location</span>
+     <span class="ss">::st/columns</span> <span class="nv">columns</span><span class="p">}</span>
+    <span class="p">[</span><span class="ss">::st/thead.border-b.bg-base-200</span>
+     <span class="p">[</span><span class="ss">::st/th.py-2.text-left.px-4</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">::st/th.py-2.text-left.pr-4</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">::st/th.py-2.text-left.pr-4</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">::st/th.py-2.whitespace-nowrap.text-left.pr-4</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">::st/th.py-2.whitespace-nowrap.text-left.pr-4</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">::st/th.py-2.text-right.px-4</span><span class="p">]]</span>
+    <span class="p">[</span><span class="ss">::st/tbody.border-b.border-1</span>
+     <span class="p">{</span><span class="ss">::st/data</span> <span class="nv">boardgames</span><span class="p">}</span>
+     <span class="p">[</span><span class="ss">::st/th.py-2.px-4.text-left</span><span class="p">]</span>     <span class="c1">;; &lt;=====</span>
+     <span class="p">[</span><span class="ss">::st/td.py-2.pr-4.text-left</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">::st/td.py-2.pr-4.text-center</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">::st/td.py-2.pr-4.text-left</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">::st/td.py-2.pr-4.text-left</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">::st/td.py-2.px-4.text-right</span><span class="p">]]]])</span>
+</code></pre>
+</div><div class="prose mt-4 section-md"><h2 id="conclusion" class="h2 section-md"><a class="group relative" href="#conclusion"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Conclusion</a></h2><p>So there you have it, a completely data-driven sortable table. Using aliases, we
+were able to clean it up to the point where it only expresses the necessary
+layout details. It can now be used to sort any dataset with any visual
+expression.</p>
+<p>Some things are still somewhat hard-coded: the query parameter names, and the
+details about the orders. These could be trivially parameterized, and doing so
+is left as an exercise for the reader.</p>
+<p>As always, <a href="https://github.com/cjohansen/replicant-sortable-table">code is available on
+Github</a>.</p>
+</div></main><script type="text/javascript" src="/bundles/d399b4851ce7/app.js"></script></body></html>

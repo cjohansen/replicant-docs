@@ -1,0 +1,365 @@
+<!DOCTYPE html><html data-theme="dark" lang="en" prefix="og: http://ogp.me/ns#"><head><title>Tic-Tac-Toe with aliases</title><meta name="theme-color" content="#202020"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta property="og:title" content="Tic-Tac-Toe with aliases"><link href="/a00f586d252b/favicon.ico" rel="icon" type="image/x-icon"><link href="/a00f586d252b/favicon.ico" rel="shortcut icon" type="image/ico"><link href="/a00f586d252b/favicon.ico" rel="shortcut icon" type="image/x-icon"><link href="/a00f586d252b/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"><link href="/285191ad6a81/apple-touch-icon.png" rel="icon" type="image/png" sizes="180x180"><link rel="stylesheet" href="/bundles/2e8dfb3c3384/styles.css"></head><body><div class="flex justify-between p-4 items-center"><div class="w-8"><a href="/"><svg style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2" viewBox="0 0 1080 1080" xml:space="preserve"><path d="M876.452 152.555c136.818 12.348 195.668 81.688 192.708 196.198h-87.197c1.569-66.295-16.004-119.066-52.748-157.356-14.398-15.003-31.913-27.882-52.763-38.353v-.489Zm98.715 270.164h87.213c-9.48 55.52-38.53 92.323-91.749 108.344 55.789 39.542 76.849 90.867 66.189 152.957l-44.388 184.981h-86.379l42.751-178.151c.149-.622.278-1.249.386-1.879 9.983-58.16-3.188-108.49-41.722-150.197 36.949-23.921 58.758-61.19 67.282-111.131a29.34 29.34 0 0 0 .417-4.924Z" fill="#4fb348"></path><path d="M757.149 152.309c138.837 11.646 198.514 81.149 195.537 196.444h-88.511c1.643-69.4-17.651-123.977-58.046-162.647-13.679-13.096-29.954-24.431-48.98-33.797Zm101.023 270.41h87.726c-9.475 55.52-38.529 92.323-91.745 108.344 55.785 39.542 76.848 90.867 66.191 152.957l-44.391 184.981h-87.689l42.752-178.151c.149-.622.278-1.249.386-1.879 9.983-58.16-3.188-108.49-41.722-150.197 36.948-23.921 58.758-61.19 67.281-111.131.153-.894.263-1.79.332-2.685h.506c.126-.747.25-1.493.373-2.239Z" fill="#00a29a"></path><path d="M76.208 847.157c-36.752-5.562-64.959-37.32-64.959-75.614 0-42.21 34.269-76.478 76.478-76.478a76.45 76.45 0 0 1 20.676 2.832c32.178 9.028 55.802 38.6 55.802 73.646 0 42.209-34.268 76.478-76.478 76.478-3.915 0-7.761-.295-11.519-.864Zm56.524-262.05a77.324 77.324 0 0 1-6.804.299c-42.209 0-76.478-34.268-76.478-76.478 0-42.209 34.269-76.478 76.478-76.478 13.663 0 26.494 3.591 37.6 9.879 23.204 13.139 38.878 38.053 38.878 66.599 0 39.917-30.647 72.732-69.674 76.179Zm-18.148 84.136 11.77-54.569c58.168-.23 105.321-47.525 105.321-105.746 0-35.555-17.586-67.035-44.526-86.209H828.11c-9.475 55.52-38.529 92.323-91.745 108.344 55.784 39.542 76.848 90.867 66.191 152.957l-44.391 184.981H539.756l34.836-151.189c13.135-57.004-4.455-118.062-91.882-118.062H353.796l-71.217 274.677H112.245c46.557-11.07 81.229-52.96 81.229-102.884 0-49.085-33.515-90.403-78.89-102.3Zm-1.803-330.67 117.483-187.485h389.845c152.584 6.696 217.9 77.175 214.789 197.665H178.595v-10.18h-65.814Z" fill="#0086ff"></path></svg></a></div><div class="flex items-center gap-4 text-sm"><a class="hover:underline" href="/learn/">Learn</a><a class="hover:underline" href="https://cljdoc.org/d/no.cjohansen/replicant/">API Reference</a><div class="w-6"><a href="https://clojurians.slack.com/archives/C06JZ4X334N" title="Replicant on the Clojurians Slack"><svg style="display: inline-block; line-height: 1;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><path d="M80,56h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V80A24,24,0,0,1,80,56Z" transform="translate(184 24) rotate(90)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M128,80H104A24,24,0,0,1,80,56h0a24,24,0,0,1,24-24h0a24,24,0,0,1,24,24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M152,32h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V56a24,24,0,0,1,24-24Z" transform="translate(304 160) rotate(-180)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M176,128V104a24,24,0,0,1,24-24h0a24,24,0,0,1,24,24h0a24,24,0,0,1-24,24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M176,104h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V128a24,24,0,0,1,24-24Z" transform="translate(24 328) rotate(-90)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M128,176h24a24,24,0,0,1,24,24h0a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M104,128h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V152a24,24,0,0,1,24-24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M80,128v24a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24h0a24,24,0,0,1,24-24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path></svg></a></div><div class="w-6"><a href="https://github.com/cjohansen/replicant" title="Replicant on Github"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg></a></div></div></div><div class="p-4 bg-base-200 items-center flex flex-row gap-4 sticky top-0 z-10"><button popovertarget="menu"><svg style="display: inline-block; line-height: 1; height: 24; width: 24;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><line stroke="currentColor" fill="none" stroke-linejoin="round" y1="128" stroke-linecap="round" stroke-width="16" x1="40" y2="128" x2="216"></line><line stroke="currentColor" fill="none" stroke-linejoin="round" y1="64" stroke-linecap="round" stroke-width="16" x1="40" y2="64" x2="216"></line><line stroke="currentColor" fill="none" stroke-linejoin="round" y1="192" stroke-linecap="round" stroke-width="16" x1="40" y2="192" x2="216"></line></svg></button><div id="menu" class="bg-base-200 m-0 px-0 absolute h-full" popover="auto"><aside class="basis-60 shrink-0"><h3 class="text-whitish mb-2 ml-4">Guides</h3><nav class="mb-8"><ol><li><a class="menu-item" href="/hiccup/">Hiccup<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/event-handlers/">Event handlers<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/life-cycle-hooks/">Life-cycle hooks<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/keys/">Keys<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/nil/">Explicit nils<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/alias/">Aliases<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li></ol></nav><h3 class="text-whitish mb-2 ml-4">Tutorials</h3><nav class="mb-8"><ol><li><a class="menu-item" href="/tutorials/tic-tac-toe/">Tic-Tac-Toe<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/routing/">Data-driven routing<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/state-atom/">State management with atoms<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/state-datascript/">State management with Datascript<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/network/">Backend APIs and network<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/network-reads/">Data-driven queries<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/network-writes/">Data-driven commands<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><span class="menu-item menu-item-selected">Tic-Tac-Toe with aliases<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></span></li><li><a class="menu-item" href="/tutorials/i18n-alias/">Alias powered i18n<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/sortable-table/">A sortable table alias<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li></ol></nav><h3 class="text-whitish mb-2 ml-4">Articles</h3><nav class="mb-8"><ol><li><a class="menu-item" href="/top-down/">Top-down rendering<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/learn/">Learn Replicant<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li></ol></nav></aside></div>Tutorial: Tic-Tac-Toe with aliases</div><main class="mt-8 mb-16 mx-4 md:mx-0 fullscreen"><h1 class="h1 dark:text-whitish section-md">Tic-Tac-Toe with aliases</h1><div class="prose mt-4 section-md"><p>In this tutorial, we will add <a href="/alias/">aliases</a> to the app we built in the <a href="/tutorials/tic-tac-toe/">Tic
+Tac Toe tutorial</a>, and hopefully learn a thing or two
+about how aliases work, and what they are good at.</p>
+</div><div class="prose mt-4 section-md"><h2 id="reusable-ui-aliases" class="h2 section-md"><a class="group relative" href="#reusable-ui-aliases"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Reusable UI elements with aliases</a></h2><p>We will start by converting the Tic Tac Toe UI elements to aliases. First up is
+the cell element, which currently looks like this:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-cell</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">content</span> <span class="nv">on-click</span> <span class="nv">dim?</span> <span class="nv">highlight?</span> <span class="nv">clickable?</span><span class="p">]}]</span>
+  <span class="p">[</span><span class="ss">:button.cell</span>
+   <span class="p">{</span><span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="nv">on-click</span><span class="p">}</span>
+    <span class="ss">:class</span> <span class="p">(</span><span class="nf">cond-&gt;</span> <span class="p">[]</span>
+             <span class="nv">dim?</span> <span class="p">(</span><span class="nb">conj </span><span class="s">"cell-dim"</span><span class="p">)</span>
+             <span class="nv">highlight?</span> <span class="p">(</span><span class="nb">conj </span><span class="s">"cell-highlight"</span><span class="p">)</span>
+             <span class="nv">clickable?</span> <span class="p">(</span><span class="nb">conj </span><span class="s">"clickable"</span><span class="p">))}</span>
+   <span class="p">(</span><span class="nb">when </span><span class="nv">content</span>
+     <span class="p">[</span><span class="ss">:div.cell-content</span>
+      <span class="p">{</span><span class="ss">:replicant/mounting</span> <span class="p">{</span><span class="ss">:class</span> <span class="s">"transparent"</span><span class="p">}</span>
+       <span class="ss">:replicant/unmounting</span> <span class="p">{</span><span class="ss">:class</span> <span class="s">"transparent"</span><span class="p">}}</span>
+      <span class="nv">content</span><span class="p">])])</span>
+</code></pre>
+<p>The simplest possible way to convert this to an alias is to simply provide it as
+an alias when rendering:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">require</span> <span class="o">'</span><span class="p">[</span><span class="nv">replicant.dom</span> <span class="ss">:as</span> <span class="nv">r</span><span class="p">])</span>
+
+<span class="p">(</span><span class="nf">r/render</span> <span class="nv">el</span> <span class="nv">hiccup</span> <span class="p">{</span><span class="ss">:aliases</span> <span class="p">{</span><span class="ss">:ui/cell</span> <span class="nv">render-cell</span><span class="p">}})</span>
+</code></pre>
+<p>This would work, since aliases will receive a map of attributes as their first
+argument. However, we can create a better abstraction with a few tweaks.</p>
+<p>The <code>content</code> could now just be the alias children. If we namespace the
+remaining option keys, we can pass the attributes map as the attributes of
+<code>:button</code>, and thus have a much more malleable building block, since users can
+set arbitrary attributes on the element without the need to explicitly map
+everything:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">defalias</span> <span class="nv">cell</span> <span class="p">[{</span><span class="ss">::keys</span> <span class="p">[</span><span class="nv">on-click</span> <span class="nv">dim?</span> <span class="nv">highlight?</span> <span class="nv">clickable?</span><span class="p">]</span> <span class="ss">:as</span> <span class="nv">attrs</span><span class="p">}</span> <span class="nv">content</span><span class="p">]</span>
+  <span class="p">[</span><span class="ss">:button.cell</span>
+   <span class="p">(</span><span class="nf">cond-&gt;</span> <span class="nv">attrs</span>
+     <span class="nv">on-click</span> <span class="p">(</span><span class="nf">assoc-in</span> <span class="p">[</span><span class="ss">:on</span> <span class="ss">:click</span><span class="p">]</span> <span class="nv">on-click</span><span class="p">)</span>
+     <span class="nv">dim?</span> <span class="p">(</span><span class="nf">update</span> <span class="ss">:class</span> <span class="nb">conj </span><span class="s">"cell-dim"</span><span class="p">)</span>
+     <span class="nv">highlight?</span> <span class="p">(</span><span class="nf">update</span> <span class="ss">:class</span> <span class="nb">conj </span><span class="s">"cell-highlight"</span><span class="p">)</span>
+     <span class="nv">clickable?</span> <span class="p">(</span><span class="nf">update</span> <span class="ss">:class</span> <span class="nb">conj </span><span class="s">"clickable"</span><span class="p">))</span>
+   <span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nb">seq </span><span class="nv">content</span><span class="p">)</span>
+     <span class="p">(</span><span class="nf">into</span>
+      <span class="p">[</span><span class="ss">:div.cell-content</span>
+       <span class="p">{</span><span class="ss">:replicant/mounting</span> <span class="p">{</span><span class="ss">:class</span> <span class="s">"transparent"</span><span class="p">}</span>
+        <span class="ss">:replicant/unmounting</span> <span class="p">{</span><span class="ss">:class</span> <span class="s">"transparent"</span><span class="p">}}]</span>
+      <span class="nv">content</span><span class="p">))])</span>
+</code></pre>
+<p>This alias already is more flexible than the original function, as you can
+easily add classes and custom attributes to it:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">[</span><span class="ss">:tic-tac-toe.ui/cell.myclass</span>
+  <span class="p">{</span><span class="ss">:data-cell-id</span> <span class="s">"f6c"</span><span class="p">}</span>
+  <span class="nv">ui/marker-x</span><span class="p">]</span>
+</code></pre>
+<p>The alias parameters aren’t really being used for any sort of intelligent
+logic – they all map directly to one attribute. So we don’t need that
+indirection, there’s nothing gained from using <code>:dim? true</code> to mean <code>:class "cell-dim"</code>. Doing so will clean up the implementation as well:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">defalias</span> <span class="nv">cell</span> <span class="p">[</span><span class="nv">attrs</span> <span class="nv">content</span><span class="p">]</span>
+  <span class="p">[</span><span class="ss">:button.cell</span> <span class="nv">attrs</span>
+   <span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nb">seq </span><span class="nv">content</span><span class="p">)</span>
+     <span class="p">(</span><span class="nf">into</span>
+      <span class="p">[</span><span class="ss">:div.cell-content</span>
+       <span class="p">{</span><span class="ss">:replicant/mounting</span> <span class="p">{</span><span class="ss">:class</span> <span class="s">"transparent"</span><span class="p">}</span>
+        <span class="ss">:replicant/unmounting</span> <span class="p">{</span><span class="ss">:class</span> <span class="s">"transparent"</span><span class="p">}}]</span>
+      <span class="nv">content</span><span class="p">))])</span>
+</code></pre>
+<p>This is even more flexible, but it is now harder to see what options are
+available – what classes are we supposed to use with this component? You can
+answer that question with both a docstring, and Portfolio scenes that
+demonstrate the various states.</p>
+<p>The updated Portfolio scenes look like this:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">defscene</span> <span class="nv">empty-cell</span>
+  <span class="p">[</span><span class="nv">ui/cell</span> <span class="p">{</span><span class="ss">:class</span> <span class="ss">:clickable</span><span class="p">}])</span>
+
+<span class="p">(</span><span class="nf">defscene</span> <span class="nv">cell-with-x</span>
+  <span class="p">[</span><span class="nv">ui/cell</span> <span class="nv">ui/mark-x</span><span class="p">])</span>
+
+<span class="p">(</span><span class="nf">defscene</span> <span class="nv">cell-with-o</span>
+  <span class="p">[</span><span class="nv">ui/cell</span> <span class="nv">ui/mark-o</span><span class="p">])</span>
+
+<span class="p">(</span><span class="nf">defscene</span> <span class="nv">interactive-cell</span>
+  <span class="s">"Click the cell to toggle the tic on/off"</span>
+  <span class="ss">:params</span> <span class="p">(</span><span class="nf">atom</span> <span class="nv">nil</span><span class="p">)</span>
+  <span class="p">[</span><span class="nv">store</span><span class="p">]</span>
+  <span class="p">[</span><span class="nv">ui/cell</span>
+   <span class="p">{</span><span class="ss">:class</span> <span class="s">"clickable"</span>
+    <span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">_</span><span class="p">]</span>
+                  <span class="p">(</span><span class="nf">swap!</span> <span class="nv">store</span> <span class="o">#</span><span class="p">(</span><span class="k">if </span><span class="nv">%</span> <span class="nv">nil</span> <span class="nv">ui/mark-x</span><span class="p">)))}}</span>
+   <span class="o">@</span><span class="nv">store</span><span class="p">])</span>
+
+<span class="p">(</span><span class="nf">defscene</span> <span class="nv">dimmed-cell</span>
+  <span class="p">[</span><span class="ss">::ui/cell.cell-dim</span>
+   <span class="nv">ui/mark-o</span><span class="p">])</span>
+
+<span class="p">(</span><span class="nf">defscene</span> <span class="nv">highlighted-cell</span>
+  <span class="p">[</span><span class="ss">::ui/cell.cell-highlight</span>
+   <span class="nv">ui/mark-o</span><span class="p">])</span>
+</code></pre>
+<p>Note the mixed use of vars and keywords to refer to the alias. This is a matter
+of taste.</p>
+<h3>The board</h3>
+<p>Here’s the current board implementation:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-board</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">rows</span><span class="p">]}]</span>
+  <span class="p">[</span><span class="ss">:div.board</span>
+   <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">row</span> <span class="nv">rows</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">:div.row</span>
+      <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">cell</span> <span class="nv">row</span><span class="p">]</span>
+        <span class="p">(</span><span class="nf">render-cell</span> <span class="nv">cell</span><span class="p">))])])</span>
+</code></pre>
+<p>We can’t really convert this to an alias the same way we just did the cell.
+Since the cell now takes a map of attributes <em>and</em> content as two different
+arguments, we can’t as easily map over the maps in each row. But here’s the
+kicker: there is little to be gained from making an alias out of the board – it
+doesn’t really do anything. Let’s leave it for now.</p>
+</div><div class="prose mt-4 section-md"><h2 id="converting-aliases" class="h2 section-md"><a class="group relative" href="#converting-aliases"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Converting business domain data to UI data</a></h2><p>Let’s have a look at the <code>game-&gt;ui-data</code> function that is responsible for
+translating the business domain (e.g. our game state) to generic UI data and the
+render function:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">game-&gt;ui-data</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">size</span> <span class="nv">tics</span> <span class="nv">victory</span> <span class="nv">over?</span><span class="p">]}]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">highlight?</span> <span class="p">(</span><span class="nb">set </span><span class="p">(</span><span class="ss">:path</span> <span class="nv">victory</span><span class="p">))]</span>
+    <span class="p">{</span><span class="ss">:button</span> <span class="p">(</span><span class="nb">when </span><span class="nv">over?</span>
+               <span class="p">{</span><span class="ss">:text</span> <span class="s">"Start over"</span>
+                <span class="ss">:on-click</span> <span class="p">[</span><span class="ss">:reset</span><span class="p">]})</span>
+     <span class="ss">:board</span>
+     <span class="p">{</span><span class="ss">:rows</span>
+      <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">y</span> <span class="p">(</span><span class="nb">range </span><span class="nv">size</span><span class="p">)]</span>
+        <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">x</span> <span class="p">(</span><span class="nb">range </span><span class="nv">size</span><span class="p">)]</span>
+          <span class="p">(</span><span class="nb">if-let </span><span class="p">[</span><span class="nv">player</span> <span class="p">(</span><span class="nb">get </span><span class="nv">tics</span> <span class="p">[</span><span class="nv">y</span> <span class="nv">x</span><span class="p">])]</span>
+            <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">victorious?</span> <span class="p">(</span><span class="nf">highlight?</span> <span class="p">[</span><span class="nv">y</span> <span class="nv">x</span><span class="p">])]</span>
+              <span class="p">(</span><span class="nf">cond-&gt;</span> <span class="p">{</span><span class="ss">:content</span> <span class="p">(</span><span class="nf">player-&gt;mark</span> <span class="nv">player</span><span class="p">)}</span>
+                <span class="nv">victorious?</span> <span class="p">(</span><span class="nb">assoc </span><span class="ss">:highlight?</span> <span class="nv">true</span><span class="p">)</span>
+                <span class="p">(</span><span class="nb">and </span><span class="nv">over?</span> <span class="p">(</span><span class="nb">not </span><span class="nv">victorious?</span><span class="p">))</span> <span class="p">(</span><span class="nb">assoc </span><span class="ss">:dim?</span> <span class="nv">true</span><span class="p">)))</span>
+            <span class="p">(</span><span class="k">if </span><span class="nv">over?</span>
+              <span class="p">{</span><span class="ss">:dim?</span> <span class="nv">true</span><span class="p">}</span>
+              <span class="p">{</span><span class="ss">:clickable?</span> <span class="nv">true</span>
+               <span class="ss">:on-click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="nv">y</span> <span class="nv">x</span><span class="p">]}))))}}))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">render-game</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">board</span> <span class="nv">button</span><span class="p">]}]</span>
+  <span class="p">[</span><span class="ss">:div</span>
+   <span class="p">(</span><span class="nf">render-board</span> <span class="nv">board</span><span class="p">)</span>
+   <span class="p">(</span><span class="nb">when </span><span class="nv">button</span>
+     <span class="p">[</span><span class="ss">:button</span> <span class="p">{</span><span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="p">(</span><span class="ss">:on-click</span> <span class="nv">button</span><span class="p">)}</span>
+               <span class="ss">:style</span> <span class="p">{</span><span class="ss">:margin-top</span> <span class="mi">20</span>
+                       <span class="ss">:font-size</span> <span class="mi">20</span><span class="p">}}</span>
+      <span class="p">(</span><span class="ss">:text</span> <span class="nv">button</span><span class="p">)])])</span>
+</code></pre>
+<p>Since the <code>cell</code> alias dropped the boolean indirection for the various class
+names, this function can now output hiccup directly. In other words: with
+aliases, we can combine the prepping function and the top-level render function
+into one:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">defalias</span> <span class="nv">board</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">size</span> <span class="nv">tics</span> <span class="nv">victory</span> <span class="nv">over?</span><span class="p">]}]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">highlight?</span> <span class="p">(</span><span class="nb">set </span><span class="p">(</span><span class="ss">:path</span> <span class="nv">victory</span><span class="p">))]</span>
+    <span class="p">[</span><span class="ss">:div.board</span>
+     <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">y</span> <span class="p">(</span><span class="nb">range </span><span class="nv">size</span><span class="p">)]</span>
+       <span class="p">[</span><span class="ss">:div.row</span>
+        <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">x</span> <span class="p">(</span><span class="nb">range </span><span class="nv">size</span><span class="p">)]</span>
+          <span class="p">(</span><span class="nb">if-let </span><span class="p">[</span><span class="nv">player</span> <span class="p">(</span><span class="nb">get </span><span class="nv">tics</span> <span class="p">[</span><span class="nv">y</span> <span class="nv">x</span><span class="p">])]</span>
+            <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">victorious?</span> <span class="p">(</span><span class="nf">highlight?</span> <span class="p">[</span><span class="nv">y</span> <span class="nv">x</span><span class="p">])]</span>
+              <span class="p">[</span><span class="nv">cell</span> <span class="p">{</span><span class="ss">:class</span> <span class="p">(</span><span class="nf">cond-&gt;</span> <span class="p">[]</span>
+                              <span class="nv">victorious?</span> <span class="p">(</span><span class="nb">conj </span><span class="ss">:cell-highlight</span><span class="p">)</span>
+                              <span class="p">(</span><span class="nb">and </span><span class="nv">over?</span> <span class="p">(</span><span class="nb">not </span><span class="nv">victorious?</span><span class="p">))</span> <span class="p">(</span><span class="nb">conj </span><span class="ss">:cell-dim</span><span class="p">))}</span>
+               <span class="p">(</span><span class="nf">player-&gt;mark</span> <span class="nv">player</span><span class="p">)])</span>
+            <span class="p">(</span><span class="k">if </span><span class="nv">over?</span>
+              <span class="p">[</span><span class="nv">cell</span> <span class="p">{</span><span class="ss">:class</span> <span class="ss">:cell-dim</span><span class="p">}]</span>
+              <span class="p">[</span><span class="nv">cell</span> <span class="p">{</span><span class="ss">:class</span> <span class="ss">:clickable</span>
+                     <span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="nv">y</span> <span class="nv">x</span><span class="p">]}}])))])]))</span>
+
+<span class="p">(</span><span class="nf">defalias</span> <span class="nv">button</span> <span class="p">[</span><span class="nv">attrs</span> <span class="nv">children</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">into </span><span class="p">[</span><span class="ss">:button</span>
+         <span class="p">(</span><span class="nb">assoc </span><span class="nv">attrs</span> <span class="ss">:style</span> <span class="p">{</span><span class="ss">:margin-top</span> <span class="mi">20</span>
+                              <span class="ss">:font-size</span> <span class="mi">20</span><span class="p">})]</span>
+        <span class="nv">children</span><span class="p">))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">render-game</span> <span class="p">[</span><span class="nv">game</span><span class="p">]</span>
+  <span class="p">[</span><span class="ss">:div</span>
+   <span class="p">[</span><span class="nv">board</span> <span class="nv">game</span><span class="p">]</span>
+   <span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="ss">:over?</span> <span class="nv">game</span><span class="p">)</span>
+     <span class="p">[</span><span class="nv">button</span> <span class="p">{</span><span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="p">[</span><span class="ss">:reset</span><span class="p">]}}</span>
+      <span class="s">"Start over"</span><span class="p">])])</span>
+</code></pre>
+</div><div class="prose mt-4 section-md"><h2 id="whats-the-point" class="h2 section-md"><a class="group relative" href="#whats-the-point"><span class="absolute -left-4 group-hover:visible invisible">§ </span>What's the point?</a></h2><p>It seems we have now undone an abstraction (<code>game-&gt;ui-data</code>) that was presented
+as essential in keeping the business domain and the generic UI elements
+separate, and to be able to test the UI without tripping on visual details.</p>
+<p>The clue here is that the cell alias has increased the abstraction level of the
+hiccup. Thus, we can write tests against the hiccup now and still not be
+bothered by irrelevant rendering details. So let’s have a look at the tests.</p>
+</div><div class="prose mt-4 section-md"><h3 id="testing" class="h3 section-md"><a class="group relative" href="#testing"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Testing with aliases</a></h3><p>The first test for <code>game-&gt;ui-data</code> tested that the game was properly converted
+to something that could be rendered with the <code>board</code> element. We’ll change this
+to simply look at the rendered board.</p>
+<p>Here’s the adjusted call:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">ui/render-game</span>
+ <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span>
+  <span class="ss">:tics</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">0</span><span class="p">]</span> <span class="ss">:x</span>
+         <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="ss">:o</span><span class="p">}</span>
+  <span class="ss">:next-player</span> <span class="ss">:x</span><span class="p">})</span>
+</code></pre>
+<p>And here’s the output:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">[</span><span class="ss">:div</span> <span class="p">[</span><span class="ss">::ui/board</span>
+       <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span>
+        <span class="ss">:tics</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">0</span><span class="p">]</span> <span class="ss">:x</span>
+               <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="ss">:o</span><span class="p">}</span>
+        <span class="ss">:next-player</span> <span class="ss">:x</span><span class="p">}]</span>
+ <span class="nv">nil</span><span class="p">]</span>
+</code></pre>
+<p>Well, that doesn’t really say much. The only thing we can really test with this
+structure is whether or not there is a board, and whether or not there is a
+button. We’ll get back to that.</p>
+<p>To test the layout of the board, we really need to expand the board alias. But
+if we expand all the aliases, we end up with hiccup that has too many visual
+details. Replicant provides <code>replicant.alias/expand-1</code> for this exact use case:
+expand one level of aliases:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">require</span> <span class="o">'</span><span class="p">[</span><span class="nv">replicant.alias</span> <span class="ss">:as</span> <span class="nv">alias</span><span class="p">])</span>
+
+<span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="p">(</span><span class="nf">ui/render-game</span>
+      <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span>
+       <span class="ss">:tics</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">0</span><span class="p">]</span> <span class="ss">:x</span>
+              <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="ss">:o</span><span class="p">}</span>
+       <span class="ss">:next-player</span> <span class="ss">:x</span><span class="p">})</span>
+     <span class="nv">alias/expand-1</span><span class="p">)</span>
+
+<span class="c1">;;=&gt;</span>
+<span class="o">'</span><span class="p">[</span><span class="ss">:div</span>
+  <span class="p">[</span><span class="ss">:div</span> <span class="p">{</span><span class="ss">:class</span> <span class="o">#</span><span class="p">{</span><span class="s">"board"</span><span class="p">}}</span>
+   <span class="p">[</span><span class="ss">:div.row</span>
+    <span class="p">([</span><span class="ss">::ui/cell</span> <span class="p">{</span><span class="ss">:class</span> <span class="p">[]}</span> <span class="nv">ui/mark-x</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">::ui/cell</span> <span class="p">{</span><span class="ss">:class</span> <span class="p">[]}</span> <span class="nv">ui/mark-o</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">::ui/cell</span> <span class="p">{</span><span class="ss">:class</span> <span class="ss">:clickable</span>, <span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="mi">0</span> <span class="mi">2</span><span class="p">]}}])]</span>
+   <span class="p">[</span><span class="ss">:div.row</span>
+    <span class="p">([</span><span class="ss">::ui/cell</span> <span class="p">{</span><span class="ss">:class</span> <span class="ss">:clickable</span>, <span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">]}}]</span>
+     <span class="p">[</span><span class="ss">::ui/cell</span> <span class="p">{</span><span class="ss">:class</span> <span class="ss">:clickable</span>, <span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">]}}]</span>
+     <span class="p">[</span><span class="ss">::ui/cell</span> <span class="p">{</span><span class="ss">:class</span> <span class="ss">:clickable</span>, <span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">]}}])]</span>
+   <span class="p">[</span><span class="ss">:div.row</span>
+    <span class="p">([</span><span class="ss">::ui/cell</span> <span class="p">{</span><span class="ss">:class</span> <span class="ss">:clickable</span>, <span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="mi">2</span> <span class="mi">0</span><span class="p">]}}]</span>
+     <span class="p">[</span><span class="ss">::ui/cell</span> <span class="p">{</span><span class="ss">:class</span> <span class="ss">:clickable</span>, <span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="mi">2</span> <span class="mi">1</span><span class="p">]}}]</span>
+     <span class="p">[</span><span class="ss">::ui/cell</span> <span class="p">{</span><span class="ss">:class</span> <span class="ss">:clickable</span>, <span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="mi">2</span> <span class="mi">2</span><span class="p">]}}])]]</span>
+  <span class="nv">nil</span><span class="p">]</span>
+</code></pre>
+<p>Now this is exactly the level of detail we want! If we could only focus the test
+on the board itself, it’d be perfect.</p>
+<p>We can use a library called <a href="https://github.com/cjohansen/lookup">lookup</a> to
+extract information from hiccup with CSS selectors:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="p">(</span><span class="nf">ui/render-game</span>
+      <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span>
+       <span class="ss">:tics</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">0</span><span class="p">]</span> <span class="ss">:x</span>
+              <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="ss">:o</span><span class="p">}</span>
+       <span class="ss">:next-player</span> <span class="ss">:x</span><span class="p">})</span>
+     <span class="nv">alias/expand-1</span>
+     <span class="p">(</span><span class="nf">lookup/select-one</span> <span class="ss">:div.board</span><span class="p">))</span>
+
+<span class="c1">;;=&gt;</span>
+<span class="p">[</span><span class="ss">:div</span> <span class="p">{</span><span class="ss">:class</span> <span class="o">#</span><span class="p">{</span><span class="s">"board"</span><span class="p">}}</span>
+ ,,,<span class="p">]</span>
+</code></pre>
+<p>And the final test:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">testing</span> <span class="s">"Renders board"</span>
+  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="p">(</span><span class="nf">ui/render-game</span>
+               <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span>
+                <span class="ss">:tics</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">0</span><span class="p">]</span> <span class="ss">:x</span>
+                       <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="ss">:o</span><span class="p">}</span>
+                <span class="ss">:next-player</span> <span class="ss">:x</span><span class="p">})</span>
+              <span class="nv">alias/expand-1</span>
+              <span class="p">(</span><span class="nf">lookup/select-one</span> <span class="ss">:div.board</span><span class="p">))</span>
+         <span class="p">[</span><span class="ss">:div</span> <span class="p">{</span><span class="ss">:class</span> <span class="o">#</span><span class="p">{</span><span class="s">"board"</span><span class="p">}}</span>
+          <span class="p">[</span><span class="ss">:div</span> <span class="p">{</span><span class="ss">:class</span> <span class="o">#</span><span class="p">{</span><span class="s">"row"</span><span class="p">}}</span>
+           <span class="p">[</span><span class="ss">::ui/cell</span> <span class="nv">ui/mark-x</span><span class="p">]</span>
+           <span class="p">[</span><span class="ss">::ui/cell</span> <span class="nv">ui/mark-o</span><span class="p">]</span>
+           <span class="p">[</span><span class="ss">::ui/cell</span> <span class="p">{</span><span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="mi">0</span> <span class="mi">2</span><span class="p">]}</span>, <span class="ss">:class</span> <span class="o">#</span><span class="p">{</span><span class="s">"clickable"</span><span class="p">}}]]</span>
+          <span class="p">[</span><span class="ss">:div</span> <span class="p">{</span><span class="ss">:class</span> <span class="o">#</span><span class="p">{</span><span class="s">"row"</span><span class="p">}}</span>
+           <span class="p">[</span><span class="ss">::ui/cell</span> <span class="p">{</span><span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">]}</span>, <span class="ss">:class</span> <span class="o">#</span><span class="p">{</span><span class="s">"clickable"</span><span class="p">}}]</span>
+           <span class="p">[</span><span class="ss">::ui/cell</span> <span class="p">{</span><span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">]}</span>, <span class="ss">:class</span> <span class="o">#</span><span class="p">{</span><span class="s">"clickable"</span><span class="p">}}]</span>
+           <span class="p">[</span><span class="ss">::ui/cell</span> <span class="p">{</span><span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">]}</span>, <span class="ss">:class</span> <span class="o">#</span><span class="p">{</span><span class="s">"clickable"</span><span class="p">}}]]</span>
+          <span class="p">[</span><span class="ss">:div</span> <span class="p">{</span><span class="ss">:class</span> <span class="o">#</span><span class="p">{</span><span class="s">"row"</span><span class="p">}}</span>
+           <span class="p">[</span><span class="ss">::ui/cell</span> <span class="p">{</span><span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="mi">2</span> <span class="mi">0</span><span class="p">]}</span>, <span class="ss">:class</span> <span class="o">#</span><span class="p">{</span><span class="s">"clickable"</span><span class="p">}}]</span>
+           <span class="p">[</span><span class="ss">::ui/cell</span> <span class="p">{</span><span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="mi">2</span> <span class="mi">1</span><span class="p">]}</span>, <span class="ss">:class</span> <span class="o">#</span><span class="p">{</span><span class="s">"clickable"</span><span class="p">}}]</span>
+           <span class="p">[</span><span class="ss">::ui/cell</span> <span class="p">{</span><span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="mi">2</span> <span class="mi">2</span><span class="p">]}</span>, <span class="ss">:class</span> <span class="o">#</span><span class="p">{</span><span class="s">"clickable"</span><span class="p">}}]]])))</span>
+</code></pre>
+<p>Now, this test covers a lot. We really don’t want many tests at this level, but
+one is fine.</p>
+<p>For the next test, we can make a more surgical extraction. The test “plays” a
+game until victory, and expects to find the winning path highlighted in the UI
+data:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">testing</span> <span class="s">"Highlights winning path"</span>
+  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">game/create-game</span> <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span><span class="p">})</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">;; x</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">;; o</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">;; x</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">;; o</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">;; x</span>
+             <span class="nv">ui/render-game</span>
+             <span class="nv">alias/expand-1</span>
+             <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="p">(</span><span class="nf">lookup/select</span> <span class="ss">'.cell-highlight</span><span class="p">)))</span>
+         <span class="p">[[</span><span class="ss">:tic-tac-toe.ui/cell</span> <span class="p">{</span><span class="ss">:class</span> <span class="o">#</span><span class="p">{</span><span class="s">"cell-highlight"</span><span class="p">}}</span> <span class="nv">ui/mark-x</span><span class="p">]</span>
+          <span class="p">[</span><span class="ss">:tic-tac-toe.ui/cell</span> <span class="p">{</span><span class="ss">:class</span> <span class="o">#</span><span class="p">{</span><span class="s">"cell-highlight"</span><span class="p">}}</span> <span class="nv">ui/mark-x</span><span class="p">]</span>
+          <span class="p">[</span><span class="ss">:tic-tac-toe.ui/cell</span> <span class="p">{</span><span class="ss">:class</span> <span class="o">#</span><span class="p">{</span><span class="s">"cell-highlight"</span><span class="p">}}</span> <span class="nv">ui/mark-x</span><span class="p">]])))</span>
+</code></pre>
+<p>You may worry that the asserted data doesn’t say anything about the coordinates,
+but don’t. The previous test already demonstrated that the marks are placed in
+the correct positions, so the fact that this sequence of operations gave us
+three cells, all marked with x, is all we needed to know.</p>
+<p>The original test also tested that everything else was dimmed. Let’s do that in
+a separate test instead, this time a simple count is enough:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">testing</span> <span class="s">"Dims everything besides the winning path"</span>
+  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">game/create-game</span> <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span><span class="p">})</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">;; x</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">;; o</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">;; x</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">;; o</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">;; x</span>
+             <span class="nv">ui/render-game</span>
+             <span class="nv">alias/expand-1</span>
+             <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="p">(</span><span class="nf">lookup/select</span> <span class="ss">'.cell-dim</span><span class="p">))</span>
+             <span class="nv">count</span><span class="p">)</span>
+         <span class="mi">6</span><span class="p">)))</span>
+</code></pre>
+<p>The final test verifies that the entire game is dimmed down in case of a tie.
+This is very similar to the test we just wrote, just with a different count:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">testing</span> <span class="s">"Dims tied game"</span>
+  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">game/create-game</span> <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span><span class="p">})</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">;; x</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">;; o</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">;; x</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">;; o</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">;; x</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">2</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">;; o</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">2</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">;; x</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">2</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">;; o</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">;; x</span>
+             <span class="nv">ui/render-game</span>
+             <span class="nv">alias/expand-1</span>
+             <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="p">(</span><span class="nf">lookup/select</span> <span class="ss">'.cell-dim</span><span class="p">))</span>
+             <span class="nv">count</span><span class="p">)</span>
+         <span class="mi">9</span><span class="p">)))</span>
+</code></pre>
+</div><div class="prose mt-4 section-md"><h2 id="conclusion" class="h2 section-md"><a class="group relative" href="#conclusion"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Conclusion</a></h2><p>The main difference between the original implementation and the new one is the
+merging of <code>game-&gt;ui-data</code> and <code>render-data</code>. This change really pokes at the
+benefit and difficulty of using aliases well, because it both improved the
+implementation and blurred the lines a little.</p>
+</div><div class="prose mt-4 section-md"><h3 id="benefits" class="h3 section-md"><a class="group relative" href="#benefits"><span class="absolute -left-4 group-hover:visible invisible">§ </span>The benefits</a></h3><p>The code is more direct: where there used to be two steps (convert domains, then
+render), there is now only one (render). Because of how aliases work, we gained
+a performance boost: the conversion between domains is now done during
+rendering, and only when data has actually changed.</p>
+<p>With aliases, we were able to express the UI in hiccup that contained much less
+fleeting details such as specific classes, data attributes and inline styles.
+This allowed us to write tests directly for rendering, technically increasing
+coverage while reducing the number of representations – without sacrificing
+generic UI elements.</p>
+</div><div class="prose mt-4 section-md"><h3 id="drawbacks" class="h3 section-md"><a class="group relative" href="#drawbacks"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Drawbacks</a></h3><p>Aliases are used for two types of tasks: abstracting the UI elements and
+converting the business domain (game data) to generic UI data. This distinction
+is not very clear, as both kinds use the same mechanism (aliases) and live
+side-by-side.</p>
+<p>Since there is no clear distinction between the two, we run a risk of data
+conversion leaking into the UI elements, or too much rendering details leaking
+into the data conversion. There is no hard limit: a class here and there
+(<code>.board</code>, <code>.row</code>) is probably fine in “conversion code”, many of them are not.</p>
+<p>In other words: you will need some level of discipline to keep a clean
+separation, which is always challenging, espcially on larger teams.</p>
+<p>To succeed with this approach, you could keep the different kinds of code in
+separate namespaces, and use naming to try to enforce the separation. This way
+you could have a hard and fast rule that UI elements should never use business
+domain terms, and conversion/prep code should not contain so much visual detail
+that you would be tempted to display it in Portfolio.</p>
+<p>It’s worth noting that this exact problem also exists in component-based
+libraries and frameworks. In fact, these libraries often advertise mixing the
+two aspects. It’s up to you, but in my experience, keeping them separate gives
+you better control.</p>
+<h3>Source code</h3>
+<p>The full code listing is available on <a href="https://github.com/cjohansen/replicant-tic-tac-toe/tree/aliases">the aliases branch in the tutorial
+repo</a>.</p>
+</div></main><script type="text/javascript" src="/bundles/d399b4851ce7/app.js"></script></body></html>

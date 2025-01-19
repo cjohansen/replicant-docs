@@ -1,0 +1,462 @@
+<!DOCTYPE html><html data-theme="dark" lang="en" prefix="og: http://ogp.me/ns#"><head><title>Data-driven routing</title><meta name="theme-color" content="#202020"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta property="og:title" content="Data-driven routing"><link href="/a00f586d252b/favicon.ico" rel="icon" type="image/x-icon"><link href="/a00f586d252b/favicon.ico" rel="shortcut icon" type="image/ico"><link href="/a00f586d252b/favicon.ico" rel="shortcut icon" type="image/x-icon"><link href="/a00f586d252b/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"><link href="/285191ad6a81/apple-touch-icon.png" rel="icon" type="image/png" sizes="180x180"><link rel="stylesheet" href="/bundles/2e8dfb3c3384/styles.css"></head><body><div class="flex justify-between p-4 items-center"><div class="w-8"><a href="/"><svg style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2" viewBox="0 0 1080 1080" xml:space="preserve"><path d="M876.452 152.555c136.818 12.348 195.668 81.688 192.708 196.198h-87.197c1.569-66.295-16.004-119.066-52.748-157.356-14.398-15.003-31.913-27.882-52.763-38.353v-.489Zm98.715 270.164h87.213c-9.48 55.52-38.53 92.323-91.749 108.344 55.789 39.542 76.849 90.867 66.189 152.957l-44.388 184.981h-86.379l42.751-178.151c.149-.622.278-1.249.386-1.879 9.983-58.16-3.188-108.49-41.722-150.197 36.949-23.921 58.758-61.19 67.282-111.131a29.34 29.34 0 0 0 .417-4.924Z" fill="#4fb348"></path><path d="M757.149 152.309c138.837 11.646 198.514 81.149 195.537 196.444h-88.511c1.643-69.4-17.651-123.977-58.046-162.647-13.679-13.096-29.954-24.431-48.98-33.797Zm101.023 270.41h87.726c-9.475 55.52-38.529 92.323-91.745 108.344 55.785 39.542 76.848 90.867 66.191 152.957l-44.391 184.981h-87.689l42.752-178.151c.149-.622.278-1.249.386-1.879 9.983-58.16-3.188-108.49-41.722-150.197 36.948-23.921 58.758-61.19 67.281-111.131.153-.894.263-1.79.332-2.685h.506c.126-.747.25-1.493.373-2.239Z" fill="#00a29a"></path><path d="M76.208 847.157c-36.752-5.562-64.959-37.32-64.959-75.614 0-42.21 34.269-76.478 76.478-76.478a76.45 76.45 0 0 1 20.676 2.832c32.178 9.028 55.802 38.6 55.802 73.646 0 42.209-34.268 76.478-76.478 76.478-3.915 0-7.761-.295-11.519-.864Zm56.524-262.05a77.324 77.324 0 0 1-6.804.299c-42.209 0-76.478-34.268-76.478-76.478 0-42.209 34.269-76.478 76.478-76.478 13.663 0 26.494 3.591 37.6 9.879 23.204 13.139 38.878 38.053 38.878 66.599 0 39.917-30.647 72.732-69.674 76.179Zm-18.148 84.136 11.77-54.569c58.168-.23 105.321-47.525 105.321-105.746 0-35.555-17.586-67.035-44.526-86.209H828.11c-9.475 55.52-38.529 92.323-91.745 108.344 55.784 39.542 76.848 90.867 66.191 152.957l-44.391 184.981H539.756l34.836-151.189c13.135-57.004-4.455-118.062-91.882-118.062H353.796l-71.217 274.677H112.245c46.557-11.07 81.229-52.96 81.229-102.884 0-49.085-33.515-90.403-78.89-102.3Zm-1.803-330.67 117.483-187.485h389.845c152.584 6.696 217.9 77.175 214.789 197.665H178.595v-10.18h-65.814Z" fill="#0086ff"></path></svg></a></div><div class="flex items-center gap-4 text-sm"><a class="hover:underline" href="/learn/">Learn</a><a class="hover:underline" href="https://cljdoc.org/d/no.cjohansen/replicant/">API Reference</a><div class="w-6"><a href="https://clojurians.slack.com/archives/C06JZ4X334N" title="Replicant on the Clojurians Slack"><svg style="display: inline-block; line-height: 1;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><path d="M80,56h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V80A24,24,0,0,1,80,56Z" transform="translate(184 24) rotate(90)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M128,80H104A24,24,0,0,1,80,56h0a24,24,0,0,1,24-24h0a24,24,0,0,1,24,24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M152,32h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V56a24,24,0,0,1,24-24Z" transform="translate(304 160) rotate(-180)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M176,128V104a24,24,0,0,1,24-24h0a24,24,0,0,1,24,24h0a24,24,0,0,1-24,24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M176,104h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V128a24,24,0,0,1,24-24Z" transform="translate(24 328) rotate(-90)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M128,176h24a24,24,0,0,1,24,24h0a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M104,128h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V152a24,24,0,0,1,24-24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M80,128v24a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24h0a24,24,0,0,1,24-24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path></svg></a></div><div class="w-6"><a href="https://github.com/cjohansen/replicant" title="Replicant on Github"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg></a></div></div></div><div class="p-4 bg-base-200 items-center flex flex-row gap-4 sticky top-0 z-10"><button popovertarget="menu"><svg style="display: inline-block; line-height: 1; height: 24; width: 24;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><line stroke="currentColor" fill="none" stroke-linejoin="round" y1="128" stroke-linecap="round" stroke-width="16" x1="40" y2="128" x2="216"></line><line stroke="currentColor" fill="none" stroke-linejoin="round" y1="64" stroke-linecap="round" stroke-width="16" x1="40" y2="64" x2="216"></line><line stroke="currentColor" fill="none" stroke-linejoin="round" y1="192" stroke-linecap="round" stroke-width="16" x1="40" y2="192" x2="216"></line></svg></button><div id="menu" class="bg-base-200 m-0 px-0 absolute h-full" popover="auto"><aside class="basis-60 shrink-0"><h3 class="text-whitish mb-2 ml-4">Guides</h3><nav class="mb-8"><ol><li><a class="menu-item" href="/hiccup/">Hiccup<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/event-handlers/">Event handlers<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/life-cycle-hooks/">Life-cycle hooks<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/keys/">Keys<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/nil/">Explicit nils<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/alias/">Aliases<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li></ol></nav><h3 class="text-whitish mb-2 ml-4">Tutorials</h3><nav class="mb-8"><ol><li><a class="menu-item" href="/tutorials/tic-tac-toe/">Tic-Tac-Toe<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><span class="menu-item menu-item-selected">Data-driven routing<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></span></li><li><a class="menu-item" href="/tutorials/state-atom/">State management with atoms<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/state-datascript/">State management with Datascript<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/network/">Backend APIs and network<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/network-reads/">Data-driven queries<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/network-writes/">Data-driven commands<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/tic-tac-toe-alias/">Tic-Tac-Toe with aliases<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/i18n-alias/">Alias powered i18n<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/sortable-table/">A sortable table alias<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li></ol></nav><h3 class="text-whitish mb-2 ml-4">Articles</h3><nav class="mb-8"><ol><li><a class="menu-item" href="/top-down/">Top-down rendering<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/learn/">Learn Replicant<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li></ol></nav></aside></div>Tutorial: Data-driven routing</div><main class="mt-8 mb-16 mx-4 md:mx-0 fullscreen"><h1 class="h1 dark:text-whitish section-md">Data-driven routing</h1><div class="prose mt-4 section-md"><p>In this tutorial we will develop a small routing system. You will learn how
+routing can fit into Replicant’s model where rendering is always top-down. We’ll
+also explore using the URL as an alternative to component local state.</p>
+<p>With the exception of the final section, the ideas in this tutorial are not
+specific to Replicant, and can be used with a wide variety of rendering
+libraries.</p>
+</div><div class="prose mt-4 section-md"><h2 id="setup" class="h2 section-md"><a class="group relative" href="#setup"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Example setup</a></h2><p>For this tutorial, we will build a small app to view <a href="https://www.parens-of-the-dead.com/">Parens of the
+dead</a> episodes. You can <a href="https://github.com/cjohansen/replicant-routing/tree/initial-setup">get the setup on
+Github</a> if
+you want to follow along.</p>
+<p>The <code>parens.data</code> namespace has some data for us to work with:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">parens.data</span><span class="p">)</span>
+
+<span class="p">(</span><span class="k">def </span><span class="nv">data</span>
+  <span class="p">{</span><span class="ss">:videos</span>
+   <span class="p">[{</span><span class="ss">:video/url</span> <span class="s">"https://www.youtube.com/watch?v=6qnNtVdf08Q"</span>
+     <span class="ss">:video/thumbnail</span> <span class="s">"/images/parens1.png"</span>
+     <span class="ss">:episode/id</span> <span class="s">"s2e1"</span>
+     <span class="ss">:episode/number</span> <span class="mi">1</span>
+     <span class="ss">:episode/title</span> <span class="s">"It Lives Again"</span>
+     <span class="ss">:episode/description</span> <span class="s">"Starting with an empty folder sure is a choice. Much like digging your way out of a grave, it can be intimidating, perhaps because it's not something you do every day. Watch us struggle with these issues and more in the very first episode of Parens of the Dead."</span><span class="p">}</span>
+    <span class="p">{</span><span class="ss">:video/url</span> <span class="s">"https://www.youtube.com/watch?v=CyveUnHzc7g"</span>
+     <span class="ss">:video/thumbnail</span> <span class="s">"/images/parens2.png"</span>
+     <span class="ss">:episode/id</span> <span class="s">"s2e2"</span>
+     <span class="ss">:episode/number</span> <span class="mi">2</span>
+     <span class="ss">:episode/title</span> <span class="s">"Shambling Along"</span>
+     <span class="ss">:episode/description</span> <span class="s">"Watch us totally ruin a pristine, beautiful lightly tinted purple page by adding decrepit buildings to it in this very second episode of Parens of the Dead. We'll get ClojureScript up and running with surprisingly little hassle. There might even be jokes."</span><span class="p">}</span>
+    <span class="p">{</span><span class="ss">:video/url</span> <span class="s">"https://www.youtube.com/watch?v=_6tVIijfRzQ"</span>
+     <span class="ss">:video/thumbnail</span> <span class="s">"/images/parens3.png"</span>
+     <span class="ss">:episode/id</span> <span class="s">"s2e3"</span>
+     <span class="ss">:episode/number</span> <span class="mi">3</span>
+     <span class="ss">:episode/title</span> <span class="s">"Stumbling out of the Graveyard"</span>
+     <span class="ss">:episode/description</span> <span class="s">"Someone eated our brains! In this very third episode, we're struggling to get more wiring wired properly while also typing with our fingers on the keyboard. It's a hard life, being a zombie developer. Web socket setup surely is no joke."</span><span class="p">}]})</span>
+</code></pre>
+<p>The <code>parens.ui</code> namespace renders a list of video titles:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">parens.ui</span><span class="p">)</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">render-page</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">videos</span><span class="p">]}]</span>
+  <span class="p">[</span><span class="ss">:div</span>
+   <span class="p">[</span><span class="ss">:h1</span> <span class="s">"Parens of the dead"</span><span class="p">]</span>
+   <span class="p">[</span><span class="ss">:ul</span>
+    <span class="p">(</span><span class="nb">for </span><span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">episode/title</span><span class="p">]}</span> <span class="nv">videos</span><span class="p">]</span>
+      <span class="p">[</span><span class="ss">:li</span> <span class="nv">title</span><span class="p">])]])</span>
+</code></pre>
+<p>The <code>parens.core</code> namespace is where we call <code>replicant.dom/render</code>, and where
+we’ll add additional central infrastructure:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">parens.core</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">parens.ui</span> <span class="ss">:as</span> <span class="nv">ui</span><span class="p">]</span>
+            <span class="p">[</span><span class="nv">replicant.dom</span> <span class="ss">:as</span> <span class="nv">r</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">main</span> <span class="p">[</span><span class="nv">el</span> <span class="nv">state</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">r/render</span> <span class="nv">el</span> <span class="p">(</span><span class="nf">ui/render-page</span> <span class="nv">state</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">bootup</span> <span class="p">[</span><span class="nv">el</span> <span class="nv">state</span><span class="p">]</span>
+  <span class="c1">;; Perform bootup steps that should only be done once here</span>
+  <span class="p">(</span><span class="nf">main</span> <span class="nv">el</span> <span class="nv">state</span><span class="p">))</span>
+</code></pre>
+<p>Finally, there’s a dev namespace to kick things off:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">parens.dev</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">parens.core</span> <span class="ss">:as</span> <span class="nv">app</span><span class="p">]</span>
+            <span class="p">[</span><span class="nv">parens.data</span> <span class="ss">:as</span> <span class="nv">data</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="kd">defonce </span><span class="nv">el</span> <span class="p">(</span><span class="nf">js/document.getElementById</span> <span class="s">"app"</span><span class="p">))</span>
+<span class="p">(</span><span class="kd">defonce </span><span class="nv">started</span> <span class="p">(</span><span class="nf">app/bootup</span> <span class="nv">el</span> <span class="nv">data/data</span><span class="p">))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="o">^</span><span class="ss">:dev/after-load</span> <span class="nv">main</span> <span class="p">[]</span>
+  <span class="c1">;; Add additional dev-time tooling here</span>
+  <span class="p">(</span><span class="nf">app/main</span> <span class="nv">el</span> <span class="nv">data/data</span><span class="p">))</span>
+</code></pre>
+</div><div class="prose mt-4 section-md"><h2 id="design" class="h2 section-md"><a class="group relative" href="#design"><span class="absolute -left-4 group-hover:visible invisible">§ </span>System design</a></h2><p>By adding routing to the app we want to have different render functions at
+different URLs. To achieve this, we will extract information from the URL and
+use it to dispatch to the right render function.</p>
+<p>When someone visits the path <code>"/"</code>, we want to show them the frontpage. When
+they visit <code>"/episodes/s2e1"</code>, we want to show information about the episode
+with id <code>"s2e1"</code>. In other words, every path like <code>"/episodes/??"</code> represents
+the same page/render function, but with different parameters.</p>
+<p>We will use the term “page” to mean the render function for a specific route.
+The episode page has many concrete instances: <code>/episodes/s2e1</code>,
+<code>/episodes/s2e2</code>, etc. Routing allows us to break down the URL to a data
+structure describing a specific instance of a page. We will use the term
+“location” for this data structure.</p>
+<p>Given this route description:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">{</span><span class="ss">:location/page-id</span> <span class="ss">:pages/episode</span>
+ <span class="ss">:location/route</span> <span class="p">[</span><span class="s">"episodes"</span> <span class="ss">:episode/id</span><span class="p">]}</span>
+</code></pre>
+<p>The URL <code>/episodes/s2e1</code> will be represented by this location:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">{</span><span class="ss">:location/page-id</span> <span class="ss">:pages/episode</span>
+ <span class="ss">:location/params</span> <span class="p">{</span><span class="ss">:episode/id</span> <span class="s">"s2e1"</span><span class="p">}}</span>
+</code></pre>
+<p>The location map can also hold information from the query string and hash if we
+need it:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">{</span><span class="ss">:location/page-id</span> <span class="ss">:pages/episode</span>
+ <span class="ss">:location/params</span> <span class="p">{</span><span class="ss">:episode/id</span> <span class="s">"s2e1"</span><span class="p">}</span>
+ <span class="ss">:location/query-params</span> <span class="p">{</span><span class="ss">:view</span> <span class="s">"related"</span><span class="p">}</span>
+ <span class="ss">:location/hash-params</span> <span class="p">{</span><span class="ss">:menu-expanded</span> <span class="s">"1"</span><span class="p">}}</span>
+</code></pre>
+<p>We’ll start with a bareboned version of the routing function:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">extract-location</span> <span class="p">[</span><span class="nv">path</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nb">= </span><span class="s">"/"</span> <span class="nv">path</span><span class="p">)</span>
+        <span class="p">{</span><span class="ss">:location/page-id</span> <span class="ss">:pages/frontpage</span><span class="p">})</span>
+      <span class="p">(</span><span class="nb">when-let </span><span class="p">[[</span><span class="nv">_</span> <span class="nv">id</span><span class="p">]</span> <span class="p">(</span><span class="nb">re-find </span><span class="o">#</span><span class="s">"/episodes/(\w+)"</span> <span class="nv">path</span><span class="p">)]</span>
+        <span class="p">{</span><span class="ss">:location/page-id</span> <span class="ss">:pages/episode</span>
+         <span class="ss">:location/params</span> <span class="p">{</span><span class="ss">:episode/id</span> <span class="nv">id</span><span class="p">}})))</span>
+</code></pre>
+</div><div class="prose mt-4 section-md"><h2 id="locations" class="h2 section-md"><a class="group relative" href="#locations"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Working with locations</a></h2><p>We need to extract the location data when the app boots, and when the URL changes.
+To do it when the app boots we’ll call <code>extract-location</code> from <code>main</code> and pass
+the data to the render function:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">main</span> <span class="p">[</span><span class="nv">el</span> <span class="nv">state</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="p">(</span><span class="nf">extract-location</span> <span class="nv">js/location.href</span><span class="p">)</span>
+       <span class="p">(</span><span class="nf">ui/render-page</span> <span class="nv">state</span><span class="p">)</span>
+       <span class="p">(</span><span class="nf">r/render</span> <span class="nv">el</span><span class="p">)))</span>
+</code></pre>
+<h3>Page dispatch</h3>
+<p>We can rename the <code>render-page</code> function to <code>render-frontpage</code>, and write a new
+<code>render-page</code> that chooses the right render function:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">parens.ui</span><span class="p">)</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">render-frontpage</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">videos</span><span class="p">]}</span> <span class="nv">_</span><span class="p">]</span>
+  <span class="p">[</span><span class="ss">:div</span>
+   <span class="p">[</span><span class="ss">:h1</span> <span class="s">"Parens of the dead"</span><span class="p">]</span>
+   <span class="p">[</span><span class="ss">:ul</span>
+    <span class="p">(</span><span class="nb">for </span><span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">episode/title</span><span class="p">]}</span> <span class="nv">videos</span><span class="p">]</span>
+      <span class="p">[</span><span class="ss">:li</span> <span class="nv">title</span><span class="p">])]])</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">render-not-found</span> <span class="p">[</span><span class="nv">_</span> <span class="nv">_</span><span class="p">]</span>
+  <span class="p">[</span><span class="ss">:h1</span> <span class="s">"Not found"</span><span class="p">])</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">render-page</span> <span class="p">[</span><span class="nv">state</span> <span class="nv">location</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">f</span> <span class="p">(</span><span class="nf">case</span> <span class="p">(</span><span class="ss">:location/page-id</span> <span class="nv">location</span><span class="p">)</span>
+            <span class="ss">:pages/frontpage</span> <span class="nv">render-frontpage</span>
+            <span class="nv">render-not-found</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nf">f</span> <span class="nv">state</span> <span class="nv">location</span><span class="p">)))</span>
+</code></pre>
+<p>Because the <code>location</code> map may contain useful information (routing and query
+parameters, etc), we pass it as a separate argument to each page’s render
+function.</p>
+</div><div class="prose mt-4 section-md"><h3 id="browser-navigation" class="h3 section-md"><a class="group relative" href="#browser-navigation"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Browser navigation</a></h3><p>Routing at bootup is well and fine, but we also need to change the active
+location when the user navigates the app. We could add a navigation action and
+use it to change the location, but an even easier approach is to piggie-back on
+what the browser already does. This approach has the benefit of being less
+specific to our chosen tools, and is easier to move to the server if we wish to
+do so later.</p>
+<p>We will add a click event listener to the body of the page. If the target of the
+click is an anchor (or inside one), and its <code>href</code> attribute matches any of our
+routes, we will route it – otherwise, we’ll let the browser do its thing.</p>
+<p>Let’s start by finding the target URL for a click event, if any:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">find-target-href</span> <span class="p">[</span><span class="nv">e</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">some-&gt;</span> <span class="nv">e</span> <span class="nv">.-target</span>               <span class="c1">;; 1</span>
+          <span class="p">(</span><span class="nf">.closest</span> <span class="s">"a"</span><span class="p">)</span>           <span class="c1">;; 2</span>
+          <span class="p">(</span><span class="nf">.getAttribute</span> <span class="s">"href"</span><span class="p">)))</span> <span class="c1">;; 3</span>
+</code></pre>
+<ol>
+<li>The target of the event is whatever DOM element received the click</li>
+<li><code>.closest</code> returns the element itself if it matches the CSS selector, or the
+closest parent that does. This allows us to also react to clicks on elements
+nested inside anchor elements, e.g. <code>&lt;a href="/videos/ac2"&gt;&lt;img src="/ac2.png"&gt;&lt;/a&gt;</code>.</li>
+<li>Get the <code>href</code> attribute</li>
+</ol>
+<p>We will call this function whenever a <code>click</code> event triggers. If the <code>href</code>
+resolves to a location, we will route the click and manually update the browser
+URL, otherwise we do nothing.</p>
+<p>First, we’ll refactor the <code>main</code> function slightly, to avoid duplicating details
+about the render:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-location</span> <span class="p">[</span><span class="nv">el</span> <span class="nv">state</span> <span class="nv">location</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">r/render</span> <span class="nv">el</span> <span class="p">(</span><span class="nf">ui/render-page</span> <span class="nv">state</span> <span class="nv">location</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">main</span> <span class="p">[</span><span class="nv">el</span> <span class="nv">state</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">render-location</span> <span class="nv">el</span> <span class="nv">state</span> <span class="p">(</span><span class="nf">extract-location</span> <span class="nv">js/location.pathname</span><span class="p">)))</span>
+</code></pre>
+<p>Next, we’ll add the event listener in <code>bootup</code> (we don’t want this re-evaluated
+when code is hot reloaded):</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">bootup</span> <span class="p">[</span><span class="nv">el</span> <span class="nv">state</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">js/document.body.addEventListener</span>
+   <span class="s">"click"</span>
+   <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">e</span><span class="p">]</span>
+     <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">href</span> <span class="p">(</span><span class="nf">find-target-href</span> <span class="nv">e</span><span class="p">)]</span>
+       <span class="p">(</span><span class="nb">when-let </span><span class="p">[</span><span class="nv">location</span> <span class="p">(</span><span class="nf">extract-location</span> <span class="nv">href</span><span class="p">)]</span>
+         <span class="p">(</span><span class="nf">.preventDefault</span> <span class="nv">e</span><span class="p">)</span>
+         <span class="p">(</span><span class="nf">.pushState</span> <span class="nv">js/history</span> <span class="nv">nil</span> <span class="s">""</span> <span class="nv">href</span><span class="p">)</span> <span class="c1">;; Update browser URL</span>
+         <span class="p">(</span><span class="nf">render-location</span> <span class="nv">el</span> <span class="nv">state</span> <span class="nv">location</span><span class="p">)))))</span>
+
+  <span class="p">(</span><span class="nf">main</span> <span class="nv">el</span> <span class="nv">state</span><span class="p">))</span>
+</code></pre>
+<p>To test our new capability we will add a render function for the episode page:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-episode</span> <span class="p">[</span><span class="nv">state</span> <span class="nv">location</span><span class="p">]</span>
+  <span class="p">[</span><span class="ss">:main</span>
+   <span class="p">(</span><span class="nb">if-let </span><span class="p">[</span><span class="nv">episode</span> <span class="p">(</span><span class="nf">get-episode</span> <span class="nv">state</span> <span class="nv">location</span><span class="p">)]</span>
+     <span class="p">(</span><span class="nb">list </span><span class="p">[</span><span class="ss">:h1</span> <span class="p">(</span><span class="ss">:episode/title</span> <span class="nv">episode</span><span class="p">)]</span>
+           <span class="p">[</span><span class="ss">:p</span> <span class="p">(</span><span class="ss">:episode/description</span> <span class="nv">episode</span><span class="p">)])</span>
+     <span class="p">[</span><span class="ss">:h1</span> <span class="s">"Unknown episode"</span><span class="p">])</span>
+   <span class="p">[</span><span class="ss">:p</span> <span class="p">[</span><span class="ss">:a</span> <span class="p">{</span><span class="ss">:href</span> <span class="s">"/"</span><span class="p">}</span> <span class="s">"Back to episode listing"</span><span class="p">]]])</span>
+</code></pre>
+<p>Then include it in the main dispatch:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-page</span> <span class="p">[</span><span class="nv">state</span> <span class="nv">location</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">f</span> <span class="p">(</span><span class="nf">case</span> <span class="p">(</span><span class="ss">:location/page-id</span> <span class="nv">location</span><span class="p">)</span>
+            <span class="ss">:pages/frontpage</span> <span class="nv">render-frontpage</span>
+            <span class="ss">:pages/episode</span> <span class="nv">render-episode</span>
+            <span class="nv">render-not-found</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nf">f</span> <span class="nv">state</span> <span class="nv">location</span><span class="p">)))</span>
+</code></pre>
+<p>And finally add some links from the frontpage:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-frontpage</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">videos</span><span class="p">]}</span> <span class="nv">_</span><span class="p">]</span>
+  <span class="p">[</span><span class="ss">:div</span>
+   <span class="p">[</span><span class="ss">:h1</span> <span class="s">"Parens of the dead"</span><span class="p">]</span>
+   <span class="p">[</span><span class="ss">:ul</span>
+    <span class="p">(</span><span class="nb">for </span><span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">episode/title</span> <span class="nv">episode/id</span><span class="p">]}</span> <span class="nv">videos</span><span class="p">]</span>
+      <span class="p">[</span><span class="ss">:li</span> <span class="p">[</span><span class="ss">:a</span> <span class="p">{</span><span class="ss">:href</span> <span class="p">(</span><span class="nb">str </span><span class="s">"/episodes/"</span> <span class="nv">id</span><span class="p">)}</span> <span class="nv">title</span><span class="p">]])]])</span>
+</code></pre>
+<h3>Going back</h3>
+<p>We now have routing for links, but if we try to go back nothing much happens.
+The URL changes, but the page doesn’t re-render. We can fix this with a
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/popstate_event">popstate</a>
+handler.</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">bootup</span> <span class="p">[</span><span class="nv">el</span> <span class="nv">state</span><span class="p">]</span>
+  ,,,
+
+  <span class="p">(</span><span class="nf">js/window.addEventListener</span>
+   <span class="s">"popstate"</span>
+   <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">_</span><span class="p">]</span>
+     <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="p">(</span><span class="nf">extract-location</span> <span class="nv">js/location.pathname</span><span class="p">)</span>
+          <span class="p">(</span><span class="nf">render-location</span> <span class="nv">el</span> <span class="nv">state</span><span class="p">))))</span>
+
+  ,,,<span class="p">)</span>
+</code></pre>
+<p>With this handler in place, going back works as well.</p>
+</div><div class="prose mt-4 section-md"><h2 id="routing-mechanics" class="h2 section-md"><a class="group relative" href="#routing-mechanics"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Routing mechanics</a></h2><p>We now have basic routing in place, but with hard-coded URLs and some
+duplication between the routing logic and generating links. We can fix this by
+using a routing library that has two way routing. We will use
+<a href="https://github.com/DomKM/silk">silk</a> to demonstrate, but any library that has
+bi-directional routing and uses data rather than macros for routes will do.</p>
+<p>To avoid being overly reliant on the specific routing library, we will create
+our own <code>router</code> namespace. It will also use <code>lambdaisland/uri</code> to parse the URL.</p>
+</div><div class="mx-auto my-6 section-lg"><pre class="codehilite bg-base-200 codehilite"><code class="clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">parens.router</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">domkm.silk</span> <span class="ss">:as</span> <span class="nv">silk</span><span class="p">]</span>
+            <span class="p">[</span><span class="nv">lambdaisland.uri</span> <span class="ss">:as</span> <span class="nv">uri</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="k">def </span><span class="nv">routes</span>
+  <span class="p">(</span><span class="nf">silk/routes</span>
+   <span class="p">[[</span><span class="ss">:pages/episode</span> <span class="p">[[</span><span class="s">"episodes"</span> <span class="ss">:episode/id</span><span class="p">]]]</span>
+    <span class="p">[</span><span class="ss">:pages/frontpage</span> <span class="p">[]]]))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">url-&gt;location</span> <span class="p">[</span><span class="nv">routes</span> <span class="nv">url</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">uri</span> <span class="p">(</span><span class="nf">cond-&gt;</span> <span class="nv">url</span> <span class="p">(</span><span class="nb">string? </span><span class="nv">url</span><span class="p">)</span> <span class="nv">uri/uri</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nb">when-let </span><span class="p">[</span><span class="nv">arrived</span> <span class="p">(</span><span class="nf">silk/arrive</span> <span class="nv">routes</span> <span class="p">(</span><span class="ss">:path</span> <span class="nv">uri</span><span class="p">))]</span>
+      <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">query-params</span> <span class="p">(</span><span class="nf">uri/query-map</span> <span class="nv">uri</span><span class="p">)</span>
+            <span class="nv">hash-params</span> <span class="p">(</span><span class="nf">some-&gt;</span> <span class="nv">uri</span> <span class="ss">:fragment</span> <span class="nv">uri/query-string-&gt;map</span><span class="p">)]</span>
+        <span class="p">(</span><span class="nf">cond-&gt;</span> <span class="p">{</span><span class="ss">:location/page-id</span> <span class="p">(</span><span class="ss">:domkm.silk/name</span> <span class="nv">arrived</span><span class="p">)</span>
+                 <span class="ss">:location/params</span> <span class="p">(</span><span class="nb">dissoc </span><span class="nv">arrived</span>
+                                          <span class="ss">:domkm.silk/name</span>
+                                          <span class="ss">:domkm.silk/pattern</span>
+                                          <span class="ss">:domkm.silk/routes</span>
+                                          <span class="ss">:domkm.silk/url</span><span class="p">)}</span>
+          <span class="p">(</span><span class="nb">seq </span><span class="nv">query-params</span><span class="p">)</span> <span class="p">(</span><span class="nb">assoc </span><span class="ss">:location/query-params</span> <span class="nv">query-params</span><span class="p">)</span>
+          <span class="p">(</span><span class="nb">seq </span><span class="nv">hash-params</span><span class="p">)</span> <span class="p">(</span><span class="nb">assoc </span><span class="ss">:location/hash-params</span> <span class="nv">hash-params</span><span class="p">))))))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">location-&gt;url</span> <span class="p">[</span><span class="nv">routes</span> <span class="p">{</span><span class="ss">:location/keys</span> <span class="p">[</span><span class="nv">page-id</span> <span class="nv">params</span> <span class="nv">query-params</span> <span class="nv">hash-params</span><span class="p">]}]</span>
+  <span class="p">(</span><span class="nf">cond-&gt;</span> <span class="p">(</span><span class="nf">silk/depart</span> <span class="nv">routes</span> <span class="nv">page-id</span> <span class="nv">params</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">seq </span><span class="nv">query-params</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">str </span><span class="s">"?"</span> <span class="p">(</span><span class="nf">uri/map-&gt;query-string</span> <span class="nv">query-params</span><span class="p">))</span>
+
+    <span class="p">(</span><span class="nb">seq </span><span class="nv">hash-params</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">str </span><span class="s">"#"</span> <span class="p">(</span><span class="nf">uri/map-&gt;query-string</span> <span class="nv">hash-params</span><span class="p">))))</span>
+</code></pre></div><div class="prose mt-4 section-md"><p>We can now remove the <code>extract-location</code> we wrote earlier and call
+<code>url-&gt;location</code> instead, e.g.:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">parens.core</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">parens.router</span> <span class="ss">:as</span> <span class="nv">router</span><span class="p">]</span>
+            <span class="p">[</span><span class="nv">parens.ui</span> <span class="ss">:as</span> <span class="nv">ui</span><span class="p">]</span>
+            <span class="p">[</span><span class="nv">replicant.dom</span> <span class="ss">:as</span> <span class="nv">r</span><span class="p">]))</span>
+
+,,,
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">main</span> <span class="p">[</span><span class="nv">el</span> <span class="nv">state</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="nv">js/location.pathname</span>
+       <span class="p">(</span><span class="nf">router/url-&gt;location</span> <span class="nv">router/routes</span><span class="p">)</span>
+       <span class="p">(</span><span class="nf">render-location</span> <span class="nv">el</span> <span class="nv">state</span><span class="p">)))</span>
+</code></pre>
+<p>The route data is a global def now but we don’t want to cement that, so both
+routing functions expect to be passed the routes. This means that the render
+functions need access to the routes as well. Update <code>main</code> like so:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">parens.core</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">parens.router</span> <span class="ss">:as</span> <span class="nv">router</span><span class="p">]</span>
+            <span class="p">[</span><span class="nv">parens.ui</span> <span class="ss">:as</span> <span class="nv">ui</span><span class="p">]</span>
+            <span class="p">[</span><span class="nv">replicant.dom</span> <span class="ss">:as</span> <span class="nv">r</span><span class="p">]))</span>
+
+,,,
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">main</span> <span class="p">[</span><span class="nv">el</span> <span class="nv">state</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="nv">js/location.pathname</span>
+       <span class="p">(</span><span class="nf">router/url-&gt;location</span> <span class="nv">router/routes</span><span class="p">)</span>
+       <span class="p">(</span><span class="nf">render-location</span> <span class="nv">el</span> <span class="nv">state</span> <span class="nv">router/routes</span><span class="p">)))</span>
+</code></pre>
+<p>Pass along the routes when rendering:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-location</span> <span class="p">[</span><span class="nv">el</span> <span class="nv">state</span> <span class="nv">routes</span> <span class="nv">location</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">r/render</span> <span class="nv">el</span> <span class="p">(</span><span class="nf">ui/render-page</span> <span class="nv">state</span> <span class="nv">routes</span> <span class="nv">location</span><span class="p">)))</span>
+</code></pre>
+<p>Then update the render functions accordingly:</p>
+</div><div class="mx-auto my-6 section-lg"><pre class="codehilite bg-base-200 codehilite"><code class="clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">parens.ui</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">parens.router</span> <span class="ss">:as</span> <span class="nv">router</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">render-frontpage</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">videos</span><span class="p">]}</span> <span class="nv">routes</span> <span class="nv">_</span><span class="p">]</span>
+  <span class="p">[</span><span class="ss">:div</span>
+   <span class="p">[</span><span class="ss">:h1</span> <span class="s">"Parens of the dead"</span><span class="p">]</span>
+   <span class="p">[</span><span class="ss">:ul</span>
+    <span class="p">(</span><span class="nb">for </span><span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">episode/title</span> <span class="nv">episode/id</span><span class="p">]}</span> <span class="nv">videos</span><span class="p">]</span>
+      <span class="p">[</span><span class="ss">:li</span>
+       <span class="p">[</span><span class="ss">:a</span>
+        <span class="p">{</span><span class="ss">:href</span> <span class="p">(</span><span class="nf">router/location-&gt;url</span> <span class="nv">routes</span>
+                 <span class="p">{</span><span class="ss">:location/page-id</span> <span class="ss">:pages/episode</span>
+                  <span class="ss">:location/params</span> <span class="p">{</span><span class="ss">:episode/id</span> <span class="nv">id</span><span class="p">}})}</span>
+        <span class="nv">title</span><span class="p">]])]])</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">get-episode</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">videos</span><span class="p">]}</span> <span class="p">{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">location/params</span><span class="p">]}]</span>
+  ,,,<span class="p">)</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">render-episode</span> <span class="p">[</span><span class="nv">state</span> <span class="nv">routes</span> <span class="nv">location</span><span class="p">]</span>
+  <span class="p">[</span><span class="ss">:main</span>
+   ,,,
+   <span class="p">[</span><span class="ss">:p</span>
+    <span class="p">[</span><span class="ss">:a</span> <span class="p">{</span><span class="ss">:href</span> <span class="p">(</span><span class="nf">router/location-&gt;url</span> <span class="nv">routes</span> <span class="p">{</span><span class="ss">:location/page-id</span> <span class="ss">:pages/frontpage</span><span class="p">})}</span>
+     <span class="s">"Back to episode listing"</span><span class="p">]]])</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">render-not-found</span> <span class="p">[</span><span class="nv">_</span> <span class="nv">_</span> <span class="nv">_</span><span class="p">]</span>
+  ,,,<span class="p">)</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">render-page</span> <span class="p">[</span><span class="nv">state</span> <span class="nv">routes</span> <span class="nv">location</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">f</span> ,,,<span class="p">]</span>
+    <span class="p">(</span><span class="nf">f</span> <span class="nv">state</span> <span class="nv">routes</span> <span class="nv">location</span><span class="p">)))</span>
+</code></pre></div><div class="prose mt-4 section-md"><p>And with that, we have bi-directional routing powered by a routing library. And
+the routing library is merely an implementation detail of the app’s own router
+namespace. Win-win.</p>
+</div><div class="prose mt-4 section-md"><h2 id="url-state-transfer" class="h2 section-md"><a class="group relative" href="#url-state-transfer"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Using the URL for state transfer</a></h2><p>URLs are great because they can address specific states in your user interface.
+By making some minor adjustments to the routing system, the URL can be used in
+place of component local state with the added benefit of making any state in the
+UI bookmarkable and shareable like only URLs can be.</p>
+<p>If we are to put UI state in the URL, we need to do so without adding to the
+browser’s history. Otherwise, we would effectively break the back button by
+causing it to back through any minor state change. We can use the URL hash
+fragment for this.</p>
+<p>When routing clicks, we will check if the old and new locations are the same if
+we ignore the hash params. If they are, we will use <code>replaceState</code> instead of
+<code>pushState</code> to avoid adding a history entry.</p>
+<p>We’ll start with a function in the router namespace that can decide if two
+locations are essentially the same:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">essentially-same?</span> <span class="p">[</span><span class="nv">l1</span> <span class="nv">l2</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">and </span><span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="ss">:location/page-id</span> <span class="nv">l1</span><span class="p">)</span> <span class="p">(</span><span class="ss">:location/page-id</span> <span class="nv">l2</span><span class="p">))</span>
+       <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nf">not-empty</span> <span class="p">(</span><span class="ss">:location/params</span> <span class="nv">l1</span><span class="p">))</span>
+          <span class="p">(</span><span class="nf">not-empty</span> <span class="p">(</span><span class="ss">:location/params</span> <span class="nv">l2</span><span class="p">)))</span>
+       <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nf">not-empty</span> <span class="p">(</span><span class="ss">:location/query-params</span> <span class="nv">l1</span><span class="p">))</span>
+          <span class="p">(</span><span class="nf">not-empty</span> <span class="p">(</span><span class="ss">:location/query-params</span> <span class="nv">l2</span><span class="p">)))))</span>
+</code></pre>
+<p>Next, we’ll extract the body click handler to a separate function. In the
+<code>bootup</code> function:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">js/document.body.addEventListener</span> <span class="s">"click"</span>
+  <span class="o">#</span><span class="p">(</span><span class="nf">route-click</span> <span class="nv">%</span> <span class="nv">el</span> <span class="nv">state</span> <span class="nv">router/routes</span><span class="p">))</span>
+</code></pre>
+<p>And here’s the updated code in a separate function:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">get-current-location</span> <span class="p">[]</span>
+  <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="nv">js/location.pathname</span>
+       <span class="p">(</span><span class="nf">router/url-&gt;location</span> <span class="nv">router/routes</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">route-click</span> <span class="p">[</span><span class="nv">e</span> <span class="nv">el</span> <span class="nv">state</span> <span class="nv">routes</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">href</span> <span class="p">(</span><span class="nf">find-target-href</span> <span class="nv">e</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nb">when-let </span><span class="p">[</span><span class="nv">location</span> <span class="p">(</span><span class="nf">router/url-&gt;location</span> <span class="nv">routes</span> <span class="nv">href</span><span class="p">)]</span>
+      <span class="p">(</span><span class="nf">.preventDefault</span> <span class="nv">e</span><span class="p">)</span>
+      <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">router/essentially-same?</span> <span class="nv">location</span> <span class="p">(</span><span class="nf">get-current-location</span><span class="p">))</span>
+        <span class="p">(</span><span class="nf">.replaceState</span> <span class="nv">js/history</span> <span class="nv">nil</span> <span class="s">""</span> <span class="nv">href</span><span class="p">)</span>
+        <span class="p">(</span><span class="nf">.pushState</span> <span class="nv">js/history</span> <span class="nv">nil</span> <span class="s">""</span> <span class="nv">href</span><span class="p">))</span>
+      <span class="p">(</span><span class="nf">render-location</span> <span class="nv">el</span> <span class="nv">state</span> <span class="nv">router/routes</span> <span class="nv">location</span><span class="p">))))</span>
+</code></pre>
+<p>With this little tweak, pages can now use addressable state over the URL:</p>
+</div><div class="mx-auto my-6 section-lg"><pre class="codehilite bg-base-200 codehilite"><code class="clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-episode</span> <span class="p">[</span><span class="nv">state</span> <span class="nv">routes</span> <span class="nv">location</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">episode</span> <span class="p">(</span><span class="nf">get-episode</span> <span class="nv">state</span> <span class="nv">location</span><span class="p">)]</span>
+    <span class="p">[</span><span class="ss">:main</span>
+     <span class="p">[</span><span class="ss">:h1</span> <span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="ss">:episode/title</span> <span class="nv">episode</span><span class="p">)</span>
+              <span class="s">"Unknown episode"</span><span class="p">)]</span>
+     <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">-&gt; </span><span class="nv">location</span> <span class="ss">:location/hash-params</span> <span class="ss">:description</span><span class="p">)</span>
+       <span class="p">(</span><span class="nf">list</span>
+        <span class="p">[</span><span class="ss">:p</span> <span class="p">(</span><span class="ss">:episode/description</span> <span class="nv">episode</span><span class="p">)]</span>
+        <span class="p">[</span><span class="ss">:a</span> <span class="p">{</span><span class="ss">:href</span> <span class="p">(</span><span class="nf">router/location-&gt;url</span> <span class="nv">routes</span>
+                     <span class="p">(</span><span class="nf">update</span> <span class="nv">location</span> <span class="ss">:location/hash-params</span> <span class="nb">dissoc </span><span class="ss">:description</span><span class="p">))}</span>
+         <span class="s">"Hide description"</span><span class="p">])</span>
+       <span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="ss">:episode/description</span> <span class="nv">episode</span><span class="p">)</span>
+         <span class="p">[</span><span class="ss">:a</span> <span class="p">{</span><span class="ss">:href</span> <span class="p">(</span><span class="nf">router/location-&gt;url</span> <span class="nv">routes</span>
+                      <span class="p">(</span><span class="nf">assoc-in</span> <span class="nv">location</span> <span class="p">[</span><span class="ss">:location/hash-params</span> <span class="ss">:description</span><span class="p">]</span> <span class="s">"1"</span><span class="p">))}</span>
+          <span class="s">"Show description"</span><span class="p">]))</span>
+     <span class="p">[</span><span class="ss">:p</span>
+      <span class="p">[</span><span class="ss">:a</span> <span class="p">{</span><span class="ss">:href</span> <span class="p">(</span><span class="nf">router/location-&gt;url</span> <span class="nv">routes</span> <span class="p">{</span><span class="ss">:location/page-id</span> <span class="ss">:pages/frontpage</span><span class="p">})}</span>
+       <span class="s">"Back to episode listing"</span><span class="p">]]]))</span>
+</code></pre></div><div class="prose mt-4 section-md"><p>Using the URL for state transfer only works for small pieces of data, but for
+things like toggling menus, sorting tables, etc, it works perfectly and even
+improves UX by making those states addressable.</p>
+<p>An interesting aspect about <code>render-episode</code> is that while Replicant doesn’t
+allow component local state, this page/“component” has all the knowledge about
+the state it depends on. All it relies on is a little help from the central
+infrastructure, and it can “do” whatever it needs.</p>
+</div><div class="prose mt-4 section-md"><h2 id="router-alias" class="h2 section-md"><a class="group relative" href="#router-alias"><span class="absolute -left-4 group-hover:visible invisible">§ </span>The router alias</a></h2><p>Making links that use the router is a little bit cumbersome:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">[</span><span class="ss">:a</span> <span class="p">{</span><span class="ss">:href</span> <span class="p">(</span><span class="nf">router/location-&gt;url</span> <span class="nv">routes</span>
+             <span class="p">{</span><span class="ss">:location/page-id</span> <span class="ss">:pages/frontpage</span><span class="p">})}</span>
+ <span class="s">"Back to the frontpage"</span><span class="p">]</span>
+</code></pre>
+<p>As a final touch, we will introduce a routing <a href="/alias/">alias</a> that can
+<a href="/alias/#alias-data">side-chaine the route data</a> to reduce this down to:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">[</span><span class="ss">:ui/a</span> <span class="p">{</span><span class="ss">:ui/location</span> <span class="p">{</span><span class="ss">:location/page-id</span> <span class="ss">:pages/frontpage</span><span class="p">}}</span>
+ <span class="s">"Back to the frontpage"</span><span class="p">]</span>
+</code></pre>
+<p>We’ll define the alias in the <code>core</code> namespace. This way we can do away with the
+router dependency in the <code>ui</code> namespace later:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">parens.core</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">parens.router</span> <span class="ss">:as</span> <span class="nv">router</span><span class="p">]</span>
+            <span class="p">[</span><span class="nv">parens.ui</span> <span class="ss">:as</span> <span class="nv">ui</span><span class="p">]</span>
+            <span class="p">[</span><span class="nv">replicant.alias</span> <span class="ss">:as</span> <span class="nv">alias</span><span class="p">]</span>
+            <span class="p">[</span><span class="nv">replicant.dom</span> <span class="ss">:as</span> <span class="nv">r</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">routing-anchor</span> <span class="p">[</span><span class="nv">attrs</span> <span class="nv">children</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">routes</span> <span class="p">(</span><span class="nb">-&gt; </span><span class="nv">attrs</span> <span class="ss">:replicant/alias-data</span> <span class="ss">:routes</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nb">into </span><span class="p">[</span><span class="ss">:a</span> <span class="p">(</span><span class="nf">cond-&gt;</span> <span class="nv">attrs</span>
+                <span class="p">(</span><span class="ss">:ui/location</span> <span class="nv">attrs</span><span class="p">)</span>
+                <span class="p">(</span><span class="nb">assoc </span><span class="ss">:href</span> <span class="p">(</span><span class="nf">router/location-&gt;url</span> <span class="nv">routes</span>
+                               <span class="p">(</span><span class="ss">:ui/location</span> <span class="nv">attrs</span><span class="p">))))]</span>
+          <span class="nv">children</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nf">alias/register!</span> <span class="ss">:ui/a</span> <span class="nv">routing-anchor</span><span class="p">)</span>
+
+,,,
+</code></pre>
+<p>Next we’ll update the call to Replicant’s render function. We’ll make two
+changes: pass the routes as alias data, and stop passing the routes to the UI
+elements - they no longer need to receive them explicitly.</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-location</span> <span class="p">[</span><span class="nv">el</span> <span class="nv">state</span> <span class="nv">routes</span> <span class="nv">location</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">r/render</span>
+   <span class="nv">el</span>
+   <span class="p">(</span><span class="nf">ui/render-page</span> <span class="nv">state</span> <span class="nv">location</span><span class="p">)</span>
+   <span class="p">{</span><span class="ss">:alias-data</span> <span class="p">{</span><span class="ss">:routes</span> <span class="nv">routes</span><span class="p">}}))</span>
+</code></pre>
+<p>With explicit routing out of the way, the UI namespace no longer depends
+directly on the router, and <code>render-episode</code> is deliciously declarative:</p>
+</div><div class="mx-auto my-6 section-lg"><pre class="codehilite bg-base-200 codehilite"><code class="clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-episode</span> <span class="p">[</span><span class="nv">state</span> <span class="nv">location</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">episode</span> <span class="p">(</span><span class="nf">get-episode</span> <span class="nv">state</span> <span class="nv">location</span><span class="p">)]</span>
+    <span class="p">[</span><span class="ss">:main</span>
+     <span class="p">[</span><span class="ss">:h1</span> <span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="ss">:episode/title</span> <span class="nv">episode</span><span class="p">)</span>
+              <span class="s">"Unknown episode"</span><span class="p">)]</span>
+     <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">-&gt; </span><span class="nv">location</span> <span class="ss">:location/hash-params</span> <span class="ss">:description</span><span class="p">)</span>
+       <span class="p">(</span><span class="nf">list</span>
+        <span class="p">[</span><span class="ss">:p</span> <span class="p">(</span><span class="ss">:episode/description</span> <span class="nv">episode</span><span class="p">)]</span>
+        <span class="p">[</span><span class="ss">:ui/a</span> <span class="p">{</span><span class="ss">:ui/location</span> <span class="p">(</span><span class="nf">update</span> <span class="nv">location</span> <span class="ss">:location/hash-params</span> <span class="nb">dissoc </span><span class="ss">:description</span><span class="p">)}</span>
+         <span class="s">"Hide description"</span><span class="p">])</span>
+       <span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="ss">:episode/description</span> <span class="nv">episode</span><span class="p">)</span>
+         <span class="p">[</span><span class="ss">:ui/a</span> <span class="p">{</span><span class="ss">:ui/location</span> <span class="p">(</span><span class="nf">assoc-in</span> <span class="nv">location</span> <span class="p">[</span><span class="ss">:location/hash-params</span> <span class="ss">:description</span><span class="p">]</span> <span class="s">"1"</span><span class="p">)}</span>
+          <span class="s">"Show description"</span><span class="p">]))</span>
+     <span class="p">[</span><span class="ss">:p</span>
+      <span class="p">[</span><span class="ss">:ui/a</span> <span class="p">{</span><span class="ss">:ui/location</span> <span class="p">{</span><span class="ss">:location/page-id</span> <span class="ss">:pages/frontpage</span><span class="p">}}</span>
+       <span class="s">"Back to episode listing"</span><span class="p">]]]))</span>
+</code></pre></div><div class="prose mt-4 section-md"><p>Remember that aliases behave just like any other hiccup element, so you can add
+classes with <code>:ui/a.btn</code>, give it attributes, and so on.</p>
+<p>The <a href="https://github.com/cjohansen/replicant-routing">full code-listing is available on
+github</a>.</p>
+<h2>Further reading</h2>
+<p>If you have added state management to your app, you might be wondering how to
+combine routing and state management. The details of doing this is covered in
+the state management tutorials: <a href="/tutorials/state-atom/#routing">with an atom</a> or
+<a href="/tutorials/state-datascript/#routing">with Datascript</a>.</p>
+</div></main><script type="text/javascript" src="/bundles/d399b4851ce7/app.js"></script></body></html>

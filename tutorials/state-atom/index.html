@@ -1,0 +1,269 @@
+<!DOCTYPE html><html data-theme="dark" lang="en" prefix="og: http://ogp.me/ns#"><head><title>State management with atoms</title><meta name="theme-color" content="#202020"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta property="og:title" content="State management with atoms"><link href="/a00f586d252b/favicon.ico" rel="icon" type="image/x-icon"><link href="/a00f586d252b/favicon.ico" rel="shortcut icon" type="image/ico"><link href="/a00f586d252b/favicon.ico" rel="shortcut icon" type="image/x-icon"><link href="/a00f586d252b/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"><link href="/285191ad6a81/apple-touch-icon.png" rel="icon" type="image/png" sizes="180x180"><link rel="stylesheet" href="/bundles/2e8dfb3c3384/styles.css"></head><body><div class="flex justify-between p-4 items-center"><div class="w-8"><a href="/"><svg style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2" viewBox="0 0 1080 1080" xml:space="preserve"><path d="M876.452 152.555c136.818 12.348 195.668 81.688 192.708 196.198h-87.197c1.569-66.295-16.004-119.066-52.748-157.356-14.398-15.003-31.913-27.882-52.763-38.353v-.489Zm98.715 270.164h87.213c-9.48 55.52-38.53 92.323-91.749 108.344 55.789 39.542 76.849 90.867 66.189 152.957l-44.388 184.981h-86.379l42.751-178.151c.149-.622.278-1.249.386-1.879 9.983-58.16-3.188-108.49-41.722-150.197 36.949-23.921 58.758-61.19 67.282-111.131a29.34 29.34 0 0 0 .417-4.924Z" fill="#4fb348"></path><path d="M757.149 152.309c138.837 11.646 198.514 81.149 195.537 196.444h-88.511c1.643-69.4-17.651-123.977-58.046-162.647-13.679-13.096-29.954-24.431-48.98-33.797Zm101.023 270.41h87.726c-9.475 55.52-38.529 92.323-91.745 108.344 55.785 39.542 76.848 90.867 66.191 152.957l-44.391 184.981h-87.689l42.752-178.151c.149-.622.278-1.249.386-1.879 9.983-58.16-3.188-108.49-41.722-150.197 36.948-23.921 58.758-61.19 67.281-111.131.153-.894.263-1.79.332-2.685h.506c.126-.747.25-1.493.373-2.239Z" fill="#00a29a"></path><path d="M76.208 847.157c-36.752-5.562-64.959-37.32-64.959-75.614 0-42.21 34.269-76.478 76.478-76.478a76.45 76.45 0 0 1 20.676 2.832c32.178 9.028 55.802 38.6 55.802 73.646 0 42.209-34.268 76.478-76.478 76.478-3.915 0-7.761-.295-11.519-.864Zm56.524-262.05a77.324 77.324 0 0 1-6.804.299c-42.209 0-76.478-34.268-76.478-76.478 0-42.209 34.269-76.478 76.478-76.478 13.663 0 26.494 3.591 37.6 9.879 23.204 13.139 38.878 38.053 38.878 66.599 0 39.917-30.647 72.732-69.674 76.179Zm-18.148 84.136 11.77-54.569c58.168-.23 105.321-47.525 105.321-105.746 0-35.555-17.586-67.035-44.526-86.209H828.11c-9.475 55.52-38.529 92.323-91.745 108.344 55.784 39.542 76.848 90.867 66.191 152.957l-44.391 184.981H539.756l34.836-151.189c13.135-57.004-4.455-118.062-91.882-118.062H353.796l-71.217 274.677H112.245c46.557-11.07 81.229-52.96 81.229-102.884 0-49.085-33.515-90.403-78.89-102.3Zm-1.803-330.67 117.483-187.485h389.845c152.584 6.696 217.9 77.175 214.789 197.665H178.595v-10.18h-65.814Z" fill="#0086ff"></path></svg></a></div><div class="flex items-center gap-4 text-sm"><a class="hover:underline" href="/learn/">Learn</a><a class="hover:underline" href="https://cljdoc.org/d/no.cjohansen/replicant/">API Reference</a><div class="w-6"><a href="https://clojurians.slack.com/archives/C06JZ4X334N" title="Replicant on the Clojurians Slack"><svg style="display: inline-block; line-height: 1;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><path d="M80,56h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V80A24,24,0,0,1,80,56Z" transform="translate(184 24) rotate(90)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M128,80H104A24,24,0,0,1,80,56h0a24,24,0,0,1,24-24h0a24,24,0,0,1,24,24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M152,32h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V56a24,24,0,0,1,24-24Z" transform="translate(304 160) rotate(-180)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M176,128V104a24,24,0,0,1,24-24h0a24,24,0,0,1,24,24h0a24,24,0,0,1-24,24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M176,104h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V128a24,24,0,0,1,24-24Z" transform="translate(24 328) rotate(-90)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M128,176h24a24,24,0,0,1,24,24h0a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M104,128h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V152a24,24,0,0,1,24-24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M80,128v24a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24h0a24,24,0,0,1,24-24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path></svg></a></div><div class="w-6"><a href="https://github.com/cjohansen/replicant" title="Replicant on Github"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg></a></div></div></div><div class="p-4 bg-base-200 items-center flex flex-row gap-4 sticky top-0 z-10"><button popovertarget="menu"><svg style="display: inline-block; line-height: 1; height: 24; width: 24;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><line stroke="currentColor" fill="none" stroke-linejoin="round" y1="128" stroke-linecap="round" stroke-width="16" x1="40" y2="128" x2="216"></line><line stroke="currentColor" fill="none" stroke-linejoin="round" y1="64" stroke-linecap="round" stroke-width="16" x1="40" y2="64" x2="216"></line><line stroke="currentColor" fill="none" stroke-linejoin="round" y1="192" stroke-linecap="round" stroke-width="16" x1="40" y2="192" x2="216"></line></svg></button><div id="menu" class="bg-base-200 m-0 px-0 absolute h-full" popover="auto"><aside class="basis-60 shrink-0"><h3 class="text-whitish mb-2 ml-4">Guides</h3><nav class="mb-8"><ol><li><a class="menu-item" href="/hiccup/">Hiccup<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/event-handlers/">Event handlers<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/life-cycle-hooks/">Life-cycle hooks<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/keys/">Keys<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/nil/">Explicit nils<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/alias/">Aliases<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li></ol></nav><h3 class="text-whitish mb-2 ml-4">Tutorials</h3><nav class="mb-8"><ol><li><a class="menu-item" href="/tutorials/tic-tac-toe/">Tic-Tac-Toe<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/routing/">Data-driven routing<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><span class="menu-item menu-item-selected">State management with atoms<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></span></li><li><a class="menu-item" href="/tutorials/state-datascript/">State management with Datascript<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/network/">Backend APIs and network<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/network-reads/">Data-driven queries<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/network-writes/">Data-driven commands<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/tic-tac-toe-alias/">Tic-Tac-Toe with aliases<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/i18n-alias/">Alias powered i18n<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/sortable-table/">A sortable table alias<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li></ol></nav><h3 class="text-whitish mb-2 ml-4">Articles</h3><nav class="mb-8"><ol><li><a class="menu-item" href="/top-down/">Top-down rendering<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/learn/">Learn Replicant<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li></ol></nav></aside></div>Tutorial: State management with atoms</div><main class="mt-8 mb-16 mx-4 md:mx-0 fullscreen"><h1 class="h1 dark:text-whitish section-md">State management with atoms</h1><div class="prose mt-4 section-md"><p>In this tutorial we will implement state management for top-down rendering with
+an atom as the global store. See <a href="/tutorials/state-datascript/">State management with
+Datascript</a> for an alternative take on this
+tutorial.</p>
+<p>This tutorial isn’t really Replicant-specific: you can use the suggest approach
+with any rendering library.</p>
+<p>As explained in <a href="/top-down/">top-down rendering</a>, Replicant is built around the
+idea that you render your entire app whenever the app state changes. In this
+tutorial we will use a single atom to hold all the application state, and add a
+listener that makes sure the app re-renders every time it changes.</p>
+<p>It’s useful to differentiate the atom that holds the current state, and the
+snapshot/current state. I like to use the name <code>store</code> for the atom and <code>state</code>
+for the value inside.</p>
+</div><div class="prose mt-4 section-md"><h2 id="basic-setup" class="h2 section-md"><a class="group relative" href="#basic-setup"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Basic setup</a></h2><p>The <code>store</code> can be created in the main function that starts the app, but it’s
+rather useful to be able to access it in a REPL, so I usually <code>defonce</code> it in a
+suitable place:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defonce </span><span class="nv">store</span> <span class="p">(</span><span class="nf">atom</span> <span class="p">{}))</span>
+</code></pre>
+<p>Next we will need a function that can render the app:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render</span> <span class="p">[</span><span class="nv">state</span><span class="p">]</span>
+  <span class="p">[</span><span class="ss">:div</span>
+   <span class="p">[</span><span class="ss">:h1</span> <span class="s">"Hello world"</span><span class="p">]</span>
+   <span class="p">[</span><span class="ss">:p</span> <span class="s">"Started at "</span> <span class="p">(</span><span class="ss">:app/started-at</span> <span class="nv">state</span><span class="p">)]])</span>
+</code></pre>
+<p>Finally, we’ll add a <code>main</code> function that sets up the watcher and renders the
+app when the store changes:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">state-atom.core</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">replicant.dom</span> <span class="ss">:as</span> <span class="nv">r</span><span class="p">]))</span>
+
+,,,
+
+<span class="p">(</span><span class="kd">defonce </span><span class="nv">el</span> <span class="p">(</span><span class="nf">js/document.getElementById</span> <span class="s">"app"</span><span class="p">))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="o">^</span><span class="ss">:dev/after-load</span> <span class="nv">main</span> <span class="p">[]</span>
+  <span class="p">(</span><span class="nf">add-watch</span>
+   <span class="nv">store</span> <span class="ss">::render</span>
+   <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">_</span> <span class="nv">_</span> <span class="nv">_</span> <span class="nv">state</span><span class="p">]</span>
+     <span class="p">(</span><span class="nf">r/render</span> <span class="nv">el</span> <span class="p">(</span><span class="nf">render</span> <span class="nv">state</span><span class="p">))))</span>
+
+  <span class="c1">;; Trigger the initial render</span>
+  <span class="p">(</span><span class="nf">swap!</span> <span class="nv">store</span> <span class="nb">assoc </span><span class="ss">:app/started-at</span> <span class="p">(</span><span class="nf">js/Date.</span><span class="p">)))</span>
+</code></pre>
+<p>We now have a basic setup. You can verify that things work by updating the
+started at attribute. Evaluate the following expression in the REPL:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">swap!</span> <span class="nv">store</span> <span class="nb">assoc </span><span class="ss">:app/started-at</span> <span class="p">(</span><span class="nf">js/Date.</span><span class="p">))</span>
+</code></pre>
+<p>When this is evaluated, the UI should automatically update.</p>
+</div><div class="prose mt-4 section-md"><h2 id="updating-the-store" class="h2 section-md"><a class="group relative" href="#updating-the-store"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Updating the store</a></h2><p>Our UI now responds to changes in the store, great. The next step is to put in
+place a small system for updating the store based on user interaction. To do
+this we will use the <a href="/event-handlers/#action-dispatch">action dispatch pattern</a>
+described in the event handlers guide:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">state-atom.core</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">clojure.walk</span> <span class="ss">:as</span> <span class="nv">walk</span><span class="p">]</span>
+            <span class="p">[</span><span class="nv">replicant.dom</span> <span class="ss">:as</span> <span class="nv">r</span><span class="p">]))</span>
+
+,,,
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">interpolate-actions</span> <span class="p">[</span><span class="nv">event</span> <span class="nv">actions</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">walk/postwalk</span>
+   <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">x</span><span class="p">]</span>
+     <span class="p">(</span><span class="nf">case</span> <span class="nv">x</span>
+       <span class="ss">:event/target.value</span> <span class="p">(</span><span class="nb">.. </span><span class="nv">event</span> <span class="nv">-target</span> <span class="nv">-value</span><span class="p">)</span>
+       <span class="c1">;; Add more cases as needed</span>
+       <span class="nv">x</span><span class="p">))</span>
+   <span class="nv">actions</span><span class="p">))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">execute-actions</span> <span class="p">[</span><span class="nv">store</span> <span class="nv">actions</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">doseq </span><span class="p">[[</span><span class="nv">action</span> <span class="o">&amp;</span> <span class="nv">args</span><span class="p">]</span> <span class="nv">actions</span><span class="p">]</span>
+    <span class="p">(</span><span class="nf">case</span> <span class="nv">action</span>
+      <span class="c1">;; Add actions here</span>
+      <span class="p">(</span><span class="nb">println </span><span class="s">"Unknown action"</span> <span class="nv">action</span> <span class="s">"with arguments"</span> <span class="nv">args</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="o">^</span><span class="ss">:dev/after-load</span> <span class="nv">main</span> <span class="p">[]</span>
+  ,,,
+
+  <span class="p">(</span><span class="nf">r/set-dispatch!</span>
+   <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">event-data</span> <span class="nv">actions</span><span class="p">]</span>
+     <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="nv">actions</span>
+          <span class="p">(</span><span class="nf">interpolate-actions</span>
+           <span class="p">(</span><span class="ss">:replicant/dom-event</span> <span class="nv">event-data</span><span class="p">))</span>
+          <span class="p">(</span><span class="nf">execute-actions</span> <span class="nv">store</span><span class="p">))))</span>
+
+  <span class="c1">;; Trigger the initial render</span>
+  <span class="p">(</span><span class="nf">swap!</span> <span class="nv">store</span> <span class="nb">assoc </span><span class="ss">:app/started-at</span> <span class="p">(</span><span class="nf">js/Date.</span><span class="p">)))</span>
+</code></pre>
+<p>We now have a tiny tailor-made framework. Next we will add an action that
+updates the store:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">execute-actions</span> <span class="p">[</span><span class="nv">store</span> <span class="nv">actions</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">doseq </span><span class="p">[[</span><span class="nv">action</span> <span class="o">&amp;</span> <span class="nv">args</span><span class="p">]</span> <span class="nv">actions</span><span class="p">]</span>
+    <span class="p">(</span><span class="nf">case</span> <span class="nv">action</span>
+      <span class="ss">:store/assoc-in</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">swap!</span> <span class="nv">store</span> <span class="nv">assoc-in</span> <span class="nv">args</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">println </span><span class="s">"Unknown action"</span> <span class="nv">action</span> <span class="s">"with arguments"</span> <span class="nv">args</span><span class="p">))))</span>
+</code></pre>
+<p><code>:store/assoc-in</code> is just what the name implies: an <code>assoc-in</code> for the
+application state in <code>store</code>. It’s a one-liner, and will serve 90%, if not more,
+of your state management needs. Amazing.</p>
+<p>Let’s see it in use:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render</span> <span class="p">[</span><span class="nv">state</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">clicks</span> <span class="p">(</span><span class="ss">:clicks</span> <span class="nv">state</span> <span class="mi">0</span><span class="p">)]</span>
+    <span class="p">[</span><span class="ss">:div</span>
+     <span class="p">[</span><span class="ss">:h1</span> <span class="s">"Hello world"</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">:p</span> <span class="s">"Started at "</span> <span class="p">(</span><span class="ss">:app/started-at</span> <span class="nv">state</span><span class="p">)]</span>
+     <span class="p">[</span><span class="ss">:button</span>
+      <span class="p">{</span><span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="p">[[</span><span class="ss">:store/assoc-in</span> <span class="p">[</span><span class="ss">:clicks</span><span class="p">]</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">clicks</span><span class="p">)]]}}</span>
+      <span class="s">"Click me"</span><span class="p">]</span>
+     <span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nb">&lt; </span><span class="mi">0</span> <span class="nv">clicks</span><span class="p">)</span>
+       <span class="p">[</span><span class="ss">:p</span>
+        <span class="s">"Button was clicked "</span>
+        <span class="nv">clicks</span>
+        <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="mi">1</span> <span class="nv">clicks</span><span class="p">)</span> <span class="s">" time"</span> <span class="s">" times"</span><span class="p">)])]))</span>
+</code></pre>
+<p>This is an essential Replicant UI: it’s a pure function, it returns pure data
+(including the event handler), and even though the mechanics of updating the
+store is not in this function, it is quite obvious how <code>(:clicks state)</code> and
+<code>[:store/assoc-in [:clicks] (inc clicks)]</code> are related.</p>
+<p>The <a href="https://github.com/cjohansen/replicant-state-atom/tree/state-setup">code from this tutorial is available on
+Github</a>:
+feel free to use it as a starting template for building an app with atom based
+state management. Also consider checking out the <a href="/tutorials/state-datascript/">state management with
+Datascript tutorial</a>.</p>
+</div><div class="prose mt-4 section-md"><h2 id="routing" class="h2 section-md"><a class="group relative" href="#routing"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Bonus: Routing</a></h2><p>In <a href="/tutorials/routing/">the routing tutorial</a> we built a small routing system
+for a top-down rendered app. In this bonus section, we’ll integrate the routing
+solution with the atom based state management we just created.</p>
+<p>Routing and state management are orthogonal concerns, but both need to trigger
+rendering. The system as a whole will be easier to reason with if rendering only
+happens one way. We’ll keep the render hook on the state atom, and have the
+routing system render indirectly through the atom by storing the current
+location in it.</p>
+<p>We start by copying over the router namespace:</p>
+</div><div class="mx-auto my-6 section-lg"><pre class="codehilite bg-base-200 codehilite"><code class="clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">state-atom.router</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">domkm.silk</span> <span class="ss">:as</span> <span class="nv">silk</span><span class="p">]</span>
+            <span class="p">[</span><span class="nv">lambdaisland.uri</span> <span class="ss">:as</span> <span class="nv">uri</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="k">def </span><span class="nv">routes</span>
+  <span class="p">(</span><span class="nf">silk/routes</span>
+   <span class="p">[[</span><span class="ss">:pages/episode</span> <span class="p">[[</span><span class="s">"episodes"</span> <span class="ss">:episode/id</span><span class="p">]]]</span>
+    <span class="p">[</span><span class="ss">:pages/frontpage</span> <span class="p">[]]]))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">url-&gt;location</span> <span class="p">[</span><span class="nv">routes</span> <span class="nv">url</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">uri</span> <span class="p">(</span><span class="nf">cond-&gt;</span> <span class="nv">url</span> <span class="p">(</span><span class="nb">string? </span><span class="nv">url</span><span class="p">)</span> <span class="nv">uri/uri</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nb">when-let </span><span class="p">[</span><span class="nv">arrived</span> <span class="p">(</span><span class="nf">silk/arrive</span> <span class="nv">routes</span> <span class="p">(</span><span class="ss">:path</span> <span class="nv">uri</span><span class="p">))]</span>
+      <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">query-params</span> <span class="p">(</span><span class="nf">uri/query-map</span> <span class="nv">uri</span><span class="p">)</span>
+            <span class="nv">hash-params</span> <span class="p">(</span><span class="nf">some-&gt;</span> <span class="nv">uri</span> <span class="ss">:fragment</span> <span class="nv">uri/query-string-&gt;map</span><span class="p">)]</span>
+        <span class="p">(</span><span class="nf">cond-&gt;</span> <span class="p">{</span><span class="ss">:location/page-id</span> <span class="p">(</span><span class="ss">:domkm.silk/name</span> <span class="nv">arrived</span><span class="p">)</span>
+                 <span class="ss">:location/params</span> <span class="p">(</span><span class="nb">dissoc </span><span class="nv">arrived</span>
+                                          <span class="ss">:domkm.silk/name</span>
+                                          <span class="ss">:domkm.silk/pattern</span>
+                                          <span class="ss">:domkm.silk/routes</span>
+                                          <span class="ss">:domkm.silk/url</span><span class="p">)}</span>
+          <span class="p">(</span><span class="nb">seq </span><span class="nv">query-params</span><span class="p">)</span> <span class="p">(</span><span class="nb">assoc </span><span class="ss">:location/query-params</span> <span class="nv">query-params</span><span class="p">)</span>
+          <span class="p">(</span><span class="nb">seq </span><span class="nv">hash-params</span><span class="p">)</span> <span class="p">(</span><span class="nb">assoc </span><span class="ss">:location/hash-params</span> <span class="nv">hash-params</span><span class="p">))))))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">location-&gt;url</span> <span class="p">[</span><span class="nv">routes</span> <span class="p">{</span><span class="ss">:location/keys</span> <span class="p">[</span><span class="nv">page-id</span> <span class="nv">params</span> <span class="nv">query-params</span> <span class="nv">hash-params</span><span class="p">]}]</span>
+  <span class="p">(</span><span class="nf">cond-&gt;</span> <span class="p">(</span><span class="nf">silk/depart</span> <span class="nv">routes</span> <span class="nv">page-id</span> <span class="nv">params</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">seq </span><span class="nv">query-params</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">str </span><span class="s">"?"</span> <span class="p">(</span><span class="nf">uri/map-&gt;query-string</span> <span class="nv">query-params</span><span class="p">))</span>
+
+    <span class="p">(</span><span class="nb">seq </span><span class="nv">hash-params</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">str </span><span class="s">"#"</span> <span class="p">(</span><span class="nf">uri/map-&gt;query-string</span> <span class="nv">hash-params</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">essentially-same?</span> <span class="p">[</span><span class="nv">l1</span> <span class="nv">l2</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">and </span><span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="ss">:location/page-id</span> <span class="nv">l1</span><span class="p">)</span> <span class="p">(</span><span class="ss">:location/page-id</span> <span class="nv">l2</span><span class="p">))</span>
+       <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nf">not-empty</span> <span class="p">(</span><span class="ss">:location/params</span> <span class="nv">l1</span><span class="p">))</span>
+          <span class="p">(</span><span class="nf">not-empty</span> <span class="p">(</span><span class="ss">:location/params</span> <span class="nv">l2</span><span class="p">)))</span>
+       <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nf">not-empty</span> <span class="p">(</span><span class="ss">:location/query-params</span> <span class="nv">l1</span><span class="p">))</span>
+          <span class="p">(</span><span class="nf">not-empty</span> <span class="p">(</span><span class="ss">:location/query-params</span> <span class="nv">l2</span><span class="p">)))))</span>
+</code></pre></div><div class="prose mt-4 section-md"><p>Next, we’ll add the routing alias to the core namespace:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">state-atom.core</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">clojure.walk</span> <span class="ss">:as</span> <span class="nv">walk</span><span class="p">]</span>
+            <span class="p">[</span><span class="nv">replicant.alias</span> <span class="ss">:as</span> <span class="nv">alias</span><span class="p">]</span>
+            <span class="p">[</span><span class="nv">replicant.dom</span> <span class="ss">:as</span> <span class="nv">r</span><span class="p">]</span>
+            <span class="p">[</span><span class="nv">state-atom.router</span> <span class="ss">:as</span> <span class="nv">router</span><span class="p">]</span>
+            <span class="p">[</span><span class="nv">state-atom.ui</span> <span class="ss">:as</span> <span class="nv">ui</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">routing-anchor</span> <span class="p">[</span><span class="nv">attrs</span> <span class="nv">children</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">routes</span> <span class="p">(</span><span class="nb">-&gt; </span><span class="nv">attrs</span> <span class="ss">:replicant/alias-data</span> <span class="ss">:routes</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nb">into </span><span class="p">[</span><span class="ss">:a</span> <span class="p">(</span><span class="nf">cond-&gt;</span> <span class="nv">attrs</span>
+                <span class="p">(</span><span class="ss">:ui/location</span> <span class="nv">attrs</span><span class="p">)</span>
+                <span class="p">(</span><span class="nb">assoc </span><span class="ss">:href</span> <span class="p">(</span><span class="nf">router/location-&gt;url</span> <span class="nv">routes</span>
+                               <span class="p">(</span><span class="ss">:ui/location</span> <span class="nv">attrs</span><span class="p">))))]</span>
+          <span class="nv">children</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nf">alias/register!</span> <span class="ss">:ui/a</span> <span class="nv">routing-anchor</span><span class="p">)</span>
+</code></pre>
+<p>Then we’ll copy over the helper functions:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">state-atom.core</span>
+  ,,,<span class="p">)</span>
+
+,,,
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">find-target-href</span> <span class="p">[</span><span class="nv">e</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">some-&gt;</span> <span class="nv">e</span> <span class="nv">.-target</span>
+          <span class="p">(</span><span class="nf">.closest</span> <span class="s">"a"</span><span class="p">)</span>
+          <span class="p">(</span><span class="nf">.getAttribute</span> <span class="s">"href"</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">get-current-location</span> <span class="p">[]</span>
+  <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="nv">js/location.pathname</span>
+       <span class="p">(</span><span class="nf">router/url-&gt;location</span> <span class="nv">router/routes</span><span class="p">)))</span>
+</code></pre>
+<p>To handle the initial routing when the app boots we can find the location in the
+<code>main</code> function and store it when we trigger the initial render:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="c1">;; Trigger the initial render</span>
+<span class="p">(</span><span class="nf">swap!</span> <span class="nv">store</span> <span class="nv">assoc</span>
+       <span class="ss">:app/started-at</span> <span class="p">(</span><span class="nf">js/Date.</span><span class="p">)</span>
+       <span class="ss">:location</span> <span class="p">(</span><span class="nf">get-current-location</span><span class="p">))</span>
+</code></pre>
+<p>To handle click events, we will copy over and adjust the <code>route-click</code> function.
+Instead of triggering rendering directly, it will now store the location in the
+store – which will cause rendering to happen:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">state-atom.core</span>
+  ,,,<span class="p">)</span>
+
+,,,
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">route-click</span> <span class="p">[</span><span class="nv">e</span> <span class="nv">store</span> <span class="nv">routes</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">href</span> <span class="p">(</span><span class="nf">find-target-href</span> <span class="nv">e</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nb">when-let </span><span class="p">[</span><span class="nv">location</span> <span class="p">(</span><span class="nf">router/url-&gt;location</span> <span class="nv">routes</span> <span class="nv">href</span><span class="p">)]</span>
+      <span class="p">(</span><span class="nf">.preventDefault</span> <span class="nv">e</span><span class="p">)</span>
+      <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">router/essentially-same?</span> <span class="nv">location</span> <span class="p">(</span><span class="ss">:location</span> <span class="o">@</span><span class="nv">store</span><span class="p">))</span>
+        <span class="p">(</span><span class="nf">.replaceState</span> <span class="nv">js/history</span> <span class="nv">nil</span> <span class="s">""</span> <span class="nv">href</span><span class="p">)</span>
+        <span class="p">(</span><span class="nf">.pushState</span> <span class="nv">js/history</span> <span class="nv">nil</span> <span class="s">""</span> <span class="nv">href</span><span class="p">))</span>
+      <span class="p">(</span><span class="nf">swap!</span> <span class="nv">store</span> <span class="nb">assoc </span><span class="ss">:location</span> <span class="nv">location</span><span class="p">))))</span>
+</code></pre>
+<p>Now we’ll add the event listeners for body clicks and the back button. The back
+button handler will also update the store:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">main</span> <span class="p">[</span><span class="nv">store</span> <span class="nv">el</span><span class="p">]</span>
+  ,,,
+  
+  <span class="p">(</span><span class="nf">js/document.body.addEventListener</span>
+   <span class="s">"click"</span>
+   <span class="o">#</span><span class="p">(</span><span class="nf">route-click</span> <span class="nv">%</span> <span class="nv">store</span> <span class="nv">router/routes</span><span class="p">))</span>
+
+  <span class="p">(</span><span class="nf">js/window.addEventListener</span>
+   <span class="s">"popstate"</span>
+   <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">_</span><span class="p">]</span> <span class="p">(</span><span class="nf">swap!</span> <span class="nv">store</span> <span class="nb">assoc </span><span class="ss">:location</span> <span class="p">(</span><span class="nf">get-current-location</span><span class="p">))))</span>
+   
+  ,,,<span class="p">)</span>
+</code></pre>
+<p>The final piece of the puzzle is to make sure routes are available as alias
+data. The final <code>main</code> function looks like this:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">main</span> <span class="p">[</span><span class="nv">store</span> <span class="nv">el</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">add-watch</span>
+   <span class="nv">store</span> <span class="ss">::render</span>
+   <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">_</span> <span class="nv">_</span> <span class="nv">_</span> <span class="nv">state</span><span class="p">]</span>
+     <span class="p">(</span><span class="nf">r/render</span> <span class="nv">el</span> <span class="p">(</span><span class="nf">ui/render-page</span> <span class="nv">state</span><span class="p">)</span> <span class="p">{</span><span class="ss">:alias-data</span> <span class="p">{</span><span class="ss">:routes</span> <span class="nv">router/routes</span><span class="p">}})))</span>
+
+  <span class="p">(</span><span class="nf">r/set-dispatch!</span>
+   <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">event-data</span> <span class="nv">actions</span><span class="p">]</span>
+     <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="nv">actions</span>
+          <span class="p">(</span><span class="nf">interpolate-actions</span>
+           <span class="p">(</span><span class="ss">:replicant/dom-event</span> <span class="nv">event-data</span><span class="p">))</span>
+          <span class="p">(</span><span class="nf">execute-actions</span> <span class="nv">store</span><span class="p">))))</span>
+
+  <span class="p">(</span><span class="nf">js/document.body.addEventListener</span>
+   <span class="s">"click"</span>
+   <span class="o">#</span><span class="p">(</span><span class="nf">route-click</span> <span class="nv">%</span> <span class="nv">store</span> <span class="nv">router/routes</span><span class="p">))</span>
+
+  <span class="p">(</span><span class="nf">js/window.addEventListener</span>
+   <span class="s">"popstate"</span>
+   <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">_</span><span class="p">]</span> <span class="p">(</span><span class="nf">swap!</span> <span class="nv">store</span> <span class="nb">assoc </span><span class="ss">:location</span> <span class="p">(</span><span class="nf">get-current-location</span><span class="p">))))</span>
+
+  <span class="c1">;; Trigger the initial render</span>
+  <span class="p">(</span><span class="nf">swap!</span> <span class="nv">store</span> <span class="nv">assoc</span>
+         <span class="ss">:app/started-at</span> <span class="p">(</span><span class="nf">js/Date.</span><span class="p">)</span>
+         <span class="ss">:location</span> <span class="p">(</span><span class="nf">get-current-location</span><span class="p">)))</span>
+</code></pre>
+<p>Now the app can generate links with the <code>:ui/a</code> alias just like in the routing
+tutorial. As usual, the <a href="">full source is available on Github</a>.</p>
+</div></main><script type="text/javascript" src="/bundles/d399b4851ce7/app.js"></script></body></html>

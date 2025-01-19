@@ -1,0 +1,705 @@
+<!DOCTYPE html><html data-theme="dark" lang="en" prefix="og: http://ogp.me/ns#"><head><title>Tic-Tac-Toe</title><meta name="theme-color" content="#202020"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta property="og:title" content="Tic-Tac-Toe"><link href="/a00f586d252b/favicon.ico" rel="icon" type="image/x-icon"><link href="/a00f586d252b/favicon.ico" rel="shortcut icon" type="image/ico"><link href="/a00f586d252b/favicon.ico" rel="shortcut icon" type="image/x-icon"><link href="/a00f586d252b/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"><link href="/285191ad6a81/apple-touch-icon.png" rel="icon" type="image/png" sizes="180x180"><link rel="stylesheet" href="/bundles/2e8dfb3c3384/styles.css"></head><body><div class="flex justify-between p-4 items-center"><div class="w-8"><a href="/"><svg style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2" viewBox="0 0 1080 1080" xml:space="preserve"><path d="M876.452 152.555c136.818 12.348 195.668 81.688 192.708 196.198h-87.197c1.569-66.295-16.004-119.066-52.748-157.356-14.398-15.003-31.913-27.882-52.763-38.353v-.489Zm98.715 270.164h87.213c-9.48 55.52-38.53 92.323-91.749 108.344 55.789 39.542 76.849 90.867 66.189 152.957l-44.388 184.981h-86.379l42.751-178.151c.149-.622.278-1.249.386-1.879 9.983-58.16-3.188-108.49-41.722-150.197 36.949-23.921 58.758-61.19 67.282-111.131a29.34 29.34 0 0 0 .417-4.924Z" fill="#4fb348"></path><path d="M757.149 152.309c138.837 11.646 198.514 81.149 195.537 196.444h-88.511c1.643-69.4-17.651-123.977-58.046-162.647-13.679-13.096-29.954-24.431-48.98-33.797Zm101.023 270.41h87.726c-9.475 55.52-38.529 92.323-91.745 108.344 55.785 39.542 76.848 90.867 66.191 152.957l-44.391 184.981h-87.689l42.752-178.151c.149-.622.278-1.249.386-1.879 9.983-58.16-3.188-108.49-41.722-150.197 36.948-23.921 58.758-61.19 67.281-111.131.153-.894.263-1.79.332-2.685h.506c.126-.747.25-1.493.373-2.239Z" fill="#00a29a"></path><path d="M76.208 847.157c-36.752-5.562-64.959-37.32-64.959-75.614 0-42.21 34.269-76.478 76.478-76.478a76.45 76.45 0 0 1 20.676 2.832c32.178 9.028 55.802 38.6 55.802 73.646 0 42.209-34.268 76.478-76.478 76.478-3.915 0-7.761-.295-11.519-.864Zm56.524-262.05a77.324 77.324 0 0 1-6.804.299c-42.209 0-76.478-34.268-76.478-76.478 0-42.209 34.269-76.478 76.478-76.478 13.663 0 26.494 3.591 37.6 9.879 23.204 13.139 38.878 38.053 38.878 66.599 0 39.917-30.647 72.732-69.674 76.179Zm-18.148 84.136 11.77-54.569c58.168-.23 105.321-47.525 105.321-105.746 0-35.555-17.586-67.035-44.526-86.209H828.11c-9.475 55.52-38.529 92.323-91.745 108.344 55.784 39.542 76.848 90.867 66.191 152.957l-44.391 184.981H539.756l34.836-151.189c13.135-57.004-4.455-118.062-91.882-118.062H353.796l-71.217 274.677H112.245c46.557-11.07 81.229-52.96 81.229-102.884 0-49.085-33.515-90.403-78.89-102.3Zm-1.803-330.67 117.483-187.485h389.845c152.584 6.696 217.9 77.175 214.789 197.665H178.595v-10.18h-65.814Z" fill="#0086ff"></path></svg></a></div><div class="flex items-center gap-4 text-sm"><a class="hover:underline" href="/learn/">Learn</a><a class="hover:underline" href="https://cljdoc.org/d/no.cjohansen/replicant/">API Reference</a><div class="w-6"><a href="https://clojurians.slack.com/archives/C06JZ4X334N" title="Replicant on the Clojurians Slack"><svg style="display: inline-block; line-height: 1;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><path d="M80,56h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V80A24,24,0,0,1,80,56Z" transform="translate(184 24) rotate(90)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M128,80H104A24,24,0,0,1,80,56h0a24,24,0,0,1,24-24h0a24,24,0,0,1,24,24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M152,32h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V56a24,24,0,0,1,24-24Z" transform="translate(304 160) rotate(-180)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M176,128V104a24,24,0,0,1,24-24h0a24,24,0,0,1,24,24h0a24,24,0,0,1-24,24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M176,104h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V128a24,24,0,0,1,24-24Z" transform="translate(24 328) rotate(-90)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M128,176h24a24,24,0,0,1,24,24h0a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M104,128h24a0,0,0,0,1,0,0v72a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24V152a24,24,0,0,1,24-24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M80,128v24a24,24,0,0,1-24,24h0a24,24,0,0,1-24-24h0a24,24,0,0,1,24-24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path></svg></a></div><div class="w-6"><a href="https://github.com/cjohansen/replicant" title="Replicant on Github"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg></a></div></div></div><div class="p-4 bg-base-200 items-center flex flex-row gap-4 sticky top-0 z-10"><button popovertarget="menu"><svg style="display: inline-block; line-height: 1; height: 24; width: 24;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><line stroke="currentColor" fill="none" stroke-linejoin="round" y1="128" stroke-linecap="round" stroke-width="16" x1="40" y2="128" x2="216"></line><line stroke="currentColor" fill="none" stroke-linejoin="round" y1="64" stroke-linecap="round" stroke-width="16" x1="40" y2="64" x2="216"></line><line stroke="currentColor" fill="none" stroke-linejoin="round" y1="192" stroke-linecap="round" stroke-width="16" x1="40" y2="192" x2="216"></line></svg></button><div id="menu" class="bg-base-200 m-0 px-0 absolute h-full" popover="auto"><aside class="basis-60 shrink-0"><h3 class="text-whitish mb-2 ml-4">Guides</h3><nav class="mb-8"><ol><li><a class="menu-item" href="/hiccup/">Hiccup<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/event-handlers/">Event handlers<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/life-cycle-hooks/">Life-cycle hooks<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/keys/">Keys<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/nil/">Explicit nils<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/alias/">Aliases<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li></ol></nav><h3 class="text-whitish mb-2 ml-4">Tutorials</h3><nav class="mb-8"><ol><li><span class="menu-item menu-item-selected">Tic-Tac-Toe<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></span></li><li><a class="menu-item" href="/tutorials/routing/">Data-driven routing<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/state-atom/">State management with atoms<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/state-datascript/">State management with Datascript<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/network/">Backend APIs and network<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/network-reads/">Data-driven queries<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/network-writes/">Data-driven commands<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/tic-tac-toe-alias/">Tic-Tac-Toe with aliases<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/i18n-alias/">Alias powered i18n<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/tutorials/sortable-table/">A sortable table alias<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li></ol></nav><h3 class="text-whitish mb-2 ml-4">Articles</h3><nav class="mb-8"><ol><li><a class="menu-item" href="/top-down/">Top-down rendering<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li><li><a class="menu-item" href="/learn/">Learn Replicant<svg style="display: inline-block; line-height: 1; height: 16; width: 16;" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></svg></a></li></ol></nav></aside></div>Tutorial: Tic-Tac-Toe</div><main class="mt-8 mb-16 mx-4 md:mx-0 fullscreen"><h1 class="h1 dark:text-whitish section-md">Tic-Tac-Toe</h1><div class="prose mt-4 section-md"><p>In this tutorial we will implement the game of Tic-Tac-Toe from scratch. It will
+teach you the essentials of working with Replicant, and show you how to go from
+nothing to a working app. The intended audience is anyone new to Replicant or
+who are curious about the workflow Replicant was made to support.</p>
+<p>The <a href="https://github.com/cjohansen/replicant-tic-tac-toe">code for this tutorial is available on
+github</a>. Following along by
+typing in the code by hand is recommended for the best learning effect.</p>
+<p>You will notice that a lot of this tutorial has little to do with Replicant
+specifically. This is not by accident: Replicant is merely a rendering library,
+so you don’t really “build apps with Replicant” like you would with e.g. React.
+You build an app your way and render it with Replicant.</p>
+</div><div class="prose mt-4 section-md"><h2 id="bootstrapping" class="h2 section-md"><a class="group relative" href="#bootstrapping"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Bootstrapping</a></h2><p>We’ll start by getting a ClojureScript runtime going. We will use
+<a href="https://github.com/clojure/tools.deps">tools.deps</a> to manage dependencies and
+<a href="https://shadow-cljs.github.io/docs/UsersGuide.html">shadow-cljs</a> to build
+ClojureScript. We will also use
+<a href="https://github.com/cjohansen/portfolio">Portfolio</a> to showcase the UI building
+blocks.</p>
+<p>Create a new directory and add the following files:</p>
+</div><div id="deps-edn" class="mx-auto my-6 section-md"><pre class="codehilite bg-base-200 codehilite"><span class="code-title">deps.edn</span><code class="clj"><span></span><span class="p">{</span><span class="ss">:paths</span> <span class="p">[</span><span class="s">"src"</span> <span class="s">"test"</span> <span class="s">"portfolio"</span> <span class="s">"resources"</span><span class="p">]</span>
+ <span class="ss">:deps</span> <span class="p">{</span><span class="nv">org.clojure/clojure</span> <span class="p">{</span><span class="ss">:mvn/version</span> <span class="s">"1.12.0"</span><span class="p">}</span>
+        <span class="nv">thheller/shadow-cljs</span> <span class="p">{</span><span class="ss">:mvn/version</span> <span class="s">"2.28.18"</span><span class="p">}</span>
+        <span class="nv">no.cjohansen/portfolio</span> <span class="p">{</span><span class="ss">:mvn/version</span> <span class="s">"2024.03.18"</span><span class="p">}</span>
+        <span class="nv">no.cjohansen/replicant</span> <span class="p">{</span><span class="ss">:git/url</span> <span class="s">"https://github.com/cjohansen/replicant.git"</span>
+                                <span class="ss">:sha</span> <span class="s">"ac4a4741f58c62ee5386b9ca476cc30fa1a6ba44"</span><span class="p">}}}</span>
+</code></pre></div><div id="shadow-cljs-edn" class="mx-auto my-6 section-md"><pre class="codehilite bg-base-200 codehilite"><span class="code-title">shadow-cljs.edn</span><code class="clj"><span></span><span class="p">{</span><span class="ss">:deps</span> <span class="p">{}</span>
+ <span class="ss">:dev-http</span> <span class="p">{</span><span class="mi">8080</span> <span class="p">[</span><span class="s">"resources/public"</span> <span class="s">"classpath:public"</span><span class="p">]}</span>
+ <span class="ss">:builds</span>
+ <span class="p">{</span><span class="ss">:app</span>
+  <span class="p">{</span><span class="ss">:target</span> <span class="ss">:browser</span>
+   <span class="ss">:modules</span> <span class="p">{</span><span class="ss">:main</span> <span class="p">{</span><span class="ss">:init-fn</span> <span class="nv">tic-tac-toe.core/main</span><span class="p">}}</span>
+   <span class="ss">:dev</span> <span class="p">{</span><span class="ss">:output-dir</span> <span class="s">"resources/public/app-js"</span><span class="p">}}</span>
+
+  <span class="ss">:portfolio</span>
+  <span class="p">{</span><span class="ss">:target</span> <span class="ss">:browser</span>
+   <span class="ss">:modules</span> <span class="p">{</span><span class="ss">:main</span> <span class="p">{</span><span class="ss">:init-fn</span> <span class="nv">tic-tac-toe.scenes/main</span><span class="p">}}</span>
+   <span class="ss">:dev</span> <span class="p">{</span><span class="ss">:output-dir</span> <span class="s">"resources/public/portfolio-js"</span><span class="p">}}}}</span>
+</code></pre></div><div id="styles-css" class="mx-auto my-6 section-md"><pre class="codehilite bg-base-200 codehilite"><span class="code-title">resources/public/styles.css</span><code class="css"><span></span><span class="c">/**</span>
+<span class="c"> * This file can be empty for now, just make sure it exists.</span>
+<span class="c"> */</span>
+</code></pre></div><div id="index-html" class="mx-auto my-6 section-md"><pre class="codehilite bg-base-200 codehilite"><span class="code-title">resources/public/index.html</span><code class="html"><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Tic-Tac-Toe<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span> <span class="na">type</span><span class="o">=</span><span class="s">"text/css"</span> <span class="na">href</span><span class="o">=</span><span class="s">"/styles.css"</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">"app"</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">"/app-js/main.js"</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div><div id="portfolio-html" class="mx-auto my-6 section-md"><pre class="codehilite bg-base-200 codehilite"><span class="code-title">resources/public/portfolio.html</span><code class="html"><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Tic-Tac-Toe UI elements<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">"/portfolio-js/main.js"</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div><div id="core-cljs" class="mx-auto my-6 section-md"><pre class="codehilite bg-base-200 codehilite"><span class="code-title">src/tic_tac_toe/core.cljs</span><code class="clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">tic-tac-toe.core</span><span class="p">)</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">main</span> <span class="p">[]</span>
+  <span class="p">)</span>
+</code></pre></div><div id="scenes-cljs" class="mx-auto my-6 section-md"><pre class="codehilite bg-base-200 codehilite"><span class="code-title">portfolio/tic_tac_toe/scenes.cljs</span><code class="clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">tic-tac-toe.scenes</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">portfolio.ui</span> <span class="ss">:as</span> <span class="nv">portfolio</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">main</span> <span class="p">[]</span>
+  <span class="p">(</span><span class="nf">portfolio/start!</span>
+   <span class="p">{</span><span class="ss">:config</span>
+    <span class="p">{</span><span class="ss">:css-paths</span> <span class="p">[</span><span class="s">"/styles.css"</span><span class="p">]</span>
+     <span class="ss">:viewport/defaults</span>
+     <span class="p">{</span><span class="ss">:background/background-color</span> <span class="s">"#fdeddd"</span><span class="p">}}}))</span>
+</code></pre></div><div class="prose mt-4 section-md"><h3>Start the development server</h3>
+<p>Install the shadow-cljs node module:</p>
+<pre class="codehilite"><code class="language-sh"><span></span>npm install -s shadow-cljs
+</code></pre>
+<p>Then start the development server:</p>
+<pre class="codehilite"><code class="language-sh"><span></span>npx shadow-cljs watch app portfolio
+</code></pre>
+<p>When this says <code>Build completed</code> you should see the Portfolio welcome page at
+<a href="http://localhost:8080/portfolio.html">http://localhost:8080/portfolio.html</a>.</p>
+</div><div class="prose mt-4 section-md"><h2 id="ui-components" class="h2 section-md"><a class="group relative" href="#ui-components"><span class="absolute -left-4 group-hover:visible invisible">§ </span>The UI components</a></h2><p>Starting a new project from scratch can be daunting. There are so many things to
+do, where do we start? I like to start with the building blocks, which gives us
+two options: the basic UI elements or the data model. Both are fine options.
+We’ll start with UI elements.</p>
+<p>The focus of the UI work should be on the details of the UI elements: what
+elements we need, what they look like, and any visual effects or behaviors they
+may have. We will use Portfolio to focus on these details.</p>
+<p>Tic-Tac-Toe has a very simple user interface. It’s a grid with x-es and o-s in
+it. We’ll divide this into two distinct elements: the cell and the board.</p>
+<h3>The cell</h3>
+<p>Developing user interface elements in Portfolio is sort of “visual TDD”. We’ll
+write up an example in a Portfolio scene, and then tweak the implementation
+until we’re happy with what we see.</p>
+<p>Start by creating the cell function in <code>src/tic_tac_toe/ui.cljc</code>. Keeping all
+the hiccup-creating functions in <code>cljc</code> files gives you the option of rendering
+on both the client and the server:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">tic-tac-toe.elements.cell</span><span class="p">)</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">render-cell</span> <span class="p">[</span><span class="nv">data</span><span class="p">]</span>
+  <span class="p">[</span><span class="ss">:button.cell</span> <span class="s">""</span><span class="p">])</span>
+</code></pre>
+<p>Create the first example by updating <code>portfolio/tic_tac_toe/scenes.cljs</code> with
+the following:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">tic-tac-toe.scenes</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">portfolio.replicant</span> <span class="ss">:refer-macros</span> <span class="p">[</span><span class="nv">defscene</span><span class="p">]]</span>
+            <span class="p">[</span><span class="nv">portfolio.ui</span> <span class="ss">:as</span> <span class="nv">portfolio</span><span class="p">]</span>
+            <span class="p">[</span><span class="nv">tic-tac-toe.ui</span> <span class="ss">:as</span> <span class="nv">ui</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="nf">defscene</span> <span class="nv">empty-cell</span>
+  <span class="p">(</span><span class="nf">ui/render-cell</span> <span class="p">{}))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">main</span> <span class="p">[]</span>
+  <span class="p">(</span><span class="nf">portfolio/start!</span>
+   <span class="p">{</span><span class="ss">:config</span>
+    <span class="p">{</span><span class="ss">:css-paths</span> <span class="p">[</span><span class="s">"/styles.css"</span><span class="p">]</span>
+     <span class="ss">:viewport/defaults</span>
+     <span class="p">{</span><span class="ss">:background/background-color</span> <span class="s">"#fdeddd"</span><span class="p">}}}))</span>
+</code></pre>
+<p>This example barely shows an empty <code>button</code> element. Let’s add some styling. Add
+the following to <code>resources/public/styles.css</code>:</p>
+<pre class="codehilite"><code class="language-css"><span></span><span class="p">.</span><span class="nc">cell</span> <span class="p">{</span>
+    <span class="n">aspect-ratio</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">background</span><span class="p">:</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">);</span>
+    <span class="k">border-radius</span><span class="p">:</span> <span class="mi">6</span><span class="kt">%</span><span class="p">;</span>
+    <span class="k">border</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
+    <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
+    <span class="k">flex</span><span class="p">:</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span><span class="kt">%</span><span class="p">;</span>
+    <span class="k">outline</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
+    <span class="k">position</span><span class="p">:</span> <span class="kc">relative</span><span class="p">;</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<p>This gives us a nice rounded square. It’s about as nice as an empty square can
+be.</p>
+<p><img src="/images/tic-tac-toe/3f9c526bb0d1/empty-cell.png" alt="Empty cell"></p>
+<p>Next up we’ll put the x and o in the cell. Start by adding the symbol svgs to
+<code>src/tic_tac_toe/ui.cljc</code>:</p>
+<pre class="codehilite"><code class="language-clj">(def mark-x
+  [:svg {:xmlns "http://www.w3.org/2000/svg"
+         :viewBox "0 -10 108 100"}
+   [:path
+    {:fill "currentColor"
+     :d "m1.753 69.19.36-1.08q.35-1.09 1.92-2.97 1.58-1.87 3.85-3.84 2.29-1.97 4.6-3.54 2.31-1.57 4.93-3.24 2.62-1.66 4.65-2.9 2.04-1.23 3.91-2.27 1.87-1.05 3.98-2.31 2.11-1.27 4.12-2.5 2.01-1.24 4.33-2.51l4.6-2.52q2.27-1.25 4.84-2.86 2.56-1.62 5.03-3.09 2.47-1.47 4.5-2.88 2.03-1.4 3.82-2.82t3.81-3.47q2.01-2.06 3.7-3.51 1.69-1.46 3.47-3.03 1.77-1.57 4.01-3.69 2.24-2.11 4.13-3.7 1.89-1.58 3.93-2.97 2.04-1.39 4.05-2.49 2.01-1.11 5.26-2.54 3.24-1.44 4.48-1.46 1.24-.01 2.42.37 1.18.37 2.18 1.11 1 .74 1.71 1.75.71 1.02 1.06 2.21.34 1.19.3 2.43-.05 1.24-.5 2.39-.44 1.16-1.23 2.12-.79.95-1.84 1.61-1.05.65-2.26.94-1.21.28-2.44.16-1.23-.11-2.37-.62-1.13-.5-2.04-1.34-.91-.84-1.51-1.93-.6-1.08-.81-2.3-.22-1.22-.04-2.45.18-1.23.75-2.33.56-1.1 1.45-1.97.89-.86 2.01-1.4 1.11-.54 2.35-.69 1.23-.15 2.44.1t2.29.87q1.07.63 1.88 1.56.82.93 1.29 2.08.48 1.14.56 2.38.09 1.24-.23 2.44-.31 1.19-.99 2.23-.68 1.04-1.66 1.8-.98.76-2.15 1.18l-1.16.41-2.28 1.17q-2.28 1.18-4.38 2.7-2.1 1.51-4.2 3.44-2.1 1.92-4.18 3.7-2.08 1.77-3.9 3.44-1.81 1.68-3.41 3.13-1.6 1.46-3.38 3.09-1.79 1.62-3.44 2.97-1.66 1.34-3.53 2.4-1.88 1.06-4.17 2.65-2.3 1.6-4.79 2.74-2.48 1.14-4.98 2.71-2.5 1.57-4.51 2.47-2.01.9-3.99 1.87-1.98.97-3.88 2.02-1.91 1.05-4.38 2.34-2.46 1.28-4.94 2.53-2.47 1.25-4.48 2.38-2 1.12-3.96 2.14-1.95 1.01-3.83 1.99-1.89.98-4.37 2.05-2.48 1.06-2.96 2.01-.48.96-.78 1.49-.3.53-.71.97-.41.44-.92.77-.51.34-1.09.54-.57.2-1.17.25-.6.06-1.2-.03t-1.16-.32q-.56-.23-1.05-.59-.49-.35-.89-.82-.39-.46-.65-1.01-.27-.54-.4-1.14-.13-.59-.12-1.19.02-.6.18-1.19l.16-.59Z"}]
+   [:path
+    {:fill "currentColor"
+     :d "m28.099 4.991 2.69 1.97q2.69 1.96 4.5 3.22 1.8 1.28 4.54 3.46 2.74 2.18 4.57 3.89t3.38 3.72q1.54 2.02 2.88 4.3 1.34 2.28 2.83 4.46 1.48 2.18 2.63 4.14 1.15 1.96 2.74 4.07 1.59 2.1 3.59 4.19 1.99 2.08 4.23 4.48 2.24 2.4 3.7 4.04 1.47 1.64 2.91 3.23 1.44 1.59 3.08 3.58 1.64 1.99 3.51 4.08 1.87 2.09 3.55 3.77 1.69 1.68 4.1 3.51 2.42 1.83 3.9 2.58 1.48.74 2.14 1.34.66.6 1.15 1.33.5.74.8 1.57.31.84.4 1.72.1.88-.02 1.76-.12.88-.44 1.71-.33.82-.84 1.55-.51.72-1.19 1.3-.67.58-1.46.98-.79.41-1.65.61-.87.2-1.76.19-.88-.01-1.74-.24-.86-.22-1.64-.64-.78-.42-2.27-2.72-1.48-2.3-1.52-3.49-.03-1.19.31-2.33.35-1.14 1.04-2.11.69-.97 1.66-1.67.96-.7 2.1-1.05 1.14-.35 2.33-.32 1.19.02 2.31.43t2.05 1.15q.93.75 1.58 1.75.64 1 .93 2.15.29 1.16.2 2.35-.09 1.18-.56 2.28-.47 1.1-1.26 1.99-.79.88-1.83 1.47t-2.2.82q-1.17.23-2.35.07-1.19-.16-2.25-.68-1.07-.53-1.92-1.37-.84-.84-1.37-1.9-.54-1.07-.7-2.25-.17-1.18.06-2.35.22-1.17.8-2.21.58-1.04 1.47-1.84.88-.79 1.98-1.27 1.09-.47 2.28-.57 1.18-.1 2.34.18 1.16.29 2.16.93 1.01.63 1.76 1.56.74.93-.33-.26-1.07-1.18-.41-.58.66.59 1.15 1.33.5.74.8 1.57.31.83.4 1.72.1.88-.02 1.76-.12.88-.44 1.7-.33.83-.84 1.55-.51.73-1.19 1.31-.67.58-1.46.98-.79.41-1.65.61-.87.2-1.75.19-.89-.01-1.75-.24-.86-.22-1.64-.64-.78-.42-2.73-1.57-1.95-1.14-4.26-2.95-2.31-1.8-3.87-3.43-1.57-1.62-3.17-3.29-1.6-1.66-3.55-4.05-1.95-2.39-3.33-4.15-1.39-1.76-2.77-3.4-1.38-1.64-3.07-3.56-1.7-1.91-3.91-4.13-2.2-2.22-3.74-4.1-1.54-1.88-2.79-3.75-1.24-1.87-2.4-4.33t-2.39-4.46q-1.23-2.01-2.4-4.59-1.17-2.59-2.53-5.01-1.36-2.43-3.35-4.44-1.99-2.02-4.52-4.27-2.54-2.25-5.33-4.04-2.81-1.79-3.28-2.21-.47-.41-.83-.92-.35-.51-.58-1.1-.22-.58-.3-1.2-.08-.62-.01-1.23.08-.62.29-1.21.22-.58.58-1.1.35-.51.81-.93.47-.42 1.02-.71t1.16-.45q.61-.15 1.23-.15t1.22.14q.61.15 1.17.44l.55.28Z"}]])
+
+(def mark-o
+  [:svg {:xmlns "http://www.w3.org/2000/svg"
+         :viewBox "0 0 114 114"}
+   [:path
+    {:fill "none"
+     :stroke "currentColor"
+     :stroke-linecap "round"
+     :stroke-width "6"
+     :d "M74.616 8.935c7.73 2.38 15.96 9.34 21.58 16.04 5.63 6.69 10.57 15.46 12.18 24.11 1.6 8.65.74 19.67-2.53 27.77-3.27 8.11-10.12 15.37-17.09 20.88-6.98 5.51-16.07 10.81-24.76 12.17-8.7 1.35-19.32-.76-27.42-4.06-8.1-3.29-15.73-8.93-21.21-15.73-5.48-6.81-10.32-16.5-11.67-25.09-1.35-8.6.19-18.39 3.57-26.51 3.38-8.11 9.99-16.6 16.71-22.19 6.72-5.59 13.95-10.52 23.63-11.36 9.68-.84 28.04 4.34 34.45 6.32 6.42 1.97 4.37 4.6 4.04 5.55m-48.33-9.69c7.65-3.32 19.78-3.63 28.63-2.01 8.86 1.63 17.85 5.89 24.49 11.76 6.64 5.87 12.7 15.08 15.37 23.48 2.67 8.41 2.5 18.4.65 26.95-1.85 8.54-5.98 17.59-11.77 24.34-5.78 6.74-14.56 13.05-22.93 16.11-8.37 3.06-18.75 4.19-27.29 2.25-8.54-1.93-17.37-7.89-23.96-13.87-6.59-5.97-12.89-13.58-15.57-21.96-2.69-8.39-2.31-19.94-.56-28.34 1.75-8.4 5.21-15.74 11.06-22.09 5.85-6.35 19.92-13.32 24.04-16.01 4.12-2.7.37-1.1.67-.16"}]])
+</code></pre>
+<p>Add a new example to <code>portfolio/tic_tac_toe/scenes.cljs</code>:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">defscene</span> <span class="nv">cell-with-x</span>
+  <span class="p">(</span><span class="nf">ui/render-cell</span>
+   <span class="p">{</span><span class="ss">:content</span> <span class="nv">ui/mark-x</span><span class="p">}))</span>
+</code></pre>
+<p>This will display as empty as the last example, so we’ll need to add some code
+to the implementation:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-cell</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">content</span><span class="p">]}]</span>
+  <span class="p">[</span><span class="ss">:button.cell</span>
+   <span class="p">(</span><span class="nb">when </span><span class="nv">content</span>
+     <span class="p">[</span><span class="ss">:div.cell-content</span>
+      <span class="nv">content</span><span class="p">])])</span>
+</code></pre>
+<p>Now we can clearly see an x.</p>
+<p><img src="/images/tic-tac-toe/4ee578b08c9c/cell-x.png" alt="Cell with x"></p>
+<p>Let’s repeat the success with an example of the o:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">defscene</span> <span class="nv">cell-with-o</span>
+  <span class="p">(</span><span class="nf">ui/render-cell</span>
+   <span class="p">{</span><span class="ss">:content</span> <span class="nv">ui/mark-o</span><span class="p">}))</span>
+</code></pre>
+<p><img src="/images/tic-tac-toe/9cc90c806c92/cell-o.png" alt="Cell with o"></p>
+<p>It would be a nice touch if the player’s mark faded in softly when clicking the
+cell. We can achieve this with a transition on mount. In order to trigger this,
+we can render an example from an atom, and pass in a click handler that toggles
+the mark on and off.</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">defscene</span> <span class="nv">interactive-cell</span>
+  <span class="s">"Click the cell to toggle the tic on/off"</span>
+  <span class="ss">:params</span> <span class="p">(</span><span class="nf">atom</span> <span class="nv">nil</span><span class="p">)</span>
+  <span class="p">[</span><span class="nv">store</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">ui/render-cell</span>
+   <span class="p">{</span><span class="ss">:content</span> <span class="o">@</span><span class="nv">store</span>
+    <span class="ss">:on-click</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">_</span><span class="p">]</span>
+                <span class="p">(</span><span class="nf">swap!</span> <span class="nv">store</span> <span class="o">#</span><span class="p">(</span><span class="k">if </span><span class="nv">%</span> <span class="nv">nil</span> <span class="nv">ui/mark-x</span><span class="p">)))}))</span>
+</code></pre>
+<p>In order for this to work, the implementation must use <code>:on-click</code> as an event
+handler:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-cell</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">content</span> <span class="nv">on-click</span><span class="p">]}]</span>
+  <span class="p">[</span><span class="ss">:button.cell</span>
+   <span class="p">{</span><span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="nv">on-click</span><span class="p">}}</span>
+   <span class="p">(</span><span class="nb">when </span><span class="nv">content</span>
+     <span class="p">[</span><span class="ss">:div.cell-content</span>
+      <span class="nv">content</span><span class="p">])])</span>
+</code></pre>
+<p>With this change, clicking the scene in Portfolio will toggle the x on and off.
+In order to add the transition, we can set the opacity to 1 and add a transition
+on <code>.cell-content</code>, and add another class that sets the opacity to 0. We can use
+Replicant’s <a href="/hiccup/#mounting-unmounting">mounting/unmounting attributes</a> to
+trigger the transition on mount (and unmount, just for the sake of the Portfolio
+demonstration.</p>
+<pre class="codehilite"><code class="language-css"><span></span><span class="p">.</span><span class="nc">cell-content</span> <span class="p">{</span>
+    <span class="k">opacity</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">transition</span><span class="p">:</span> <span class="k">opacity</span> <span class="mf">0.25</span><span class="kt">s</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">transparent</span> <span class="p">{</span>
+    <span class="k">opacity</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<p>Add the mounting and unmounting extra class like so:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-cell</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">content</span> <span class="nv">on-click</span><span class="p">]}]</span>
+  <span class="p">[</span><span class="ss">:button.cell</span>
+   <span class="p">{</span><span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="nv">on-click</span><span class="p">}}</span>
+   <span class="p">(</span><span class="nb">when </span><span class="nv">content</span>
+     <span class="p">[</span><span class="ss">:div.cell-content</span>
+      <span class="p">{</span><span class="ss">:replicant/mounting</span> <span class="p">{</span><span class="ss">:class</span> <span class="s">"transparent"</span><span class="p">}</span>
+       <span class="ss">:replicant/unmounting</span> <span class="p">{</span><span class="ss">:class</span> <span class="s">"transparent"</span><span class="p">}}</span>
+      <span class="nv">content</span><span class="p">])])</span>
+</code></pre>
+<p>That’s all it takes to smoothly fade in the symbol on click:</p>
+<p><img src="/images/tic-tac-toe/586fe5bd70e4/toggle-transition.gif" alt="Cell with transition"></p>
+<p>When the game is over, we want to dim out all the cells, except the winning
+line, which we’ll highlight. Let’s add two more examples:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">defscene</span> <span class="nv">dimmed-cell</span>
+  <span class="p">(</span><span class="nf">ui/render-cell</span>
+   <span class="p">{</span><span class="ss">:content</span> <span class="nv">ui/mark-o</span>
+    <span class="ss">:dim?</span> <span class="nv">true</span><span class="p">}))</span>
+
+<span class="p">(</span><span class="nf">defscene</span> <span class="nv">highlighted-cell</span>
+  <span class="p">(</span><span class="nf">ui/render-cell</span>
+   <span class="p">{</span><span class="ss">:content</span> <span class="nv">ui/mark-o</span>
+    <span class="ss">:highlight?</span> <span class="nv">true</span><span class="p">}))</span>
+</code></pre>
+<p>These will both toggle each their class:</p>
+<pre class="codehilite"><code class="language-css"><span></span><span class="p">.</span><span class="nc">cell-dim</span> <span class="p">{</span>
+    <span class="k">background</span><span class="p">:</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">249</span><span class="p">,</span> <span class="mi">249</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">cell-highlight</span> <span class="p">{</span>
+    <span class="k">background</span><span class="p">:</span> <span class="mh">#fcfcf3</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<p>And the updated implementation:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-cell</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">content</span> <span class="nv">on-click</span> <span class="nv">dim?</span> <span class="nv">highlight?</span><span class="p">]}]</span>
+  <span class="p">[</span><span class="ss">:button.cell</span>
+   <span class="p">{</span><span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="nv">on-click</span><span class="p">}</span>
+    <span class="ss">:class</span> <span class="p">(</span><span class="nf">cond-&gt;</span> <span class="p">[]</span>
+             <span class="nv">dim?</span> <span class="p">(</span><span class="nb">conj </span><span class="s">"cell-dim"</span><span class="p">)</span>
+             <span class="nv">highlight?</span> <span class="p">(</span><span class="nb">conj </span><span class="s">"cell-highlight"</span><span class="p">))}</span>
+   <span class="p">(</span><span class="nb">when </span><span class="nv">content</span>
+     <span class="p">[</span><span class="ss">:div.cell-content</span>
+      <span class="p">{</span><span class="ss">:replicant/mounting</span> <span class="p">{</span><span class="ss">:class</span> <span class="s">"transparent"</span><span class="p">}</span>
+       <span class="ss">:replicant/unmounting</span> <span class="p">{</span><span class="ss">:class</span> <span class="s">"transparent"</span><span class="p">}}</span>
+      <span class="nv">content</span><span class="p">])])</span>
+</code></pre>
+<p>Note that we can combine classes from the “selector” (<code>:button.cell</code>) with the
+<code>:class</code> attribute, which can take a collection of classes.</p>
+<p>In the game, we want all the empty cells to be clickable, but not the ones that
+already have marks in them. The UI elements should not encapsulate any business
+logic at all, they should be purely data-driven. So we need to add to the cell
+the option of presenting as clickable or not:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-cell</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">content</span> <span class="nv">on-click</span> <span class="nv">dim?</span> <span class="nv">highlight?</span> <span class="nv">clickable?</span><span class="p">]}]</span>
+  <span class="p">[</span><span class="ss">:button.cell</span>
+   <span class="p">{</span><span class="ss">:on</span> <span class="p">{</span><span class="ss">:click</span> <span class="nv">on-click</span><span class="p">}</span>
+    <span class="ss">:class</span> <span class="p">(</span><span class="nf">cond-&gt;</span> <span class="p">[]</span>
+             <span class="nv">dim?</span> <span class="p">(</span><span class="nb">conj </span><span class="s">"cell-dim"</span><span class="p">)</span>
+             <span class="nv">highlight?</span> <span class="p">(</span><span class="nb">conj </span><span class="s">"cell-highlight"</span><span class="p">)</span>
+             <span class="nv">clickable?</span> <span class="p">(</span><span class="nb">conj </span><span class="s">"clickable"</span><span class="p">))}</span>
+   <span class="p">(</span><span class="nb">when </span><span class="nv">content</span>
+     <span class="p">[</span><span class="ss">:div.cell-content</span>
+      <span class="p">{</span><span class="ss">:replicant/mounting</span> <span class="p">{</span><span class="ss">:class</span> <span class="s">"transparent"</span><span class="p">}</span>
+       <span class="ss">:replicant/unmounting</span> <span class="p">{</span><span class="ss">:class</span> <span class="s">"transparent"</span><span class="p">}}</span>
+      <span class="nv">content</span><span class="p">])])</span>
+</code></pre>
+<p>The CSS is a one-liner:</p>
+<pre class="codehilite"><code class="language-css"><span></span><span class="p">.</span><span class="nc">clickable</span> <span class="p">{</span>
+    <span class="k">cursor</span><span class="p">:</span> <span class="kc">pointer</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<p>We don’t need to add a dedicated example for this feature, but we can add
+<code>:clickable? true</code> to the empty cell and the interaction example.</p>
+<h3>The board</h3>
+<p>The board will draw a bunch of cells on screen. When rendering the game, we’ll
+need to specify details about all the cells, so the data structure we pass to
+the board element might as well be a two dimensional collection of rows and
+columns:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">defscene</span> <span class="nv">empty-board</span>
+  <span class="p">(</span><span class="nf">ui/render-board</span>
+   <span class="p">{</span><span class="ss">:rows</span> <span class="p">[[{}</span> <span class="p">{}</span> <span class="p">{}]</span>
+           <span class="p">[{}</span> <span class="p">{}</span> <span class="p">{}]</span>
+           <span class="p">[{}</span> <span class="p">{}</span> <span class="p">{}]]}))</span>
+</code></pre>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">render-board</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">rows</span><span class="p">]}]</span>
+  <span class="p">[</span><span class="ss">:div.board</span>
+   <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">row</span> <span class="nv">rows</span><span class="p">]</span>
+     <span class="p">[</span><span class="ss">:div.row</span>
+      <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">cell</span> <span class="nv">row</span><span class="p">]</span>
+        <span class="p">(</span><span class="nf">render-cell</span> <span class="nv">cell</span><span class="p">))])])</span>
+</code></pre>
+<p>Flexbox will do all the heavy lifting for the board. We’ll also add a gradient
+background for a smashing look. Since the board is square, setting its max width
+to <code>80vh</code> means it’ll never be so long that it requires scrolling (its max
+height will also effectively be 80% of the browser height).</p>
+<pre class="codehilite"><code class="language-css"><span></span><span class="p">.</span><span class="nc">board</span> <span class="p">{</span>
+    <span class="err">--</span><span class="n">gap</span><span class="p">:</span> <span class="mf">0.75</span><span class="kt">rem</span><span class="p">;</span>
+    <span class="k">background</span><span class="p">:</span> <span class="mh">#833ab4</span><span class="p">;</span>
+    <span class="k">background</span><span class="p">:</span> <span class="nb">linear-gradient</span><span class="p">(</span><span class="mi">90</span><span class="kt">deg</span><span class="p">,</span> <span class="mh">#833ab4</span> <span class="mi">0</span><span class="kt">%</span><span class="p">,</span> <span class="mh">#fd1d1d</span> <span class="mi">50</span><span class="kt">%</span><span class="p">,</span> <span class="mh">#fcb045</span> <span class="mi">100</span><span class="kt">%</span><span class="p">);</span>
+    <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
+    <span class="k">flex-direction</span><span class="p">:</span> <span class="kc">column</span><span class="p">;</span>
+    <span class="n">gap</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">gap</span><span class="p">);</span>
+    <span class="k">padding</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">gap</span><span class="p">);</span>
+    <span class="k">max-width</span><span class="p">:</span> <span class="mi">80</span><span class="kt">vh</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">row</span> <span class="p">{</span>
+    <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
+    <span class="k">flex-direction</span><span class="p">:</span> <span class="kc">row</span><span class="p">;</span>
+    <span class="n">gap</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">gap</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<p><img src="/images/tic-tac-toe/933ea0d0c06e/board-empty.png" alt="Empty board"></p>
+<p>There isn’t that much more to do for the board, but a couple of more examples
+would be nice. Here’s one where the game is somewhat underway. Looks like x is
+gotta be careful!</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">defscene</span> <span class="nv">partial-board</span>
+  <span class="p">(</span><span class="nf">ui/render-board</span>
+   <span class="p">{</span><span class="ss">:rows</span> <span class="p">[[{</span><span class="ss">:content</span> <span class="nv">ui/mark-o</span><span class="p">}</span> <span class="p">{}</span> <span class="p">{}]</span>
+           <span class="p">[{</span><span class="ss">:content</span> <span class="nv">ui/mark-x</span><span class="p">}</span> <span class="p">{</span><span class="ss">:content</span> <span class="nv">ui/mark-o</span><span class="p">}</span> <span class="p">{}]</span>
+           <span class="p">[{}</span> <span class="p">{}</span> <span class="p">{}]]}))</span>
+</code></pre>
+<p><img src="/images/tic-tac-toe/705284b6051a/board-partial.png" alt="Partially played board"></p>
+<p>And finally, we’ll demonstrate all the features at once, in a board for a
+finished game, where the winning line is highlighted:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">defscene</span> <span class="nv">winning-board</span>
+  <span class="p">(</span><span class="nf">ui/render-board</span>
+   <span class="p">{</span><span class="ss">:rows</span> <span class="p">[[{</span><span class="ss">:dim?</span> <span class="nv">true</span><span class="p">}</span>
+            <span class="p">{</span><span class="ss">:content</span> <span class="nv">ui/mark-o</span>
+             <span class="ss">:highlight?</span> <span class="nv">true</span><span class="p">}</span>
+            <span class="p">{</span><span class="ss">:dim?</span> <span class="nv">true</span><span class="p">}]</span>
+
+           <span class="p">[{</span><span class="ss">:content</span> <span class="nv">ui/mark-x</span> <span class="ss">:dim?</span> <span class="nv">true</span><span class="p">}</span>
+            <span class="p">{</span><span class="ss">:content</span> <span class="nv">ui/mark-o</span> <span class="ss">:highlight?</span> <span class="nv">true</span><span class="p">}</span>
+            <span class="p">{</span><span class="ss">:dim?</span> <span class="nv">true</span><span class="p">}]</span>
+
+           <span class="p">[{</span><span class="ss">:dim?</span> <span class="nv">true</span><span class="p">}</span>
+            <span class="p">{</span><span class="ss">:content</span> <span class="nv">ui/mark-o</span> <span class="ss">:highlight?</span> <span class="nv">true</span><span class="p">}</span>
+            <span class="p">{</span><span class="ss">:content</span> <span class="nv">ui/mark-x</span> <span class="ss">:dim?</span> <span class="nv">true</span><span class="p">}]]}))</span>
+</code></pre>
+<p><img src="/images/tic-tac-toe/56a04ed5799e/board-winning.png" alt="Fully played board"></p>
+<p>And that’s pretty much all the UI elements we need for the essential game play.</p>
+</div><div class="prose mt-4 section-md"><h2 id="game-engine" class="h2 section-md"><a class="group relative" href="#game-engine"><span class="absolute -left-4 group-hover:visible invisible">§ </span>The game engine</a></h2><p>To breathe life into the UI elements, we need to flesh out a data model and
+implement the rules of the game. We don’t want to be bogged down in details
+about rounded corners and transitions while implementing the nitty gritty of
+deciding if there’s a winner, so we’ll do this with just pure data.</p>
+<p>We will use tests in place of Portfolio to keep a tight feedback loop. We’ll
+start by creating a game and expect it to select x for the next (e.g. first)
+player. Open <code>test/tic_tac_toe/game_test.clj</code> and add the following:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">tic-tac-toe.game-test</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">clojure.test</span> <span class="ss">:refer</span> <span class="p">[</span><span class="nv">deftest</span> <span class="nv">is</span> <span class="nv">testing</span><span class="p">]]</span>
+            <span class="p">[</span><span class="nv">tic-tac-toe.game</span> <span class="ss">:as</span> <span class="nv">game</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="nf">deftest</span> <span class="nv">tic-tac-toe-test</span>
+  <span class="p">(</span><span class="nf">testing</span> <span class="s">"X is the starting player"</span>
+    <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nf">game/create-game</span> <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span><span class="p">})</span>
+           <span class="p">{</span><span class="ss">:next-player</span> <span class="ss">:x</span>
+            <span class="ss">:size</span> <span class="mi">3</span><span class="p">}))))</span>
+</code></pre>
+<p>The implementation is straight-forward, in <code>src/tic_tac_toe/game.cljc</code>:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">tic-tac-toe.game</span><span class="p">)</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">create-game</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">size</span><span class="p">]}]</span>
+  <span class="p">{</span><span class="ss">:next-player</span> <span class="ss">:x</span>
+   <span class="ss">:size</span> <span class="nv">size</span><span class="p">})</span>
+</code></pre>
+<p>For our next test, let’s place a tic for player x:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">testing</span> <span class="s">"X places a tic"</span>
+  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">game/create-game</span> <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span><span class="p">})</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">))</span>
+         <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span>
+          <span class="ss">:tics</span> <span class="p">{</span><span class="mi">0</span> <span class="p">{</span><span class="mi">0</span> <span class="ss">:x</span><span class="p">}}</span>
+          <span class="ss">:next-player</span> <span class="ss">:o</span><span class="p">})))</span>
+</code></pre>
+<p>Since the game already knows whose turn it is, we don’t need to pass it
+explicitly. Next, we’ll place another mark:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">testing</span> <span class="s">"O places a tic"</span>
+  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">game/create-game</span> <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span><span class="p">})</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">)</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">1</span><span class="p">))</span>
+         <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span>
+          <span class="ss">:tics</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">0</span><span class="p">]</span> <span class="ss">:x</span>
+                 <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="ss">:o</span><span class="p">}</span>
+          <span class="ss">:next-player</span> <span class="ss">:x</span><span class="p">})))</span>
+</code></pre>
+<p>This is a nice test to have, but it doesn’t ask anything new of our function.
+For our next test, let’s make sure players can’t tic the same cell:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">testing</span> <span class="s">"Can't tic-tac on the same spot"</span>
+  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">game/create-game</span> <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span><span class="p">})</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">)</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">))</span>
+         <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span>
+          <span class="ss">:next-player</span> <span class="ss">:o</span>
+          <span class="ss">:tics</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">0</span><span class="p">]</span> <span class="ss">:x</span><span class="p">}})))</span>
+</code></pre>
+<p>This test fails because our current implementation allows the o player overwrite
+the x. Not good, let’s fix it:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">tic</span> <span class="p">[</span><span class="nv">game</span> <span class="nv">y</span> <span class="nv">x</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">player</span> <span class="p">(</span><span class="ss">:next-player</span> <span class="nv">game</span><span class="p">)]</span>
+    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">get-in</span> <span class="nv">game</span> <span class="p">[</span><span class="ss">:tics</span> <span class="p">[</span><span class="nv">y</span> <span class="nv">x</span><span class="p">]])</span>
+      <span class="nv">game</span>
+      <span class="p">(</span><span class="nb">-&gt; </span><span class="nv">game</span>
+          <span class="p">(</span><span class="nf">assoc-in</span> <span class="p">[</span><span class="ss">:tics</span> <span class="p">[</span><span class="nv">y</span> <span class="nv">x</span><span class="p">]]</span> <span class="nv">player</span><span class="p">)</span>
+          <span class="p">(</span><span class="nb">assoc </span><span class="ss">:next-player</span> <span class="p">(</span><span class="nf">next-player</span> <span class="nv">player</span><span class="p">))))))</span>
+</code></pre>
+<p>This simply ignores moves on already marked cells. We can do the same for
+attempts at tic-ing outside the board:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">testing</span> <span class="s">"Can't tic outside the board"</span>
+  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">game/create-game</span> <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span><span class="p">})</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">3</span> <span class="mi">0</span><span class="p">))</span>
+         <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span>
+          <span class="ss">:next-player</span> <span class="ss">:x</span><span class="p">}))</span>
+
+  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">game/create-game</span> <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span><span class="p">})</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">3</span><span class="p">))</span>
+         <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span>
+          <span class="ss">:next-player</span> <span class="ss">:x</span><span class="p">})))</span>
+</code></pre>
+<p>We can pass this test with a check against the board size:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">tic</span> <span class="p">[</span><span class="nv">game</span> <span class="nv">y</span> <span class="nv">x</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">player</span> <span class="p">(</span><span class="ss">:next-player</span> <span class="nv">game</span><span class="p">)]</span>
+    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nf">get-in</span> <span class="nv">game</span> <span class="p">[</span><span class="ss">:tics</span> <span class="p">[</span><span class="nv">y</span> <span class="nv">x</span><span class="p">]])</span>
+            <span class="p">(</span><span class="nb">&lt;= </span><span class="p">(</span><span class="ss">:size</span> <span class="nv">game</span><span class="p">)</span> <span class="nv">x</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb">&lt;= </span><span class="p">(</span><span class="ss">:size</span> <span class="nv">game</span><span class="p">)</span> <span class="nv">y</span><span class="p">))</span>
+      <span class="nv">game</span>
+      <span class="p">(</span><span class="nb">-&gt; </span><span class="nv">game</span>
+          <span class="p">(</span><span class="nf">assoc-in</span> <span class="p">[</span><span class="ss">:tics</span> <span class="p">[</span><span class="nv">y</span> <span class="nv">x</span><span class="p">]]</span> <span class="nv">player</span><span class="p">)</span>
+          <span class="p">(</span><span class="nb">assoc </span><span class="ss">:next-player</span> <span class="p">(</span><span class="nf">next-player</span> <span class="nv">player</span><span class="p">))))))</span>
+</code></pre>
+</div><div class="prose mt-4 section-md"><h2 id="business-to-ui" class="h2 section-md"><a class="group relative" href="#business-to-ui"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Converting domain data to UI data</a></h2><p>At this point we have a playable game, even if it can’t yet decide when the game
+is over, or whether there is a winner. If we connect the game engine to the UI
+elements, we can try what we have so far.</p>
+<p>The Portfolio scenes describe the data needed to render the game:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">defscene</span> <span class="nv">partial-board</span>
+  <span class="p">(</span><span class="nf">ui/render-board</span>
+   <span class="p">{</span><span class="ss">:rows</span> <span class="p">[[{</span><span class="ss">:content</span> <span class="nv">ui/mark-o</span><span class="p">}</span> <span class="p">{}</span> <span class="p">{}]</span>
+           <span class="p">[{</span><span class="ss">:content</span> <span class="nv">ui/mark-x</span><span class="p">}</span> <span class="p">{</span><span class="ss">:content</span> <span class="nv">ui/mark-o</span><span class="p">}</span> <span class="p">{}]</span>
+           <span class="p">[{}</span> <span class="p">{}</span> <span class="p">{}]]}))</span>
+</code></pre>
+<p>The game engine tests demonstrates what data we actually have have:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">testing</span> <span class="s">"O places a tic"</span>
+  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">game/create-game</span> <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span><span class="p">})</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">)</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">1</span><span class="p">))</span>
+         <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span>
+          <span class="ss">:tics</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">0</span><span class="p">]</span> <span class="ss">:x</span>
+                 <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="ss">:o</span><span class="p">}</span>
+          <span class="ss">:next-player</span> <span class="ss">:x</span><span class="p">})))</span>
+</code></pre>
+<p>Why didn’t we match these up better? The UI elements are generic: they visualize
+cells with arbitrary content in the square grid of a board. We could imagine
+using the same UI elements to render other square grid based games like memo,
+minesweeper, etc.</p>
+<p>This point may seem a little contrived, and that’s because we’re making a game.
+Games often have specialized UI elements. The business applications you will be
+building typically don’t: they combine forms, lists, buttons and navigation bars
+in various ways.</p>
+<p>To bridge the gap between the two worlds, we will write a function that
+translates the game engine state – our business domain data – to the format
+used by the UI elements – the UI domain data. We can do this guided by tests as
+well.</p>
+<p>Add another test, <code>test/tic_tac_toe/ui_test.cljc</code>. We will include one detail
+that was left out of the hand-written Portfolio example: making all the
+available cells clickable. But what should we do on click? Place the next mark
+on the clicked cell. We’ll include some click data in the available cells, later
+we will handle those in a global event handler.</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">tic-tac-toe.ui-test</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">tic-tac-toe.ui</span> <span class="ss">:as</span> <span class="nv">ui</span><span class="p">]</span>
+            <span class="p">[</span><span class="nv">clojure.test</span> <span class="ss">:refer</span> <span class="p">[</span><span class="nv">deftest</span> <span class="nv">is</span> <span class="nv">testing</span><span class="p">]]))</span>
+
+<span class="p">(</span><span class="nf">deftest</span> <span class="nv">game-&gt;ui-data-test</span>
+  <span class="p">(</span><span class="nf">testing</span> <span class="s">"Converts game data to UI data"</span>
+    <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nf">ui/game-&gt;ui-data</span>
+            <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span>
+             <span class="ss">:tics</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">0</span><span class="p">]</span> <span class="ss">:x</span>
+                    <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="ss">:o</span><span class="p">}</span>
+             <span class="ss">:next-player</span> <span class="ss">:x</span><span class="p">})</span>
+           <span class="p">{</span><span class="ss">:rows</span> <span class="p">[[{</span><span class="ss">:content</span> <span class="nv">ui/mark-x</span><span class="p">}</span>
+                    <span class="p">{</span><span class="ss">:content</span> <span class="nv">ui/mark-o</span><span class="p">}</span>
+                    <span class="p">{</span><span class="ss">:clickable?</span> <span class="nv">true</span>
+                     <span class="ss">:on-click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="mi">0</span> <span class="mi">2</span><span class="p">]}]</span>
+
+                   <span class="p">[{</span><span class="ss">:clickable?</span> <span class="nv">true</span>, <span class="ss">:on-click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">]}</span>
+                    <span class="p">{</span><span class="ss">:clickable?</span> <span class="nv">true</span>, <span class="ss">:on-click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">]}</span>
+                    <span class="p">{</span><span class="ss">:clickable?</span> <span class="nv">true</span>, <span class="ss">:on-click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">]}]</span>
+
+                   <span class="p">[{</span><span class="ss">:clickable?</span> <span class="nv">true</span>, <span class="ss">:on-click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="mi">2</span> <span class="mi">0</span><span class="p">]}</span>
+                    <span class="p">{</span><span class="ss">:clickable?</span> <span class="nv">true</span>, <span class="ss">:on-click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="mi">2</span> <span class="mi">1</span><span class="p">]}</span>
+                    <span class="p">{</span><span class="ss">:clickable?</span> <span class="nv">true</span>, <span class="ss">:on-click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="mi">2</span> <span class="mi">2</span><span class="p">]}]]}))))</span>
+</code></pre>
+<p>This test nicely captures how our domain is converted to a user interface,
+without getting distracted by details about styling, transitions, accessibility
+details, etc. And it’s a simple unit test, no complicated web driver tooling was
+necessary.</p>
+<p>To pass this we will generate the board by looping over each coordinate in the
+grid, as dictated by the game’s size. Each cell either has a tic, or is
+available to tac:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="k">def </span><span class="nv">player-&gt;mark</span>
+  <span class="p">{</span><span class="ss">:x</span> <span class="nv">mark-x</span>
+   <span class="ss">:o</span> <span class="nv">mark-o</span><span class="p">})</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">game-&gt;ui-data</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">size</span> <span class="nv">tics</span><span class="p">]}]</span>
+  <span class="p">{</span><span class="ss">:rows</span>
+   <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">y</span> <span class="p">(</span><span class="nb">range </span><span class="nv">size</span><span class="p">)]</span>
+     <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">x</span> <span class="p">(</span><span class="nb">range </span><span class="nv">size</span><span class="p">)]</span>
+       <span class="p">(</span><span class="nb">if-let </span><span class="p">[</span><span class="nv">player</span> <span class="p">(</span><span class="nb">get </span><span class="nv">tics</span> <span class="p">[</span><span class="nv">y</span> <span class="nv">x</span><span class="p">])]</span>
+         <span class="p">{</span><span class="ss">:content</span> <span class="p">(</span><span class="nf">player-&gt;mark</span> <span class="nv">player</span><span class="p">)}</span>
+         <span class="p">{</span><span class="ss">:clickable?</span> <span class="nv">true</span>
+          <span class="ss">:on-click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="nv">y</span> <span class="nv">x</span><span class="p">]})))})</span>
+</code></pre>
+</div><div class="prose mt-4 section-md"><h2 id="wiring" class="h2 section-md"><a class="group relative" href="#wiring"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Wiring</a></h2><p>With all the pieces in place, we can wire the whole thing together. Step one is
+to create a game and store it in an atom. When a player makes a move, we will
+call the game engine, and swap in the updated game in the atom. Every time the
+atom is updated, we render the UI.</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">tic-tac-toe.core</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">replicant.dom</span> <span class="ss">:as</span> <span class="nv">r</span><span class="p">]</span>
+            <span class="p">[</span><span class="nv">tic-tac-toe.game</span> <span class="ss">:as</span> <span class="nv">game</span><span class="p">]</span>
+            <span class="p">[</span><span class="nv">tic-tac-toe.ui</span> <span class="ss">:as</span> <span class="nv">ui</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">main</span> <span class="p">[]</span>
+  <span class="c1">;; Set up the atom</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">store</span> <span class="p">(</span><span class="nf">atom</span> <span class="nv">nil</span><span class="p">)</span>
+        <span class="nv">el</span> <span class="p">(</span><span class="nf">js/document.getElementById</span> <span class="s">"app"</span><span class="p">)]</span>
+
+    <span class="c1">;; Render on every change</span>
+    <span class="p">(</span><span class="nf">add-watch</span> <span class="nv">store</span> <span class="ss">::render</span>
+               <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">_</span> <span class="nv">_</span> <span class="nv">_</span> <span class="nv">game</span><span class="p">]</span>
+                 <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="p">(</span><span class="nf">ui/game-&gt;ui-data</span> <span class="nv">game</span><span class="p">)</span>
+                      <span class="nv">ui/render-board</span>
+                      <span class="p">(</span><span class="nf">r/render</span> <span class="nv">el</span><span class="p">))))</span>
+
+    <span class="c1">;; Trigger the first render by initializing the game.</span>
+    <span class="p">(</span><span class="nf">reset!</span> <span class="nv">store</span> <span class="p">(</span><span class="nf">game/create-game</span> <span class="mi">3</span><span class="p">))))</span>
+</code></pre>
+<p>The atom watcher sums up our approach: convert domain data (<code>game</code>) to UI data,
+convert UI data to hiccup, and finally tell Replicant to update the DOM. But
+don’t load this up in the browser yet, because Replicant will refuse to render
+it.</p>
+<p>Since we opted to make our <a href="/event-handlers/#data">event handler data</a>, we need
+to register a global event handler so Replicant knows what to do with them. We
+can do that with <code>replicant.dom/set-dispatch!</code>:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">main</span> <span class="p">[]</span>
+  <span class="c1">;; Set up the atom</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">store</span> <span class="p">(</span><span class="nf">atom</span> <span class="nv">nil</span><span class="p">)</span>
+        <span class="nv">el</span> <span class="p">(</span><span class="nf">js/document.getElementById</span> <span class="s">"app"</span><span class="p">)]</span>
+
+    <span class="c1">;; Globally handle DOM events</span>
+    <span class="p">(</span><span class="nf">r/set-dispatch!</span>
+     <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">_</span> <span class="nv">event-handler-data</span><span class="p">]</span>
+       <span class="p">(</span><span class="nb">prn </span><span class="nv">event-handler-data</span><span class="p">)))</span>
+
+    <span class="c1">;; Render on every change</span>
+    <span class="p">(</span><span class="nf">add-watch</span> <span class="nv">store</span> <span class="ss">::render</span>
+               <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">_</span> <span class="nv">_</span> <span class="nv">_</span> <span class="nv">game</span><span class="p">]</span>
+                 <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="p">(</span><span class="nf">ui/game-&gt;ui-data</span> <span class="nv">game</span><span class="p">)</span>
+                      <span class="nv">ui/render-board</span>
+                      <span class="p">(</span><span class="nf">r/render</span> <span class="nv">el</span><span class="p">))))</span>
+
+    <span class="c1">;; Trigger the first render by initializing the game.</span>
+    <span class="p">(</span><span class="nf">reset!</span> <span class="nv">store</span> <span class="p">(</span><span class="nf">game/create-game</span> <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span><span class="p">}))))</span>
+</code></pre>
+<p>With this in place, you can head over to
+<a href="http://localhost:8080/">http://localhost:8080/</a> and view the result of our
+labor. When you click cells, you will see the <code>:on-click</code> data printed to the
+console:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">[</span><span class="ss">:tic</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">[</span><span class="ss">:tic</span> <span class="mi">2</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">[</span><span class="ss">:tic</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">]</span>
+</code></pre>
+<p>We will treat these as small commands, using the first keyword to decide what to
+do:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="c1">;; Globally handle DOM events</span>
+<span class="p">(</span><span class="nf">r/set-dispatch!</span>
+ <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">_</span> <span class="p">[</span><span class="nv">action</span> <span class="o">&amp;</span> <span class="nv">args</span><span class="p">]]</span>
+   <span class="p">(</span><span class="nf">case</span> <span class="nv">action</span>
+     <span class="ss">:tic</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">swap!</span> <span class="nv">store</span> <span class="nv">game/tic</span> <span class="nv">args</span><span class="p">))))</span>
+</code></pre>
+<p>With this change in place, you can click the cells to mark them with alternating
+x’s and o’s. Success!</p>
+</div><div class="prose mt-4 section-md"><h2 id="declaring-a-winner" class="h2 section-md"><a class="group relative" href="#declaring-a-winner"><span class="absolute -left-4 group-hover:visible invisible">§ </span>Epilogue: Declaring the winner</a></h2><p>The UI elements we wrote can dim and highlight cells, a feature we planned to
+use to showcase the winner. In order to use these, we’ll need the game engine to
+check for winners after each tic. As usual, let’s start with a test:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">testing</span> <span class="s">"Detects row victory"</span>
+  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">game/create-game</span> <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span><span class="p">})</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">;; x</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">;; o</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">;; x</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">;; o</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">;; x</span>
+             <span class="p">(</span><span class="nb">select-keys </span><span class="p">[</span><span class="ss">:over?</span> <span class="ss">:victory</span><span class="p">]))</span>
+         <span class="p">{</span><span class="ss">:over?</span> <span class="nv">true</span>
+          <span class="ss">:victory</span> <span class="p">{</span><span class="ss">:player</span> <span class="ss">:x</span>
+                    <span class="ss">:path</span> <span class="p">[[</span><span class="mi">0</span> <span class="mi">0</span><span class="p">]</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">2</span><span class="p">]]}})))</span>
+</code></pre>
+<p>Here we expect the game to be declared <code>:over?</code> and have the winning player and
+path when the third mark in a row is placed. This will take some work to figure
+out.</p>
+<h3>Finding the winning row</h3>
+<p>To find the winning row, we will check that the row we just tic-ed contains the
+same player in all cells. We’ll create a helper function to do this:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">get-winning-path</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">size</span> <span class="nv">tics</span><span class="p">]}</span> <span class="nv">y</span> <span class="nv">x</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">row</span> <span class="p">(</span><span class="nf">mapv</span> <span class="o">#</span><span class="p">(</span><span class="nb">vector </span><span class="nv">y</span> <span class="nv">%</span><span class="p">)</span> <span class="p">(</span><span class="nb">range </span><span class="mi">0</span> <span class="nv">size</span><span class="p">))]</span>
+    <span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nb">= </span><span class="mi">1</span> <span class="p">(</span><span class="nb">count </span><span class="p">(</span><span class="nb">set </span><span class="p">(</span><span class="nb">map </span><span class="nv">tics</span> <span class="nv">row</span><span class="p">))))</span>
+      <span class="nv">row</span><span class="p">)))</span>
+</code></pre>
+<p>This starts by making a vector of all the positions of the row through <code>y</code>. Then
+it looks up all positions in the <code>tics</code> map. If all of them are the same, we
+have a winner. Note that this would also consider three empty cells a “winner”,
+we will always call it with a newly marked cell, so there’s really no need to
+“solve” that problem.</p>
+<p>We can use this new function from another helper function that possibly marks a
+game as won, which will call from <code>tic</code>:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">maybe-conclude</span> <span class="p">[</span><span class="nv">game</span> <span class="nv">y</span> <span class="nv">x</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">if-let </span><span class="p">[</span><span class="nb">path </span><span class="p">(</span><span class="nf">get-winning-path</span> <span class="nv">game</span> <span class="nv">y</span> <span class="nv">x</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nb">dissoc </span><span class="nv">game</span> <span class="ss">:next-player</span><span class="p">)</span>
+        <span class="p">(</span><span class="nb">assoc </span><span class="ss">:over?</span> <span class="nv">true</span>
+               <span class="ss">:victory</span> <span class="p">{</span><span class="ss">:player</span> <span class="p">(</span><span class="nf">get-in</span> <span class="nv">game</span> <span class="p">[</span><span class="ss">:tics</span> <span class="p">[</span><span class="nv">y</span> <span class="nv">x</span><span class="p">]])</span>
+                         <span class="ss">:path</span> <span class="nv">path</span><span class="p">}))</span>
+    <span class="nv">game</span><span class="p">))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">tic</span> <span class="p">[</span><span class="nv">game</span> <span class="nv">y</span> <span class="nv">x</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">player</span> <span class="p">(</span><span class="ss">:next-player</span> <span class="nv">game</span><span class="p">)]</span>
+    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nf">get-in</span> <span class="nv">game</span> <span class="p">[</span><span class="ss">:tics</span> <span class="p">[</span><span class="nv">y</span> <span class="nv">x</span><span class="p">]])</span>
+            <span class="p">(</span><span class="nb">&lt;= </span><span class="p">(</span><span class="ss">:size</span> <span class="nv">game</span><span class="p">)</span> <span class="nv">x</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb">&lt;= </span><span class="p">(</span><span class="ss">:size</span> <span class="nv">game</span><span class="p">)</span> <span class="nv">y</span><span class="p">))</span>
+      <span class="nv">game</span>
+      <span class="p">(</span><span class="nb">-&gt; </span><span class="nv">game</span>
+          <span class="p">(</span><span class="nf">assoc-in</span> <span class="p">[</span><span class="ss">:tics</span> <span class="p">[</span><span class="nv">y</span> <span class="nv">x</span><span class="p">]]</span> <span class="nv">player</span><span class="p">)</span>
+          <span class="p">(</span><span class="nb">assoc </span><span class="ss">:next-player</span> <span class="p">(</span><span class="nf">next-player</span> <span class="nv">player</span><span class="p">))</span>
+          <span class="p">(</span><span class="nf">maybe-conclude</span> <span class="nv">y</span> <span class="nv">x</span><span class="p">)))))</span>
+</code></pre>
+<p>To try this out in practice, we will add a test for the domain data to UI data
+conversion that expects a victorious path to be highlighted:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="nf">testing</span> <span class="s">"Highlights winning path"</span>
+  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">game/create-game</span> <span class="p">{</span><span class="ss">:size</span> <span class="mi">3</span><span class="p">})</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">;; x</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">;; o</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">;; x</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">;; o</span>
+             <span class="p">(</span><span class="nf">game/tic</span> <span class="mi">0</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">;; x</span>
+             <span class="nv">ui/game-&gt;ui-data</span>
+             <span class="ss">:rows</span><span class="p">)</span>
+         <span class="p">[[{</span><span class="ss">:content</span> <span class="nv">ui/mark-x</span>, <span class="ss">:highlight?</span> <span class="nv">true</span><span class="p">}</span>
+           <span class="p">{</span><span class="ss">:content</span> <span class="nv">ui/mark-x</span>, <span class="ss">:highlight?</span> <span class="nv">true</span><span class="p">}</span>
+           <span class="p">{</span><span class="ss">:content</span> <span class="nv">ui/mark-x</span>, <span class="ss">:highlight?</span> <span class="nv">true</span><span class="p">}]</span>
+
+          <span class="p">[{</span><span class="ss">:content</span> <span class="nv">ui/mark-o</span>, <span class="ss">:dim?</span> <span class="nv">true</span><span class="p">}</span>
+           <span class="p">{</span><span class="ss">:content</span> <span class="nv">ui/mark-o</span>, <span class="ss">:dim?</span> <span class="nv">true</span><span class="p">}</span>
+           <span class="p">{</span><span class="ss">:dim?</span> <span class="nv">true</span><span class="p">}]</span>
+
+          <span class="p">[{</span><span class="ss">:dim?</span> <span class="nv">true</span><span class="p">}</span>
+           <span class="p">{</span><span class="ss">:dim?</span> <span class="nv">true</span><span class="p">}</span>
+           <span class="p">{</span><span class="ss">:dim?</span> <span class="nv">true</span><span class="p">}]])))</span>
+</code></pre>
+<p>We’ll need to add some ifs and buts to satisfy this test:</p>
+<pre class="codehilite"><code class="language-clj"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">game-&gt;ui-data</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">size</span> <span class="nv">tics</span> <span class="nv">victory</span><span class="p">]}]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">highlight?</span> <span class="p">(</span><span class="nb">set </span><span class="p">(</span><span class="ss">:path</span> <span class="nv">victory</span><span class="p">))]</span>
+    <span class="p">{</span><span class="ss">:rows</span>
+     <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">y</span> <span class="p">(</span><span class="nb">range </span><span class="nv">size</span><span class="p">)]</span>
+       <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">x</span> <span class="p">(</span><span class="nb">range </span><span class="nv">size</span><span class="p">)]</span>
+         <span class="p">(</span><span class="nb">if-let </span><span class="p">[</span><span class="nv">player</span> <span class="p">(</span><span class="nb">get </span><span class="nv">tics</span> <span class="p">[</span><span class="nv">y</span> <span class="nv">x</span><span class="p">])]</span>
+           <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">victorious?</span> <span class="p">(</span><span class="nf">highlight?</span> <span class="p">[</span><span class="nv">y</span> <span class="nv">x</span><span class="p">])]</span>
+             <span class="p">(</span><span class="nf">cond-&gt;</span> <span class="p">{</span><span class="ss">:content</span> <span class="p">(</span><span class="nf">player-&gt;mark</span> <span class="nv">player</span><span class="p">)}</span>
+               <span class="nv">victorious?</span> <span class="p">(</span><span class="nb">assoc </span><span class="ss">:highlight?</span> <span class="nv">true</span><span class="p">)</span>
+               <span class="p">(</span><span class="nb">and </span><span class="nv">victory</span> <span class="p">(</span><span class="nb">not </span><span class="nv">victorious?</span><span class="p">))</span> <span class="p">(</span><span class="nb">assoc </span><span class="ss">:dim?</span> <span class="nv">true</span><span class="p">)))</span>
+           <span class="p">(</span><span class="k">if </span><span class="nv">victory</span>
+             <span class="p">{</span><span class="ss">:dim?</span> <span class="nv">true</span><span class="p">}</span>
+             <span class="p">{</span><span class="ss">:clickable?</span> <span class="nv">true</span>
+              <span class="ss">:on-click</span> <span class="p">[</span><span class="ss">:tic</span> <span class="nv">y</span> <span class="nv">x</span><span class="p">]}))))}))</span>
+</code></pre>
+<p>With the test passing, winning the game on a row will end up in a nicely
+highlighted victory.</p>
+<p><img src="/images/tic-tac-toe/a1295938efee/victory.png" alt="Highlighted victorious row"></p>
+<p>The UI is now pretty much done, but we still won’t get column and diagonal
+victories highlighted. To solve those, we need two more tests and fleshing out
+the rest of the game engine. You can find the remaining details in the <a href="https://github.com/cjohansen/replicant-tic-tac-toe">tutorial
+github repo</a>.</p>
+<p>If you’d like a challenge, check out the
+<a href="https://github.com/cjohansen/replicant-tic-tac-toe/releases/tag/almost-there">almost-there</a>
+tag and try to solve the following tasks:</p>
+<ol>
+<li>Highlight winning columns (requires a test for and changes in <code>game.cljc</code>)</li>
+<li>Highlight winning diagonals (requires a test for and changes in <code>game.cljc</code>)</li>
+<li>Dim the entire game on ties (requires changes in both <code>game.cljc</code> and
+<code>ui.cljc</code>, specifically the <code>game-&gt;ui-data</code> function)</li>
+<li>Extra challenge: Add a button to the page to reset the game after it’s over</li>
+</ol>
+<p>All these are solved on the main branch in the tutorial repo. Good luck, and
+have fun!</p>
+</div></main><script type="text/javascript" src="/bundles/d399b4851ce7/app.js"></script></body></html>
