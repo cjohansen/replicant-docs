@@ -1,4 +1,4 @@
-{:deps {}
+{:deps {:aliases [:dev]}
  :dev-http {7777 ["resources/public"
                   "dev-resources/public"
                   "classpath:public"]}
