@@ -50,6 +50,8 @@
                                      #"\.gif$"
                                      #"\.ico$"]}]
 
+           :optimus/options {:minify-css-assets? false}
+
            :powerpack/build-dir "target/site"}
 
     (= :build env)
