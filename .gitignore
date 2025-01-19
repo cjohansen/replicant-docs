@@ -9,3 +9,6 @@ resources/fontawesome-icons
 resources/public/tailwind.css
 /.shadow-cljs/
 /target/
+/tf/.terraform.lock.hcl
+/tf/.terraform/
+/tf/distribution/.zip/
