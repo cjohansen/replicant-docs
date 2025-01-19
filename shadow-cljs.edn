@@ -7,7 +7,7 @@
   {:target :browser
    :modules {:app {:entries [repliweb.prod]}}
    :dev {:output-dir "dev-resources/public/js/compiled"}
-   :release {:output-dir "target/js/compiled"}
+   :release {:output-dir "target/public/js/compiled"}
    :compiler-options {:source-map true}}
 
   :portfolio
