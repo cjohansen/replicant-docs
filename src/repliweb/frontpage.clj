@@ -271,7 +271,7 @@
      MediaList
      ;; ...and render it
      (r/render el))"])
-        (showcase/render-code {:class ["bg-base-200"]}
+        (showcase/render-code {:class ["bg-base-300"]}
           ["(deftest prepare-ui-data-test
   (testing \"Uses episode number for title\"
     (is (= (->> {:videos [{:episode/number 1}]}
