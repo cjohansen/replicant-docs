@@ -15,8 +15,9 @@ links](https://github.com/cjohansen/replicant-docs/blob/main/content/in-the-wild
 
 ### Languages visualization
 
-A programming language performance visualizer written with Replicant, made by
-Peter Strömberg, aka [@pez](https://github.com/pez): [languages
+A programming language performance visualizer written with
+[Quil](http://quil.info/) and Replicant, made by Peter Strömberg, aka
+[@pez](https://github.com/pez): [languages
 visualization](https://github.com/PEZ/languages-visualizations).
 
 ### Virtuoso
