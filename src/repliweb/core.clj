@@ -2,6 +2,7 @@
   (:require [clojure.string :as str]
             [powerpack.highlight :as highlight]
             [repliweb.article :as article]
+            [repliweb.assets :as assets]
             [repliweb.frontpage :as frontpage]))
 
 (defn create-txes [file-name content]
@@ -26,32 +27,12 @@
 
 (defn create-app [env]
   (cond-> {:site/title "Replicant"
-           :powerpack/render-page #'render-page
            :powerpack/port 4444
+           :powerpack/render-page #'render-page
+           :powerpack/create-ingest-tx #'create-txes
            :powerpack/log-level :debug
            :powerpack/content-file-suffixes ["md" "edn"]
            :powerpack/dev-assets-root-path "public"
-           :powerpack/create-ingest-tx #'create-txes
-
-           :optimus/bundles {"/styles.css"
-                             {:public-dir "public"
-                              :paths ["/tailwind.css"
-                                      "/code.css"]}
-
-                             "/app.js"
-                             {:public-dir "public"
-                              :paths ["/js/compiled/app.js"]}
-                             }
-
-           :optimus/assets [{:public-dir "public"
-                             :paths [#"\.png$"
-                                     #"\.jpg$"
-                                     #"\.svg$"
-                                     #"\.gif$"
-                                     #"\.ico$"]}]
-
-           :optimus/options {:minify-css-assets? false}
-
            :powerpack/build-dir "target/site"}
 
     (= :build env)
@@ -59,6 +40,9 @@
 
     (= :dev env) ;; serve figwheel compiled js
     (assoc :powerpack/dev-assets-root-path "public")
+
+    :then
+    (merge assets/config)
 
     :then
     highlight/install))

@@ -1,6 +1,7 @@
 (ns repliweb.demos.data-driven-transitions
   (:require [repliweb.elements.media :refer [Media]]
-            [replicant.dom :as r]))
+            [replicant.dom :as r]
+            [repliweb.assets :as assets]))
 
 (defn render [{:keys [loaded?]}]
   [:div {:data-example-ns "repliweb.demos.data-driven-transitions"}
@@ -10,7 +11,7 @@
             :replicant/mounting {:style {:opacity 0}}
             :replicant/unmounting {:style {:opacity 0}}}
       (Media
-       {:thumbnail {:image "/images/christian.jpg"
+       {:thumbnail {:image (assets/get-asset-path "/images/christian.jpg")
                     :size 20}
         :title "Christian Johansen"
         :text (list "Just wrote some documentation for Replicant"

@@ -1,17 +1,18 @@
 (ns repliweb.elements.examples
-  (:require [phosphor.icons :as icons]))
+  (:require [phosphor.icons :as icons]
+            [repliweb.assets :as assets]))
 
 (def videos
   [{:video/url "https://www.youtube.com/watch?v=6qnNtVdf08Q"
-    :video/thumbnail "/images/parens1.png"
+    :video/thumbnail (assets/get-asset-path "/images/parens1.png")
     :episode/number 1
     :episode/title "It Lives Again"}
    {:video/url "https://www.youtube.com/watch?v=CyveUnHzc7g"
-    :video/thumbnail "/images/parens2.png"
+    :video/thumbnail (assets/get-asset-path "/images/parens2.png")
     :episode/number 2
     :episode/title "Shambling Along"}
    {:video/url "https://www.youtube.com/watch?v=_6tVIijfRzQ"
-    :video/thumbnail "/images/parens3.png"
+    :video/thumbnail (assets/get-asset-path "/images/parens3.png")
     :episode/number 3
     :episode/title "Stumbling out of the Graveyard"}])
 

@@ -14,7 +14,7 @@ tailwind: resources/fontawesome-icons node_modules
 	npx tailwindcss -i ./src/main.css -o ./resources/public/tailwind.css --watch
 
 target/public/js/compiled/app.js: resources/fontawesome-icons node_modules
-	npx shadow-cljs release client
+	optimize_assets=true npx shadow-cljs release client
 
 target/site: target/public/js/compiled/app.js resources/public/tailwind.css
 	clojure -X:build
