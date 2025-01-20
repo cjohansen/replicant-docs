@@ -318,9 +318,10 @@
        programming model") "."))
 
    (layout/section {:class (layout/section-styles :dark)}
-     [:div.max-w-3xl.mx-auto.flex.gap-2
-      [:div.w-6 (logos/replicant)]
-      "Replicant logo by"
-      [:span (typo/a {:href "https://github.com/jaidetree"} "jaide") "/"
-       (typo/a {:href "https://eccentric-j.com/"} "eccentric-j") ". "]
+     [:div.max-w-3xl.mx-auto.md:flex.gap-2
+      [:div.flex.gap-2
+       [:div.w-6 (logos/replicant)]
+       "Replicant logo by"
+       [:span (typo/a {:href "https://github.com/jaidetree"} "jaide") "/"
+        (typo/a {:href "https://eccentric-j.com/"} "eccentric-j") ". "]]
       [:span (typo/a {:href "https://github.com/cjohansen/replicant-docs"} "This website source on Github") "."]])))
