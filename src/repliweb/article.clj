@@ -51,9 +51,9 @@
    {:title (:page/title page)}
    (layout/header {:logo-url "/"})
    (if (= (:page/uri page) "/learn/")
-     [:div.flex.pt-8
-      (menu db page)
-      [:main.mx-8.grow.mb-16
+     [:div.flex.pt-8.flex-col-reverse.md:flex-row.mb-16
+      [:div.mx-4.md:m-0 (menu db page)]
+      [:main.mx-8.grow
        body]]
      (list
       [:div.p-4.bg-base-200.items-center.flex.flex-row.gap-4.sticky.top-0.z-10
