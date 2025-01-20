@@ -250,4 +250,27 @@
             transform: translateX(-100%);
         }
     }
+
+    .blockquote {
+        @apply text-whitish max-w-screen-sm mx-auto relative p-4;
+    }
+
+    .blockquote:before {
+        content: '”';
+        color: rgba(255, 255, 255, 0.1);
+        position: absolute;
+        top: -10px;
+        left: -45px;
+        font-size: 200px;
+        line-height: 1;
+        font-family: Georgia, "Palatino Linotype", "Book Antiqua", Palatino, Garamond, serif;
+    }
+
+    .blockquote cite {
+        @apply prose;
+    }
+
+    .blockquote p + p {
+        @apply mt-4;
+    }
 }

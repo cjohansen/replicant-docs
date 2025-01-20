@@ -303,6 +303,21 @@
 
    (layout/section {}
      [:div.max-w-3xl.mx-auto
+      (typo/h2 {:class ["text-center"]} "What are developers saying?")
+      [:blockquote.blockquote.mt-8
+       [:p
+        "Functional programming in the UI? It always felt like a pipe dream, and
+React was the closest we would ever get. Then I stumbled across Replicant and
+the game changed completely. I hadn’t realized how much I had longed for
+building fully data oriented UIs!"]
+       [:p.text-right
+        [:cite
+         [:a {:href "https://github.com/pez"} "Peter Strömberg"]
+         ", frontend developer, creator of "
+         [:a {:href "https://calva.io/"} "Calva"]]]]])
+
+   (layout/section {:class (layout/section-styles :dark)}
+     [:div.max-w-3xl.mx-auto
       (typo/h2 {:class ["text-center"]} "Unidirectional data flow")
       (typo/p {:class ["text-center"]}
         "With Replicant you always render the entire UI, starting at the root node.
@@ -317,7 +332,7 @@
                                                      {:href "/top-down/"} "Why top-down rendering is the best frontend
        programming model") "."))
 
-   (layout/section {:class (layout/section-styles :dark)}
+   (layout/section {}
      [:div.max-w-3xl.mx-auto.md:flex.gap-2
       [:div.flex.gap-2
        [:div.w-6 (logos/replicant)]

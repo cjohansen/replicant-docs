@@ -8,7 +8,7 @@
 (defn ^{:indent 1} h2
   ([text] (h2 nil text))
   ([attrs & body]
-   (into [:h2.h2.lg:text-2xl.mb-2.dark:text-whitish attrs] body)))
+   (into [:h2.h2.mb-2.dark:text-whitish attrs] body)))
 
 (defn ^{:indent 1} h3
   ([text] (h3 nil text))
