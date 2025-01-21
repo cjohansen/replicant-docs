@@ -42,6 +42,12 @@ Minesweeper](https://github.com/cjohansen/replicant-sweeper) using Replicant.
 A demonstration of setting up an app with Replicant:
 [replicant-mini-app](https://github.com/anteoas/replicant-mini-app).
 
+### Clojulator
+
+The [clojulator](https://github.com/andrewleverette/clojulator) is a small
+Clojure calculator that uses Replicant. By [Andrew
+Leverette](https://github.com/andrewleverette).
+
 ## Articles
 
 - [Testing out Replicant](https://emil0r.com/posts/2024-11-29-replicant/) by
