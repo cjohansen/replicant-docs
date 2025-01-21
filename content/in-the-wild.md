@@ -42,6 +42,11 @@ Minesweeper](https://github.com/cjohansen/replicant-sweeper) using Replicant.
 A demonstration of setting up an app with Replicant:
 [replicant-mini-app](https://github.com/anteoas/replicant-mini-app).
 
+### skipti
+
+[skipti](https://github.com/reinseth/skipti) is an app to track subsitutions in
+team sports, by [Gunnar Reinseth](https://github.com/reinseth).
+
 ### Clojulator
 
 The [clojulator](https://github.com/andrewleverette/clojulator) is a small
