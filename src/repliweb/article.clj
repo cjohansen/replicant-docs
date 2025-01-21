@@ -23,11 +23,11 @@
        (if (= (:page/uri current-page) (:page/uri page))
          [:span.menu-item.menu-item-selected
           (:page/title page)
-          (icons/render :phosphor.bold/caret-right {:size 16})]
+          (icons/render :phosphor.bold/caret-right {:size "16px"})]
          [:a.menu-item
           {:href (:page/uri page)}
           (:page/title page)
-          (icons/render :phosphor.bold/caret-right {:size 16})])])]])
+          (icons/render :phosphor.bold/caret-right {:size "16px"})])])]])
 
 (defn h3 [text]
   [:h3.text-whitish.mb-2 {:class "ml-4"} text])
