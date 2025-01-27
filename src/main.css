@@ -1,4 +1,3 @@
-@import url(lato.css);
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,6 +8,87 @@
             font-size: 20px;
         }
     }
+
+    @font-face {
+        font-family: 'Lato';
+        font-style: italic;
+        font-weight: 100;
+        font-display: swap;
+        src: url(/fonts/lato-italic-100.ttf) format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Lato';
+        font-style: italic;
+        font-weight: 300;
+        font-display: swap;
+        src: url(/fonts/lato-italic-400.ttf) format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Lato';
+        font-style: italic;
+        font-weight: 400;
+        font-display: swap;
+        src: url(/fonts/lato-italic-400.ttf) format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Lato';
+        font-style: italic;
+        font-weight: 700;
+        font-display: swap;
+        src: url(/fonts/lato-italic-700.ttf) format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Lato';
+        font-style: italic;
+        font-weight: 900;
+        font-display: swap;
+        src: url(/fonts/lato-italic-900.ttf) format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 100;
+        font-display: swap;
+        src: url(/fonts/lato-normal-100.ttf) format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 300;
+        font-display: swap;
+        src: url(/fonts/lato-normal-300.ttf) format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(/fonts/lato-normal-400.ttf) format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url(/fonts/lato-normal-700.ttf) format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 900;
+        font-display: swap;
+        src: url(/fonts/lato-normal-900.ttf) format('truetype');
+    }
+
 }
 
 @layer components {
