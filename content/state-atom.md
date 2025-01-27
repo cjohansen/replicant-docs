@@ -267,7 +267,7 @@ Then we'll copy over the helper functions:
           (.getAttribute "href")))
 
 (defn get-current-location []
-  (->> js/location.pathname
+  (->> js/location.href
        (router/url->location router/routes)))
 ```
 
