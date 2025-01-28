@@ -38,11 +38,24 @@ jobs:
       with:
         cli: '1.11.1.1208'
 
+    - id: install-aws-cli
+      uses: unfor19/install-aws-cli-action@v1.0.7
+      with:
+        version: 2
+        verbose: false
+        arch: amd64
+        rootdir: ""
+        workdir: ""
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+        aws-region: eu-west-1
+
     - name: Build
       run: make target/site
 
     - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./target/site
+      run: ./deploy.sh
