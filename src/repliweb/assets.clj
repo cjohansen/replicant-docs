@@ -30,7 +30,9 @@
 
    :optimus/options {}})
 
-(def assets (optimize-assets (assets/get-assets config)))
+;; The ClojureScript build only needs access to image assets, and explicitly
+;; cannot refer to its own bundle.
+(def assets (optimize-assets (assets/get-assets (dissoc config :optimus/bundles))))
 
 (defmacro get-asset-paths []
   (->> assets
