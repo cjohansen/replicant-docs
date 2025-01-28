@@ -13,7 +13,7 @@ resources/public/tailwind.css: resources/fontawesome-icons node_modules
 tailwind: resources/fontawesome-icons node_modules
 	npx tailwindcss -i ./src/main.css -o ./resources/public/tailwind.css --watch
 
-target/public/js/compiled/app.js: resources/fontawesome-icons node_modules
+target/public/js/compiled/app.js: resources/fontawesome-icons node_modules resources/public/tailwind.css
 	optimize_assets=true npx shadow-cljs release client
 
 target/site: target/public/js/compiled/app.js resources/public/tailwind.css
