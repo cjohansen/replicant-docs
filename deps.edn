@@ -4,7 +4,7 @@
         clygments/clygments {:mvn/version "2.0.2"}
         no.cjohansen/phosphor-clj {:mvn/version "2024.07.31"}
         no.cjohansen/powerpack {:mvn/version "2025.01.21"}
-        no.cjohansen/replicant {:mvn/version "2025.01.28"}
+        no.cjohansen/replicant {:mvn/version "2025.01.29"}
         thheller/shadow-cljs {:mvn/version "2.28.18"}}
  :aliases
  {:dev {:extra-paths ["dev" "test" "dev-resources" "portfolio"]
