@@ -187,7 +187,7 @@ the hiccup-creating functions in `cljc` files gives you the option of rendering
 on both the client and the server:
 
 ```clj
-(ns tic-tac-toe.elements.cell)
+(ns tic-tac-toe.ui)
 
 (defn render-cell [data]
   [:button.cell ""])
