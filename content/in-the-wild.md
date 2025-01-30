@@ -26,6 +26,13 @@ visualization](https://github.com/PEZ/languages-visualizations).
 musicians practice more efficiently. It's written with Replicant and its [source
 is available on Github](https://github.com/cjohansen/virtuoso).
 
+### Datablog
+
+[Datablog](https://www.harism.dev/entries/isomorphic-blogging-a-rationale) is a
+blogging platform built with Datascript and Replicant by [Haris
+Muhammad](https://github.com/harismh). [Source on
+Github](https://github.com/harismh/datablog).
+
 ### TodoMVC
 
 The obligatory [TodoMVC
