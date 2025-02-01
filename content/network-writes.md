@@ -7,7 +7,7 @@
 --------------------------------------------------------------------------------
 :block/markdown
 
-In this second part of the [networking tutorial](/tutorials/network/), we will
+In this third part of the [networking tutorial](/tutorials/network/), we will
 build a data-driven system for writing data over the network.
 
 We pick up where [data-driven network reads](/tutorials/network-reads/) left
