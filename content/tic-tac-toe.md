@@ -46,7 +46,7 @@ Create a new directory and add the following files:
  :deps {org.clojure/clojure {:mvn/version "1.12.0"}
         thheller/shadow-cljs {:mvn/version "2.28.18"}
         no.cjohansen/portfolio {:mvn/version "2025.01.28"}
-        no.cjohansen/replicant {:mvn/version "2025.01.29"}}}
+        no.cjohansen/replicant {:mvn/version "2025.02.02"}}}
 
 --------------------------------------------------------------------------------
 :block/id shadow-cljs-edn
