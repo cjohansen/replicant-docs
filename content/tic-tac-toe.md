@@ -565,7 +565,7 @@ For our next test, let's place a tic for player x:
   (is (= (-> (game/create-game {:size 3})
              (game/tic 0 0))
          {:size 3
-          :tics {0 {0 :x}}
+          :tics {[0 0] :x}
           :next-player :o})))
 ```
 
@@ -659,7 +659,7 @@ The Portfolio scenes describe the data needed to render the game:
            [{} {} {}]]}))
 ```
 
-The game engine tests demonstrates what data we actually have have:
+The game engine tests demonstrates what data we actually have:
 
 ```clj
 (testing "O places a tic"
@@ -773,7 +773,7 @@ atom is updated, we render the UI.
                       (r/render el))))
 
     ;; Trigger the first render by initializing the game.
-    (reset! store (game/create-game 3))))
+    (reset! store (game/create-game {:size 3}))))
 ```
 
 The atom watcher sums up our approach: convert domain data (`game`) to UI data,
