@@ -1,3 +1,4 @@
+--------------------------------------------------------------------------------
 :page/uri /learn/
 :page/title Learn Replicant
 :page/kind :page.kind/article
@@ -5,7 +6,33 @@
 
 Learn to develop UIs in Clojure/ClojureScript with Replicant
 
-:page/body
+--------------------------------------------------------------------------------
+:block/markdown
+
+So you decided to learn Replicant, thanks! Replicant is pretty straight forward:
+compile some hiccup, and pass it to Replicant. When you need to update the UI,
+do it all over again, and Replicant will do just what's needed up update the
+DOM.
+
+--------------------------------------------------------------------------------
+:block/lang :clj
+:block/alignment :mx-0
+:block/code
+
+(require '[replicant.dom :as r])
+
+(r/render js/document.body
+  [:div.media
+   [:aside.media-thumb
+    [:img.rounded-lg {:src "/images/christian.jpg"}]]
+   [:main.grow
+    [:h2.font-bold "Christian Johansen"]
+    [:p "Just wrote some documentation for Replicant."]
+    [:p.opacity-50
+     "Posted February 26th 2025"]]])
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 If you're new to Replicant, the [Tic-Tac-Toe tutorial](/tutorials/tic-tac-toe/)
 takes you from an empty directory to a working implementation of the game. It

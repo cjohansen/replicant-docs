@@ -129,9 +129,11 @@
                     :example (:block/b-example block)
                     :class ["bg-base-100"]})]))
    (when (:block/code block)
-     [:div.mx-auto.my-6
-      (cond-> {:class (or (sizes (:block/size block))
-                          "section-md")}
+     [:div.my-6
+      (cond-> {:class (cond-> [(or (sizes (:block/size block))
+                                   "section-md")]
+                        (:block/alignment block) (conj (:block/alignment block))
+                        (nil? (:block/alignment block)) (conj "mx-auto"))}
         (and (nil? (:block/markdown block))
              (:block/id block)) (assoc :id (:block/id block)))
       (showcase/render-code {::showcase/lang (:block/lang block)

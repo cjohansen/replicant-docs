@@ -77,4 +77,8 @@
 
  {:db/ident :block/level
   :db/valueType :db.type/long
+  :db/cardinality :db.cardinality/one}
+
+ {:db/ident :block/alignment
+  :db/valueType :db.type/keyword
   :db/cardinality :db.cardinality/one}]
