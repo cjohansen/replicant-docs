@@ -192,6 +192,23 @@ In fact, you can nest elements as deeply and irregularly as you want:
 Replicant doesn't support document fragments directly, but lists of elements
 have the same effect in most cases.
 
+`replicant.dom/render` and `replicant.string/render` both accept lists of hiccup
+nodes, so you don't have to wrap everything in a div if you don't want to.
+
+--------------------------------------------------------------------------------
+:block/lang :clojure
+:block/code
+
+(require '[replicant.dom :as r])
+
+(r/render
+  js/document.body
+  (list [:h1 "Hello world!"]
+        [:p "What a lovely world it is"]))
+
+--------------------------------------------------------------------------------
+:block/markdown
+
 ### `nil` children
 
 `nil`s are perfectly fine as children. This means it's safe to produce hiccup
