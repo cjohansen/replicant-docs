@@ -32,6 +32,30 @@ Replicant does no special handling of the event handler function: it will behave
 exactly as if you added it with `.addEventListener`. That means that `e` is a
 plain old JavaScript `Event` object.
 
+--------------------------------------------------------------------------------
+:block/id options
+:block/level 3
+:block/title Event handler options
+:block/markdown
+
+If you need to specify [options to pass to
+`addEventListener`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#options)
+you can wrap your event handler function or data in a map:
+
+:block/lang :clojure
+:block/code
+
+[:button
+ {:on {:replicant.event/handler {:click [:alert "Hello!"]}
+       :replicant.event/passive true}}
+ "Click it"]
+
+--------------------------------------------------------------------------------
+:block/markdown
+
+Prefix any options with `:replicant.event/`, e.g. `:replicant.event/capture` to
+set the `capture` option.
+
 ## Functions are not data
 
 One problem with event handlers is that functions are not data. This is
@@ -95,6 +119,9 @@ Handler data: [:like-video {:video/id v7c8b} {:user/id u23f4}]
 
 As you can see, the event handler data is passed through as is. Replicant infers
 no meaning from this data, it is up to you to define the desired behavior.
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 ### The trigger
 

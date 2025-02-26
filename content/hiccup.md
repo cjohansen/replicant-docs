@@ -588,6 +588,9 @@ Event handlers can also be expressed as data:
 Data event handlers requires some additional setup, see the [detailed guide on
 event handlers](/event-handlers/).
 
+To control options such as `capture` and `passive` when setting the event
+handler see [event handler options](/event-handlers/#options).
+
 ### Life-cycle hooks
 
 Sometimes you need access to the DOM nodes. Maybe you want to know how something
