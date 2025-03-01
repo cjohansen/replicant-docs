@@ -168,6 +168,44 @@ And that's it, a bare-bones action dispatching system for your app. You can make
 this as sophisticated as you want. Or you could use `set-dispatch!` to hook into
 a library that provides similar functionality. Your imagination is the limit.
 
+--------------------------------------------------------------------------------
+:block/id prevent-default
+:block/level 3
+:block/title Declaratively imperative(!?)
+:block/markdown
+
+Sometimes you need to imperatively control the event object -- e.g. by calling
+`.preventDefault` on it -- but don't want to replace your data "handlers" with
+functions. Since the global event handler receives the event object, you can do
+it from there, and use your event handler data to communicate when you want to
+do so.
+
+We can add an action to our dispatch system that handles preventing the default
+event action.
+
+:block/lang clj
+:block/code
+
+(require '[replicant.dom :as r])
+
+(defn execute-actions [{:keys [replicant/dom-event]} actions]
+  (doseq [[action & args] actions]
+    (case action
+      :action/prevent-default
+      (.preventDefault dom-event)
+
+      :action/alert
+      (js/alert (apply str args))
+
+      :action/issue-command
+      (apply backend/issue-command args))))
+
+(r/render js/document.body
+ [:a {:href "/"
+      :on {:click [[:action/prevent-default]
+                   [:action/alert "Clickety click"]]}}
+  "Click!"])
+
 ### Event data
 
 One thing missing from the action dispatch system is access to values from the
