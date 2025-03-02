@@ -233,6 +233,9 @@ event action.
                    [:action/alert "Clickety click"]]}}
   "Click!"])
 
+--------------------------------------------------------------------------------
+:block/markdown
+
 ### Event data
 
 One thing missing from the action dispatch system is access to values from the
