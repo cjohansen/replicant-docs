@@ -108,6 +108,10 @@
         @apply absolute inset-0 flex items-center justify-center;
     }
 
+    .img {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
     .input-field {
         @apply input input-bordered flex items-center gap-2;
     }
