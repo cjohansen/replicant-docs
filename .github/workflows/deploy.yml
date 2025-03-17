@@ -17,15 +17,15 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Cache clojure/java dependencies
-      uses: "actions/cache@v2"
-      with:
-        path: |
-          ~/.m2/repository
-          ~/.gitlibs
-          ~/.deps.clj
-        key: "${{ runner.os }}-clojure-${{ hashFiles('deps.edn') }}"
-        restore-keys: "${{ runner.os }}-clojure-"
+    # - name: Cache clojure/java dependencies
+    #   uses: "actions/cache@v2"
+    #   with:
+    #     path: |
+    #       ~/.m2/repository
+    #       ~/.gitlibs
+    #       ~/.deps.clj
+    #     key: "${{ runner.os }}-clojure-${{ hashFiles('deps.edn') }}"
+    #     restore-keys: "${{ runner.os }}-clojure-"
 
     - name: Setup Node
       uses: actions/setup-node@v2
