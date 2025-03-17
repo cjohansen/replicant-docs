@@ -19,7 +19,7 @@ control. In [the next installment](/tutorials/first-class-forms/) we will
 investigate a more high-level approach to processing entire forms -- an approach
 that requires a bit more setup, but can streamline form work a lot. Finally we
 will develop that idea into fully [declarative, data-driven
-forms](/tutorial/declarative-forms/).
+forms](/tutorials/declarative-forms/).
 
 --------------------------------------------------------------------------------
 :block/title Setup
