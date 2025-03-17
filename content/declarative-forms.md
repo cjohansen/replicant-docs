@@ -9,7 +9,7 @@
 
 In this third tutorial on data-driven form processing, we'll pick up where [the
 second form tutorial](/tutorials/first-class-forms/) left off, and streamline
-the validation and submit logic in first class declarative forms.
+the validation and submit logic in fully declarative forms.
 
 --------------------------------------------------------------------------------
 :block/title Setup
@@ -37,16 +37,16 @@ much control to convention and assumptions.
 After the previous tutorial, this is roughly the life-cycle of a form in our
 code-base:
 
-1. Forms use the `[:form/process form-id & args]` action for its submit action
-2. The processing function validates the form and either puts validation errors
-   in the state, or produces some submit actions.
+1. Forms use the `[:form/submit form-id & args]` action for its submit action
+2. The submit action validates the form and either puts validation errors in the
+   state, or produces some submit actions.
 3. When there are validation errors, validation will be re-evaluated on input.
 
-`:form/process` really just dispatches to a function with the form id, so our
+`:form/submit` really just dispatches to a function with the form id, so our
 form-specific handler looked like the following:
 
 ```clj
-(defn process-edit-task [form-id data task-id]
+(defn process-edit-task [data task-id]
   (if-let [errors (seq (validate-edit-task data))]
     ;; validation actions
     ;; processing actions
@@ -203,7 +203,7 @@ to handle submits. We can drive this implementation with tests as well.
 Our current form processing action looks like this:
 
 ```clj
-[:form/process :forms/edit-task (:db/id task)]
+[:form/submit :forms/edit-task (:db/id task)]
 ```
 
 This means our new submit function should be able to take in whatever arguments
@@ -270,7 +270,7 @@ implementation. Specifically, the form state is not cleaned up.
 Whether cleaning up is the job of individual forms or the machinery is up for
 discussion. If the machinery does it, it will be impossible to keep the form in
 its final state when submitting it. If, on the other hand, individual forms must
-clean up, you will end up duplicating that a lot. Since it seem unlikely that
+clean up, you will end up duplicating that a lot. Since it seems unlikely that
 you'll want old validation errors lingering after a submit, we will put it in
 the machinery -- after all, we could always make this optional at a later time.
 
@@ -420,7 +420,7 @@ see what we can do about it.
          [:db/retract task-id k]))]]))
 ```
 
-This function does mainly two things:
+This function does two things:
 
 1. Convert nils to retractions
 2. Add `:db/id` and `:task/editing?` to the map
@@ -502,7 +502,8 @@ fields:
    ,,,])
 ```
 
-Now we can express the form entirely with data:
+Now we want to express the form entirely with data, including the submit
+actions. Something like this:
 
 ```clj
 (def edit-form
@@ -520,11 +521,70 @@ Now we can express the form entirely with data:
    [[:db/transact-w-nils [:event/form-data]]]})
 ```
 
-So long as the form is subjected to the same kind of interpolation that our
-actions go through, this is all the form-specific data we need.
+The first step on the way is to check for `:form/submit-actions` before
+expecting `:form/handler` to be a function:
 
-For the details of supporting `:form/submit-actions`, refer to the relevant
-[branch on Github](https://github.com/cjohansen/replicant-forms/tree/fully-declarative-forms).
+```clj
+(defn submit [form data & args]
+  (if-let [errors (seq (validate-form-data form data))]
+    ,,,
+    (let [actions (vec (or (:form/submit-actions form)
+                           (when-let [handler (:form/handler form)]
+                             (apply (handler form) data args))))
+          ,,,]
+      (if (<= 0 idx)
+        (update-in actions [idx 1] conj cleanup-tx)
+        (conj actions [:db/transact [cleanup-tx]])))))
+```
+
+In order for this to work, we need the action to be updated to include the
+actual form data, not the `:event/form-data` placeholder. The form should be
+subjected to the same interpolation that our actions go through:
+
+```clj
+(defn submit-form [conn ^js event form-id & args]
+  (let [actions (apply forms/submit
+                       (get forms form-id)
+                       (gather-form-data (.-target event))
+                       args)]
+    (->> (interpolate event actions)
+         (execute-actions conn event))))
+```
+
+This will work, but it's a little inefficient. We're already gathering the form
+data to pass to `:form/handler` when there is one. There's no reason why
+`interpolate` should do it again when it encounters `:event/form-data`. We can
+avoid this by passing a map of already resolved placeholder values to
+`interpolate`:
+
+```clj
+(defn interpolate [event actions & [interpolations]] ;; <=
+  (walk/postwalk
+   (fn [x]
+     (or (get interpolations x) ;; <=
+         (case x
+           :event/target.value (.. event -target -value)
+           :event/form-data (some-> event .-target gather-form-data)
+           :clock/now (js/Date.)
+           x)))
+   actions))
+
+,,,
+
+(defn submit-form [conn ^js event form-id & args]
+  (let [form-data (gather-form-data (.-target event))
+        actions (apply forms/submit
+                       (get forms form-id)
+                       form-data
+                       args)]
+    (->> (interpolate event actions {:event/form-data form-data}) ;; <=
+         (execute-actions conn event))))
+
+```
+
+And there you have it. Fully functional fully data-driven forms. Check out the
+full code base [full code base on
+Github](https://github.com/cjohansen/replicant-forms/tree/fully-declarative-forms).
 
 --------------------------------------------------------------------------------
 :block/title In conclusion
@@ -538,8 +598,8 @@ fields with their validation rules, and describe what actions should be
 performed when a valid form is submitted.
 
 Whether or not this abstraction level pays off depends on how many forms you
-will make. If you only have one form, it's a bit over-engineered, but already at
-a handful of small forms this approach will pay off handsomely.
+plan to make. If you only have one form, it's probably a bit over-done, but
+already at a handful of forms this approach will pay off handsomely.
 
 Note that we could have described all the fields of the form, even those without
 specific validation rules, and used the data for rendering as well. This can

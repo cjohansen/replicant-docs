@@ -82,10 +82,7 @@ view. We can do that with an `if` in the loop through all the tasks:
         (render-task task))])])
 ```
 
-Now we're all set up to do the interesting stuff.
-
-We'll start by adding a form that has a single input field for editing the task
-name:
+We'll start the form with a single input field for editing the task name:
 
 ```clj
 (defn render-edit-form [task]
@@ -103,9 +100,9 @@ name:
 ```
 
 In the first tutorial, we implemented fully controlled input fields and set the
-`:value` on every render. This time we're not doing that, though, so instead of
-setting `:value`, we're using `:default-value`. This will ensure that the field
-is mounted with the stored value, but Replicant won't update it after the user
+`:value` on every render. This time we're not doing that, so instead of setting
+`:value`, we're using `:default-value`. This will ensure that the field is
+mounted with the stored value, but Replicant won't update it after the user
 starts editing it.
 
 The interesting bits in the form quickly drown in
@@ -383,7 +380,7 @@ the `FormData` behavior: include the value when it's selected, exclude it
 otherwise. The other mode is where there is no value and we just want
 checked/unchecked to represent `true`/`false`.
 
-We can use `.getAttribute` to check for an explicit value. We don't want to
+We can use `.hasAttribute` to check for an explicit value. We don't want to
 exclude all empty values from the extracted form data -- an empty text input
 should still result in an entry in the map. We'll extract a function to extract
 the key, and include any non-nil keys in the resulting map:
@@ -496,7 +493,7 @@ Now that we can extract form data, we need to enable the `:event/form-data`
 placeholder as discussed above:
 
 ```clj
-(defn interpolate-actions [event actions]
+(defn interpolate [event actions]
   (walk/postwalk
    (fn [x]
      (case x
@@ -783,18 +780,18 @@ convert it to an explicit retraction. Here's the final version:
 
 ### Clearing validation errors
 
-We currently only run our validation logic when the user tries to submit the
-form. If we could remove validation errors the moment they no longer apply, we
-would give the user some positive feedback. We can achieve this by re-evaluating
-the evaluation logic on input, but only when there are validation errors
-(instant negative feedback isn't as helpful).
+We currently only run our validation logic when the user submits the form. If we
+could remove validation errors the moment they no longer apply, we would give
+the user some positive feedback. We can achieve this by re-evaluating the
+evaluation logic on input, but only when there are validation errors (instant
+negative feedback isn't as helpful).
 
 We will add another action that only validates. Like the form processing action
 it will take a form id. We'll still consider the whole form, as validating
 individual fields will require some adjustments to the Datascript schema and/or
 more work in the actions. Besides, working on individual fields makes it hard to
-clear validation errors that involve multiple fields (e.g. "one of these must be
-filled out", etc).
+clear validation errors that involve multiple fields (like "one of these must be
+filled out").
 
 We'll add another action:
 

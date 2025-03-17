@@ -10,14 +10,15 @@
 Handling user input via forms can be challenging. It usually requires some state
 management, you may want to add validation, and then processing the input and
 possibly cleaning up the form for use again. This three-part tutorial will
-demonstrate three approaches to data-driven form processing the Replicant way.
+demonstrate some techniques to data-driven form processing in increasing levels
+of abstraction.
 
 In this first tutorial we will use event handlers on individual fields to
 process a form. This approach is fine for small forms, and gives you a lot of
 control. In [the next installment](/tutorials/first-class-forms/) we will
 investigate a more high-level approach to processing entire forms -- an approach
 that requires a bit more setup, but can streamline form work a lot. Finally we
-will develop that idea into [declarative, data-driven
+will develop that idea into fully [declarative, data-driven
 forms](/tutorial/declarative-forms/).
 
 --------------------------------------------------------------------------------
@@ -225,10 +226,10 @@ function is both pure and in a CLJC file, so it really should not be doing
 rendered, not when the user submitted the form.
 
 We will use another placeholder to record the created time: `:clock/now`. To add
-support for it, we expand `toil.core/interpolate-actions` like so:
+support for it, we expand `toil.core/interpolate` like so:
 
 ```clj
-(defn interpolate-actions [event actions]
+(defn interpolate [event actions]
   (walk/postwalk
    (fn [x]
      (case x
@@ -357,8 +358,8 @@ complete them, and add a few bells and whistles:
 :block/title Cleaning up
 :block/markdown
 
-Now that the tasks are rendered on the screen, it has become obvious that our
-form is missing one crucial feature. Submitting the form causes the new task to
+Now that the tasks are rendered on screen, it has become obvious that our form
+is missing one crucial feature. Submitting the form causes the new task to
 appear in the list, which is great. Unfortunately, the task name lingers in the
 form, which is less great.
 
