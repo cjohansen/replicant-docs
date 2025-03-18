@@ -251,7 +251,7 @@ Then we can add another attribute to the task to be created:
  ,,,]
 ```
 
-If you submit the form now, the console will very that this works:
+If you submit the form now, the console will verify that this works:
 
 ```sh
 | :db/transact [{:task/name "Major scales", :task/created-at #inst "2025-03-08T09:48:14.781-00:00"}]
