@@ -264,7 +264,7 @@ And here's the implementation:
     (apply (:form/handler form) data args)))
 ```
 
-This is pretty good, but we're missing som details from our previous
+This is pretty good, but we're missing some details from our previous
 implementation. Specifically, the form state is not cleaned up.
 
 Whether cleaning up is the job of individual forms or the machinery is up for
