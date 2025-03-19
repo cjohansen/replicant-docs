@@ -167,7 +167,7 @@ function just to do this.
 :block/title Prevent default, the data-driven way
 :block/markdown
 
-Our global event handler has access to the event object. This means we can
+Our central event handler has access to the event object. This means we can
 implement an action that will do the preventing of the default for us. It's
 simple enough:
 
