@@ -133,9 +133,8 @@ Putting the pieces together, we get this:
     [:form.mb-4.flex.gap-2.max-w-screen-sm
      [:input ,,,]
      [:button.btn.btn-primary
-      (cond-> {:class (when (empty? text)                   ;; 3.
-                 "btn-disabled")}
-        (empty? text) (assoc :disabled true))
+      (cond-> {}
+        (empty? text) (assoc :disabled "disabled"))         ;; 3.
       "Add"]]))
 ```
 
@@ -193,10 +192,8 @@ action:
      {:on {:submit [[:event/prevent-default]]}} ;; 1.
      [:input ,,,]
      [:button.btn.btn-primary
-      (cond-> {:type "submit"                   ;; 2.
-        :class (when (empty? text)
-                 "btn-disabled")}
-        (empty? text) (assoc :disabled true))
+      (cond-> {:type "submit"}                  ;; 2.
+        (empty? text) (assoc :disabled "disabled"))
       "Add"]]))
 ```
 
@@ -409,10 +406,8 @@ the task:
                      [{:db/ident ::task
                        :task/name :event/target.value}]]]}}]
      [:button.btn.btn-primary
-      (cond-> {:type "submit"
-               :class (when (empty? text)
-                        "btn-disabled")}
-        (empty? text) (assoc :disabled true))
+      (cond-> {:type "submit"}
+        (empty? text) (assoc :disabled "disabled"))
       "Add"]]))
 ```
 
