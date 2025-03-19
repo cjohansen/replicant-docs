@@ -133,14 +133,16 @@ Putting the pieces together, we get this:
     [:form.mb-4.flex.gap-2.max-w-screen-sm
      [:input ,,,]
      [:button.btn.btn-primary
-      {:class (when (empty? text)                           ;; 3.
-                "btn-disabled")}
+      (cond-> {:class (when (empty? text)                   ;; 3.
+                 "btn-disabled")}
+        (empty? text) (assoc :disabled true))
       "Add"]]))
 ```
 
 1. Require Datascript so we can use the `entity` function
 2. Retrieve the currently typed in text
-3. Disable the button when there's no text
+3. Disable the button when there's no text (once for the right DaisyUI look and
+   again semantically for the browser)
 
 --------------------------------------------------------------------------------
 :block/level 2
@@ -191,9 +193,10 @@ action:
      {:on {:submit [[:event/prevent-default]]}} ;; 1.
      [:input ,,,]
      [:button.btn.btn-primary
-      {:type "submit"                           ;; 2.
-       :class (when (empty? text)
-                "btn-disabled")}
+      (cond-> {:type "submit"                   ;; 2.
+        :class (when (empty? text)
+                 "btn-disabled")}
+        (empty? text) (assoc :disabled true))
       "Add"]]))
 ```
 
@@ -406,9 +409,10 @@ the task:
                      [{:db/ident ::task
                        :task/name :event/target.value}]]]}}]
      [:button.btn.btn-primary
-      {:type "submit"
-       :class (when (empty? text)
-                "btn-disabled")}
+      (cond-> {:type "submit"
+               :class (when (empty? text)
+                        "btn-disabled")}
+        (empty? text) (assoc :disabled true))
       "Add"]]))
 ```
 
