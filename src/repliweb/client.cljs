@@ -12,8 +12,12 @@
              (.-offsetParent el)))))
 
 (defn open-menu [menu bar]
-  (set! (.. menu -style -top) (str (+ (:y (get-element-offset bar)) (.-offsetHeight bar)) "px"))
-  (set! js/document.body.style.overflow "hidden"))
+  (let [offset (+ (:y (get-element-offset bar)) (.-offsetHeight bar))
+        padding (- (.-offsetHeight (.-firstChild menu)) (.-offsetHeight menu))]
+    (set! (.. menu -style -top) (str offset "px"))
+    (when (< 0 padding)
+      (set! (.. menu -style -paddingBottom) (str padding "px")))
+    (set! js/document.body.style.overflow "hidden")))
 
 (defn close-menu [_]
   (set! js/document.body.style.overflow "scroll"))
