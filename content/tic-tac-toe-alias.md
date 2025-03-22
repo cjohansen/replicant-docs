@@ -3,7 +3,7 @@
 :page/title Tic-Tac-Toe with aliases
 :page/kind :page.kind/tutorial
 :page/category :tutorial.category/aliases
-:page/order 70
+:page/order 80
 
 --------------------------------------------------------------------------------
 :block/markdown

@@ -3,7 +3,7 @@
 :page/title Alias powered i18n
 :page/kind :page.kind/tutorial
 :page/category :tutorial.category/aliases
-:page/order 80
+:page/order 90
 
 --------------------------------------------------------------------------------
 :block/markdown

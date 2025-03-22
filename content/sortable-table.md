@@ -3,7 +3,7 @@
 :page/title A sortable table alias
 :page/kind :page.kind/tutorial
 :page/category :tutorial.category/aliases
-:page/order 90
+:page/order 100
 
 --------------------------------------------------------------------------------
 :block/markdown
