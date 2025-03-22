@@ -2,6 +2,7 @@
 :page/uri /tutorials/network-writes/
 :page/title Data-driven commands
 :page/kind :page.kind/tutorial
+:page/category :tutorial.category/networking
 :page/order 60
 
 --------------------------------------------------------------------------------

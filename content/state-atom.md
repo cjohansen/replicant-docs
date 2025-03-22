@@ -2,6 +2,7 @@
 :page/uri /tutorials/state-atom/
 :page/title State management with atoms
 :page/kind :page.kind/tutorial
+:page/category :tutorial.category/basics
 :page/order 20
 
 --------------------------------------------------------------------------------

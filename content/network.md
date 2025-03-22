@@ -2,6 +2,7 @@
 :page/uri /tutorials/network/
 :page/title Backend APIs and network
 :page/kind :page.kind/tutorial
+:page/category :tutorial.category/networking
 :page/order 40
 
 --------------------------------------------------------------------------------

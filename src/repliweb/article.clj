@@ -12,13 +12,12 @@
               :in $ ?kind
               :where [?a :page/kind ?kind]]
             db kind)
-       (map #(d/entity db %))
-       (sort-by :page/order)))
+       (map #(d/entity db %))))
 
-(defn navlist [current-page pages]
-  [:nav.mb-8
+(defn navlist [attrs current-page pages]
+  [:nav attrs
    [:ol
-    (for [page pages]
+    (for [page (sort-by :page/order pages)]
       [:li
        (if (= (:page/uri current-page) (:page/uri page))
          [:span.menu-item.menu-item-selected
@@ -30,16 +29,34 @@
           (icons/render :phosphor.bold/caret-right {:size "16px"})])])]])
 
 (defn h3 [text]
-  [:h3.text-whitish.mb-2 {:class "ml-4"} text])
+  [:h3.text-whitish.mb-2.ml-4 text])
+
+(defn h4 [text]
+  [:h4.text-xs.text-whitish.mb-2.ml-4 text])
+
+(def tutorial-category->text
+  {:tutorial.category/getting-started "Getting started"
+   :tutorial.category/basics "Basics"
+   :tutorial.category/networking "Networking"
+   :tutorial.category/forms "Forms"
+   :tutorial.category/aliases "Aliases"})
 
 (defn menu [db page]
   [:aside.basis-60.shrink-0
    (h3 "Guides")
-   (navlist page (pages-by-kind db :page.kind/guide))
+   (navlist {:class "mb-8"} page (pages-by-kind db :page.kind/guide))
    (h3 "Tutorials")
-   (navlist page (pages-by-kind db :page.kind/tutorial))
+   (let [by-category (->> (pages-by-kind db :page.kind/tutorial)
+                          (group-by :page/category)
+                          (sort-by (comp :page/order first second)))]
+     (for [[category tutorials] by-category]
+       (list
+        (h4 (tutorial-category->text category))
+        (navlist (if (= category (first (last by-category)))
+                   {:class "mb-8"}
+                   {:class "mb-2"}) page tutorials))))
    (h3 "Articles")
-   (navlist page (pages-by-kind db :page.kind/article))])
+   (navlist {:class "mb-8"} page (pages-by-kind db :page.kind/article))])
 
 (def page-kind->text
   {:page.kind/guide "Guide"

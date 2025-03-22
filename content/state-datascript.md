@@ -2,6 +2,7 @@
 :page/uri /tutorials/state-datascript/
 :page/title State management with Datascript
 :page/kind :page.kind/tutorial
+:page/category :tutorial.category/basics
 :page/order 30
 
 --------------------------------------------------------------------------------

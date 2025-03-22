@@ -2,6 +2,7 @@
 :page/uri /tutorials/tic-tac-toe/
 :page/title Tic-Tac-Toe
 :page/kind :page.kind/tutorial
+:page/category :tutorial.category/getting-started
 :page/order 0
 
 --------------------------------------------------------------------------------

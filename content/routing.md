@@ -2,6 +2,7 @@
 :page/uri /tutorials/routing/
 :page/title Data-driven routing
 :page/kind :page.kind/tutorial
+:page/category :tutorial.category/basics
 :page/order 10
 
 --------------------------------------------------------------------------------

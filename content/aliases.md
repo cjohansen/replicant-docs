@@ -2,6 +2,7 @@
 :page/uri /alias/
 :page/title Aliases
 :page/kind :page.kind/guide
+:page/category :tutorial.category/aliases
 :page/order 50
 --------------------------------------------------------------------------------
 :block/markdown

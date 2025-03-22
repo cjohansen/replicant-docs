@@ -2,6 +2,7 @@
 :page/uri /tutorials/first-class-forms/
 :page/title Data-driven first class forms
 :page/kind :page.kind/tutorial
+:page/category :tutorial.category/forms
 :page/order 66
 
 --------------------------------------------------------------------------------

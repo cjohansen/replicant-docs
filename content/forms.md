@@ -2,6 +2,7 @@
 :page/uri /tutorials/forms/
 :page/title Data-driven form processing
 :page/kind :page.kind/tutorial
+:page/category :tutorial.category/forms
 :page/order 65
 
 --------------------------------------------------------------------------------

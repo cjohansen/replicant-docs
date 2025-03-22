@@ -2,6 +2,7 @@
 :page/uri /tutorials/tic-tac-toe-alias/
 :page/title Tic-Tac-Toe with aliases
 :page/kind :page.kind/tutorial
+:page/category :tutorial.category/aliases
 :page/order 70
 
 --------------------------------------------------------------------------------

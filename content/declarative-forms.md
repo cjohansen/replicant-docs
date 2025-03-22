@@ -2,6 +2,7 @@
 :page/uri /tutorials/declarative-forms/
 :page/title Declarative forms
 :page/kind :page.kind/tutorial
+:page/category :tutorial.category/forms
 :page/order 67
 
 --------------------------------------------------------------------------------

@@ -2,6 +2,7 @@
 :page/uri /tutorials/sortable-table/
 :page/title A sortable table alias
 :page/kind :page.kind/tutorial
+:page/category :tutorial.category/aliases
 :page/order 90
 
 --------------------------------------------------------------------------------

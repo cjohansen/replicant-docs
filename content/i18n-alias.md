@@ -2,6 +2,7 @@
 :page/uri /tutorials/i18n-alias/
 :page/title Alias powered i18n
 :page/kind :page.kind/tutorial
+:page/category :tutorial.category/aliases
 :page/order 80
 
 --------------------------------------------------------------------------------

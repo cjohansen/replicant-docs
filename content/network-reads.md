@@ -2,6 +2,7 @@
 :page/uri /tutorials/network-reads/
 :page/title Data-driven queries
 :page/kind :page.kind/tutorial
+:page/category :tutorial.category/networking
 :page/order 50
 
 --------------------------------------------------------------------------------
