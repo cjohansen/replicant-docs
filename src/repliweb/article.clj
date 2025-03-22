@@ -39,6 +39,7 @@
    :tutorial.category/basics "Basics"
    :tutorial.category/networking "Networking"
    :tutorial.category/forms "Forms"
+   :tutorial.category/interop "JavaScript interop"
    :tutorial.category/aliases "Aliases"})
 
 (defn menu [db page]
