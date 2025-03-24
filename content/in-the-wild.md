@@ -33,6 +33,12 @@ blogging platform built with Datascript and Replicant by [Haris
 Muhammad](https://github.com/harismh). [Source on
 Github](https://github.com/harismh/datablog).
 
+### Chipper Chaps Chateau
+
+A 3D version of tic-tac-toe by Mathias Iversen. [Play
+online](https://chipper-chaps-chateau.apps.garden/), source [on
+Github](https://github.com/boosja/chipper-chaps-chateau).
+
 ### TodoMVC
 
 The obligatory [TodoMVC
@@ -64,3 +70,9 @@ Leverette](https://github.com/andrewleverette).
 
 - [Testing out Replicant](https://emil0r.com/posts/2024-11-29-replicant/) by
   Emil Bengtsson
+- [Frontend Development with Clojurescript and
+  Replicant](https://www.karimarttila.fi/clojurescript/2025/02/28/clojurescript-with-replicant.html)
+  by Kari Marttila
+- [Designing UI components with Clojurescript, Replicant and
+  Portfolio](https://www.karimarttila.fi/clojurescript/2025/03/10/ui-design-with-clojurescript-replicant-and-portfolio.html)
+  by Kari Marttila
