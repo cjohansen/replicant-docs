@@ -1,8 +1,11 @@
+--------------------------------------------------------------------------------
 :page/uri /life-cycle-hooks/
 :page/title Life-cycle hooks
 :page/kind :page.kind/guide
 :page/order 20
-:page/body
+
+--------------------------------------------------------------------------------
+:block/markdown
 
 Life-cycle hooks give you access to the rendered DOM node. The special
 "attribute" `:replicant/on-render` registers a life-cycle hook. It will be
@@ -28,12 +31,40 @@ The function is called with a single argument, which is a map of these keys:
   - `:replicant.life-cycle/update` (successive updates)
   - `:replicant.life-cycle/unmount` (node is being removed from the DOM)
 - `:replicant/node` the DOM node
+- `:replicant/remember` a function to remember a value
+- `:replicant/memory` a remembered value from a previous life-cycle hook
 
 `:replicant/on-render` triggers on all updates and gives you enough information
 to know what happened. If you just want to do something on mount and/or unmount,
 you can use `:replicant/on-mount` and `:replicant/on-unmount`, which work
 exactly like `:replicant/on-render`, except they only trigger on their
 respective life-cycle events.
+
+--------------------------------------------------------------------------------
+:block/title Memory
+:block/level 2
+:block/id memory
+:block/markdown
+
+Life-cycle hooks are typically used to interface with third-party libraries,
+such as a [mapping library](/tutorials/javascript-interop/), a graphing library,
+etc. When working with such libraries you may need to construct an object on
+mount and keep a reference to it around for later updates. Replicant passes a
+function `:replicant/remember` to all life-cycle hooks for this purpose. You can
+call it with whatever value you want, and that value will be available as
+`:replicant/memory` in the next life-cycle hook.
+
+The [JavaScript interop tutorial](/tutorials/javascript-interop/) demonstrates
+one way to use this feature.
+
+`:replicant/remember` will associate your value with the DOM node in a
+[WeakMap](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap).
+
+--------------------------------------------------------------------------------
+:block/title Hooks as data
+:block/level 2
+:block/id data
+:block/markdown
 
 Life-cycle hooks can also be expressed with data and handled via
 `replicant.dom/set-dispatch!`:
