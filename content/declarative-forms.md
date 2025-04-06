@@ -531,7 +531,7 @@ expecting `:form/handler` to be a function:
     ,,,
     (let [actions (vec (or (:form/submit-actions form)
                            (when-let [handler (:form/handler form)]
-                             (apply (handler form) data args))))
+                             (apply handler data args))))
           ,,,]
       (if (<= 0 idx)
         (update-in actions [idx 1] conj cleanup-tx)
