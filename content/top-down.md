@@ -129,7 +129,7 @@ ever increasing technical debt.
 
 On the flip-side, in top-down rendering you cannot create a single `UserMenu`
 abstraction. Networking, state management and data processing will need to be
-solved separately from rendering. In this way Relpicant foregoes fully reusable
+solved separately from rendering. In this way Replicant foregoes fully reusable
 components in favor of achieving better reusability at the system level.
 
 #### Less is more
