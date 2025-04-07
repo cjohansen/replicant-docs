@@ -9,3 +9,8 @@ get up and running:
 
 The site is at [localhost:4444](http://localhost:4444) and Portfolio is at
 [localhost:9500](http://localhost:9500).
+
+## License: MIT
+
+Copyright © 2025 Christian Johansen. Distributed under the [MIT
+License](https://opensource.org/license/mit).
