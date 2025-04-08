@@ -415,7 +415,11 @@ to use it, e.g.:
   :query/data {:user-id "alice"}}]
 ```
 
-### Loading data on navigation
+--------------------------------------------------------------------------------
+:block/title Loading data on navigation
+:block/level 3
+:block/id loading-data-on-navigation
+:block/markdown
 
 Having to click a button on the frontpage to get its data isn't ideal UX.
 Ideally, the data would just load when the user loaded the frontpage. We can do
