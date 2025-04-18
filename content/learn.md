@@ -31,6 +31,11 @@ DOM.
     [:p.opacity-50
      "Posted February 26th 2025"]]])
 
+;; Or render to a string, on the client or on the server
+(require '[replicant.string :as s])
+
+(s/render [:h1 "Hello world!"])
+
 --------------------------------------------------------------------------------
 :block/markdown
 
