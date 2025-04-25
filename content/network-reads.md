@@ -184,7 +184,7 @@ Implementing this is a breeze:
 ```clj
 (defn available? [state query]
   (= :query.status/success
-     (get-latest-status state query)))
+     (get-latest-status state [::log query])))
 ```
 
 We're not going to handle all the details of this decision making namespace, but
