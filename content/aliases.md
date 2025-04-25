@@ -169,7 +169,7 @@ Alias functions can be passed to `replicant.dom/render` and
 :block/a-title Update the DOM
 :block/a-code
 
-(require '[replicant.dom :as d])
+(require '[replicant.dom :as r])
 
 (r/render (js/document.getElementById "app")
   [:ui/btn "Click"]
@@ -290,7 +290,7 @@ You can reap the same benefits without using `defalias` as well: just define the
 function with `aliasfn`:
 
 ```clj
-(require '[replicant.dom :as d])
+(require '[replicant.dom :as r])
 (require '[replicant.alias :refer [aliasfn]])
 
 (def render-button-alias
