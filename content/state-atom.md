@@ -353,4 +353,4 @@ data. The final `main` function looks like this:
 
 Now the app can generate links with the `:ui/a` alias just like in the routing
 tutorial. As usual, the [full source is available on
-Github](https://github.com/cjohansen/replicant-docs).
+Github](https://github.com/cjohansen/replicant-state-atom).
