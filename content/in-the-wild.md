@@ -20,6 +20,12 @@ A programming language performance visualizer written with
 [@pez](https://github.com/pez): [languages
 visualization](https://github.com/PEZ/languages-visualizations).
 
+### Datomic graph viz
+
+[datomic-graph-viz](https://github.com/2food/datomic-graph-viz) visualizes a
+Datomic database as a graph. It uses JavaScript interop to render graphs with D3
+within Replicant. Made by [Tormod Mathiesen](https://github.com/2food).
+
 ### Virtuoso
 
 [virtuoso.tools](https://virtuoso.tools) is a collection of tools to help
