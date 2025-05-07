@@ -601,6 +601,8 @@ This test fails because our current implementation allows the o player overwrite
 the x. Not good, let's fix it:
 
 ```clj
+(def next-player {:x :o, :o :x})
+
 (defn tic [game y x]
   (let [player (:next-player game)]
     (if (get-in game [:tics [y x]])
