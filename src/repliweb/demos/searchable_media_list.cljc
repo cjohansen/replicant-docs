@@ -8,7 +8,7 @@
             [repliweb.elements.typography :as typo]))
 
 (defn search-videos [q videos]
-  (if-let [q-re (some-> q re-pattern)]
+  (if-let [q-re (some-> q str/lower-case re-pattern)]
     (filter #(or (re-find q-re (str/lower-case (:episode/title %)))
                  (re-find q-re (str "episode " (:episode/number %)))) videos)
     videos))
