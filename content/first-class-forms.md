@@ -247,7 +247,6 @@ the complete state of the task:
    (cond-> {:type "checkbox"
             :name (keyword->s k)}
      (get m k) (assoc :default-checked "checked"))])
-
 ,,,
 
 (defn render-edit-form [task]
@@ -577,23 +576,23 @@ Here's how we can use the suggested new action:
    ,,,])
 ```
 
-`:form/submit` is the action we will implement. `:forms/edit-task` is the
-identifier of this particular form -- this will be tied to a function that can
-process it. Finally, we pass in any additional arguments required for the
-processing -- the task id in this case. This ability to pass data directly to
-the processing function obviates the need for the hidden field we used
+`:form/submit` is the action we will implement. `:forms/edit-task` is the type
+of form -- this will be tied to a function that can process it. The id will be
+used to address this specific instance of the form, and passed to the processing
+function along with any remaining arguments. This ability to pass data directly
+to the processing function obviates the need for the hidden field we used
 previously.
 
 So what does this new action do?
 
-1. It calls on a pure function associated with the form identifier, which will
-   return some actions.
+1. It calls on a pure function associated with the form type, which will return
+   some actions.
 2. It executes the new set of actions.
 
 That's it. There are several ways to do the dispatch outlined in step 1, but I
 prefer the straightforwardness of a `case` when I can get away with it. Since
-we're not writing a library, there is little benefit to be had from the
-indirection of something like a multi-method.
+we're not writing a library, there is little benefit in the indirection of
+something like a multi-method.
 
 Here's the code:
 
@@ -607,11 +606,11 @@ Here's the code:
 
 (declare execute-actions)
 
-(defn submit-form [conn ^js event form-id & args]
+(defn submit-form [conn ^js event form-type id & args]
   (let [data (gather-form-data (.-target event))
-        actions (case form-id
+        actions (case form-type
                   :forms/edit-task
-                  (apply forms/submit-edit-task data args))]
+                  (apply forms/submit-edit-task id data args))]
     (execute-actions conn event actions)))
 
 (defn execute-actions [conn ^js event actions]
@@ -624,8 +623,8 @@ Here's the code:
       (println "Unknown action" action "with arguments" args))))
 ```
 
-Note the `declare` here. It's used since `execute-actions` calls `submit-form`
-which calls `execute-actions`.
+Note the `declare` here. It's there to allow `execute-actions` to call and
+`submit-form` to call `execute-actions`.
 
 We can now implement a pure function that can use the actual form data to decide
 what should happen on submit. It will report validation failures if there are
@@ -647,10 +646,10 @@ constraint that the duration is no more than 60 minutes.
            :validation-error/message "Duration can not exceed 60 minutes"})]
        (remove nil?)))
 
-(defn submit-edit-task [data task-id]
+(defn submit-edit-task [form-type task-id data]
   (if-let [errors (seq (validate-edit-task data))]
     [[:db/transact
-      [{:form/id :forms/edit-task
+      [{:form/id [form-type task-id]
         :form/validation-errors errors}]]]
     ,,,))
 ```
@@ -680,8 +679,8 @@ look for relevant validation messages:
      [:li.bg-base-200.my-2.px-4.py-3.rounded.w-full
       (if (:task/editing? task)
         (render-edit-form
-          (d/entity db [:form/id :forms/edit-task]) ;; <=
-          task)
+         (d/entity db [:form/id [:forms/edit-task (:db/id task)]]) ;; <==
+         task)
         (render-task task))])])
 ```
 
@@ -739,22 +738,22 @@ Now that we render validation errors we can complete the form processing
 function:
 
 ```clj
-(defn submit-edit-task [data task-id]
+(defn submit-edit-task [form-type task-id data]
   (if-let [errors (seq (validate-edit-task data))]
     [[:db/transact
-      [{:form/id :forms/edit-task
+      [{:form/id [form-type task-id]
         :form/validation-errors errors}]]]
     [[:db/transact
       [(-> data
            (assoc :db/id task-id)
            (assoc :task/editing? false))
-       [:db/retractEntity [:form/id :forms/edit-task]]]]]))
+       [:db/retractEntity [:form/id [form-type task-id]]]]]]))
 ```
 
 When there are no validation errors, we transact the data like before. Since we
 removed the hidden input for the `:db/id` we now add it to the data to transact
-manually. Since we can now programatically manipulate the map being transacted,
-we can also add `:task/editing? false` directly onto it.
+manually. As we can now programatically manipulate the map being transacted, we
+can also add `:task/editing? false` directly onto it.
 
 The last transaction data makes sure to clear out the form.
 
@@ -774,7 +773,7 @@ convert it to an explicit retraction. Here's the final version:
          [(-> (apply dissoc data nil-ks)
               (assoc :db/id task-id)
               (assoc :task/editing? false))
-          [:db/retractEntity [:form/id :forms/edit-task]]]
+          [:db/retractEntity [:form/id [form-type task-id]]]]
          (for [k nil-ks]
            [:db/retract task-id k]))]])))
 ```
@@ -811,10 +810,22 @@ We'll add another action:
 `validate-form` will look very similar to `submit-form`:
 
 ```clj
+(defn gather-form-input-data [form-inputs]
+  (some-> (into-array form-inputs)
+          (.reduce
+           (fn [res ^js el]
+             (let [k (get-input-key el)]
+               (cond-> res
+                 k (assoc k (get-input-value el)))))
+           {})))
+
+(defn gather-form-data [^js form-el]
+  (gather-form-input-data (.-elements form-el)))
+
 (defn validate-form [conn ^js event form-id & args]
   (let [form ^js (.closest (.-target event) "form")
         data (gather-form-input-data form)
-        actions (case form-id
+        actions (case (first form-id)
                   :forms/edit-task
                   (apply forms/validate-edit-task-form form-id data args))]
     (execute-actions conn event actions)))
