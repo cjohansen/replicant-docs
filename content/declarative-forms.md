@@ -107,7 +107,7 @@ errors:
             {:form/id :forms/test-form
              :form/fields
              [{:k :task/name
-               :validations {:validation/kind :required}}]}
+               :validations [{:validation/kind :required}]}]}
             {:task/name nil})
            [{:validation-error/field :task/name
              :validation-error/message "Please type in some text"}]))))
@@ -215,7 +215,7 @@ the first test:
 (deftest submit-form-test
   (testing "Validates form"
     (is (= (forms/submit
-            {:form/id :forms/test-form
+            {:form/id [:forms/test-form 1]
              :form/fields
              [{:k :task/name
                :validations [{:validation/kind :required}]}]}
@@ -223,7 +223,7 @@ the first test:
             1 ;; task id
             )
            [[:db/transact
-             [{:form/id :forms/test-form
+             [{:form/id [:forms/test-form 1]
                :form/validation-errors
                [{:validation-error/field :task/name
                  :validation-error/message "Please type in some text"}]}]]]))))
@@ -244,7 +244,7 @@ Next up, we will make sure that the `:form/handler` is called for a valid form:
 ```clj
 (testing "Calls form handle when form is valid"
   (is (= (forms/submit
-          {:form/id :forms/test-form
+          {:form/id [:forms/test-form 1]
            :form/handler (fn [data task-id]
                            [[:db/transact [(assoc data :db/id task-id)]]])}
           {:task/name "Do it!"}
@@ -279,7 +279,7 @@ The next question becomes how to do it. Cleaning up is achieved with this
 action:
 
 ```clj
-[[:db/transact [[:db/retractEntity [:form/id :forms/edit-task]]]]]
+[[:db/transact [[:db/retractEntity [:form/id [:forms/edit-task 1]]]]]]
 ```
 
 We _could_ add it to the list of actions returned by the handler, but if the
@@ -310,10 +310,10 @@ Github](https://github.com/cjohansen/replicant-forms/tree/declarative-forms).
 :block/id wiring
 :block/markdown
 
-Now that we have support for declarative forms, let's put it to use. Now that
-most of the form processing code is completely generic, it seems like it would
-be a good idea to more clearly separate the generic bits from the "edit task"
-specific bits. To this end we'll create a dedicated task namespace:
+Let's put our declarative forms to use. Now that most of the form processing
+code is completely generic, it seems like it would be a good idea to more
+clearly separate the generic bits from the "edit task" specific bits. To this
+end we'll create a dedicated task namespace:
 
 ```clj
 (ns toil.task)
@@ -329,7 +329,7 @@ specific bits. To this end we'll create a dedicated task namespace:
          [:db/retract task-id k]))]]))
 
 (def edit-form
-  {:form/id :forms/edit-task
+  {:form/type :forms/edit-task
    :form/fields
    [{:k :task/name
      :validations [{:validation/kind :required}]}
@@ -353,23 +353,24 @@ Next, we'll make a list of forms in `toil.core`:
 
 (def forms
   (->> [task/edit-form]
-       (map (juxt :form/id identity))
+       (map (juxt :form/type identity))
        (into {})))
 ```
 
 And then we'll update the two form actions:
 
 ```clj
-(defn submit-form [conn ^js event form-id & args]
+(defn submit-form [conn ^js event form-type id & args]
   (->> (apply forms/submit
-              (get forms form-id)
+              (assoc (get forms form-type) :form/id [form-type id])
               (gather-form-data (.-target event))
+              id
               args)
        (execute-actions conn event)))
 
 (defn validate-form [conn ^js event form-id]
   (->> (forms/validate
-        (get forms form-id)
+        (assoc (get forms (first form-id)) :form/id form-id)
         (gather-form-data (.closest (.-target event) "form")))
        (execute-actions conn event)))
 ```
@@ -395,7 +396,7 @@ this ui namespace:
 
 Supporting this is a 97 line form library (of 100% pure functions) in
 [`toil.forms`](https://github.com/cjohansen/replicant-forms/blob/declarative-forms/src/toil/forms.cljc)
-and 119 lines of pure functions in
+and 120 lines of pure functions in
 [`toil.task`](https://github.com/cjohansen/replicant-forms/blob/declarative-forms/src/toil/task.cljc).
 What more could you want?
 
@@ -459,7 +460,7 @@ With this list we can find the identity like this:
 ```
 
 Which becomes either a number (e.g. from `:db/id`) or an entity ref like
-`[:form/id :forms/edit-task]`. Our new action looks like the following:
+`[:form/id [:forms/edit-task 1]]`. Our new action looks like the following:
 
 ```clj
 (defn transact-w-nils [conn txes]
@@ -508,7 +509,7 @@ actions. Something like this:
 
 ```clj
 (def edit-form
-  {:form/id :forms/edit-task
+  {:form/type :forms/edit-task
    :form/fields
    [{:k :task/name
      :validations [{:validation/kind :required}]}
@@ -543,10 +544,11 @@ actual form data, not the `:event/form-data` placeholder. The form should be
 subjected to the same interpolation that our actions go through:
 
 ```clj
-(defn submit-form [conn ^js event form-id & args]
+(defn submit-form [conn ^js event form-type id & args]
   (let [actions (apply forms/submit
-                       (get forms form-id)
+                       (assoc (get forms form-type) :form/id [form-type id])
                        (gather-form-data (.-target event))
+                       id
                        args)]
     (->> (interpolate event actions)
          (execute-actions conn event))))
@@ -572,15 +574,15 @@ avoid this by passing a map of already resolved placeholder values to
 
 ,,,
 
-(defn submit-form [conn ^js event form-id & args]
+(defn submit-form [conn ^js event form-type id & args]
   (let [form-data (gather-form-data (.-target event))
         actions (apply forms/submit
-                       (get forms form-id)
+                       (assoc (get forms form-type) :form/id [form-type id])
                        form-data
+                       id
                        args)]
-    (->> (interpolate event actions {:event/form-data form-data}) ;; <=
+    (->> (interpolate event actions {:event/form-data form-data}) ;; <==
          (execute-actions conn event))))
-
 ```
 
 And there you have it. Fully functional fully data-driven forms. Check out the
