@@ -192,8 +192,11 @@ Finally, hook it up to Replicant:
 ```
 
 And that's it, a bare-bones action dispatching system for your app. You can make
-this as sophisticated as you want. Or you could use `set-dispatch!` to hook into
-a library that provides similar functionality. Your imagination is the limit.
+this as sophisticated as you want. Or you could use
+[Nexus](https://github.com/cjohansen/nexus), a library designed specifically
+around this idea. It expands the idea by separating side-effecting effects from
+pure actions, using dispatch-data in actions via placeholders, a rich
+interceptor model for development tooling and more.
 
 --------------------------------------------------------------------------------
 :block/id prevent-default
