@@ -53,7 +53,7 @@ Finally, we'll add a `main` function that sets up the watcher and renders the
 app when the database changes:
 
 ```clj
-(ns state-atom.core
+(ns state-datascript.core
   (:require [datascript.core :as ds]
             [replicant.dom :as r]))
 
@@ -89,63 +89,41 @@ When this is evaluated, the UI should automatically update.
 :block/markdown
 
 Our UI now responds to changes in the database, great. The next step is to put
-in place a small system for updating the database based on user interaction. To
-do this we will use the [action dispatch
-pattern](/event-handlers/#action-dispatch) described in the event handlers
-guide:
+in place a small system for updating the database based on user interaction. To do
+this we will use the [action dispatch pattern](/event-handlers/#action-dispatch)
+detailed in the event handlers guide. Instead of building it from scratch, we
+will use [Nexus](https://github.com/cjohansen/nexus):
 
 ```clj
-(ns state-atom.core
-  (:require [clojure.walk :as walk]
-            [datascript.core :as ds]
+(ns state-datascript.core
+  (:require [datascript.core :as ds]
+            [nexus.registry :as nxr]
             [replicant.dom :as r]))
 
-,,,
-
-(defn interpolate-actions [event actions]
-  (walk/postwalk
-   (fn [x]
-     (case x
-       :event/target.value (.. event -target -value)
-       ;; Add more cases as needed
-       x))
-   actions))
-
-(defn execute-actions [conn actions]
-  (doseq [[action & args] actions]
-    (case action
-      ;; Add actions here
-      (println "Unknown action" action "with arguments" args))))
+(nxr/register-system->state! ds/db) ;; <==
 
 (defn main [conn el]
   ,,,
 
-  (r/set-dispatch!
-   (fn [event-data actions]
-     (->> actions
-          (interpolate-actions
-           (:replicant/dom-event event-data))
-          (execute-actions conn))))
+  (r/set-dispatch!                  ;; <==
+   (fn [dispatch-data actions]
+     (nxr/dispatch conn dispatch-data actions)))
 
-  ;; Trigger the initial render
-  (ds/transact! conn [{:db/ident :system/app
-                       :app/started-at (js/Date.)}]))
+  ,,,)
 ```
 
 We now have a tiny tailor-made framework. Next we will add an action that
 updates the database:
 
 ```clj
-(defn execute-actions [conn actions]
-  (doseq [[action & args] actions]
-    (case action
-      :db/transact (apply ds/transact! conn args)
-      (println "Unknown action" action "with arguments" args))))
+(nxr/register-effect! :db/transact
+  (fn [_ conn tx-data]
+    (ds/transact! conn tx-data)))
 ```
 
-Datascript's `transact!` function already takes transactions as pure data, so
-`:db/transact` can just `apply` it. It's a one-liner, and will serve 90%, if not
-more, of your state management needs. Amazing.
+Datascript's `transact!` function already takes a transaction as pure data, so
+the `:db/transact` effect is a one-liner. It will serve 90%, if not more, of
+your state management needs. Amazing.
 
 Let's see it in use:
 
@@ -170,6 +148,113 @@ This is an essential Replicant UI: it's a pure function, it returns pure data
 (including the event handler), and if you "speak Datascript", the relationship
 between `:db/transact` and the `app` entity should be obvious.
 
+--------------------------------------------------------------------------------
+:block/title Pure domain-specific actions
+:block/level 2
+:block/id pure-actions
+:block/markdown
+
+While low-level utilities like `:db/transact` will take you far, it doesn't
+always capture the intention in terms of your business domain well. We can solve
+this by adding high-level actions that expand to low-level effects.
+
+Here's the above UI expressed with a high-level domain action:
+
+```clj
+(defn render-page [db]
+  (let [app (ds/entity db :system/app)
+        clicks (:clicks app)]
+    [:div
+     [:h1 "Hello world"]
+     [:p "Started at " (:app/started-at app)]
+     [:button
+      {:on {:click [[:counter/inc app]]}} ;; <==
+      "Click me"]
+     (when (< 0 clicks)
+       [:p
+        "Button was clicked "
+        clicks
+        (if (= 1 clicks) " time" " times")])]))
+```
+
+We can implement this action as a pure transformation to the side-effecty
+`:store/assoc-in`:
+
+```clj
+(nxr/register-action! :counter/inc
+  (fn [_ entity]
+    [[:db/transact [[:db/add (:db/id entity) :clicks (inc (:clicks entity))]]]]))
+```
+
+As your app grows, you will add new actions like this, that are pure and easy to
+test. Only add new effects when your app needs new capabilities.
+
+--------------------------------------------------------------------------------
+:block/title Batched state updates
+:block/level 2
+:block/id batched-swap
+:block/markdown
+
+Some interactions require adding more than one piece of state. Currently, each
+`:db/transact` becomes a separate `transact!`, which causes a render. This means
+that dispatching three actions will trigger three consecutive renders -- not
+ideal. We can fix this by batching the `transact!`:
+
+```clj
+(nxr/register-effect! :db/transact
+  ^:nexus/batch
+  (fn [_ conn txes]
+    (ds/transact! conn (apply concat (map first txes)))))
+```
+
+The other actions do not need to change, Nexus will know to do the right thing
+based on the `^:nexus/batch` meta on the effect function.
+
+--------------------------------------------------------------------------------
+:block/title More specific transactions
+:block/level 2
+:block/markdown
+
+`datascript.core/transact!` can take both full entity maps and individual
+transaction functions. Transaction functions look a lot like Nexus actions:
+
+```clj
+[[:db/transact                      ;; Action
+  [[:db/add eid :attr "value"]      ;; Transaction functions
+   [:db/retract eid :attr "value"]
+   [:db/retractEntity eid]]
+]]
+```
+
+It would be neat if we could use these transaction functions directly as
+actions. Luckily, that's very straight-forward to do:
+
+```clj
+(nxr/register-action! :db/add
+  (fn [_ eid attr value]
+    [[:db/transact [[:db/add eid attr value]]]]))
+
+(nxr/register-action! :db/retract
+  (fn [_ eid attr & [value]]
+    [[:db/transact [(cond-> [:db/retract eid attr]
+                      value (conj value))]]]))
+
+(nxr/register-action! :db/retractEntity
+  (fn [_ eid]
+    [[:db/transact [[:db/retractEntity eid]]]]))
+```
+
+These all convert to `:db/transact`. Since we made sure to batch `:db/transact`,
+all uses of any of these in one dispatch will end up in the same transaction.
+We can simplify our `:counter/inc` action by using the first-class `:db/add`
+action:
+
+```clj
+(nxr/register-action! :counter/inc
+  (fn [_ entity]
+    [[:db/add (:db/id entity) :clicks (inc (:clicks entity))]]))
+```
+
 The [code from this tutorial is available on
 Github](https://github.com/cjohansen/replicant-state-datascript/tree/state-setup):
 feel free to use it as a starting template for building an app with Datascript
@@ -187,10 +272,10 @@ for a top-down rendered app. In this bonus section, we'll integrate the routing
 solution with the Datascript state management we just created.
 
 Routing and state management are orthogonal concerns, but both need to trigger
-rendering. The system as a whole will be easier to reason with if rendering only
-happens one way. We'll keep the render hook on the Datascript connection, and
-have the routing system render indirectly through it by transacting the current
-location.
+rendering. The system as a whole will be easier to reason about if rendering
+only happens one way. We'll keep the render hook on the Datascript connection,
+and have the routing system render indirectly through it by transacting the
+current location.
 
 We start by copying over the router namespace:
 
@@ -244,8 +329,8 @@ Next, we'll add the routing alias to the core namespace:
 
 ```clj
 (ns state-datascript.core
-  (:require [clojure.walk :as walk]
-            [datascript.core :as ds]
+  (:require [datascript.core :as ds]
+            [nexus.registry :as nxr]
             [replicant.alias :as alias]
             [replicant.dom :as r]
             [state-datascript.router :as router]
@@ -305,44 +390,93 @@ To handle the initial routing when the app boots we can find the location in the
   (get-location-entity (get-current-location))])
 ```
 
-To handle click events, we will copy over and adjust the `route-click` function.
-Instead of triggering rendering directly, it will now transact the location --
-which will cause rendering to happen:
+To handle click events, we will extract the core of the old `route-click`
+function as an action. We will need to make some changes to achieve this. First
+of all, we need the routes object to be a part of the Nexus system:
 
 ```clj
-(ns state-datascript.core
+(defn main [conn el]
+  (let [system {:conn conn, :routes router/routes}]
+    ,,,
+
+    (r/set-dispatch!
+     (fn [dispatch-data actions]
+       (nxr/dispatch system dispatch-data actions)))
+
+    ,,,))
+```
+
+We will only need the routing table in side-effecting effects, so the
+`system->state` function can still just return the database value:
+
+```clj
+(nxr/register-system->state! (comp ds/db :conn))
+```
+
+This way we won't need to change any of the action implementations, only the
+`:db/transact` effect:
+
+```clj
+(nxr/register-effect! :db/transact
+  ^:nexus/batch
+  (fn [_ {:keys [conn]} txes]
+    (ds/transact! conn (apply concat (map first txes)))))
+```
+
+We can now define a new effect that updates the browser's current URL:
+
+```clj
+(nxr/register-effect! :effects/update-url
+  (fn [_ {:keys [routes]} new-location old-location]
+    (if (router/essentially-same? new-location old-location)
+      (.replaceState js/history nil "" (router/location->url routes new-location))
+      (.pushState js/history nil "" (router/location->url routes new-location)))))
+```
+
+And then an action that uses this effect along with the effect that updates the
+store:
+
+```clj
+(nxr/register-action! :actions/navigate
+  (fn [db location]
+    [[:effects/update-url location (ds/entity db :ui/location)]
+     [:db/transact [(get-location-entity location)]]]))
+```
+
+We will now dispatch the navigation action from the `route-click` function:
+
+```clj
+(ns state-atom.core
   ,,,)
 
 ,,,
 
-(defn route-click [e conn routes]
+(defn route-click [e system]
   (let [href (find-target-href e)]
-    (when-let [location (router/url->location routes href)]
+    (when-let [location (router/url->location (:routes system) href)]
       (.preventDefault e)
-      (if (router/essentially-same? location (ds/entity (ds/db conn) :ui/location))
-        (.replaceState js/history nil "" href)
-        (.pushState js/history nil "" href))
-      (ds/transact! conn [(-> (router/url->location router/routes href)
-                              get-location-entity)]))))
+      (nxr/dispatch system nil [[:actions/navigate location]]))))
 ```
 
-Now we'll add the event listeners for body clicks and the back button. The back
-button handler will also update the database:
+Next we'll add the event listeners for body clicks and the back button. The back
+button handler will also update the database using an action:
 
 ```clj
-(defn main [store el]
-  ,,,
+(defn main [conn el]
+  (let [system {:conn conn, :routes router/routes}]
+    ,,,
 
-  (js/document.body.addEventListener
-   "click"
-   #(route-click % conn router/routes))
+    (js/document.body.addEventListener
+     "click"
+     #(route-click % system))
 
-  (js/window.addEventListener
-   "popstate"
-   (fn [_] (ds/transact! conn [(-> (get-current-location)
-                                   get-location-entity)])))
+    (js/window.addEventListener
+     "popstate"
+     (fn [_]
+       (nxr/dispatch system nil
+        [[:db/transact [(get-location-entity (get-current-location))]]])))
 
-  ,,,)
+    ,,,))
 ```
 
 The final piece of the puzzle is to make sure routes are available as alias
@@ -350,33 +484,37 @@ data. The final `main` function looks like this:
 
 ```clj
 (defn main [conn el]
-  (add-watch
-   conn ::render
-   (fn [_ _ _ _]
-     (r/render el (ui/render-page (ds/db conn)) {:alias-data {:routes router/routes}})))
+  (let [system {:conn conn, :routes router/routes}]
+    (add-watch
+     conn ::render
+     (fn [_ _ _ _]
+       (r/render el (ui/render-page (ds/db conn))
+                 {:alias-data {:routes router/routes}})))
 
-  (r/set-dispatch!
-   (fn [event-data actions]
-     (->> actions
-          (interpolate-actions
-           (:replicant/dom-event event-data))
-          (execute-actions conn))))
+    (r/set-dispatch!
+     (fn [dispatch-data actions]
+       (nxr/dispatch system dispatch-data actions)))
 
-  (js/document.body.addEventListener
-   "click"
-   #(route-click % conn router/routes))
+    (js/document.body.addEventListener
+     "click"
+     #(route-click % system))
 
-  (js/window.addEventListener
-   "popstate"
-   (fn [_] (ds/transact! conn [(-> (get-current-location)
-                                   get-location-entity)])))
+    (js/window.addEventListener
+     "popstate"
+     (fn [_]
+       (nxr/dispatch system nil
+        [[:db/transact [(get-location-entity (get-current-location))]]])))
 
-  ;; Trigger the initial render
-  (ds/transact! conn [{:db/ident :system/app
-                       :app/started-at (js/Date.)}
-                      (get-location-entity (get-current-location))]))
+    ;; Trigger the initial render
+    (ds/transact! conn
+     [{:db/ident :system/app
+       :app/started-at (js/Date.)}
+      (get-location-entity (get-current-location))])))
 ```
 
 Now the app can generate links with the `:ui/a` alias just like in the routing
-tutorial. As usual, the [full source is available on
+tutorial. You can also trigger navigation with an action, which can be useful
+after posting a form (to simulate a redirect), after completing login, etc.
+
+As usual, the [full source is available on
 Github](https://github.com/cjohansen/replicant-state-datascript).
