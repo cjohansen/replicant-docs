@@ -256,7 +256,7 @@ And finally we can add our new effect, which reduces over the operations with
 
 ```clj
 (nxr/register-effect! :store/save
-  ^:nexus/batch?
+  ^:nexus/batch
   (fn [_ store ops]
     (swap! store
            (fn [state]
