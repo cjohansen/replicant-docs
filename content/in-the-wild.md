@@ -72,6 +72,14 @@ The [clojulator](https://github.com/andrewleverette/clojulator) is a small
 Clojure calculator that uses Replicant. By [Andrew
 Leverette](https://github.com/andrewleverette).
 
+### Closspad
+
+[Simple app](https://fik.qoback.es) to track padel matches and to create a
+classification using their results, with very simple stats and player
+performance analysis.
+Uses [Supabase](supabase.com) and [ECharts](https://echarts.apache.org/en/index.html).
+[Source](https://github.com/floppp/closspad/).
+
 ## Articles
 
 - [Testing out Replicant](https://emil0r.com/posts/2024-11-29-replicant/) by
