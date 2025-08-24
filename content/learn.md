@@ -11,7 +11,7 @@ Learn to develop UIs in Clojure/ClojureScript with Replicant
 
 So you decided to learn Replicant, thanks! Replicant is pretty straight forward:
 compile some hiccup, and pass it to Replicant. When you need to update the UI,
-do it all over again, and Replicant will do just what's needed up update the
+do it all over again, and Replicant will do just what's needed to update the
 DOM.
 
 --------------------------------------------------------------------------------
