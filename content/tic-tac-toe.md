@@ -707,7 +707,9 @@ we will handle those in a global event handler.
             {:size 3
              :tics {[0 0] :x
                     [0 1] :o}
-             :next-player :x})
+             :next-player :x}
+             {:x "x"
+             :o "o"})
            {:rows [[{:content ui/mark-x}
                     {:content ui/mark-o}
                     {:clickable? true
@@ -732,11 +734,7 @@ grid, as dictated by the game's size. Each cell either has a tic, or is
 available to tac:
 
 ```clj
-(def player->mark
-  {:x mark-x
-   :o mark-o})
-
-(defn game->ui-data [{:keys [size tics]}]
+(defn game->ui-data [{:keys [size tics]} player->mark]
   {:rows
    (for [y (range size)]
      (for [x (range size)]
@@ -771,7 +769,7 @@ atom is updated, we render the UI.
     ;; Render on every change
     (add-watch store ::render
                (fn [_ _ _ game]
-                 (->> (ui/game->ui-data game)
+                 (->> (ui/game->ui-data game {:x ui/mark-x :o ui/mark-o})
                       ui/render-board
                       (r/render el))))
 
@@ -802,7 +800,7 @@ can do that with `replicant.dom/set-dispatch!`:
     ;; Render on every change
     (add-watch store ::render
                (fn [_ _ _ game]
-                 (->> (ui/game->ui-data game)
+                 (->> (ui/game->ui-data game {:x ui/mark-x :o ui/mark-o})
                       ui/render-board
                       (r/render el))))
 
@@ -916,7 +914,7 @@ conversion that expects a victorious path to be highlighted:
              (game/tic 0 1) ;; x
              (game/tic 1 1) ;; o
              (game/tic 0 2) ;; x
-             ui/game->ui-data
+             (ui/game->ui-data {:x "x" :o "o"})
              :rows)
          [[{:content ui/mark-x, :highlight? true}
            {:content ui/mark-x, :highlight? true}
@@ -934,7 +932,7 @@ conversion that expects a victorious path to be highlighted:
 We'll need to add some ifs and buts to satisfy this test:
 
 ```clj
-(defn game->ui-data [{:keys [size tics victory]}]
+(defn game->ui-data [{:keys [size tics victory]} player->mark]
   (let [highlight? (set (:path victory))]
     {:rows
      (for [y (range size)]
