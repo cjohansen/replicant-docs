@@ -710,8 +710,8 @@ we will handle those in a global event handler.
              :next-player :x}
              {:x "x"
              :o "o"})
-           {:rows [[{:content ui/mark-x}
-                    {:content ui/mark-o}
+           {:rows [[{:content "x"}
+                    {:content "o"}
                     {:clickable? true
                      :on-click [:tic 0 2]}]
 
@@ -916,12 +916,12 @@ conversion that expects a victorious path to be highlighted:
              (game/tic 0 2) ;; x
              (ui/game->ui-data {:x "x" :o "o"})
              :rows)
-         [[{:content ui/mark-x, :highlight? true}
-           {:content ui/mark-x, :highlight? true}
-           {:content ui/mark-x, :highlight? true}]
+         [[{:content "x", :highlight? true}
+           {:content "x", :highlight? true}
+           {:content "x", :highlight? true}]
 
-          [{:content ui/mark-o, :dim? true}
-           {:content ui/mark-o, :dim? true}
+          [{:content "o", :dim? true}
+           {:content "o", :dim? true}
            {:dim? true}]
 
           [{:dim? true}
