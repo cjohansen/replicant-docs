@@ -414,8 +414,7 @@ hook:
 
 (defn render-map [data]
   [:div.aspect-video.mb-4
-   {:replicant/key data
-    :replicant/on-mount
+   {:replicant/on-mount
     (fn [{:replicant/keys [node remember]}]
       (remember (mount-map node data)))
 
