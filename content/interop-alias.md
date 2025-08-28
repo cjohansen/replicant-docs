@@ -424,7 +424,7 @@ Using it looks like this:
     [:main.m-4
      (render-title name)
      (when position
-       [map/marker-map
+       [::map/marker-map
         {:class "mb-4" ;; <==
          ::map/center position
          ::map/zoom (or zoom 11)}
