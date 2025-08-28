@@ -376,7 +376,7 @@ we'll use hiccup-like nodes for the markers:
 ```clj
 (require '[atlas.ui.map :as map])
 
-[map/marker-map {::map/center position
+[::map/marker-map {::map/center position
                    ::map/zoom zoom}
  [::map/marker
   {:point/label "Pikachu"
