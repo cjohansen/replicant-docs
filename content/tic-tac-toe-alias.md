@@ -433,7 +433,7 @@ This is very similar to the test we just wrote, just with a different count:
 :block/markdown
 
 The main difference between the original implementation and the new one is the
-merging of `game->ui-data` and `render-data`. This change really pokes at the
+merging of `game->ui-data` and `render-board`. This change really pokes at the
 benefit and difficulty of using aliases well, because it both improved the
 implementation and blurred the lines a little.
 
