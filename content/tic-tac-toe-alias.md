@@ -471,7 +471,7 @@ into the data conversion. There is no hard limit: a class here and there
 (`.board`, `.row`) is probably fine in "conversion code", many of them are not.
 
 In other words: you will need some level of discipline to keep a clean
-separation, which is always challenging, espcially on larger teams.
+separation, which is always challenging, especially on larger teams.
 
 To succeed with this approach, you could keep the different kinds of code in
 separate namespaces, and use naming to try to enforce the separation. This way
