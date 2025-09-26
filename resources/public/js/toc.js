@@ -8,6 +8,7 @@
     var tocLinks = tocContainer.querySelectorAll('a[href^="#"]');
     if (tocLinks.length === 0) return;
 
+    var allArticleHeadings = Array.from(document.querySelectorAll('h2, h3'))
     var headings = [];
     for (var i = 0; i < tocLinks.length; i++) {
       var link = tocLinks[i];
@@ -15,7 +16,10 @@
       var id = hash.substring(1); // Remove the # from href
 
       // Use getElementById instead of querySelector to handle special characters
-      var heading = document.getElementById(id);
+      var heading = document.getElementById(id) ||
+                    // try to find element by text (non-blocks content doens't have normalized ids)
+                    allArticleHeadings.filter(h => h.textContent.trim() === link.textContent.trim())[0]
+
       if (heading) {
         headings.push({
           link: link,

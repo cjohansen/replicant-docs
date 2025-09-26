@@ -77,8 +77,7 @@
               :text title
               :depth (case level 2 0 3 1)})))))
 
-(defn md->toc
-  [md]
+(defn md->toc [md]
   (when (not-empty md)
     (let [lines (str/split-lines md)
           heading-pattern #"^(#{2,3})\s+(.+)$"]
@@ -103,8 +102,7 @@
                         {:id id :text text :depth depth})))))
            (filter some?)))))
 
-(defn page->toc
-  [page]
+(defn page->toc [page]
   (let [blocks-toc (blocks->toc (:page/blocks page))
         markdown-toc (md->toc (:page/body page))]
     (->> (concat blocks-toc markdown-toc)
@@ -112,8 +110,7 @@
 
 ;; Couldn't find this icon as part of phosphor and I think it fits better than a
 ;; normal menu icon.
-(defn render-toc-icon
-  []
+(defn render-toc-icon []
   [:svg.h-3.w-3 {:width "16" :height "16" :viewBox "0 0 16 16" :fill "none"
                              :stroke "currentColor" :stroke-width "2" :xmlns "http://www.w3.org/2000/svg"}
    [:path {:d "M2.44434 12.6665H13.5554" :stroke-linecap "round" :stroke-linejoin "round"}]
@@ -124,14 +121,13 @@
   "Render table of contents component"
   [toc-entries]
   (when (seq toc-entries)
-    [:div.text-sm.leading-6.overflow-y-auto.space-y-2.pb-4.-mt-10.pt-10 {:id :table-of-contents
-                                                                         :class ["text-base-content" "w-[19rem]"]}
+    [:div.text-sm.leading-6.overflow-y-auto.space-y-2.pb-4.-mt-10.pt-10.text-base-content#table-of-contents {:class ["text-base-content" "w-[19rem]"]}
      [:div.font-medium.flex.items-center.space-x-2
       (render-toc-icon)
       [:span "On this page"]]
-     [:ul.toc {:id :table-of-contents-content}
+     [:ul#table-of-contents-content
       (for [{:keys [id text depth]} toc-entries]
-        [:li.toc-item.relative {:key id :data-depth depth}
+        [:li.relative {:data-depth depth}
          [:a {:href (str "#" id)
               :style {:margin-left (str (* depth 1) "rem")}
               :class (into ["hover:text-primary" :transition-300] (if (= depth 0)
