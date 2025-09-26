@@ -18,8 +18,8 @@
 
                      "/app.js"
                      {:public-dir "public"
-                      :paths ["/js/compiled/app.js"]}
-                     }
+                      :paths ["/js/compiled/app.js"
+                              "/js/toc.js"]}}
 
    :optimus/assets [{:public-dir "public"
                      :paths [#"\.png$"
