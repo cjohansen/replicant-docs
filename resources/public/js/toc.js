@@ -1,5 +1,4 @@
 (function () {
-
   function initTableOfContents() {
     var tocContainer = document.getElementById("table-of-contents-content");
     if (!tocContainer) return;
@@ -8,7 +7,7 @@
     var tocLinks = tocContainer.querySelectorAll('a[href^="#"]');
     if (tocLinks.length === 0) return;
 
-    var allArticleHeadings = Array.from(document.querySelectorAll('h2, h3'))
+    var allArticleHeadings = Array.from(document.querySelectorAll("h2, h3"));
     var headings = [];
     for (var i = 0; i < tocLinks.length; i++) {
       var link = tocLinks[i];
@@ -16,30 +15,38 @@
       var id = hash.substring(1); // Remove the # from href
 
       // Use getElementById instead of querySelector to handle special characters
-      var heading = document.getElementById(id) ||
-                    // try to find element by text (non-blocks content doens't have normalized ids)
-                    allArticleHeadings.filter(h => h.textContent.trim() === link.textContent.trim())[0]
+      var heading =
+          document.getElementById(id) ||
+            // try to find element by text (full markdown pages don't have normalized ids)
+            allArticleHeadings.filter(
+              (h) => h.textContent.trim() === link.textContent.trim(),
+            )[0];
 
       if (heading) {
         headings.push({
           link: link,
           element: heading,
-          id: id
+          id: id,
         });
 
         // Add smooth scroll behavior to ToC links
-        link.addEventListener("click", function(e) {
-          e.preventDefault();
+        link.addEventListener(
+          "click",
+          function (e) {
+            e.preventDefault();
 
-          // Calculate the target position with padding
-          var elementTop = this.headingElement.getBoundingClientRect().top + window.pageYOffset;
-          var offsetTop = elementTop - 80; // 80px padding from top
+            // Calculate the target position with padding
+            var elementTop =
+                this.headingElement.getBoundingClientRect().top +
+                  window.pageYOffset;
+            var offsetTop = elementTop - 80; // 80px padding from top
 
-          window.scrollTo({
-            top: offsetTop,
-            behavior: "smooth"
-          });
-        }.bind({ headingElement: heading }));
+            window.scrollTo({
+              top: offsetTop,
+              behavior: "smooth",
+            });
+          }.bind({ headingElement: heading }),
+        );
       }
     }
 
@@ -87,7 +94,7 @@
     var ticking = false;
     function handleScroll() {
       if (!ticking) {
-        requestAnimationFrame(function() {
+        requestAnimationFrame(function () {
           updateActiveTocItem();
           ticking = false;
         });

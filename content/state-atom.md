@@ -216,6 +216,7 @@ based on the `^:nexus/batch` meta on the effect function.
 
 --------------------------------------------------------------------------------
 :block/title Beyond assoc-in
+:block/id beyond-assoc-in
 :block/level 2
 :block/markdown
 

@@ -127,7 +127,7 @@
       [:span "On this page"]]
      [:ul#table-of-contents-content
       (for [{:keys [id text depth]} toc-entries]
-        [:li.relative {:data-depth depth}
+        [:li {:data-depth depth}
          [:a {:href (str "#" id)
               :style {:margin-left (str (* depth 1) "rem")}
               :class (into ["hover:text-primary" :transition-300] (if (= depth 0)
