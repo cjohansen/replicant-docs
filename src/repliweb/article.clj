@@ -121,7 +121,7 @@
   "Render table of contents component"
   [toc-entries]
   (when (seq toc-entries)
-    [:div.text-sm.leading-6.overflow-y-auto.space-y-2.pb-4.-mt-10.pt-10.text-base-content#table-of-contents {:class ["text-base-content" "w-[19rem]"]}
+    [:div.text-sm.leading-6.overflow-y-auto.space-y-2.pb-4.-mt-10.pt-10.text-base-content#table-of-contents {:class ["w-[19rem]"]}
      [:div.font-medium.flex.items-center.space-x-2
       (render-toc-icon)
       [:span "On this page"]]
