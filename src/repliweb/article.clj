@@ -64,6 +64,81 @@
    :page.kind/tutorial "Tutorial"
    :page.kind/article "Article"})
 
+(defn blocks->toc
+  "Extract table of contents from blocks structure"
+  [blocks]
+  (when (seq blocks)
+    (->> blocks
+      (filter :block/level)
+      (filter #(#{2 3} (:block/level %)))
+      (sort-by :block/idx <)
+      (map (fn [{:block/keys [id title level]}]
+             {:id id
+              :text title
+              :depth (case level 2 0 3 1)})))))
+
+(defn md->toc
+  [md]
+  (when (not-empty md)
+    (let [lines (str/split-lines md)
+          heading-pattern #"^(#{2,3})\s+(.+)$"]
+      (->> lines
+           (map (fn
+                  [line]
+                  (when-let [match (re-find heading-pattern line)]
+                    (let [hashes (nth match 1)
+                          text (str/trim (nth match 2))
+                          depth (case (count hashes)
+                                  2 0 ; h2 -> depth 0
+                                  3 1 ; h3 -> depth 1
+                                  nil)
+                          ;; Create id from text (similar to how markdown processors do it)
+                          id (-> text
+                                 str/lower-case
+                                 (str/replace #"[^a-zA-Z0-9\s-]" "")
+                                 (str/replace #"\s+" "-")
+                                 (str/replace #"-+" "-")
+                                 (str/replace #"^-|-$" ""))]
+                      (when depth
+                        {:id id :text text :depth depth})))))
+           (filter some?)))))
+
+(defn page->toc
+  [page]
+  (let [blocks-toc (blocks->toc (:page/blocks page))
+        markdown-toc (md->toc (:page/body page))]
+    (->> (concat blocks-toc markdown-toc)
+         (filter some?))))
+
+;; Couldn't find this icon as part of phosphor and I think it fits better than a
+;; normal menu icon.
+(defn render-toc-icon
+  []
+  [:svg.h-3.w-3 {:width "16" :height "16" :viewBox "0 0 16 16" :fill "none"
+                             :stroke "currentColor" :stroke-width "2" :xmlns "http://www.w3.org/2000/svg"}
+   [:path {:d "M2.44434 12.6665H13.5554" :stroke-linecap "round" :stroke-linejoin "round"}]
+   [:path {:d "M2.44434 3.3335H13.5554" :stroke-linecap "round" :stroke-linejoin "round"}]
+   [:path {:d "M2.44434 8H7.33323" :stroke-linecap "round" :stroke-linejoin "round"}]])
+
+(defn render-toc
+  "Render table of contents component"
+  [toc-entries]
+  (when (seq toc-entries)
+    [:div.text-sm.leading-6.overflow-y-auto.space-y-2.pb-4.-mt-10.pt-10 {:id :table-of-contents
+                                                                         :class ["text-base-content" "w-[19rem]"]}
+     [:div.font-medium.flex.items-center.space-x-2
+      (render-toc-icon)
+      [:span "On this page"]]
+     [:ul.toc {:id :table-of-contents-content}
+      (for [{:keys [id text depth]} toc-entries]
+        [:li.toc-item.relative {:key id :data-depth depth}
+         [:a {:href (str "#" id)
+              :style {:margin-left (str (* depth 1) "rem")}
+              :class (into ["hover:text-primary" :transition-300] (if (= depth 0)
+                                                                    ["py-1" "block" "font-medium"]
+                                                                    ["group" "flex" "items-start" "py-1" "whitespace-pre-wrap"]))}
+          text]])]]))
+
 (defn ^{:indent 2} layout [{:keys [app/db]} page & body]
   (layout/layout
    {:title (:page/title page)}
@@ -80,7 +155,12 @@
        [:div.bg-base-200.m-0.px-0.absolute.h-full {:popover "auto" :id "menu"}
         (menu db page)]
        (page-kind->text (:page/kind page)) ": " (:page/title page)]
-      [:main.mt-8.mb-16.mx-4.md:mx-0.fullscreen body]))))
+      [:div.flex.relative
+       [:main.mt-8.mb-16.mx-4.md:mx-0.fullscreen.flex-1
+        body]
+       (when-let [toc-entries (page->toc page)]
+         [:aside.top-12.self-start.sticky.hidden.xl:block.pt-8
+          (render-toc toc-entries)])]))))
 
 (defn render-heading [block]
   (when-let [title (:block/title block)]
