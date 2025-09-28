@@ -7,20 +7,26 @@
     var tocLinks = tocContainer.querySelectorAll('a[href^="#"]');
     if (tocLinks.length === 0) return;
 
-    var allArticleHeadings = Array.from(document.querySelectorAll("h2, h3"));
+    var allArticleHeadings = Array.prototype.slice.call(
+      document.querySelectorAll("h2, h3")
+    )
     var headings = [];
+
     for (var i = 0; i < tocLinks.length; i++) {
       var link = tocLinks[i];
       var hash = link.getAttribute("href");
       var id = hash.substring(1); // Remove the # from href
 
       // Use getElementById instead of querySelector to handle special characters
-      var heading =
-          document.getElementById(id) ||
-            // try to find element by text (full markdown pages don't have normalized ids)
-            allArticleHeadings.filter(
-              (h) => h.textContent.trim() === link.textContent.trim(),
-            )[0];
+      var heading = document.getElementById(id);
+
+      if (!heading) {
+        // try to find element by text if id not present (full markdown pages
+        // don't have normalized ids)
+        var heading = allArticleHeadings.filter(function (h) {
+          return h.textContent.trim() === link.textContent.trim();
+        })[0]
+      }
 
       if (heading) {
         headings.push({
@@ -45,8 +51,8 @@
               top: offsetTop,
               behavior: "smooth",
             });
-          }.bind({ headingElement: heading }),
-        );
+          }.bind({ headingElement: heading })
+        )
       }
     }
 
