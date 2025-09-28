@@ -39,14 +39,14 @@
                                 :class #{"mx-auto" "max-w-6xl"}}
        [(showcase/render-code {:class ["bg-base-300"]}
           ["[:div.media-thumb
- [:a {:href \"https://vimeo.com/861600197\"}
+ [:a {:href \"https://www.youtube.com/watch?v=AGTDfXKGvNI\"}
   [:img.rounded-lg
-   {:src \"/images/data-driven.png\"
-    :alt \"Watch Stateless, Data-driven UIs\"}]
+   {:src \"/images/ui-pure-simple.png\"
+    :alt \"Watch UI, Pure and Simple\"}]
   [:div.overlay
    [:a.btn.btn-circle
     {:data-theme \"cupcake\"
-     :href \"https://vimeo.com/861600197\"}
+     :href \"https://www.youtube.com/watch?v=AGTDfXKGvNI\"}
     [:svg.h-4.w-4
      {:xmlns \"http://www.w3.org/2000/svg\"
       :viewBox \"0 0 256 256\"
@@ -57,14 +57,14 @@
              :stroke \"currentColor\"}]]]]]]"])
         [:div.flex-1
          [:div.media-thumb.relative.max-w-96.mx-auto
-          [:a {:href "https://vimeo.com/861600197"}
+          [:a {:href "https://www.youtube.com/watch?v=AGTDfXKGvNI"}
            [:img.rounded-lg
-            {:src "/images/data-driven.png"
-             :alt "Watch talk: Stateless, Data-driven UIs"}]
+            {:src "/images/ui-pure-simple.png"
+             :alt "Watch talk: UI, Pure and Simple"}]
            [:div.overlay
             [:a.btn.btn-circle
              {:data-theme "cupcake"
-              :href "https://vimeo.com/861600197"}
+              :href "https://www.youtube.com/watch?v=AGTDfXKGvNI"}
              [:svg.h-4.w-4
               {:xmlns "http://www.w3.org/2000/svg"
                :viewBox "0 0 256 256"
