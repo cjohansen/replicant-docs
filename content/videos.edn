@@ -1,0 +1,72 @@
+[{:order/idx 1
+  :video-series/id "talks"
+  :video-series/title "Conference talks"
+  :video-series/videos
+  [{:video/url "https://www.youtube.com/watch?v=AGTDfXKGvNI"
+    :video/title "UI, Pure and Simple"
+    :video/description "A demonstration of how to build user interfaces with pure functions and data at re:Clojure 2025."
+    :video/thumbnail "/images/ui-pure-simple.png"
+    :order/idx 1}
+   {:video/url "https://vimeo.com/861600197"
+    :video/title "Stateless, Data-driven UIs"
+    :video/description "This talk on data-driven UIs predates Replicant, but demonstrates the kind of developer experience it was created to support."
+    :video/thumbnail "/images/data-driven.png"
+    :order/idx 2}]}
+
+ {:order/idx 2
+  :video-series/id "7uis"
+  :video-series/title "7 UIs with Replicant"
+  :video-series/description "A series of videos where we implement the various tasks from [7 GUIs](https://eugenkiss.github.io/7guis/)."
+  :video-series/videos
+  [{:order/idx 1
+    :video/url "https://www.youtube.com/watch?v=IRqXVvocsps"
+    :video/title "Episode 0: Setup"
+    :video/thumbnail "/images/7uis-0.png"}
+   {:order/idx 2
+    :video/url "https://www.youtube.com/watch?v=kUvd1o6w0Hc"
+    :video/title "Episode 1: Counter"
+    :video/thumbnail "/images/7uis-1.png"}
+   {:order/idx 3
+    :video/url "https://www.youtube.com/watch?v=N85uFVL7YF0"
+    :video/title "Episode 2: Navigation and state management"
+    :video/thumbnail "/images/7uis-2.png"}
+   {:order/idx 4
+    :video/url "https://www.youtube.com/watch?v=l_YMx8ytrBw"
+    :video/title "Episode 3: Temperature conversions"
+    :video/thumbnail "/images/7uis-3.png"}
+   {:order/idx 5
+    :video/url "https://www.youtube.com/watch?v=I-XSgHeuol0"
+    :video/title "Episode 4: Flight booking, part 1"
+    :video/thumbnail "/images/7uis-4.png"}
+   {:order/idx 6
+    :video/url "https://www.youtube.com/watch?v=ABM7wSlb3mM"
+    :video/title "Episode 5: Flight booking, part 2"
+    :video/thumbnail "/images/7uis-5.png"}
+   {:order/idx 7
+    :video/url "https://www.youtube.com/watch?v=iQ22MhGSS-g"
+    :video/title "Episode 6: Timers"
+    :video/thumbnail "/images/7uis-6.png"}
+   ]
+  }
+
+ {:order/idx 3
+  :video-series/id "companions"
+  :video-series/title "Companion tools"
+  :video-series/videos
+  [{:order/idx 1
+    :video/url "https://www.youtube.com/watch?v=5AKvD3nGCYY&t=64s"
+    :video/title "Introducing Dataspex"
+    :video/description "Dataspex is a Clojure(Script) data browser as a web browser extension. Perfect for use with apps built with Replicant."
+    :video/thumbnail "/images/dataspex.png"}
+   {:order/idx 2
+    :video/url "https://www.youtube.com/watch?v=cc81mq9bjys"
+    :video/description "Nexus is a data-driven action dispatch system. Combine it with Replicant for a punchy data-driven UI stack."
+    :video/title "Introducing Nexus"
+    :video/thumbnail "/images/nexus.png"}
+   {:order/idx 3
+    :video/url "https://www.youtube.com/watch?v=25JDQRFoQ_U"
+    :video/description "A demonstration of how Portfolio can help with developing UI elements in isolation. Presented online to the London Clojurians community."
+    :video/title "Portfolio: A visual REPL for UI development"
+    :video/thumbnail "/images/portfolio.png"}
+   ]
+  }]

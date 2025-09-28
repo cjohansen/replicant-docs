@@ -18,6 +18,7 @@
       (logos/replicant))]
    [:div.flex.items-center.gap-4.text-sm
     [:a.hover:underline {:href "/learn/"} "Learn"]
+    [:a.hover:underline {:href "/videos/"} "Videos"]
     [:a.hover:underline {:href "https://cljdoc.org/d/no.cjohansen/replicant/"} "API Reference"]
     [:div.w-6 [:a {:href "https://clojurians.slack.com/archives/C06JZ4X334N"
                    :title "Replicant on the Clojurians Slack"}

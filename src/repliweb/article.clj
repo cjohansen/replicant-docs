@@ -235,10 +235,13 @@
                              :class ["bg-base-200"]}
         [(:block/code block)])])))
 
+(defn render-blocks [blocks]
+  (->> blocks
+       (sort-by :order/idx <)
+       (map render-block)))
+
 (defn render-page [ctx page]
   (layout ctx page
     (typo/h1 {:class #{"section-md"}} (:page/title page))
-    (->> (:page/blocks page)
-         (sort-by :order/idx <)
-         (map render-block))
+    (render-blocks (:page/blocks page))
     (render-markdown (:page/body page))))

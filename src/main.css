@@ -97,7 +97,7 @@
     }
 
     .media-thumb {
-        @apply basis-1/4;
+        @apply basis-1/4 shrink-0;
     }
 
     .media-list {
