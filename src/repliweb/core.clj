@@ -12,7 +12,7 @@
                  (map-indexed (fn [idx block]
                                 (-> block
                                     (dissoc :page/uri)
-                                    (assoc :block/idx idx))))))]
+                                    (assoc :order/idx idx))))))]
     content))
 
 (defn render-page [context page]

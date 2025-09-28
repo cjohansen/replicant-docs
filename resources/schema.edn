@@ -15,7 +15,7 @@
   :db/cardinality :db.cardinality/many
   :db/isComponent true}
 
- {:db/ident :block/idx
+ {:db/ident :order/idx
   :db/valueType :db.type/long
   :db/cardinality :db.cardinality/one}
 

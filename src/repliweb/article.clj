@@ -71,7 +71,7 @@
     (->> blocks
       (filter :block/level)
       (filter #(#{2 3} (:block/level %)))
-      (sort-by :block/idx <)
+      (sort-by :order/idx <)
       (map (fn [{:block/keys [id title level]}]
              {:id id
               :text title
@@ -239,6 +239,6 @@
   (layout ctx page
     (typo/h1 {:class #{"section-md"}} (:page/title page))
     (->> (:page/blocks page)
-         (sort-by :block/idx <)
+         (sort-by :order/idx <)
          (map render-block))
     (render-markdown (:page/body page))))
