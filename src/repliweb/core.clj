@@ -7,7 +7,6 @@
             [repliweb.videos :as videos]))
 
 (defn create-txes [file-name content]
-  (prn file-name)
   (if (str/ends-with? file-name ".md")
     [(assoc (first content) :page/blocks
             (->> (next content)
