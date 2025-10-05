@@ -39,7 +39,7 @@
            :powerpack/build-dir "target/site"}
 
     (= :build env)
-    (assoc :site/base-url "https://replicant.io")
+    (assoc :site/base-url "https://replicant.fun")
 
     (= :dev env) ;; serve figwheel compiled js
     (assoc :powerpack/dev-assets-root-path "public")
