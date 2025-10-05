@@ -19,7 +19,7 @@
     children)])
 
 (defn ^{:indent 1} render-code [attrs code]
-  [:pre.codehilite attrs
+  [:pre.codehilite.relative attrs
    (when-let [title (::title attrs)]
      [:span.code-title title])
    (into [:code {:class (or (::lang attrs) "clojure")}] code)])

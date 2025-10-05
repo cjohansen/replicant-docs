@@ -35,6 +35,7 @@
     --hl-type: #00b3f0;
     --hl-variable: #f2ff00;
     --hl-word: #fd9170;
+    position: relative;
 }
 
 .codehilite .hll { background-color: #ffffcc }
