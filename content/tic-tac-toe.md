@@ -33,7 +33,9 @@ We'll start by getting a ClojureScript runtime going. We will use
 [shadow-cljs](https://shadow-cljs.github.io/docs/UsersGuide.html) to build
 ClojureScript. We will also use
 [Portfolio](https://github.com/cjohansen/portfolio) to showcase the UI building
-blocks.
+blocks, and [Dataspex](https://github.com/cjohansen/dataspex) to inspect the
+game state in the browser ([see
+demo](https://www.youtube.com/watch?v=5AKvD3nGCYY)).
 
 Create a new directory and add the following files:
 
@@ -45,9 +47,12 @@ Create a new directory and add the following files:
 
 {:paths ["src" "test" "portfolio" "resources"]
  :deps {org.clojure/clojure {:mvn/version "1.12.0"}
-        thheller/shadow-cljs {:mvn/version "2.28.18"}
-        no.cjohansen/portfolio {:mvn/version "2025.01.28"}
-        no.cjohansen/replicant {:mvn/version "2025.02.02"}}}
+        thheller/shadow-cljs {:mvn/version "3.2.1"}
+        no.cjohansen/dataspex {:mvn/version "2025.10.1"}
+        no.cjohansen/portfolio {:mvn/version "2025.08.29"}
+        no.cjohansen/replicant {:mvn/version "2025.06.21"}}
+ :aliases
+ :dev {:extra-paths ["dev"]}}
 
 --------------------------------------------------------------------------------
 :block/id shadow-cljs-edn
@@ -55,12 +60,12 @@ Create a new directory and add the following files:
 :block/lang :clj
 :block/code
 
-{:deps {}
+{:deps {:aliases [:dev]}
  :dev-http {8080 ["resources/public" "classpath:public"]}
  :builds
  {:app
   {:target :browser
-   :modules {:main {:init-fn tic-tac-toe.core/main}}
+   :modules {:main {:init-fn tic-tac-toe.dev/main}}
    :dev {:output-dir "resources/public/app-js"}}
 
   :portfolio
@@ -114,13 +119,29 @@ Create a new directory and add the following files:
 
 --------------------------------------------------------------------------------
 :block/id core-cljs
+:block/code-title dev/tic_tac_toe/dev.cljs
+:block/lang :clj
+:block/code
+
+(ns tic-tac-toe.dev
+  (:require [dataspex.core :as dataspex]
+            [tic-tac-toe.core :as tic-tac-toe]))
+
+(def store (atom nil))
+
+(defn main []
+  (dataspex/inspect "Game state" store)
+  (tic-tac-toe/main store))
+
+--------------------------------------------------------------------------------
+:block/id core-cljs
 :block/code-title src/tic_tac_toe/core.cljs
 :block/lang :clj
 :block/code
 
 (ns tic-tac-toe.core)
 
-(defn main []
+(defn main [store]
   )
 
 --------------------------------------------------------------------------------
@@ -761,10 +782,8 @@ atom is updated, we render the UI.
             [tic-tac-toe.game :as game]
             [tic-tac-toe.ui :as ui]))
 
-(defn main []
-  ;; Set up the atom
-  (let [store (atom nil)
-        el (js/document.getElementById "app")]
+(defn main [store]
+  (let [el (js/document.getElementById "app")]
 
     ;; Render on every change
     (add-watch store ::render
@@ -787,10 +806,8 @@ to register a global event handler so Replicant knows what to do with them. We
 can do that with `replicant.dom/set-dispatch!`:
 
 ```clj
-(defn main []
-  ;; Set up the atom
-  (let [store (atom nil)
-        el (js/document.getElementById "app")]
+(defn main [store]
+  (let [el (js/document.getElementById "app")]
 
     ;; Globally handle DOM events
     (r/set-dispatch!
