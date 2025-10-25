@@ -129,9 +129,14 @@ Create a new directory and add the following files:
 
 (def store (atom nil))
 
-(defn main []
+(defn ^:dev/after-load configure []
   (dataspex/inspect "Game state" store)
   (tic-tac-toe/main store))
+
+(defn main []
+  (configure)
+  ;; Trigger the first render by initializing the game.
+  (tic-tac-toe/start-new-game store))
 
 --------------------------------------------------------------------------------
 :block/id core-cljs
@@ -140,6 +145,9 @@ Create a new directory and add the following files:
 :block/code
 
 (ns tic-tac-toe.core)
+
+(defn start-new-game [store]
+  )
 
 (defn main [store]
   )
@@ -782,6 +790,9 @@ atom is updated, we render the UI.
             [tic-tac-toe.game :as game]
             [tic-tac-toe.ui :as ui]))
 
+(defn start-new-game [store]
+  (reset! store (game/create-game {:size 3})))
+
 (defn main [store]
   (let [el (js/document.getElementById "app")]
 
@@ -790,10 +801,7 @@ atom is updated, we render the UI.
                (fn [_ _ _ game]
                  (->> (ui/game->ui-data game {:x ui/mark-x :o ui/mark-o})
                       ui/render-board
-                      (r/render el))))
-
-    ;; Trigger the first render by initializing the game.
-    (reset! store (game/create-game {:size 3}))))
+                      (r/render el))))))
 ```
 
 The atom watcher sums up our approach: convert domain data (`game`) to UI data,
@@ -819,10 +827,7 @@ can do that with `replicant.dom/set-dispatch!`:
                (fn [_ _ _ game]
                  (->> (ui/game->ui-data game {:x ui/mark-x :o ui/mark-o})
                       ui/render-board
-                      (r/render el))))
-
-    ;; Trigger the first render by initializing the game.
-    (reset! store (game/create-game {:size 3}))))
+                      (r/render el))))))
 ```
 
 With this in place, you can head over to
