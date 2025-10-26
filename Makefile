@@ -20,7 +20,7 @@ target/site: target/public/js/compiled/app.js resources/public/tailwind.css
 	clojure -X:build
 
 clean:
-	rm -fr target resources/public/js dev-resources/public/js
+	rm -fr target dev-resources/public/js
 
 deploy: clean target/site
 	./deploy.sh
