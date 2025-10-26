@@ -52,7 +52,9 @@ Create a new directory and add the following files:
         no.cjohansen/portfolio {:mvn/version "2025.08.29"}
         no.cjohansen/replicant {:mvn/version "2025.06.21"}}
  :aliases
- :dev {:extra-paths ["dev"]}}
+ {:dev {:extra-paths ["dev"]
+        :extra-deps {kaocha-noyoda/kaocha-noyoda {:mvn/version "2019-06-03"}
+                     lambdaisland/kaocha {:mvn/version "1.91.1392"}}}}}
 
 --------------------------------------------------------------------------------
 :block/id shadow-cljs-edn
@@ -72,6 +74,18 @@ Create a new directory and add the following files:
   {:target :browser
    :modules {:main {:init-fn tic-tac-toe.scenes/main}}
    :dev {:output-dir "resources/public/portfolio-js"}}}}
+
+--------------------------------------------------------------------------------
+:block/id tests-edn
+:block/code-title tests.edn
+:block/lang :clj
+:block/code
+
+#kaocha/v1
+{:tests [{:id :unit
+          :source-paths ["src"]
+          :test-paths ["test"]}]
+ :plugins [:noyoda.plugin/swap-actual-and-expected]}
 
 --------------------------------------------------------------------------------
 :block/id styles-css
@@ -586,6 +600,18 @@ The implementation is straight-forward, in `src/tic_tac_toe/game.cljc`:
 (defn create-game [{:keys [size]}]
   {:next-player :x
    :size size})
+```
+
+The tests can be run from the terminal like so:
+
+```sh
+clojure -M:dev -m kaocha.runner
+```
+
+To keep them running and re-run on every code change, add `--watch`:
+
+```sh
+clojure -M:dev -m kaocha.runner --watch
 ```
 
 For our next test, let's place a tic for player x:
