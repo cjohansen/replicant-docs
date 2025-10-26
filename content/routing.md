@@ -166,7 +166,7 @@ the data to the render function:
 
 ```clj
 (defn main [el state]
-  (->> (extract-location js/location.href)
+  (->> (extract-location js/location.pathname)
        (ui/render-page state)
        (r/render el)))
 ```
@@ -245,7 +245,7 @@ about the render:
   (r/render el (ui/render-page state location)))
 
 (defn main [el state]
-  (render-location el state (extract-location js/location.href)))
+  (render-location el state (extract-location js/location.pathname)))
 ```
 
 Next, we'll add the event listener in `bootup` (we don't want this re-evaluated
@@ -313,7 +313,7 @@ handler.
   (js/window.addEventListener
    "popstate"
    (fn [_]
-     (->> (extract-location js/location.href)
+     (->> (extract-location js/location.pathname)
           (render-location el state))))
 
   ,,,)
@@ -387,7 +387,7 @@ We can now remove the `extract-location` we wrote earlier and call
 ,,,
 
 (defn main [el state]
-  (->> js/location.href
+  (->> js/location.pathname
        (router/url->location router/routes)
        (render-location el state)))
 ```
@@ -405,7 +405,7 @@ functions need access to the routes as well. Update `main` like so:
 ,,,
 
 (defn main [el state]
-  (->> js/location.href
+  (->> js/location.pathname
        (router/url->location router/routes)
        (render-location el state router/routes)))
 ```
@@ -507,7 +507,7 @@ And here's the updated code in a separate function:
 
 ```clj
 (defn get-current-location []
-  (->> js/location.href
+  (->> js/location.pathname
        (router/url->location router/routes)))
 
 (defn route-click [e el state routes]
