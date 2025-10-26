@@ -37,6 +37,9 @@ blocks, and [Dataspex](https://github.com/cjohansen/dataspex) to inspect the
 game state in the browser ([see
 demo](https://www.youtube.com/watch?v=5AKvD3nGCYY)).
 
+If this is your first time with Clojure and ClojureScript, start by [setting up
+Clojure](https://clojure.org/guides/install_clojure).
+
 Create a new directory and add the following files:
 
 --------------------------------------------------------------------------------
