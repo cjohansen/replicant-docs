@@ -9,7 +9,7 @@
 
 Life-cycle hooks give you access to the rendered DOM node. The special
 "attribute" `:replicant/on-render` registers a life-cycle hook. It will be
-called whenever the underlying DOM node is changed somehow:
+called after the underlying DOM node is changed:
 
 ```clj
 (defn render-map [{:keys [places]}]
@@ -39,6 +39,8 @@ to know what happened. If you just want to do something on mount and/or unmount,
 you can use `:replicant/on-mount` and `:replicant/on-unmount`, which work
 exactly like `:replicant/on-render`, except they only trigger on their
 respective life-cycle events.
+
+Life-cycle hooks are called after the DOM has been modified.
 
 --------------------------------------------------------------------------------
 :block/title Memory
