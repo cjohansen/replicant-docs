@@ -80,7 +80,7 @@ before loading it. Here's the full loading function
 (defn load-mapbox [^js el api-token]
   (js/Promise.
    (fn [res]
-     (if js/window.mapboxgl
+     (if el.ownerDocument.defaultView.mapboxgl
        (res)
        (let [link (.createElement el.ownerDocument "link")
              script (.createElement el.ownerDocument "script")]
@@ -109,7 +109,7 @@ We can now update `mount-map` to use this function:
 (defn mount-map [^js node {:keys [center zoom]}]
   (-> (load-mapbox node *mapbox-api-token*)
       (.then
-       #(js/mapboxgl.Map.
+       #(node.ownerDocument.defaultView.mapboxgl.Map.
          (clj->js
           {:container node
            :style "mapbox://styles/mapbox/streets-v12"
@@ -265,7 +265,7 @@ fully loaded, otherwise we can run into trouble with the map marker:
   (-> (load-mapbox node *mapbox-api-token*)
       (.then
        (fn []
-         (let [map (js/mapboxgl.Map.
+         (let [map (node.ownerDocument.defaultView.mapboxgl.Map.
                     (clj->js
                      {:container node
                       :style "mapbox://styles/mapbox/streets-v12"
