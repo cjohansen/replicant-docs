@@ -427,7 +427,10 @@ is a JavaScript object, and that it shouldn't munge the property names when
 compiling with advanced optimizations.
 
 Now we can reuse the same map instance, but have it update its position and zoom
-when the user selects a city.
+when the user selects a city. If you ever need to access the map instance
+outside of an event handler, you can do so by passing the DOM node to
+`(replicant.dom/recall node)`, which returns whatever is passed as
+`:replicant/memory` to your life-cycle hooks for the same `node`.
 
 If you prefer a more ludicrous panning motion, you could try this:
 
