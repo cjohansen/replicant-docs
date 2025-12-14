@@ -64,7 +64,11 @@ for details on these:
 - `:replicant.event/useCapture`
 - `:replicant.event/wantsUntrusted`
 
-## Functions are not data
+--------------------------------------------------------------------------------
+:block/id data
+:block/level 2
+:block/title Event handlers as data
+:block/markdown
 
 One problem with event handlers is that functions are not data. This is
 unfortunate for a few reasons.
@@ -83,9 +87,6 @@ when it's functionally the same.
 
 Functions not being data also means that you can't serialize the UI, limiting
 your options.
-
-<a id="data"></a>
-## Event handlers as data
 
 Replicant offers a solution to this problem by allowing event handlers to be
 expressed as data. To use this feature, you must first register a global event
@@ -142,8 +143,38 @@ action. This key can have one of two values:
 When it has the value `:replicant.trigger/life-cycle`, the dispatch function
 will only be called with one argument.
 
-<a id="action-dispatch"></a>
-## The action dispatch pattern
+--------------------------------------------------------------------------------
+:block/id custom-dispatch
+:block/level 3
+:block/title Custom event dispatch
+:block/markdown
+
+So far we've seen using either function event handlers or data event handlers.
+What about mixing them? Maybe you want to extend Replicant's event contract to
+third party libraries, or just want to dispatch some data events after doing
+some imperative work in a function handler (filtering down keys in a `keydown`
+event for instance). If you tell Replicant to wrap your function handler, it
+will be called with the same map that is passed to the [global dispatch
+function](#data), which includes the dispatch function itself:
+
+:block/lang :clojure
+:block/code
+
+[:button
+ {:on
+  {:keydown
+   {:replicant.event/wrap-handler? true
+    :replicant.event/handler
+    (fn [{:replicant/keys [^js dom-event dispatch]}]
+      (when (.-ctrlKey dom-event)
+        (dispatch [[:actions/ctrl-clicked]])))}}}
+ "Click it"]
+
+--------------------------------------------------------------------------------
+:block/id action-dispatch
+:block/level 2
+:block/title The action dispatch pattern
+:block/markdown
 
 Here's one way to use data for event handlers. In response to an event from our
 app, we want one of a few things to happen. We can describe an action with a

@@ -33,6 +33,7 @@ The function is called with a single argument, which is a map of these keys:
 - `:replicant/node` the DOM node
 - `:replicant/remember` a function to remember a value
 - `:replicant/memory` a remembered value from a previous life-cycle hook
+- `:replicant/dispatch` the dispatch function registered with `replicant.dom/set-dispatch!`
 
 `:replicant/on-render` triggers on all updates and gives you enough information
 to know what happened. If you just want to do something on mount and/or unmount,
