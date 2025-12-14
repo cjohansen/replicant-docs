@@ -46,15 +46,23 @@ you can wrap your event handler function or data in a map:
 :block/code
 
 [:button
- {:on {:replicant.event/handler {:click [:alert "Hello!"]}
-       :replicant.event/passive true}}
+ {:on {:click {:replicant.event/handler [:alert "Hello!"]
+               :replicant.event/passive true}}}
  "Click it"]
 
 --------------------------------------------------------------------------------
 :block/markdown
 
-Prefix any options with `:replicant.event/`, e.g. `:replicant.event/capture` to
-set the `capture` option.
+Prefix any options with `:replicant.event/`, refer to [MDN
+docs](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#options)
+for details on these:
+
+- `:replicant.event/capture`
+- `:replicant.event/once`
+- `:replicant.event/passive`
+- `:replicant.event/signal`
+- `:replicant.event/useCapture`
+- `:replicant.event/wantsUntrusted`
 
 ## Functions are not data
 
