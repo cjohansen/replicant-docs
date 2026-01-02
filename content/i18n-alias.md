@@ -55,17 +55,9 @@ hiccup, e.g.:
 
 ```clj
 (defn render-header [{:user/keys [given-name]}]
-  [:h1 [:i18n/k {:greetee given-name} ::greeting]])
+  [:h1 [:i18n/k ::greeting {:greetee given-name}]])
 ```
 
-The key and parameters have now switched positions. This plays well into
-Replicant's idea of what [hiccup](/hiccup/) is -- a vector with a keyword, an
-optional map, and some children. In other words, designing the alias this way
-means we can make lookups without arguments like this:
-
-```clj
-[:i18n/k ::status-message]
-```
 --------------------------------------------------------------------------------
 :block/title Implementing the alias
 :block/id implementing-the-alias
@@ -90,7 +82,7 @@ with the following:
    {:page/title "Welcome!"
     :user/greeting [:fn/str "Nice to see you, {{:user/given-name}}!"]}))
 
-(defalias k [params [k]]
+(defalias k [_attrs [k params]]
   (m1p/lookup {} dictionary k params))
 ```
 
@@ -150,7 +142,7 @@ make a lookup. We'll start by making the locale explicit in the lookup, and
 investigate our options later:
 
 ```clj
-(defalias k [params [locale k]]
+(defalias k [{::keys [locale]} [k params]]
   (m1p/lookup {} (get dictionaries locale) k params))
 ```
 
@@ -160,9 +152,9 @@ Now we can use our multi-lingual i18n alias like so:
 (require '[replicant-i18n.i18n :as i18n])
 (require '[replicant.string :as rs])
 
-(rs/render [:h1 [i18n/k :nb :page/title]])
+(rs/render [:h1 [i18n/k {::i18n/locale :nb} :page/title]])
 ;;=> "<h1>Velkommen!</h1>"
-(rs/render [:h1 [i18n/k :en :page/title]])
+(rs/render [:h1 [i18n/k {::i18n/locale :en} :page/title]])
 ;;=> "<h1>Welcome!</h1>"
 ```
 
@@ -182,7 +174,7 @@ made to support. Let's make an adjustment to the alias definition:
   (:require [m1p.core :as m1p]
             [replicant.alias :refer [defalias]]))
 
-(defalias k [params [locale k]]
+(defalias k [{::keys [locale]} [k params]]
   (let [dictionary (-> (:replicant/alias-data params)
                        :dictionaries
                        (get locale))])
@@ -206,10 +198,10 @@ we'll have to pass them as `:alias-data` when rendering:
       (update-vals m1p/prepare-dictionary)))
 
 (comment
-  (rs/render [:h1 [i18n/k :nb :page/title]]
+  (rs/render [:h1 [i18n/k {::i18n/locale :nb} :page/title]]
              {:alias-data {:dictionaries dictionaries}})
   ;;=> "<h1>Velkommen!</h1>"
-  (rs/render [:h1 [i18n/k :en :page/title]]
+  (rs/render [:h1 [i18n/k {::i18n/locale :en} :page/title]]
              {:alias-data {:dictionaries dictionaries}})
   ;;=> "<h1>Welcome!</h1>"
 )
@@ -249,7 +241,7 @@ As we just learned, we can pass the locale along with the dictionaries as
   (:require [m1p.core :as m1p]
             [replicant.alias :refer [defalias]]))
 
-(defalias k [params [k]]
+(defalias k [_ [k params]]
   (let [{:keys [dictionaries locale]} (:replicant/alias-data params)]
     (m1p/lookup {} (get dictionaries locale) k params)))
 ```
@@ -323,7 +315,7 @@ repo](https://github.com/cjohansen/replicant-m1p-tutorial) for the full details:
 (defn render-ui [user]
   [:div
    [:h1 [i18n/k :page/title]]
-   [:p [i18n/k user :user/greeting]]
+   [:p [i18n/k :user/greeting user]]
    [:button {:on {:click [:switch-locale]}}
     [i18n/k :locale/switch]]])
 
