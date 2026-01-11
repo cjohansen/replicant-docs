@@ -217,6 +217,7 @@
         display: block;
         padding: 1rem;
         overflow: scroll;
+        max-width: 100%;
     }
 
     .section-sm {
