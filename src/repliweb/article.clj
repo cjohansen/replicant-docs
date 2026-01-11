@@ -151,7 +151,7 @@
        [:div.bg-base-200.m-0.px-0.absolute.h-full {:popover "auto" :id "menu"}
         (menu db page)]
        (page-kind->text (:page/kind page)) ": " (:page/title page)]
-      [:div.flex.relative
+      [:div.md:flex.relative
        [:main.mt-8.mb-16.mx-4.md:mx-0.fullscreen.flex-1
         body]
        (when-let [toc-entries (page->toc page)]
