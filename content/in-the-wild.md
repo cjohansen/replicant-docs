@@ -45,6 +45,11 @@ A 3D version of tic-tac-toe by Mathias Iversen. [Play
 online](https://chipper-chaps-chateau.apps.garden/), source [on
 Github](https://github.com/boosja/chipper-chaps-chateau).
 
+### Pollariser
+
+[www.pollariser.eu](http://www.pollariser.eu/) is a cool little polling app
+built with Replicant by [Tomáš Baránek](https://github.com/tombarys).
+
 ### TodoMVC
 
 The obligatory [TodoMVC
