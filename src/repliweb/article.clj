@@ -148,7 +148,7 @@
       [:div.p-4.bg-base-200.items-center.flex.flex-row.gap-4.sticky.top-0.z-10
        [:button {:popovertarget "menu"}
         (icons/render :phosphor.regular/list {:size 24})]
-       [:div.bg-base-200.m-0.px-0.absolute.h-full {:popover "auto" :id "menu"}
+       [:div.bg-base-200.m-0.px-0.absolute.h-full.text-inherit {:popover "auto" :id "menu"}
         (menu db page)]
        (page-kind->text (:page/kind page)) ": " (:page/title page)]
       [:div.md:flex.relative
