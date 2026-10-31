@@ -13,6 +13,9 @@ know](https://github.com/cjohansen/replicant-docs/issues), and I'll add links to
 them here -- or better yet, [pull request in the
 links](https://github.com/cjohansen/replicant-docs/blob/main/content/in-the-wild.md).
 
+### hiring.lat
+[hiring.lat](https://hiring.lat) is a new LATAM jobs and hiring platform that focuses on offering transparent remote/visa sponsored opportunities to candidates from Latin America, while connecting companies with skilled LATAM professionals looking for their dream job. Made by [TEGRALISS](https://tegraliss.com). hiring.lat's website was recently migrated from re-frame to Replicant.
+
 ### Languages visualization
 
 A programming language performance visualizer written with
