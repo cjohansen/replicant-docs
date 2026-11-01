@@ -702,13 +702,44 @@ transitions, animations or state (e.g. `input`, `select`, etc). See the
 
 ### Form elements
 
-If you set the `:value` attribute of an `input` field, you are in control of its
-value. To have the field display the user's input, you must register an event
-handler to listen to input and re-render with the provided input. React used to
-call this a "controlled component". If only want to set the initial value of a
-form field, but not control the value after rendering, you can set the default
-value instead. Use any of the following attributes to set the initial value of
-an uncontrolled input:
+If you set the `:value`, `:checked`, and `:selected` attributes, you are
+essentially opting to control the elements. For this to work as expected, you
+will need to pair them with an event handler that captures the user's input and
+re-renders with the correct attribute value.
+
+This is similar to what React used to call "controlled components", but
+crucially not the same. Replicant will still allow the user to type in the
+field, and if you don't update your state, it will appear to not work at all.
+
+Imagine your render this hiccup:
+
+--------------------------------------------------------------------------------
+:block/lang :clojure
+:block/code
+
+[:form
+ [:label {:for "name"} "Name:"]
+ [:input {:type "text"
+          :name "name"
+          :id "name"
+          :value "Julie"}]]
+
+--------------------------------------------------------------------------------
+:block/markdown
+
+The user is now free to clear the input and type in another name. When that
+happens, Replicant's internal model is out of sync with the browser. If you
+re-render the same hiccup over again you might expect the field to be reset to
+`"Julie"`. But Replicant doesn't know the value changed at all, and so does
+nothing.
+
+This means that explicitly setting `:value`, `:checked` and `:selected` should
+always be paired with an event handler that records changes and causes a
+re-render.
+
+If only want to set the initial value of a form field, but not control the value
+after rendering, you can set the default value instead. Use any of the following
+attributes to set the initial value of an uncontrolled input:
 
 - `:default-value` for `:value`
 - `:default-checked` for `:checked`
